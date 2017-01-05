@@ -1,4 +1,4 @@
-package com.op;
+package com.op.oauth;
 
 import org.springframework.web.bind.annotation.*;
 

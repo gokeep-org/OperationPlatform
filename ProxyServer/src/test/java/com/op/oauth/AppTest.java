@@ -1,4 +1,4 @@
-package com.op;
+package com.op.oauth;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

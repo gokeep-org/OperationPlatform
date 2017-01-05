@@ -1,4 +1,4 @@
-package com.op;
+package com.op.oauth;
 
 /**
  * Hello world!
