@@ -3,9 +3,12 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>CustomerServer</artifactId>
-    <packaging>jar</packaging>
-    <name>CustomerServer</name>
+    <packaging>pom</packaging>
+    <name>OperationPlatform::CustomerServer</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>../MessageServer</module>
+    </modules>
 
     <parent>
         <artifactId>OperationPlatform</artifactId>

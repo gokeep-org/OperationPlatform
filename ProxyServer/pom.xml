@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ProxyServer</artifactId>
     <packaging>jar</packaging>
-    <name>ProxyServer</name>
+    <name>OperationPlatform::ProxyServer</name>
     <url>http://maven.apache.org</url>
 
     <!--OperationPlaform为父依赖-->
