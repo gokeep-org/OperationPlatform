@@ -1,4 +1,4 @@
-package com.op.rest;
+package com.op.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -8,32 +8,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by me on 2017/1/6.
- */
+/****************************************
+ * Copyright (c) xuning.
+ * 尊重版权，禁止抄袭!
+ * 如有违反，必将追究其法律责任.
+ * @Auther is xuning on 2017/1/7.
+ ****************************************/
 @RestController
 @RequestMapping("/email")
 public class SendEmail {
-
     @Autowired
-    JavaMailSender mailSender;
-
+    public JavaMailSender javaMailSender=new JavaMailSenderImpl();
     @RequestMapping(value = "/simple", method = RequestMethod.GET)
-    public String sendSimpleEmail(){
+    public String sendSimpleEmail() {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("18753377393@163.com");//发送者.
-        message.setTo("xuning@eefung.com");//接收者.
-        message.setSubject("测试邮件（邮件主题）");//邮件主题.
-        message.setText("这是邮件内容");//邮件内容.
-        mailSender.send(message);//发送邮件
-        return "OK";
+        message.setFrom("postmaster@networklab.cn");
+        message.setTo("1748373312@qq.com");
+        message.setSubject("xunivvsng的test");
+        message.setText("wuiu shoudaovfdvfdvfdvfd ");
+
+        javaMailSender.send(message);
+        return "ok";
     }
 
-    public JavaMailSender getMailSender() {
-        return mailSender;
-    }
-
-    public void setMailSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
 }
