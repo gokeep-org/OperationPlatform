@@ -6,9 +6,6 @@
     <packaging>pom</packaging>
     <name>OperationPlatform::CustomerServer</name>
     <url>http://maven.apache.org</url>
-    <modules>
-        <module>../MessageServer</module>
-    </modules>
 
     <parent>
         <artifactId>OperationPlatform</artifactId>

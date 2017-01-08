@@ -1,6 +1,6 @@
 package com.op.service.impl;
 
-import com.op.bean.Email;
+import com.op.bean.email.Email;
 import com.op.service.MailSendService;
 
 /****************************************

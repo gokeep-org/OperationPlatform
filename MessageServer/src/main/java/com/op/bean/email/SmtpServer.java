@@ -1,4 +1,4 @@
-package com.op.bean;
+package com.op.bean.email;
 
 import com.op.util.PropertiesUtil;
 
@@ -9,7 +9,6 @@ import com.op.util.PropertiesUtil;
  * @Auther is xuning on 2017/1/8.
  ****************************************/
 public class SmtpServer {
-
     private static String smtpHost= PropertiesUtil.getValue("spring.mail.host");
     private static String smtpProt= PropertiesUtil.getValue("spring.mail.port");
     private static String smtpUsername= PropertiesUtil.getValue("spring.mail.username");
