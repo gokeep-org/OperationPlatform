@@ -1,11 +1,6 @@
 package com.op.config;
 
-import com.op.library.provider.GsonMessageBodyHandler;
-import org.glassfish.jersey.message.DeflateEncoder;
-import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.ServerProperties;
-import org.glassfish.jersey.server.filter.EncodingFilter;
 
 /****************************************
  * Copyright (c) xuning.
@@ -19,6 +14,6 @@ public class JerseyConfig extends ResourceConfig {
     }
     private void setJerseyComponentsLocation() {
         packages("com.op");
-
     }
+
 }
