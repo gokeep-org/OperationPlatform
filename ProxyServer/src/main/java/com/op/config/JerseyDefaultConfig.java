@@ -3,6 +3,7 @@ package com.op.config;
 import com.op.bean.Endpoint;
 import com.op.bean.ReverseEndpoint;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /****************************************
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Component;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/10.
  ****************************************/
-@Component
+
+@Configuration
 public class JerseyDefaultConfig extends ResourceConfig {
     public JerseyDefaultConfig(){
-        register(Endpoint.class);
-        register(ReverseEndpoint.class);
+        packages("com.op");
     }
 }

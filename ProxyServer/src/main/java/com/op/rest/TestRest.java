@@ -1,9 +1,7 @@
-package com.op.bean;
+package com.op.rest;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
 
 /****************************************
  * Copyright (c) xuning.
@@ -11,16 +9,12 @@ import javax.ws.rs.QueryParam;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/10.
  ****************************************/
-
-@Path("/reverse")
-public class ReverseEndpoint {
-    @GET
-    public String reverse(@QueryParam("input") @NotNull String input) {
-        return new StringBuilder(input).reverse().toString();
-    }
+//TODO: 这里必须添加path路径
+@Path("/")
+public class TestRest {
     @GET
     @Path("/test")
     public String test(){
-        return "test";
+        return "Hello World";
     }
 }
