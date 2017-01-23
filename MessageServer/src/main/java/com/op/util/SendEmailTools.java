@@ -9,9 +9,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 public class SendEmailTools{
-	public static void main(String[] args) {
-		SendEmailTools.SendMail("1250496032@qq.com", "贱人艳", "你很丑");
-	}
+//	public static void main(String[] args) {
+//		SendEmailTools.SendMail("1250496032@qq.com", "贱人艳", "你很丑");
+//	}
 	private SendEmailTools(){}
 	private static String from="18753377393@163.com";
 	private static String password="xnjm0611";
