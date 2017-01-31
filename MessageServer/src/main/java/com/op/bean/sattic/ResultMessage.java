@@ -1,6 +1,7 @@
 package com.op.bean.sattic;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -15,48 +16,52 @@ import java.util.UUID;
 /**
  * rest结果信息
  */
-public class ResultMessage implements Serializable{
-    private String code;
-    private String messsage;
-    private Boolean success;
-    private UUID uuid;
+@Component
+public class ResultMessage implements Serializable {
+	@Value("200")
+	private String code;
+	@Value("操作成功")
+	private String messsage;
+	@Value("true")
+	private Boolean success;
+	private UUID uuid;
 
-    public ResultMessage(String code, String messsage, Boolean success, UUID uuid) {
-        this.code = code;
-        this.messsage = messsage;
-        this.success = success;
-        this.uuid = uuid;
-    }
+	public ResultMessage(String code, String messsage, Boolean success, UUID uuid) {
+		this.code = code;
+		this.messsage = messsage;
+		this.success = success;
+		this.uuid = uuid;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public String getMesssage() {
-        return messsage;
-    }
+	public String getMesssage() {
+		return messsage;
+	}
 
-    public void setMesssage(String messsage) {
-        this.messsage = messsage;
-    }
+	public void setMesssage(String messsage) {
+		this.messsage = messsage;
+	}
 
-    public Boolean getSuccess() {
-        return success;
-    }
+	public Boolean getSuccess() {
+		return success;
+	}
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
 
-    public UUID getUuid() {
-        return uuid;
-    }
+	public UUID getUuid() {
+		return uuid;
+	}
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
 }
