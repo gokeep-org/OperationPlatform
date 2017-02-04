@@ -69,7 +69,7 @@ public class MyAuthServerConfigurer extends AuthorizationServerConfigurerAdapter
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.withClientDetails(clientDetails())
+		clients.withClientDetails(clientDetails()).jdbc()
 			.withClient("client")
 			.secret("secret")
 			.authorizedGrantTypes("authorization_code")
