@@ -1,7 +1,7 @@
 
-import com.alibaba.fastjson.JSONObject;
 import com.op.App;
-import com.op.queue.Sender;
+import com.op.queue.sender.QueueSender;
+import net.minidev.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
 public class Trabbitmq {
-		@Autowired
-		private Sender sender;
-		@Test
-		public void hello() throws Exception {
-			JSONObject jsonObject=new JSONObject();
-			jsonObject.put("type", "customer");
-			jsonObject.put("aaa","bbbb");
-				sender.send("customer", jsonObject.toJSONString());
-		}
+	@Autowired
+	public QueueSender queueSender;
+	@Test
+	public void hello(){
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("type","customer");
+		jsonObject.put("aaa", "bbb");
+//		System.out.println(jsonObject);
+		queueSender.send(jsonObject.toJSONString());
+	}
 }
