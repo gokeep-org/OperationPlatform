@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,10 @@ public class MailRest {
 		email.setSender("postmaster@networklab.cn");
 		email.setTitle("test-xuning");
 		email.setContent("这是一个测试, 点击<a href='http://www.baidu.com'>百度</a>");
+		File file=new File("/home/xuning/1.txt");
+		List<File> files = new ArrayList<>();
+		files.add(file);
+		email.setAttachmentList(files);
 		List<String> list=new ArrayList<>();
 		list.add("postmaster@networklab.cn");
 		list.add("18753377393@163.com");
