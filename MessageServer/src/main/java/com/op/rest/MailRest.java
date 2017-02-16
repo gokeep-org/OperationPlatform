@@ -35,7 +35,7 @@ public class MailRest {
 		email.setAccepter("1748373312@qq.com");
 		email.setSender("postmaster@networklab.cn");
 		email.setTitle("test-xuning");
-		email.setContent("这是一个测试");
+		email.setContent("这是一个测试, 点击<a href='http://www.baidu.com'>百度</a>");
 		List<String> list=new ArrayList<>();
 		list.add("postmaster@networklab.cn");
 		list.add("18753377393@163.com");

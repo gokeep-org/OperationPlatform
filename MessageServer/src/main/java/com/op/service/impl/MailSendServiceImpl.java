@@ -22,15 +22,19 @@ public class MailSendServiceImpl implements MailSendService {
 	@Override
 	public Boolean sendSimpleEmail(Email email) throws MessagingException {
 		try{
-			smtpServer.setMailSessionInfo(true)
-					.setMailTransport()
-					.contractMimeMessage(email)
+			smtpServer.setMailSessionInfo()
+					.setEmail(email)
+					.setSender()
+					.setReceiver()
+					.setRecipients()
+					.setTitle()
+					.setContent()
+					.setAttachment()
 					.execute();
 			return true;
 		}catch (Exception e){
 			return false;
 		}
-
 	}
 
 	@Override
