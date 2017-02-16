@@ -1,6 +1,6 @@
 package com.op.bean.sattic;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -25,6 +25,10 @@ public class ResultMessage implements Serializable {
 	@Value("true")
 	private Boolean success;
 	private UUID uuid;
+
+	public ResultMessage() {
+
+	}
 
 	public ResultMessage(String code, String messsage, Boolean success, UUID uuid) {
 		this.code = code;
@@ -55,6 +59,9 @@ public class ResultMessage implements Serializable {
 
 	public void setSuccess(Boolean success) {
 		this.success = success;
+		if (success.equals(false)){
+			setUuid(UUID.randomUUID());
+		}
 	}
 
 	public UUID getUuid() {

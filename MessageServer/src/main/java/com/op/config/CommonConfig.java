@@ -1,14 +1,11 @@
-package com.op.rest;
-
-import org.springframework.beans.factory.annotation.Autowired;
+package com.op.config;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/1/31.
+ * @Auther is xuning on 2017/2/16.
  ****************************************/
-public class BaseRest<T> {
-	@Autowired
-	private T t;
+public class CommonConfig {
+	public static final String defaultCharset = "text/html;charset=utf-8";
 }

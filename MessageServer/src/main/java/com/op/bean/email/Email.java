@@ -9,80 +9,89 @@ import java.util.List;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/7.
  ****************************************/
-public class Email {
-    private String sender;
-    private String accepter;
-    private String title;
-    private String content;
-    private String remark;
-    private String dateTime;
-    private String size;
-    private List<File> attachmentList;
+public class Email{
+	private String sender;
+	private String accepter;
+	private String title;
+	private String content;
+	private String remark;
+	private String dateTime;
+	private String size;
+	private List<File> attachmentList;
+	private List<String> recipienters;
 
-    public Email() {
-    }
+	public Email() {
+	}
 
-    public String getSender() {
-        return sender;
-    }
+	public String getSender() {
+		return sender;
+	}
 
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
 
-    public String getAccepter() {
-        return accepter;
-    }
+	public String getAccepter() {
+		return accepter;
+	}
 
-    public void setAccepter(String accepter) {
-        this.accepter = accepter;
-    }
+	public void setAccepter(String accepter) {
+		this.accepter = accepter;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public String getRemark() {
-        return remark;
-    }
+	public String getRemark() {
+		return remark;
+	}
 
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
-    public String getDateTime() {
-        return dateTime;
-    }
+	public String getDateTime() {
+		return dateTime;
+	}
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
+	}
 
-    public String getSize() {
-        return size;
-    }
+	public String getSize() {
+		return size;
+	}
 
-    public void setSize(String size) {
-        this.size = size;
-    }
+	public void setSize(String size) {
+		this.size = size;
+	}
 
-    public List<File> getAttachmentList() {
-        return attachmentList;
-    }
+	public List<File> getAttachmentList() {
+		return attachmentList;
+	}
 
-    public void setAttachmentList(List<File> attachmentList) {
-        this.attachmentList = attachmentList;
-    }
+	public void setAttachmentList(List<File> attachmentList) {
+		this.attachmentList = attachmentList;
+	}
+
+	public List<String> getRecipienters() {
+		return recipienters;
+	}
+
+	public void setRecipienters(List<String> recipienters) {
+		this.recipienters = recipienters;
+	}
 }
