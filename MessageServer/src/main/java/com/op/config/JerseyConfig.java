@@ -1,7 +1,6 @@
 package com.op.config;
 
 import com.op.rest.provide.GsonMessageBodyHandler;
-import io.swagger.jaxrs.config.BeanConfig;
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -51,14 +50,18 @@ public class JerseyConfig extends ResourceConfig {
      * 注册Swagger,用于生成api文档
      */
     private void registerSwagger() {
-        boolean isSwaggerEnabled = true;
-        if (isSwaggerEnabled) {
-            register(io.swagger.jaxrs.listing.ApiListingResource.class);
-            register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
-            BeanConfig beanConfig = new BeanConfig();
-            beanConfig.setVersion("1.0.0");
-            beanConfig.setResourcePackage("com.op.rest");
-            beanConfig.setScan(true);
-        }
+        register(io.swagger.jaxrs.listing.ApiListingResource.class);
+        register(io.swagger.jaxrs.listing.AcceptHeaderApiListingResource.class);
+        register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+        //        boolean isSwaggerEnabled = true;
+//        if (isSwaggerEnabled) {
+//            register(io.swagger.jaxrs.listing.ApiListingResource.class);
+//            register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+//            BeanConfig beanConfig = new BeanConfig();
+//            beanConfig.setVersion("1.0.0");
+//            beanConfig.setResourcePackage("com.op.rest");
+//            beanConfig.setScan(true);
+//            beanConfig.setTitle("Operation Platform");
+//        }
     }
 }
