@@ -7,6 +7,5 @@ package com.op.config;
  * @Auther is xuning on 2017/2/16.
  ****************************************/
 public class CommonConfig {
-	public static final String DEFAULT_CHARSET = "text/html;charset=utf-8";
-	public static final Boolean MAIL_DEBUG = false;
+
 }

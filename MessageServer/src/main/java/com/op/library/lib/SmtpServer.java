@@ -1,7 +1,6 @@
 package com.op.library.lib;
 
 import com.op.bean.email.Email;
-import com.op.config.CommonConfig;
 import com.op.util.OpUtils;
 import com.op.util.PropertiesUtil;
 import org.slf4j.Logger;
@@ -45,6 +44,7 @@ public class SmtpServer {
 	private static final String smtpAuth = PropertiesUtil.getValue("spring.mail.properties.mail.smtp.auth");
 	private static final String smtpStarttlsEnable = PropertiesUtil.getValue("spring.mail.properties.mail.smtp.starttls.enable");
 	private static final Boolean mailDebug = Boolean.parseBoolean(PropertiesUtil.getValue("spring.mail.debug"));
+	private static final String mailCharset = PropertiesUtil.getValue("spring.mail.charset");
 	private static Properties properties = new Properties();
 	private Session session;
 	private Transport transport;
@@ -136,7 +136,7 @@ public class SmtpServer {
 		BodyPart bodyPart = new MimeBodyPart();
 		bodyPart.setText(email.getContent());
 		multipart.addBodyPart(bodyPart);
-		message.setContent(email.getContent(), CommonConfig.DEFAULT_CHARSET);
+		message.setContent(email.getContent(), mailCharset);
 		return this;
 	}
 
