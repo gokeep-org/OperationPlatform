@@ -1,4 +1,4 @@
-package com.op.library.lib;
+package com.op.library;
 
 import com.op.bean.email.Email;
 import com.op.util.OpUtils;

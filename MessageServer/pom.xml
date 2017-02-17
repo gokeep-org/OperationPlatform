@@ -54,7 +54,12 @@
             <artifactId>commons-email</artifactId>
             <version>1.4</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-jaxrs -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>1.5.12</version>
+        </dependency>
         <!--Test-->
         <dependency>
             <groupId>junit</groupId>

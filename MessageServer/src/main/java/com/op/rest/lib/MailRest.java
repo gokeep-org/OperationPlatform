@@ -1,4 +1,4 @@
-package com.op.rest;
+package com.op.rest.lib;
 
 import com.op.bean.email.Email;
 import com.op.service.MailSendService;

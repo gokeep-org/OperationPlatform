@@ -1,7 +1,6 @@
 package com.op.bean.email;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.List;
 
 /****************************************
@@ -10,7 +9,7 @@ import java.util.List;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/7.
  ****************************************/
-public class Email implements Serializable{
+public class Email{
 	private String sender;
 	private List<String> accepter;
 	private String title;
