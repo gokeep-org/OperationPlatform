@@ -1,6 +1,7 @@
 package com.op.bean.email;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 
 /****************************************
@@ -9,14 +10,15 @@ import java.util.List;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/7.
  ****************************************/
-public class Email{
+public class Email implements Serializable{
 	private String sender;
-	private String accepter;
+	private List<String> accepter;
 	private String title;
 	private String content;
 	private String remark;
 	private String dateTime;
 	private String size;
+	private List<String> bccAccepter;
 	private List<File> attachmentList;
 	private List<String> recipienters;
 
@@ -31,11 +33,11 @@ public class Email{
 		this.sender = sender;
 	}
 
-	public String getAccepter() {
+	public List<String> getAccepter() {
 		return accepter;
 	}
 
-	public void setAccepter(String accepter) {
+	public void setAccepter(List<String> accepter) {
 		this.accepter = accepter;
 	}
 
@@ -93,5 +95,13 @@ public class Email{
 
 	public void setRecipienters(List<String> recipienters) {
 		this.recipienters = recipienters;
+	}
+
+	public List<String> getBccAccepter() {
+		return bccAccepter;
+	}
+
+	public void setBccAccepter(List<String> bccAccepter) {
+		this.bccAccepter = bccAccepter;
 	}
 }

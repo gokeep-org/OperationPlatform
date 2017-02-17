@@ -2,8 +2,6 @@ package com.op.service;
 
 import com.op.bean.email.Email;
 
-import javax.mail.MessagingException;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -11,7 +9,15 @@ import javax.mail.MessagingException;
  * @Auther is xuning on 2017/1/7.
  ****************************************/
 public interface MailSendService {
-    public Boolean sendSimpleEmail(Email email) throws MessagingException;
-    public Boolean sendAttachmentsEmail(Email email);
-    public Boolean sendTemplate(Email email);
+	public Boolean sendSimpleEmail(Email email);
+
+	public Boolean sendRecipientsEmail(Email email);
+
+	public Boolean sendBccEmail(Email email);
+
+	public Boolean sendAttachmentsEmail(Email email);
+
+	public Boolean sendCommonEmail(Email email);
+
+	public Boolean sendTemplate(Email email);
 }

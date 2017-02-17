@@ -6,8 +6,6 @@ import com.op.service.MailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.mail.MessagingException;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -20,8 +18,24 @@ public class MailSendServiceImpl implements MailSendService {
 	private SmtpServer smtpServer;
 
 	@Override
-	public Boolean sendSimpleEmail(Email email) throws MessagingException {
-		try{
+	public Boolean sendSimpleEmail(Email email) {
+		try {
+			smtpServer.setMailSessionInfo()
+					.setEmail(email)
+					.setSender()
+					.setReceiver()
+					.setTitle()
+					.setContent()
+					.execute();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean sendRecipientsEmail(Email email) {
+		try {
 			smtpServer.setMailSessionInfo()
 					.setEmail(email)
 					.setSender()
@@ -29,21 +43,82 @@ public class MailSendServiceImpl implements MailSendService {
 					.setRecipients()
 					.setTitle()
 					.setContent()
-					.setAttachment()
 					.execute();
 			return true;
-		}catch (Exception e){
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean sendBccEmail(Email email) {
+		try {
+			smtpServer.setMailSessionInfo()
+					.setEmail(email)
+					.setSender()
+					.setReceiver()
+					.setBccAccepter()
+					.setTitle()
+					.setContent()
+					.execute();
+			return true;
+		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	@Override
 	public Boolean sendAttachmentsEmail(Email email) {
-		return null;
+		try {
+			smtpServer.setMailSessionInfo()
+					.setEmail(email)
+					.setSender()
+					.setReceiver()
+					.setTitle()
+					.setContent()
+					.setAttachment()
+					.execute();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean sendCommonEmail(Email email) {
+		try {
+			smtpServer.setMailSessionInfo()
+					.setEmail(email)
+					.setSender()
+					.setReceiver()
+					.setRecipients()
+					.setBccAccepter()
+					.setTitle()
+					.setContent()
+					.setAttachment()
+					.execute();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
 	public Boolean sendTemplate(Email email) {
-		return null;
+		try {
+			smtpServer.setMailSessionInfo()
+					.setEmail(email)
+					.setSender()
+					.setReceiver()
+					.setRecipients()
+					.setBccAccepter()
+					.setTitle()
+					.setContent()
+					.setAttachment()
+					.execute();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

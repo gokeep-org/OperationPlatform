@@ -39,4 +39,17 @@ public class OpUtils {
 		}
 		return true;
 	}
+
+	public static String getEnvValue(String key){
+		if (!checkStringIsNull(key)){
+			String res = System.getProperty(key);
+			if (!checkStringIsNull(res)){
+				return res;
+			}
+			LOGGER.error("env not have '"+key+"' value");
+			return null;
+		}
+		LOGGER.error("get env error, key is null");
+		return null;
+	}
 }

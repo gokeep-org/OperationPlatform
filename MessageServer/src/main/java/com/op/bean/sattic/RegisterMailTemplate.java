@@ -13,9 +13,9 @@ public class RegisterMailTemplate extends Email{
 	public RegisterMailTemplate(){
 		super();
 		PropertiesUtil.setConfigFileName("template.properties");
-		this.setAccepter(PropertiesUtil.getValue("accept"));
-		this.setAccepter(PropertiesUtil.getValue("accept"));
-		this.setAccepter(PropertiesUtil.getValue("accept"));
+//		this.setAccepter(PropertiesUtil.getValue("accept"));
+//		this.setAccepter(PropertiesUtil.getValue("accept"));
+//		this.setAccepter(PropertiesUtil.getValue("accept"));
 	}
 
 }

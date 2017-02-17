@@ -11,11 +11,19 @@ import org.springframework.stereotype.Component;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.mail.*;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -50,10 +58,12 @@ public class SmtpServer {
 		properties.put("mail.transport.protocol", protocolType);
 		properties.put("mail.smtp.auth", smtpAuth);
 	}
+
 	private void getTransport() throws MessagingException {
 		transport = session.getTransport();
 		transport.connect(smtpUsername, smtpPassword);
 	}
+
 	public SmtpServer setMailSessionInfo() throws MessagingException {
 		session = Session.getInstance(getSmtpServerSessionProperties());
 		session.setDebug(mailDebug);
@@ -62,27 +72,53 @@ public class SmtpServer {
 		return this;
 	}
 
-	public SmtpServer setEmail(Email mail){
-		email=mail;
+	public SmtpServer setEmail(Email mail) {
+		email = mail;
 		return this;
 	}
+
 	public SmtpServer setSender() throws MessagingException {
 		message.setFrom(new InternetAddress(email.getSender()));
 		return this;
 	}
 
 	public SmtpServer setReceiver() throws MessagingException {
-		message.setRecipient(Message.RecipientType.TO, new InternetAddress(email.getAccepter()));
+		if (!OpUtils.checkObjectIsNull(email.getAccepter())) {
+			email.getAccepter().forEach(e -> {
+				try {
+					message.addRecipient(Message.RecipientType.TO, new InternetAddress(e));
+				} catch (MessagingException e1) {
+					LOGGER.info("add email accepter is exception");
+				}
+			});
+		} else {
+			LOGGER.info("add email receiver is exception");
+		}
 		return this;
 	}
 
-	public SmtpServer setRecipients(){
+	public SmtpServer setRecipients() throws MessagingException {
 		if (!OpUtils.checkObjectIsNull(email.getRecipienters())) {
 			email.getRecipienters().forEach(e -> {
 				try {
-					message.setRecipient(Message.RecipientType.CC, new InternetAddress(e));
+					message.addRecipient(Message.RecipientType.CC, new InternetAddress(e));
 				} catch (MessagingException e1) {
-					LOGGER.info("recipient is exception");
+					LOGGER.info("add email recipient is exception");
+				}
+			});
+		} else {
+			LOGGER.info("SMTP_RECIPIENTERS_IS_NULL");
+		}
+		return this;
+	}
+
+	public SmtpServer setBccAccepter() {
+		if (!OpUtils.checkObjectIsNull(email.getBccAccepter())) {
+			email.getBccAccepter().forEach(e -> {
+				try {
+					message.addRecipient(Message.RecipientType.BCC, new InternetAddress(e));
+				} catch (MessagingException e1) {
+					LOGGER.info("add email bccaccepter is exception");
 				}
 			});
 		} else {
@@ -100,33 +136,33 @@ public class SmtpServer {
 		BodyPart bodyPart = new MimeBodyPart();
 		bodyPart.setText(email.getContent());
 		multipart.addBodyPart(bodyPart);
+		message.setContent(email.getContent(), CommonConfig.DEFAULT_CHARSET);
 		return this;
 	}
+
 	public SmtpServer setAttachment() throws MessagingException {
-		BodyPart messageBodyPart= new MimeBodyPart();
-		List<DataSource> sources = null;
-		if (!OpUtils.checkObjectIsNull(email.getAttachmentList())){
+
+		List<DataSource> sources = new ArrayList<>();
+		if (!OpUtils.checkObjectIsNull(email.getAttachmentList())) {
 			email.getAttachmentList().forEach(e -> {
 				sources.add(new FileDataSource(e));
 			});
 		}
-		//添加附件的内容
-		if (!OpUtils.checkObjectIsNull(sources)){
-			sources.forEach(e ->{
+		if (!OpUtils.checkObjectIsNull(sources)) {
+			sources.forEach(e -> {
 				try {
+					BodyPart messageBodyPart = new MimeBodyPart();
 					messageBodyPart.setDataHandler(new DataHandler(e));
-					sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
-					messageBodyPart.setFileName("=?GBK?B?"+enc.encode(e.getName().getBytes())+"?=");
+					messageBodyPart.setFileName(MimeUtility.encodeText(e.getName()));
 					multipart.addBodyPart(messageBodyPart);
 				} catch (MessagingException e1) {
 					LOGGER.info("set attachment error");
+				} catch (UnsupportedEncodingException e1) {
+					LOGGER.info("get attachment file name error");
 				}
 			});
 			message.setContent(multipart);
-		}else {
-			message.setContent(email.getContent(), CommonConfig.DEFAULT_CHARSET);
 		}
-		//保存邮件
 		message.saveChanges();
 		return this;
 	}
@@ -172,7 +208,7 @@ public class SmtpServer {
 		return smtpStarttlsEnable;
 	}
 
-	public static Boolean getMailDebug(){
+	public static Boolean getMailDebug() {
 		return mailDebug;
 	}
 }
