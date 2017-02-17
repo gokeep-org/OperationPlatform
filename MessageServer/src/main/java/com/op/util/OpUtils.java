@@ -14,10 +14,10 @@ import java.util.Objects;
  ****************************************/
 public class OpUtils {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OpUtils.class);
+
 	private OpUtils() {
 	}
 
-	//验证字符串是不是空
 	public static Boolean checkStringIsNull(String string) {
 		if (null == string || string.trim().equals("")) {
 			return true;
@@ -25,28 +25,28 @@ public class OpUtils {
 		return false;
 	}
 
-	public static Boolean checkObjectIsNull(Object obj){
-		if (!Objects.equals(null, obj)){
+	public static Boolean checkObjectIsNull(Object obj) {
+		if (!Objects.equals(null, obj)) {
 			return false;
 		}
-		try{
-			List list=(List) obj;
-			if (list.size() > 0){
+		try {
+			List list = (List) obj;
+			if (list.size() > 0) {
 				return false;
 			}
-		}catch (Exception e){
+		} catch (Exception e) {
 			LOGGER.info("check obj is null transfrom list is faile");
 		}
 		return true;
 	}
 
-	public static String getEnvValue(String key){
-		if (!checkStringIsNull(key)){
-			String res = System.getProperty(key);
-			if (!checkStringIsNull(res)){
+	public static String getEnvValue(String key) {
+		if (!checkStringIsNull(key)) {
+			String res = System.getenv(key);
+			if (!checkStringIsNull(res)) {
 				return res;
 			}
-			LOGGER.error("env not have '"+key+"' value");
+			LOGGER.error("env not have '" + key + "' value");
 			return null;
 		}
 		LOGGER.error("get env error, key is null");

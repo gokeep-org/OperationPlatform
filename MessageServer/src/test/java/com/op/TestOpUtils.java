@@ -12,7 +12,7 @@ import org.junit.Test;
 public class TestOpUtils {
 	@Test
 	public void testGetEnvValue(){
-		String javaHome = OpUtils.getEnvValue("OS");
-		System.out.println(javaHome);
+		String s= OpUtils.getEnvValue("JAVA_HOME");
+		System.out.println(s);
 	}
 }

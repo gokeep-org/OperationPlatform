@@ -1,7 +1,8 @@
-package com.op.util;
+package com.op;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.junit.Test;
 
 /****************************************
  * Copyright (c) xuning.
@@ -9,20 +10,14 @@ import org.apache.commons.mail.SimpleEmail;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/2/16.
  ****************************************/
-public class ApacheCommonsEmail {
-	public static void main(String[] args) {
+public class TestCommonsEmail {
+	@Test
+	public  void main(String[] args) {
 		SimpleEmail email = new SimpleEmail();
 		email.setHostName("smtp.networklab.cn");// 设置使用发电子邮件的邮件服务器，这里以qq邮箱为例（其它例如：【smtp.163.com】，【smtp.sohu.com】）
 		try {
-
-//			Properties prop=new Properties();postmaster@networklab.cn", "Xnjm0611
-//			prop.put("mail.host","smtp.networklab.cn" );
-//			prop.put("mail.transport.protocol", "smtp");
-//			prop.put("mail.smtp.auth", "true");
-//			prop.put("mail.smtp.port", "25");
 			// 收件人邮箱
 			email.addTo("1748373312@qq.com");
-			;
 			// 邮箱服务器身份验证
 			email.setAuthentication("postmaster@networklab.cn", "Xnjm0611");
 			// 发件人邮箱
