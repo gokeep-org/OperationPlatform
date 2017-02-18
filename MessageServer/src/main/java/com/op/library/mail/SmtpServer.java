@@ -10,17 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
+import javax.mail.*;
+import javax.mail.internet.*;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,17 +25,17 @@ import java.util.Properties;
  ****************************************/
 @Component
 public class SmtpServer {
-
+	private static  PropertiesUtil propertiesUtil = new PropertiesUtil("mail.properties");
 	private static final Logger LOGGER = LoggerFactory.getLogger(SmtpServer.class);
-	private static final String smtpHost = PropertiesUtil.getValue("spring.mail.host");
-	private static final String smtpProt = PropertiesUtil.getValue("spring.mail.port");
-	private static final String smtpUsername = PropertiesUtil.getValue("spring.mail.username");
-	private static final String smtpPassword = PropertiesUtil.getValue("spring.mail.password");
-	private static final String protocolType = PropertiesUtil.getValue("spring.mail.protocol");
-	private static final String smtpAuth = PropertiesUtil.getValue("spring.mail.properties.mail.smtp.auth");
-	private static final String smtpStarttlsEnable = PropertiesUtil.getValue("spring.mail.properties.mail.smtp.starttls.enable");
-	private static final Boolean mailDebug = Boolean.parseBoolean(PropertiesUtil.getValue("spring.mail.debug"));
-	private static final String mailCharset = PropertiesUtil.getValue("spring.mail.charset");
+	private static final String smtpHost = propertiesUtil.getValue("spring.mail.host");
+	private static final String smtpProt = propertiesUtil.getValue("spring.mail.port");
+	private static final String smtpUsername = propertiesUtil.getValue("spring.mail.username");
+	private static final String smtpPassword = propertiesUtil.getValue("spring.mail.password");
+	private static final String protocolType = propertiesUtil.getValue("spring.mail.protocol");
+	private static final String smtpAuth = propertiesUtil.getValue("spring.mail.properties.mail.smtp.auth");
+	private static final String smtpStarttlsEnable = propertiesUtil.getValue("spring.mail.properties.mail.smtp.starttls.enable");
+	private static final Boolean mailDebug = Boolean.parseBoolean(propertiesUtil.getValue("spring.mail.debug"));
+	private static final String mailCharset = propertiesUtil.getValue("spring.mail.charset");
 	private static Properties properties = new Properties();
 	private Session session;
 	private Transport transport;

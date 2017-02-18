@@ -64,4 +64,12 @@ public class PropertiesUtil {
 		}
 		return value;
 	}
+	
+	public static String getUserConfigFile() {
+		return userConfigFile;
+	}
+	
+	public static void setUserConfigFile(String userConfigFile) {
+		PropertiesUtil.userConfigFile = userConfigFile;
+	}
 }
