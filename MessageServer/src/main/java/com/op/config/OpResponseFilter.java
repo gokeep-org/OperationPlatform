@@ -1,5 +1,6 @@
 package com.op.config;
 
+import com.op.bean.action.output.ErrorInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +29,9 @@ public class OpResponseFilter implements ContainerResponseFilter {
 			responseContext.setEntity("status isz: "+responseContext.getStatus());
 			LOGGER.error("response sttaus is "+responseContext.getStatus());
 		}
-		LOGGER.info("response filter :"+responseContext.getEntity());
-//		responseContext.setStatus(300);
-//		responseContext.setEntity("OK---response" +
-//				"");
+		ErrorInfo info = new ErrorInfo();
+		info.setCode(String.valueOf(responseContext.getStatus()));
+		info.setMesssage("邮件发送失败");
+		info.setSuccess("fase");
 	}
 }

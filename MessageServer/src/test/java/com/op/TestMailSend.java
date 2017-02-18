@@ -40,7 +40,7 @@ public class TestMailSend {
 	public void testSimpleMailSend() throws MessagingException {
 		List<String> accepts = Arrays.asList(new String[]{eefungAccepter, qqAccepter});
 		email.setAccepter(accepts);
-		email.setSender(mailSender);
+		email.setSender(qqAccepter);
 		email.setTitle(title);
 		email.setContent(content);
 		Boolean res = mailSendService.sendSimpleEmail(email);
@@ -96,7 +96,7 @@ public class TestMailSend {
 				new File("C:/Users/me/Desktop/test1.txt"),
 				new File("C:/Users/me/Desktop/test.docx")
 		});
-		email.setAttachmentList(files);
+		email.setAttachment(files);
 		Boolean res = mailSendService.sendAttachmentsEmail(email);
 		Assert.assertTrue(res);
 	}
@@ -123,7 +123,7 @@ public class TestMailSend {
 				new File("C:/Users/me/Desktop/test1.txt"),
 				new File("C:/Users/me/Desktop/test.docx")
 		});
-		email.setAttachmentList(files);
+		email.setAttachment(files);
 		Boolean res = mailSendService.sendCommonEmail(email);
 		Assert.assertTrue(res);
 	}

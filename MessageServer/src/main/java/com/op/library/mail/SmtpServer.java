@@ -143,8 +143,8 @@ public class SmtpServer {
 	public SmtpServer setAttachment() throws MessagingException {
 
 		List<DataSource> sources = new ArrayList<>();
-		if (!OpUtils.checkObjectIsNull(email.getAttachmentList())) {
-			email.getAttachmentList().forEach(e -> {
+		if (!OpUtils.checkObjectIsNull(email.getAttachment())) {
+			email.getAttachment().forEach(e -> {
 				sources.add(new FileDataSource(e));
 			});
 		}

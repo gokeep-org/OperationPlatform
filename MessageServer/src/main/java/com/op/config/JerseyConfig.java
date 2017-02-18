@@ -8,6 +8,8 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
 
+import javax.ws.rs.ApplicationPath;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @Auther is xuning on 2017/1/8.
  ****************************************/
 @Configuration
+@ApplicationPath("/msg")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         setJerseyComponentsLocation();
@@ -22,7 +25,6 @@ public class JerseyConfig extends ResourceConfig {
         registerJsonProvider();
         registerCompressionEncoder();
         registerSwagger();
-
     }
     private void setJerseyComponentsLocation() {
         packages("com.op.rest");

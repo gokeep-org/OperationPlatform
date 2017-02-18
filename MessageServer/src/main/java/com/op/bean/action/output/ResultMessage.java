@@ -1,8 +1,7 @@
-package com.op.bean.sattic;
+package com.op.bean.action.output;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 /****************************************
@@ -15,7 +14,7 @@ import java.util.UUID;
 /**
  * rest结果信息
  */
-public class ResultMessage implements Serializable {
+public class ResultMessage{
 	@Value("200")
 	private String code;
 	@Value("操作成功")

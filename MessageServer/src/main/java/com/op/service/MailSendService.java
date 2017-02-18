@@ -8,7 +8,7 @@ import com.op.bean.entity.email.Email;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/7.
  ****************************************/
-public interface MailSendService {
+public interface MailSendService{
 	public Boolean sendSimpleEmail(Email email);
 
 	public Boolean sendRecipientsEmail(Email email);

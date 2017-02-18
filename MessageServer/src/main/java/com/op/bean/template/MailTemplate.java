@@ -1,4 +1,4 @@
-package com.op.bean.sattic;
+package com.op.bean.template;
 
 import com.op.bean.entity.email.Email;
 

@@ -1,5 +1,7 @@
 package com.op.bean.entity.email;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.File;
 import java.util.List;
 
@@ -15,10 +17,12 @@ public class Email{
 	private String title;
 	private String content;
 	private String remark;
+    @SerializedName("date_time")
 	private String dateTime;
 	private String size;
+    @SerializedName("bcc_accepter")
 	private List<String> bccAccepter;
-	private List<File> attachmentList;
+	private List<File> attachment;
 	private List<String> recipienters;
 
 	public Email() {
@@ -80,12 +84,12 @@ public class Email{
 		this.size = size;
 	}
 
-	public List<File> getAttachmentList() {
-		return attachmentList;
+	public List<File> getAttachment() {
+		return attachment;
 	}
 
-	public void setAttachmentList(List<File> attachmentList) {
-		this.attachmentList = attachmentList;
+	public void setAttachment(List<File> attachment) {
+		this.attachment = attachment;
 	}
 
 	public List<String> getRecipienters() {
