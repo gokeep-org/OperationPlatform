@@ -1,13 +1,11 @@
 package com.op.rest;
 
+import com.google.gson.JsonObject;
 import com.op.bean.entity.email.Email;
 import com.op.service.MailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -15,6 +13,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/test")
 @Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
 public class TestRest {
     @Autowired
     private MailSendService mailSendService;
@@ -22,7 +21,10 @@ public class TestRest {
     @Path("/test1")
     @GET
     public String xx() {
-        return "{'a':'111'}";
+    
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("test", "ismok");
+        return jsonObject.toString();
     }
 
     @Path("/request/header")

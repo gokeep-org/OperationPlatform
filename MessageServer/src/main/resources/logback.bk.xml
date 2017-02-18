@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%d [%thread] %-5level [%logger{35}] - [%X{uuid}] %msg%n----%n%ex{full}</pattern>
+    </layout>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>//home/xuning/test-dev/OpenPlatform/log/open-api/open-api.log</File>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern>/home/xuning/op.%i.log</FileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>4</maxIndex>
+    </rollingPolicy>
+      <triggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <maxFileSize>100MB</maxFileSize>
+      </triggeringPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d [%thread] %-5level [%logger{35}] - [%X{uuid}] %msg%n----%n%ex{full}</Pattern>
+    </layout>
+  </appender>
+
+  <appender name="MONITOR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>/home/xuning/monitor.log</File>
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern>/home/xuning/monitor.%i.log</FileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>4</maxIndex>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>100MB</maxFileSize>
+    </triggeringPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d [%thread] %-5level [%logger{35}] - [%X{uuid}] %msg%n----%n%ex{full}</Pattern>
+    </layout>
+  </appender>
+
+  <logger name="monitor" additivity="false" level="info">
+    <appender-ref ref="MONITOR" />
+  </logger>
+
+  <root>
+    <level value="info" />
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>

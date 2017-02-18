@@ -10,16 +10,16 @@ import java.util.UUID;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-2-19
  ****************************************/
-public class ErrorInfo extends BaseOutput{
+public class ErrorInfoOutput extends BaseOutput{
     private String code;
     @SerializedName("msg")
     private String messsage;
-    private UUID uuid;
+    private UUID uuid=UUID.randomUUID();
     
-    public ErrorInfo() {
+    public ErrorInfoOutput() {
     }
     
-    public ErrorInfo(String code, String messsage, UUID uuid) {
+    public ErrorInfoOutput(String code, String messsage, UUID uuid) {
         this.code = code;
         this.messsage = messsage;
         this.uuid = uuid;
