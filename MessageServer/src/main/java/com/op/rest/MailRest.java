@@ -1,6 +1,6 @@
-package com.op.rest.lib;
+package com.op.rest;
 
-import com.op.bean.email.Email;
+import com.op.bean.entity.email.Email;
 import com.op.service.MailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by me on 2017/1/5.
  */
-@Path("/test")
+@Path("/mail")
 @Produces({MediaType.APPLICATION_JSON})
 public class MailRest {
 	@Autowired
@@ -36,7 +36,7 @@ public class MailRest {
 		return "OK";
 	}
 
-	@Path("/email/send")
+	@Path("/simple/send")
 	@GET
 	public String mailSend1() {
 		Email email = new Email();

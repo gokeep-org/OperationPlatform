@@ -1,6 +1,6 @@
 package com.op.service;
 
-import com.op.bean.email.Email;
+import com.op.bean.entity.email.Email;
 
 /****************************************
  * Copyright (c) xuning.

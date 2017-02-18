@@ -1,4 +1,4 @@
-package com.op.bean.email;
+package com.op.bean.entity.email;
 
 import java.io.File;
 import java.util.List;

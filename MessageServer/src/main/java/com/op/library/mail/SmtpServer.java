@@ -1,6 +1,6 @@
-package com.op.library;
+package com.op.library.mail;
 
-import com.op.bean.email.Email;
+import com.op.bean.entity.email.Email;
 import com.op.util.OpUtils;
 import com.op.util.PropertiesUtil;
 import org.slf4j.Logger;

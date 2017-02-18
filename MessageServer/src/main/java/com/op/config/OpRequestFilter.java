@@ -34,7 +34,6 @@ public class OpRequestFilter implements ContainerRequestFilter {
 	private HttpServletRequest request;
 
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		LOGGER.info("filter2--------2");
 		getBrowerHeader(requestContext);
 		String method = requestContext.getMethod();
 		String path = requestContext.getUriInfo().getPath();

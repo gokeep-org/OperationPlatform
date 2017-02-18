@@ -1,7 +1,7 @@
 package com.op.service.impl;
 
-import com.op.bean.email.Email;
-import com.op.library.SmtpServer;
+import com.op.bean.entity.email.Email;
+import com.op.library.mail.SmtpServer;
 import com.op.service.MailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

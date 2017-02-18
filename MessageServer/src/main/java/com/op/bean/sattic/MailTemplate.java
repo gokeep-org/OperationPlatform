@@ -1,6 +1,6 @@
 package com.op.bean.sattic;
 
-import com.op.bean.email.Email;
+import com.op.bean.entity.email.Email;
 
 import java.util.Objects;
 import java.util.Random;

@@ -1,6 +1,6 @@
 package com.op.config;
 
-import com.op.rest.provide.GsonMessageBodyHandler;
+import com.op.library.provide.GsonMessageBodyHandler;
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;

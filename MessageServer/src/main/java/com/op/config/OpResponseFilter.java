@@ -24,6 +24,13 @@ public class OpResponseFilter implements ContainerResponseFilter {
 	private HttpServletRequest request;
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-		LOGGER.info("response filter :"+responseContext);
+		if(!(responseContext.getStatus() == 200)){
+			responseContext.setEntity("status isz: "+responseContext.getStatus());
+			LOGGER.error("response sttaus is "+responseContext.getStatus());
+		}
+		LOGGER.info("response filter :"+responseContext.getEntity());
+//		responseContext.setStatus(300);
+//		responseContext.setEntity("OK---response" +
+//				"");
 	}
 }

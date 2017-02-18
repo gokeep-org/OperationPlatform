@@ -1,6 +1,6 @@
 package com.op;
 
-import com.op.bean.email.Email;
+import com.op.bean.entity.email.Email;
 import com.op.service.MailSendService;
 import org.junit.Assert;
 import org.junit.Test;

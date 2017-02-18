@@ -1,7 +1,6 @@
 package com.op.bean.sattic;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -16,7 +15,6 @@ import java.util.UUID;
 /**
  * rest结果信息
  */
-@Component
 public class ResultMessage implements Serializable {
 	@Value("200")
 	private String code;
