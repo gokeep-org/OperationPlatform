@@ -65,6 +65,7 @@ public class SmtpServer {
 
 	public SmtpServer setEmail(Email mail) {
 		email = mail;
+		email.setSender(smtpUsername);
 		return this;
 	}
 

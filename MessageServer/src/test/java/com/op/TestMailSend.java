@@ -40,7 +40,7 @@ public class TestMailSend {
 	public void testSimpleMailSend() throws MessagingException {
 		List<String> accepts = Arrays.asList(new String[]{eefungAccepter, qqAccepter});
 		email.setAccepter(accepts);
-		email.setSender(qqAccepter);
+//		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
 		Boolean res = mailSendService.sendSimpleEmail(email);

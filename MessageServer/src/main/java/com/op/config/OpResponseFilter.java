@@ -33,7 +33,6 @@ public class OpResponseFilter implements ContainerResponseFilter {
 			responseContext.setEntity(info);
 		}
 //		responseContext.setEntity("status isz: "+responseContext.getStatus());
-		LOGGER.error("response sttaus is "+responseContext.getStatus());
-		
+		LOGGER.info("response sttaus is "+responseContext.getStatus());
 	}
 }

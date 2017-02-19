@@ -3,8 +3,6 @@ package com.op.rest;
 import com.op.action.factory.mail.EmailActionFactory;
 import com.op.bean.action.input.email.MailSendInput;
 import com.op.bean.action.output.email.MailSendOutput;
-import com.op.service.MailSendService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,8 +17,6 @@ import java.util.Objects;
 @Path("/email")
 @Produces({MediaType.APPLICATION_JSON})
 public class MailRest {
-	@Autowired
-	private MailSendService mailSendService;
 	
 	@Path("/simple/send")
 	@POST
