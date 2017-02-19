@@ -31,7 +31,7 @@ public class MailAction extends ItemAction<MailSendOutput> {
     
     @Override
     protected void start() {
-        mailSendService.sendSimpleEmail(this.email);
+        mailSendService.sendCommonEmail(this.email);
     }
     
     @Override

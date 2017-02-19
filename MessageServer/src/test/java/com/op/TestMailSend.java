@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.mail.MessagingException;
@@ -18,6 +19,7 @@ import java.util.Random;
  * Created by xuning on 17-2-17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public class TestMailSend {
 	@Autowired
 	private MailSendService mailSendService;
@@ -38,7 +40,6 @@ public class TestMailSend {
 	public void testSimpleMailSend() throws MessagingException {
 		List<String> accepts = Arrays.asList(new String[]{eefungAccepter, qqAccepter});
 		email.setAccepter(accepts);
-//		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
 		Boolean res = mailSendService.sendSimpleEmail(email);

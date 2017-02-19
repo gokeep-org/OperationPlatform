@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JettyConfig extends JettyEmbeddedServletContainerFactory {
 
-    private static PropertiesUtil propertiesUtil = new PropertiesUtil("app-config.properties");
+    private static PropertiesUtil propertiesUtil = new PropertiesUtil("jetty-config.properties");
     private static final String maxThread = propertiesUtil.getValue("server.jetty.maxthread.size");
     private static final String minThread = propertiesUtil.getValue("server.jetty.minthread.size");
     private static final String timout = propertiesUtil.getValue("server.jetty.timeout");
