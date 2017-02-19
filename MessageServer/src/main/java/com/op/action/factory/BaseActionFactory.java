@@ -1,6 +1,8 @@
 package com.op.action.factory;
 
+import com.op.bean.entity.user.User;
 import com.op.service.MailSendService;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /****************************************
@@ -19,5 +21,10 @@ public abstract class BaseActionFactory {
     
     public static void setMailSendService(MailSendService mailSendService) {
         BaseActionFactory.mailSendService = mailSendService;
+    }
+    
+    public final static User getUser(){
+        User user = new User(Long.parseLong(MDC.get("user_id")));
+        return user;
     }
 }

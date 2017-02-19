@@ -26,10 +26,10 @@ public class OpResponseFilter implements ContainerResponseFilter {
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
 		if(!(responseContext.getStatus() == 200)){
-			ErrorInfoOutput info = new ErrorInfoOutput();
-			info.setCode(String.valueOf(responseContext.getStatus()));
-			info.setMesssage(responseContext.getStatusInfo().toString());
-			info.setSuccess("false");
+			ErrorInfoOutput info = new ErrorInfoOutput(
+					String.valueOf(responseContext.getStatus()),
+					responseContext.getStatusInfo().toString()
+			);
 			responseContext.setEntity(info);
 		}
 //		responseContext.setEntity("status isz: "+responseContext.getStatus());

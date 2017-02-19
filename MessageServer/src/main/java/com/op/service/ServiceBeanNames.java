@@ -1,5 +1,5 @@
 package com.op.service;
 
 public class ServiceBeanNames {
-    public static final String MAIL_SEND_SERVICE = "filePresignService";
+    public static final String MAIL_SEND_SERVICE = "sendMailService";
 }

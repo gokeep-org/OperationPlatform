@@ -3,6 +3,7 @@ package com.op.action.factory.mail;
 import com.op.action.factory.BaseActionFactory;
 import com.op.action.mail.MailAction;
 import com.op.bean.action.input.email.MailSendInput;
+import com.op.bean.entity.user.User;
 
 /****************************************
  * Copyright (c) xuning.
@@ -11,7 +12,9 @@ import com.op.bean.action.input.email.MailSendInput;
  * @Auther is xuning on 17-2-18
  ****************************************/
 public class EmailActionFactory extends BaseActionFactory {
+    
     public static MailAction getMailSendAction(MailSendInput input) throws Exception {
+        User user = getUser();
         return new MailAction(input);
     }
 }

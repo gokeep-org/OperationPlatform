@@ -38,6 +38,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
 		String method = requestContext.getMethod();
 		String path = requestContext.getUriInfo().getPath();
 		String requestPath = method + ":" + path;
+		MDC.put("user_id", requestContext.getHeaderString("user_id"));
 		LOGGER.info(requestContext.getHeaderString("token"));
 		LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
 	}

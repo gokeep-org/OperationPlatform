@@ -15,13 +15,15 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
 public class TestRest {
+    public String tpf(){
+        return "* is tfg";
+    }
     @Autowired
     private MailSendService mailSendService;
 
     @Path("/test1")
     @GET
     public String xx() {
-    
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("test", "ismok");
         return jsonObject.toString();
