@@ -1,5 +1,3 @@
-package com.op;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -13,7 +11,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-@ImportResource("classpath:spring.xml")
+@ImportResource("spring.xml")
 public class Application {
 
     public static void main(String[] args) {
