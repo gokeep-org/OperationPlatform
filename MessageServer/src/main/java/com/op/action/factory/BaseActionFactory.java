@@ -24,7 +24,7 @@ public abstract class BaseActionFactory {
     }
     
     public final static User getUser(){
-        User user = new User(Long.parseLong(MDC.get("user_id")));
+        User user = new User(MDC.get("user_id"));
         return user;
     }
 }

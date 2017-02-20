@@ -19,7 +19,7 @@
 //	private static final String queueName = "sys";
 //
 //	@Override
-//	public void send(String message) {
+//	public void sender(String message) {
 //		if (null == message && message.trim() != "") {
 //			throw new OperationPlatformException(ErrorCode.SEND_QUEUE_IS_NULL);
 //		}

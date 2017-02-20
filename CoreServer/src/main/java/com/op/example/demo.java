@@ -13,7 +13,7 @@
 //
 //	public static QueueSender queueSender=new CustomerSender();
 //	public static void main(String[] args) {
-//		queueSender.send("test");
+//		queueSender.sender("test");
 //	}
 //
 //}

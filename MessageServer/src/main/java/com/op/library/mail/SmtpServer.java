@@ -164,7 +164,7 @@ public class SmtpServer {
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 		} catch (MessagingException e) {
-			LOGGER.info("send email is error: ", e);
+			LOGGER.info("sender email is error: ", e);
 		}
 	}
 

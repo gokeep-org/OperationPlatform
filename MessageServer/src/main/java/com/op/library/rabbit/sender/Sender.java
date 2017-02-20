@@ -1,4 +1,4 @@
-package com.op.exception;
+package com.op.library.rabbit.sender;
 
 /****************************************
  * Copyright (c) xuning.
@@ -6,8 +6,6 @@ package com.op.exception;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/2/15.
  ****************************************/
-public class ErrorCode {
-	public static final String SEND_QUEUE_IS_NULL = "sender queue json data is null";
-	public static final String SERVER_INTERNAL_ERROR = "server internal error";
-
+public interface Sender {
+	public void send(String queueName, String message);
 }

@@ -24,6 +24,5 @@ public class CustomerSender extends QueueSender {
 			throw new OperationPlatformException(ErrorCode.SEND_QUEUE_IS_NULL);
 		}
 		this.rabbitTemplate.convertAndSend(queueName, message);
-
 	}
 }

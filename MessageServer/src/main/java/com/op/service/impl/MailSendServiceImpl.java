@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @Auther is xuning on 2017/2/16.
  ****************************************/
 @Service(ServiceBeanNames.MAIL_SEND_SERVICE)
-public class MailSendServiceImpl extends BaseService implements MailSendService{
+public class MailSendServiceImpl extends BaseService implements MailSendService {
 	@Autowired
 	private SmtpServer smtpServer;
 

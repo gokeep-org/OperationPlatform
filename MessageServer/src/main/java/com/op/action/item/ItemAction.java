@@ -2,6 +2,8 @@ package com.op.action.item;
 
 import com.op.action.factory.BaseAction;
 import com.op.bean.action.output.BaseOutput;
+import com.op.library.rabbit.sender.Sender;
+import com.op.library.rabbit.sender.SenderImpl;
 import com.op.service.BaseService;
 import com.op.service.MailSendService;
 import com.op.service.ServiceBeanNames;
@@ -15,13 +17,15 @@ import com.op.service.impl.MailSendServiceImpl;
  ****************************************/
 public abstract class ItemAction <T extends BaseOutput> extends BaseAction<T> {
     public static MailSendService mailSendService = BaseService.getService(ServiceBeanNames.MAIL_SEND_SERVICE, MailSendServiceImpl.class);
-    
+    public static Sender senderService = BaseService.getService(ServiceBeanNames.SENDER_SERVICE, SenderImpl.class);
+
+
+
     public static MailSendService getMailSendService() {
         return mailSendService;
     }
-    
+
     public static void setMailSendService(MailSendService mailSendService) {
         ItemAction.mailSendService = mailSendService;
     }
-    //所有的service
 }

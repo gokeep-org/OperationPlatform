@@ -17,31 +17,31 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 public class MailRest {
     
-    @Path("/simple/send")
+    @Path("/simple/sender")
     @POST
     public MailSendOutput simpleMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailSendAction(input).execute();
     }
     
-    @Path("/recipienters/send")
+    @Path("/recipienters/sender")
     @POST
     public MailSendOutput RecipientersMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailSendAction(input).execute();
     }
     
-    @Path("/bcc/send")
+    @Path("/bcc/sender")
     @POST
     public MailSendOutput bccMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailSendAction(input).execute();
     }
     
-    @Path("/attachment/send")
+    @Path("/attachment/sender")
     @POST
     public MailSendOutput attachmentMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailSendAction(input).execute();
     }
     
-    @Path("/send")
+    @Path("/sender")
     @POST
     public MailSendOutput mailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailSendAction(input).execute();

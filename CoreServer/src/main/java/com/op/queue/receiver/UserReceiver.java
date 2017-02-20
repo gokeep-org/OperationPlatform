@@ -19,6 +19,7 @@ public class UserReceiver extends QueueReceiver {
 
 	@RabbitHandler
 	public void process(String jsonStr) throws Exception{
+
 		LOGGER.info("user---"+jsonStr);
 	}
 }

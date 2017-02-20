@@ -1,5 +1,6 @@
 package com.op.action.mail;
 
+import com.google.gson.Gson;
 import com.op.action.item.ItemAction;
 import com.op.bean.action.input.email.MailSendInput;
 import com.op.bean.action.output.email.MailSendOutput;
@@ -31,7 +32,9 @@ public class MailAction extends ItemAction<MailSendOutput> {
     
     @Override
     protected void start() {
-        mailSendService.sendCommonEmail(this.email);
+//        mailSendService.sendCommonEmail(this.email);
+//        mailSendService
+        senderService.send("message", new Gson().toJson(email));
     }
     
     @Override
