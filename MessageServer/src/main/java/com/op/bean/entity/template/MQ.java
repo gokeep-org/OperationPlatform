@@ -17,9 +17,6 @@ public class MQ <T extends BaseInput>{
 	private String method;
 	private T param;
 
-	public static void main(String[] args) {
-		System.out.println(MqType.customer.toString().getClass().getTypeName());
-	}
 	public String getRoteKey() {
 		return roteKey;
 	}

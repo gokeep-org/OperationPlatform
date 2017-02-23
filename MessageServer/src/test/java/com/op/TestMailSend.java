@@ -1,7 +1,12 @@
 package com.op;
 
-import com.op.bean.entity.email.Email;
-import com.op.service.MailSendService;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import javax.mail.MessagingException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,11 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.mail.MessagingException;
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import com.op.bean.entity.email.Email;
+import com.op.service.MailSendService;
 
 /**
  * Created by xuning on 17-2-17.
@@ -90,12 +92,8 @@ public class TestMailSend {
 		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
-		List<File> files = Arrays.asList(new File[]{
-				new File("C:/Users/me/Desktop/test.txt"),
-				new File("C:/Users/me/Desktop/test1.txt"),
-				new File("C:/Users/me/Desktop/test.docx")
-		});
-		email.setAttachment(files);
+		List<String> files = Arrays.asList(new String[]{"C:/Users/me/Desktop/test.txt"});
+		email.setAttachmentPath(files);
 		Boolean res = mailSendService.sendAttachmentsEmail(email);
 		Assert.assertTrue(res);
 	}
@@ -122,7 +120,7 @@ public class TestMailSend {
 				new File("C:/Users/me/Desktop/test1.txt"),
 				new File("C:/Users/me/Desktop/test.docx")
 		});
-		email.setAttachment(files);
+		email.setAttachmentFile(files);
 		Boolean res = mailSendService.sendCommonEmail(email);
 		Assert.assertTrue(res);
 	}

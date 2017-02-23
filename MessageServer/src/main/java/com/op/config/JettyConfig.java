@@ -1,9 +1,10 @@
 package com.op.config;
 
-import com.op.util.PropertiesUtil;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Configuration;
+
+import com.op.util.PropertiesUtil;
 
 /****************************************
  * Copyright (c) xuning.
@@ -44,10 +45,6 @@ public class JettyConfig extends JettyEmbeddedServletContainerFactory {
     }
 
     public void setQueueSize() {
-//        threadPool.setQueue();
-//        int capacity = Math.max(60000, 8);
-//        Queue queue = new BlockingArrayQueue(capacity, capacity);
-//        threadPool.setQueue((BlockingQueue<Runnable>) queue);
 
     }
 
