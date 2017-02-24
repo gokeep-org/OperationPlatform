@@ -33,15 +33,15 @@ public class JettyConfig extends JettyEmbeddedServletContainerFactory {
     }
 
     public void setMaxThread() {
-        threadPool.setMaxThreads(2000);
+        threadPool.setMaxThreads(Integer.parseInt(maxThread));
     }
 
     public void setMinThread() {
-        threadPool.setMinThreads(20);
+        threadPool.setMinThreads(Integer.parseInt(minThread));
     }
 
     public void setTimout() {
-        threadPool.setIdleTimeout(30000);
+        threadPool.setIdleTimeout(Integer.parseInt(timout));
     }
 
     public void setQueueSize() {
@@ -49,7 +49,7 @@ public class JettyConfig extends JettyEmbeddedServletContainerFactory {
     }
 
     public void setServerPort() {
-        setPort(9090);
+        setPort(Integer.parseInt(serverPort));
     }
 
 }
