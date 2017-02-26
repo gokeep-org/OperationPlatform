@@ -46,10 +46,10 @@ public class OpUtils {
 			if (!checkStringIsNull(res)) {
 				return res;
 			}
-			LOGGER.error("env not have '" + key + "' value");
+			LOGGER.info("env not have '" + key + "' value");
 			return null;
 		}
-		LOGGER.error("get env error, key is null");
+		LOGGER.info("get env error, key is null");
 		return null;
 	}
 }
