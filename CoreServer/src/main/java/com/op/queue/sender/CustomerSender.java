@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class CustomerSender extends QueueSender {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
-	private static final String queueName = "customer";
+	private static final String queueName = "oauth";
 
 	@Override
 	public void send(String message) {

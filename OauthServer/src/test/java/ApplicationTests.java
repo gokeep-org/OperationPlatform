@@ -1,5 +1,5 @@
-import com.op.customer.App;
-import com.op.customer.service.UserService;
+import com.op.oauth.Application;
+import com.op.oauth.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(App.class)
+@SpringApplicationConfiguration(Application.class)
 public class ApplicationTests {
 	@Autowired
 	public UserService userService;

@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
  * @Auther is xuning on 2017/2/10.
  ****************************************/
 @Component
-@RabbitListener(queues = "customer")
+@RabbitListener(queues = "oauth")
 public class CustomerReceiver extends QueueReceiver {
 	private static final Logger LOGGER= LoggerFactory.getLogger(CustomerReceiver.class);
 	@RabbitHandler
 	public void process(String jsonStr) throws Exception{
-		LOGGER.info("customer--"+jsonStr);
+		LOGGER.info("oauth--"+jsonStr);
 		//处理客户服务队列
 	}
 }

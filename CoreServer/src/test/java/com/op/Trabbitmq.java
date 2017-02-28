@@ -23,7 +23,7 @@ public class Trabbitmq {
 	@Test
 	public void hello(){
 		JSONObject jsonObject=new JSONObject();
-		jsonObject.put("type","customer");
+		jsonObject.put("type","oauth");
 		jsonObject.put("aaa", "bbb");
 //		System.out.println(jsonObject);
 		queueSender.send(jsonObject.toJSONString());

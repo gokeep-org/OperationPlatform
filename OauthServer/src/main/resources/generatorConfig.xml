@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="E:\maven_workspace\.m2\repository\mysql\mysql-connector-java\5.1.24\mysql-connector-java-5.1.24.jar" />
+    <context id="context1" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/op?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root" password="root" />
+        <javaModelGenerator targetPackage="com.op.oauth.mybatis"
+                            targetProject="E:\os_china_work\OperationPlatform\OauthServer\src\main\java" />
+        <sqlMapGenerator targetPackage="com.op.oauth.mybatis"
+                         targetProject="E:\os_china_work\OperationPlatform\OauthServer\src\main\resources" />
+        <javaClientGenerator targetPackage="com.op.oauth.mybatis" targetProject="E:\os_china_work\OperationPlatform\OauthServer\src\main\java" type="XMLMAPPER" />
+        <table schema="op" tableName="oauth_access_token" />
+        <table schema="op" tableName="oauth_approvals" />
+        <table schema="op" tableName="oauth_client_details" />
+        <table schema="op" tableName="oauth_client_token" />
+        <table schema="op" tableName="oauth_code" />
+        <table schema="op" tableName="oauth_refresh_token" />
+    </context>
+</generatorConfiguration>

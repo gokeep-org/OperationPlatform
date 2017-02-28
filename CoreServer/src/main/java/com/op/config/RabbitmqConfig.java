@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitmqConfig {
 	@Bean
 	public Queue customerQueue() {
-		return new Queue("customer");
+		return new Queue("oauth");
 	}
 
 	@Bean
