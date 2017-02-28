@@ -1,4 +1,4 @@
-package com.op.oauth;
+package com.op.customer;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,6 +1,6 @@
-package com.op.oauth.service.impl;
+package com.op.customer.service.impl;
 
-import com.op.oauth.service.UserService;
+import com.op.customer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

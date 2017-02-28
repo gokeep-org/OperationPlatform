@@ -12,11 +12,11 @@ import com.op.bean.entity.email.Email;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-2-18
  ****************************************/
-public class MailAction extends ItemAction<MailSendOutput> {
+public class MailAsyncAction extends ItemAction<MailSendOutput> {
     
     private Email email;
     
-    public MailAction(MailSendInput input) {
+    public MailAsyncAction(MailSendInput input) {
         this.email = input;
     }
     
@@ -32,8 +32,6 @@ public class MailAction extends ItemAction<MailSendOutput> {
     
     @Override
     protected void start() {
-//        mailSendService.sendCommonEmail(this.email);
-//        mailSendService
         senderService.send("message", new Gson().toJson(email));
     }
     

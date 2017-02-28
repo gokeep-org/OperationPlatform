@@ -20,7 +20,6 @@ public abstract class ItemAction <T extends BaseOutput> extends BaseAction<T> {
     public static Sender senderService = BaseService.getService(ServiceBeanNames.SENDER_SERVICE, SenderImpl.class);
 
 
-
     public static MailSendService getMailSendService() {
         return mailSendService;
     }

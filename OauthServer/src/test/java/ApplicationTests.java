@@ -1,5 +1,5 @@
-import com.op.oauth.App;
-import com.op.oauth.service.UserService;
+import com.op.customer.App;
+import com.op.customer.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

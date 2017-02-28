@@ -4,7 +4,7 @@
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/22.
  ****************************************/
-package com.op.oauth.config;
+package com.op.customer.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

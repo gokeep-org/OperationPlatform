@@ -1,7 +1,7 @@
 package com.op.library.rabbit.sender;
 
-import com.op.service.BaseService;
-import com.op.service.ServiceBeanNames;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -9,7 +9,8 @@ import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import com.op.service.BaseService;
+import com.op.service.ServiceBeanNames;
 
 /****************************************
  * Copyright (c) xuning.
@@ -45,7 +46,7 @@ public class SenderImpl extends BaseService implements Sender, RabbitTemplate.Co
 
 	@Override
 	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-		System.out.println(" 回调id:" + correlationData);
+		System.err.println(" 回调id:" + correlationData);
 		if (ack) {
 			LOGGER.info("消息成功消费");
 		} else {

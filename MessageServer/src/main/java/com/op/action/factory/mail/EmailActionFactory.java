@@ -1,7 +1,8 @@
 package com.op.action.factory.mail;
 
 import com.op.action.factory.BaseActionFactory;
-import com.op.action.mail.MailAction;
+import com.op.action.mail.MailAsyncAction;
+import com.op.action.mail.MailSyncAction;
 import com.op.bean.action.input.email.MailSendInput;
 import com.op.bean.entity.user.User;
 
@@ -13,8 +14,13 @@ import com.op.bean.entity.user.User;
  ****************************************/
 public class EmailActionFactory extends BaseActionFactory {
     
-    public static MailAction getMailSendAction(MailSendInput input) throws Exception {
+    public static MailAsyncAction getMailAsyncSendAction(MailSendInput input) throws Exception {
         User user = getUser();
-        return new MailAction(input);
+        return new MailAsyncAction(input);
+    }
+
+    public static MailSyncAction getMailSyncSendAction(MailSendInput input) throws Exception{
+        User user = getUser();
+        return new MailSyncAction(input);
     }
 }

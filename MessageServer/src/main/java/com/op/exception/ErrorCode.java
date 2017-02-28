@@ -9,5 +9,6 @@ package com.op.exception;
 public class ErrorCode {
 	public static final String SMTP_RECIPIENTERS_IS_NULL = "smtp recipienters is null";
 	public static final String SMTP_ACCEPTER_IS_NULL = "smtp accepter is null";
+	public static final String SMTP_SEND_ERROR = "smtp mail send error";
 
 }

@@ -1,4 +1,4 @@
-package com.op.oauth;
+package com.op.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
