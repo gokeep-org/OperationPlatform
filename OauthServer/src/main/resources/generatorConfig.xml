@@ -1,22 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <classPathEntry
-            location="E:\maven_workspace\.m2\repository\mysql\mysql-connector-java\5.1.24\mysql-connector-java-5.1.24.jar" />
-    <context id="context1" targetRuntime="MyBatis3">
+    <classPathEntry location="E:\maven_workspace\.m2\repository\mysql\mysql-connector-java\5.1.24\mysql-connector-java-5.1.24.jar"/>
+    <context id="Oauth2Table" targetRuntime="MyBatis3">
+        <!--关闭注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接信息-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/op?useUnicode=true&amp;characterEncoding=UTF-8"
-                        userId="root" password="root" />
-        <javaModelGenerator targetPackage="com.op.oauth.mybatis"
-                            targetProject="E:\os_china_work\OperationPlatform\OauthServer\src\main\java" />
-        <sqlMapGenerator targetPackage="com.op.oauth.mybatis"
-                         targetProject="E:\os_china_work\OperationPlatform\OauthServer\src\main\resources" />
-        <javaClientGenerator targetPackage="com.op.oauth.mybatis" targetProject="E:\os_china_work\OperationPlatform\OauthServer\src\main\java" type="XMLMAPPER" />
-        <table schema="op" tableName="oauth_access_token" />
-        <table schema="op" tableName="oauth_approvals" />
-        <table schema="op" tableName="oauth_client_details" />
-        <table schema="op" tableName="oauth_client_token" />
-        <table schema="op" tableName="oauth_code" />
-        <table schema="op" tableName="oauth_refresh_token" />
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+        <!--Java类型处理-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类的位置-->
+        <javaModelGenerator targetPackage="com.op.oauth.bean.entity"
+                            targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件的存放位置-->
+        <sqlMapGenerator targetPackage="mybatis" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成DAO类的存放位置-->
+        <javaClientGenerator targetPackage="com.op.oauth.dao.mybatis"
+                             targetProject="src\main\java"
+                             implementationPackage="com.op.oauth.dao.mybatis"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--生成对应表和类名-->
+        <table schema="op"
+               tableName="oauth_access_token"
+/>
+        <table schema="op"
+               tableName="oauth_approvals"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table schema="op"
+               tableName="oauth_client_details"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table schema="op"
+               tableName="oauth_client_token"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table schema="op"
+               tableName="oauth_code"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table schema="op"
+               tableName="oauth_refresh_token"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
     </context>
 </generatorConfiguration>
