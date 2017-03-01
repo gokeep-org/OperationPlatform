@@ -1,4 +1,4 @@
-package com.op.oauth.bean.entity;
+package com.op.oauth.bean;
 
 public class OauthClientDetails {
     private String clientId;

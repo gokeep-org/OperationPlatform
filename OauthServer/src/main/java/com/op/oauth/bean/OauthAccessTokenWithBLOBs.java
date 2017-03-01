@@ -1,19 +1,9 @@
-package com.op.oauth.bean.entity;
+package com.op.oauth.bean;
 
-public class OauthRefreshToken {
-    private String tokenId;
-
+public class OauthAccessTokenWithBLOBs extends OauthAccessToken {
     private byte[] token;
 
     private byte[] authentication;
-
-    public String getTokenId() {
-        return tokenId;
-    }
-
-    public void setTokenId(String tokenId) {
-        this.tokenId = tokenId == null ? null : tokenId.trim();
-    }
 
     public byte[] getToken() {
         return token;

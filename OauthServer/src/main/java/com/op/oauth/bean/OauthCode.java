@@ -1,4 +1,4 @@
-package com.op.oauth.bean.entity;
+package com.op.oauth.bean;
 
 public class OauthCode {
     private String code;

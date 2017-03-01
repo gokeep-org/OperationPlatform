@@ -1,6 +1,6 @@
-package com.op.oauth.bean.entity;
+package com.op.oauth.bean;
 
-public class OauthClientToken {
+public class OauthAccessToken {
     private String tokenId;
 
     private String authenticationId;
@@ -9,7 +9,7 @@ public class OauthClientToken {
 
     private String clientId;
 
-    private byte[] token;
+    private String refreshToken;
 
     public String getTokenId() {
         return tokenId;
@@ -43,11 +43,11 @@ public class OauthClientToken {
         this.clientId = clientId == null ? null : clientId.trim();
     }
 
-    public byte[] getToken() {
-        return token;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setToken(byte[] token) {
-        this.token = token;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken == null ? null : refreshToken.trim();
     }
 }

@@ -1,4 +1,4 @@
-package com.op.oauth.bean.entity;
+package com.op.oauth.bean;
 
 import java.util.Date;
 
