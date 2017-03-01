@@ -1,8 +1,15 @@
 package com.op.oauth.rest;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.google.gson.JsonObject;
+import com.op.oauth.bean.User;
+import com.op.oauth.dao.UserMapper;
 
 /****************************************
  * Copyright (c) xuning.
@@ -13,8 +20,15 @@ import javax.ws.rs.core.MediaType;
 @Path("/test")
 @Produces({MediaType.APPLICATION_JSON})
 public class TestRest {
+    @Autowired
+    private UserMapper mapper;
+
+    @GET
     @Path("/hello")
-    public String test(){
-        return "Hello world";
+    public String test() {
+        User user = mapper.selectByPrimaryKey(1);
+        JsonObject obj = new JsonObject();
+        obj.addProperty("name", user.getName());
+        return obj.toString();
     }
 }

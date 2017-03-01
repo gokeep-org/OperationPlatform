@@ -1,16 +1,18 @@
 package com.op.oauth.dao;
 
-import com.op.oauth.bean.User;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
+import com.op.oauth.bean.User;
+@Mapper
 public interface UserMapper {
     @Delete({
         "delete from user",
@@ -26,9 +28,6 @@ public interface UserMapper {
     })
     int insert(User record);
 
-    @InsertProvider(type=UserSqlProvider.class, method="insertSelective")
-    int insertSelective(User record);
-
     @Select({
         "select",
         "id, name, age",
@@ -42,8 +41,17 @@ public interface UserMapper {
     })
     User selectByPrimaryKey(Integer id);
 
-    @UpdateProvider(type=UserSqlProvider.class, method="updateByPrimaryKeySelective")
-    int updateByPrimaryKeySelective(User record);
+    @Select({
+        "select",
+        "id, name, age",
+        "from user"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="age", property="age", jdbcType=JdbcType.INTEGER)
+    })
+    List<User> selectAll();
 
     @Update({
         "update user",

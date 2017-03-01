@@ -1,5 +1,4 @@
 spring:
-  profiles : dev
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource
@@ -15,6 +14,9 @@ spring:
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
+  profiles:
+    active: dev
+
 mybatis:
   mapperLocations: classpath*:mybatis/*Mapper.xml
   typeAliasesPackage: com.op.oauth.bean

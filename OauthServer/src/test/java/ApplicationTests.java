@@ -23,10 +23,8 @@ public class ApplicationTests {
 	@Test
 	public void testMybatis(){
         OauthCode oauthCode = new OauthCode();
-        oauthCode.setCode("sssss");
+        oauthCode.setCode("我叫徐宁");
         oauthCode.setAuthentication("aaa".getBytes());
         oauthCodeMapper.insert(oauthCode);
     }
-
-
 }

@@ -11,6 +11,10 @@ public class OauthAccessToken {
 
     private String refreshToken;
 
+    private byte[] token;
+
+    private byte[] authentication;
+
     public String getTokenId() {
         return tokenId;
     }
@@ -49,5 +53,21 @@ public class OauthAccessToken {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken == null ? null : refreshToken.trim();
+    }
+
+    public byte[] getToken() {
+        return token;
+    }
+
+    public void setToken(byte[] token) {
+        this.token = token;
+    }
+
+    public byte[] getAuthentication() {
+        return authentication;
+    }
+
+    public void setAuthentication(byte[] authentication) {
+        this.authentication = authentication;
     }
 }
