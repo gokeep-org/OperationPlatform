@@ -23,12 +23,12 @@ public class TestRest {
     @Autowired
     private UserMapper mapper;
 
-    @GET
-    @Path("/hello")
-    public String test() {
-        User user = mapper.selectByPrimaryKey(1);
-        JsonObject obj = new JsonObject();
-//        obj.addProperty("name", user.getName());
-        return obj.toString();
-    }
+//    @GET
+//    @Path("/hello")
+//    public String test() {
+//        User user = mapper.selectByPrimaryKey(1);
+//        JsonObject obj = new JsonObject();
+////        obj.addProperty("name", user.getName());
+//        return obj.toString();
+//    }
 }

@@ -10,13 +10,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.op.oauth.action.factory.UserActionFactory;
 import com.op.oauth.bean.action.input.user.CreateUserInput;
+import com.op.oauth.bean.action.input.user.GetUserInput;
 import com.op.oauth.bean.action.output.user.CreateUserOutput;
+import com.op.oauth.bean.action.output.user.GetUserOutput;
 import com.op.oauth.bean.entity.User;
-import com.op.oauth.service.UserService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -28,8 +27,6 @@ import com.op.oauth.service.UserService;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class UserRest {
-    @Autowired
-    private UserService userService;
     /**
      * 创建一个用户
      * @param
@@ -69,8 +66,10 @@ public class UserRest {
      * @return
      */
     @GET
-    public String getUser(){
-        return null;
+    public GetUserOutput getUser(@QueryParam("user_id") String userId) throws Exception {
+        GetUserInput input = new GetUserInput();
+        input.setId(userId);
+        return (GetUserOutput) UserActionFactory.getUserAction(input).execute();
     }
 
     /**

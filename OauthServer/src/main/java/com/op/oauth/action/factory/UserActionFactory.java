@@ -2,7 +2,9 @@ package com.op.oauth.action.factory;
 
 import com.op.oauth.action.BaseActionFactory;
 import com.op.oauth.action.user.CreateUserAction;
+import com.op.oauth.action.user.GetUserAction;
 import com.op.oauth.bean.action.input.user.CreateUserInput;
+import com.op.oauth.bean.action.input.user.GetUserInput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -13,5 +15,9 @@ import com.op.oauth.bean.action.input.user.CreateUserInput;
 public class UserActionFactory extends BaseActionFactory {
     public static CreateUserAction getCreateAction(CreateUserInput input) {
         return new CreateUserAction(input);
+    }
+
+    public static GetUserAction getUserAction(GetUserInput input){
+        return new GetUserAction(input);
     }
 }
