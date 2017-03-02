@@ -19,4 +19,4 @@ spring:
 
 mybatis:
   mapperLocations: classpath*:mybatis/*Mapper.xml
-  typeAliasesPackage: com.op.oauth.bean
+  typeAliasesPackage: com.op.oauth.bean.entity

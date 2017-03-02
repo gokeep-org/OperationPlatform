@@ -32,7 +32,7 @@
         </javaTypeResolver>
 
         <!--生成Model类的位置-->
-        <javaModelGenerator targetPackage="com.op.oauth.bean"
+        <javaModelGenerator targetPackage="com.op.oauth.bean.entity"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -54,42 +54,7 @@
 
         <!--生成对应表和类名-->
         <table schema="op"
-               tableName="oauth_access_token"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table schema="op"
-               tableName="oauth_approvals"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table schema="op"
-               tableName="oauth_client_details"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table schema="op"
-               tableName="oauth_client_token"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table schema="op"
-               tableName="oauth_code"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table schema="op"
-               tableName="oauth_refresh_token"
+               tableName="client"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -97,6 +62,13 @@
                selectByExampleQueryId="false"/>
         <table schema="op"
                tableName="user"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <table schema="op"
+               tableName="token"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

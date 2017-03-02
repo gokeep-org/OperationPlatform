@@ -17,12 +17,20 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class AuthorizationRest {
+    /**
+     * 发起授权，这是默认是授权码模式
+     * @param client_id
+     * @param redirect_uri
+     * @param response_type
+     * @param state
+     * @return
+     */
     @GET
     public String authorize(
             @QueryParam("client_id") String client_id,
             @QueryParam("redirect_uri") String redirect_uri,
             @QueryParam("response_type") String response_type,
-            @QueryParam("state") String state){
+            @QueryParam("state") String state) {
 
         return null;
     }

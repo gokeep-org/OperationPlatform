@@ -1,6 +1,12 @@
 package com.op.library.provide;
 
-import com.google.gson.Gson;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -10,13 +16,9 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 使用Gson处理序列化和反序列化，并在Jersey中注册
@@ -33,7 +35,8 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
     private Gson getGson() throws WebApplicationException {
         try {
             if (gson == null) {
-                gson = new Gson();
+                GsonBuilder gsonbuilder = new GsonBuilder().serializeNulls();
+                gson = gsonbuilder.create();
             }
         }
         catch (Exception e) {

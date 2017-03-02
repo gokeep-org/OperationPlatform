@@ -18,6 +18,7 @@ import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * 使用Gson处理序列化和反序列化，并在Jersey中注册
@@ -34,7 +35,8 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
     private Gson getGson() throws WebApplicationException {
         try {
             if (gson == null) {
-                gson = new Gson();
+                GsonBuilder gsonbuilder = new GsonBuilder().serializeNulls();
+                gson = gsonbuilder.create();
             }
         }
         catch (Exception e) {

@@ -19,18 +19,28 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class TokenRest {
+    /**
+     * 获取token，支持授权码和密码两种方式
+     * @param grantType
+     * @param redirectUri
+     * @param code
+     * @param refreshToke
+     * @param authorization
+     * @return
+     */
     @POST
     public String token(
             @QueryParam("grant_type") @DefaultValue("password") String grantType,
             @QueryParam("redirect_uri") String redirectUri,
-            @QueryParam("code") String code,
             @QueryParam("refresh_token") String refreshToke,
-            @HeaderParam("authorization") String authorization){
-        if (grantType.equals("authorization_code")){
+            @QueryParam("username") String userName,
+            @QueryParam("password") String password,
+            @QueryParam("code") String code,
+            @HeaderParam("authorization") String authorization) {
+        if (grantType.equals("authorization_code")) {
             //authorization_code mode
         }
-
-        //password mode
+        //这里是默认使用密码模式
         return "ok";
     }
 }

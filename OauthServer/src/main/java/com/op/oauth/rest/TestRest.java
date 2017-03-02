@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.JsonObject;
-import com.op.oauth.bean.User;
+import com.op.oauth.bean.entity.User;
 import com.op.oauth.dao.UserMapper;
 
 /****************************************
@@ -28,7 +28,7 @@ public class TestRest {
     public String test() {
         User user = mapper.selectByPrimaryKey(1);
         JsonObject obj = new JsonObject();
-        obj.addProperty("name", user.getName());
+//        obj.addProperty("name", user.getName());
         return obj.toString();
     }
 }

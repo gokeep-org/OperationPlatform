@@ -12,6 +12,8 @@ import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.op.oauth.bean.action.output.ErrorInfoOutput;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -25,6 +27,13 @@ public class OpResponseFilter implements ContainerResponseFilter {
 	private HttpServletRequest request;
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+        if(!(responseContext.getStatus() == 200)){
+            ErrorInfoOutput info = new ErrorInfoOutput(
+                    String.valueOf(responseContext.getStatus()),
+                    responseContext.getStatusInfo().toString()
+            );
+            responseContext.setEntity(info);
+        }
 		LOGGER.info("response sttaus is "+responseContext.getStatus());
 	}
 }

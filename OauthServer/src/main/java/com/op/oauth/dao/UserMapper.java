@@ -11,53 +11,97 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 
-import com.op.oauth.bean.User;
+import com.op.oauth.bean.entity.User;
+
 @Mapper
 public interface UserMapper {
     @Delete({
-        "delete from user",
-        "where id = #{id,jdbcType=INTEGER}"
+            "delete from user",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into user (id, name, ",
-        "age)",
-        "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
-        "#{age,jdbcType=INTEGER})"
+            "insert into user (user_id, ",
+            "username, password, ",
+            "status, create_date)",
+            "values (#{userId,jdbcType=VARCHAR}, ",
+            "#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, ",
+            "#{status,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP})"
     })
     int insert(User record);
 
     @Select({
-        "select",
-        "id, name, age",
-        "from user",
-        "where id = #{id,jdbcType=INTEGER}"
+            "select",
+            "id, user_id, username, password, status, create_date",
+            "from user",
+            "where id = #{id,jdbcType=INTEGER} or username = #{username,jdbcType=VARCHAR}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="age", property="age", jdbcType=JdbcType.INTEGER)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "password", property = "password", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.BIT),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.TIMESTAMP)
     })
     User selectByPrimaryKey(Integer id);
 
     @Select({
-        "select",
-        "id, name, age",
-        "from user"
+            "select",
+            "id, user_id, username, password, status, create_date",
+            "from user",
+            "where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="age", property="age", jdbcType=JdbcType.INTEGER)
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "password", property = "password", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.BIT),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.TIMESTAMP)
+    })
+    List<User> checkoutUserLogin(User user);
+
+    @Select({
+            "select",
+            "id, user_id, username, password, status, create_date",
+            "from user",
+            "where username = #{username,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "password", property = "password", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.BIT),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.TIMESTAMP)
+    })
+    List<User> checkoutUserNameIsExist(User user);
+
+    @Select({
+            "select",
+            "id, user_id, username, password, status, create_date",
+            "from user"
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "username", property = "username", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "password", property = "password", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "status", property = "status", jdbcType = JdbcType.BIT),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.TIMESTAMP)
     })
     List<User> selectAll();
 
     @Update({
-        "update user",
-        "set name = #{name,jdbcType=VARCHAR},",
-          "age = #{age,jdbcType=INTEGER}",
-        "where id = #{id,jdbcType=INTEGER}"
+            "update user",
+            "set user_id = #{userId,jdbcType=VARCHAR},",
+            "username = #{username,jdbcType=VARCHAR},",
+            "password = #{password,jdbcType=VARCHAR},",
+            "status = #{status,jdbcType=BIT},",
+            "create_date = #{createDate,jdbcType=TIMESTAMP}",
+            "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(User record);
 }
