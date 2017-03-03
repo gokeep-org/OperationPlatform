@@ -26,36 +26,44 @@ public class ClientServiceImpl extends BaseService implements ClientService<Clie
 
     @Override
     public Boolean createClient(Client client) {
-        return OpUtils.checkMapperCudIsSuccess(clientMapper.insert(client));
+        return OpUtils.checkMapperCudIsSuccess(
+                clientMapper.insert(client)
+        );
     }
 
     @Override
-    public Boolean deleteClient(Client client) {
-        return null;
+    public Boolean deleteClient(String clientId) {
+        return OpUtils.checkMapperCudIsSuccess(
+                clientMapper.deleteClientByClientId(clientId)
+        );
     }
 
     @Override
     public Boolean updateClient(Client client) {
-        return null;
+        return OpUtils.checkMapperCudIsSuccess(
+                clientMapper.updateByClientId(client)
+        );
     }
 
     @Override
     public Client getClientByClientId(String clientId) {
-        return null;
+        return clientMapper.selectByClientId(clientId);
     }
 
     @Override
     public List<Client> getClientByUserId(String userId) {
-        return null;
+        return clientMapper.selectByUserId(userId);
     }
 
     @Override
     public List<Client> getAllClient() {
-        return null;
+        return clientMapper.selectAll();
     }
 
     @Override
-    public Client freezeClientByClientId(String clientId) {
-        return null;
+    public Boolean freezeClientByClientId(String clientId) {
+        return OpUtils.checkMapperCudIsSuccess(
+                clientMapper.freezeClientByClientId(clientId)
+        );
     }
 }

@@ -61,6 +61,28 @@ public interface ClientMapper {
             "select",
             "id, client_name, client_id, client_secret, state, user_id, create_date, grant_type, ",
             "code, scope, redirect_uri",
+            "from client",
+            "where user_id = #{userId,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+            @Result(column = "client_name", property = "clientName", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "client_id", property = "clientId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "client_secret", property = "clientSecret", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "state", property = "state", jdbcType = JdbcType.BIGINT),
+            @Result(column = "user_id", property = "userId", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.TIMESTAMP),
+            @Result(column = "grant_type", property = "grantType", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "code", property = "code", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "scope", property = "scope", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "redirect_uri", property = "redirectUri", jdbcType = JdbcType.VARCHAR)
+    })
+    List<Client> selectByUserId(String userId);
+
+    @Select({
+            "select",
+            "id, client_name, client_id, client_secret, state, user_id, create_date, grant_type, ",
+            "code, scope, redirect_uri",
             "from client"
     })
     @Results({
@@ -81,16 +103,31 @@ public interface ClientMapper {
     @Update({
             "update client",
             "set client_name = #{clientName,jdbcType=VARCHAR},",
-            "client_id = #{clientId,jdbcType=VARCHAR},",
             "client_secret = #{clientSecret,jdbcType=VARCHAR},",
             "state = #{state,jdbcType=BIGINT},",
+            "grant_type = #{grantType,jdbcType=VARCHAR},",
+            "code = #{code,jdbcType=VARCHAR},",
+            "scope = #{scope,jdbcType=VARCHAR},",
+            "redirect_uri = #{redirectUri,jdbcType=VARCHAR}",
+            "where client_id = #{clientId,jdbcType=VARCHAR}"
+    })
+    int updateByClientId(Client record);
+
+    @Update({
+            "update client",
+            "set client_name = #{clientName,jdbcType=VARCHAR},",
+            "client_secret = #{clientSecret,jdbcType=VARCHAR},",
+            "state = 0,",
             "user_id = #{userId,jdbcType=VARCHAR},",
             "create_date = #{createDate,jdbcType=TIMESTAMP},",
             "grant_type = #{grantType,jdbcType=VARCHAR},",
             "code = #{code,jdbcType=VARCHAR},",
             "scope = #{scope,jdbcType=VARCHAR},",
             "redirect_uri = #{redirectUri,jdbcType=VARCHAR}",
-            "where user_id = #{userId,jdbcType=VARCHAR}"
+            "where client_id = #{clientId,jdbcType=VARCHAR}"
     })
-    int updateByPrimaryKey(Client record);
+    int freezeClientByClientId(String clientId);
+
+    @Select("select count(user_id) from client")
+    int getClientCount();
 }

@@ -39,7 +39,7 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
         if (OpUtils.checkObjectIsNull(user) || OpUtils.checkStringIsNull(user.getUsername())) {
             throw new OperationPlatformException(ErrorCode.USER_IS_NULL);
         }
-        if ((Boolean) userService.checkoutUserNameIsExist(user)){
+        if ((Boolean) userService.checkoutUserNameIsExist(user)) {
             throw new OperationPlatformException(ErrorCode.USER_IS_EXIST);
         }
         this.user.setUserId(UUID.randomUUID().toString());

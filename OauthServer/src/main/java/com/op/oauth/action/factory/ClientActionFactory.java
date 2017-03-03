@@ -2,7 +2,13 @@ package com.op.oauth.action.factory;
 
 import com.op.oauth.action.BaseActionFactory;
 import com.op.oauth.action.client.CreateClientAction;
+import com.op.oauth.action.client.DeleteClientAction;
+import com.op.oauth.action.client.GetClientAction;
+import com.op.oauth.action.client.UpdateClientAction;
 import com.op.oauth.bean.action.input.client.CreateClientInput;
+import com.op.oauth.bean.action.input.client.DeleteClientInput;
+import com.op.oauth.bean.action.input.client.GetClientInput;
+import com.op.oauth.bean.action.input.client.UpdateClientInput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -15,4 +21,15 @@ public class ClientActionFactory extends BaseActionFactory {
         return new CreateClientAction(input);
     }
 
+    public static DeleteClientAction getDeleteClientAction(DeleteClientInput input) {
+        return new DeleteClientAction(input);
+    }
+
+    public static UpdateClientAction getUpdateClientAction(UpdateClientInput input) {
+        return new UpdateClientAction(input);
+    }
+
+    public static GetClientAction getClientAction(GetClientInput input) {
+        return new GetClientAction(input);
+    }
 }

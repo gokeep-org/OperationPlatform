@@ -11,7 +11,7 @@ import java.util.List;
 public interface ClientService<T, S, U> {
     S createClient(T t);
 
-    S deleteClient(T t);
+    S deleteClient(String clientId);
 
     S updateClient(T t);
 
@@ -21,5 +21,5 @@ public interface ClientService<T, S, U> {
 
     List<T> getAllClient();
 
-    T freezeClientByClientId(String clientId);
+    S freezeClientByClientId(String clientId);
 }
