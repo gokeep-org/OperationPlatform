@@ -1,8 +1,8 @@
 package com.op.oauth.bean.action.output;
 
-import java.util.UUID;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.UUID;
 
 /****************************************
  * Copyright (c) xuning.

@@ -11,7 +11,7 @@ import com.op.oauth.bean.entity.Token;
  * @Auther is xuning on 2017/3/3.
  ****************************************/
 public class CreateTokenOutput extends ResultOutput {
-    @SerializedName("token_info")
+    @SerializedName("result")
     private Token token;
 
     public Token getToken() {

@@ -1,5 +1,7 @@
 package com.op.oauth.exception;
 
+import java.util.UUID;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -7,6 +9,13 @@ package com.op.oauth.exception;
  * @Auther is xuning on 2017/2/15.
  ****************************************/
 public class OperationPlatformException extends RuntimeException {
+	private String code;
+	private String uuid = UUID.randomUUID().toString();
+	
+	public String getUuid() {
+		return uuid;
+	}
+	
 	public OperationPlatformException() {
 	}
 
@@ -17,12 +26,27 @@ public class OperationPlatformException extends RuntimeException {
 	public OperationPlatformException(String message) {
 		super(message);
 	}
-
-	public OperationPlatformException(String message, Throwable cause) {
+	
+	public OperationPlatformException(String message, String code, Throwable cause) {
 		super(message, cause);
+		this.setCode(code);
 	}
 
 	public OperationPlatformException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
+	}
+	
+	public String getCode() {
+		return code;
+	}
+	
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+		this.getMessage();
 	}
 }

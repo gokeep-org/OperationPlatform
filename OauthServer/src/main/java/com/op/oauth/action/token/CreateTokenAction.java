@@ -1,22 +1,19 @@
 package com.op.oauth.action.token;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.input.token.CreateTokenInput;
 import com.op.oauth.bean.action.input.token.GrantType;
 import com.op.oauth.bean.action.output.BaseOutput;
-import com.op.oauth.bean.action.output.HttpStatusCode;
 import com.op.oauth.bean.action.output.ResultOutput;
 import com.op.oauth.bean.action.output.token.CreateTokenOutput;
 import com.op.oauth.bean.entity.Token;
 import com.op.oauth.bean.entity.User;
-import com.op.oauth.exception.ErrorCode;
 import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.util.OpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
@@ -47,6 +44,7 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
         this.user = new User();
         this.user.setUsername(this.createTokenInput.getUserName());
         this.user.setPassword(this.createTokenInput.getPassword());
+        
     }
 
     @Override
@@ -56,13 +54,11 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
             if (users.size() == 1){
                 this.user = users.get(0);
                 this.token = (Token) tokenService.createTokenByUserId(this.user.getUserId());
+            }else {
+                throw new OperationPlatformException("user login failds");
             }
-            this.errorOutput = new ResultOutput();
-            errorOutput.setCode(HttpStatusCode.NOT_PERMISSION);
-            errorOutput.setMesssage(ErrorCode.NOT_PERMISSION);
-            errorOutput.setSuccess(false);
         }else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)){
-            //授权码模式，暂时不实现
+            //授权码模式，暂时不实现,无需求
             LOGGER.error("password mode is not implement");
         }else {
             throw new OperationPlatformException("grant type is null");

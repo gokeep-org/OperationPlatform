@@ -1,7 +1,9 @@
 package com.op.oauth.config;
 
-import javax.ws.rs.ApplicationPath;
-
+import com.op.oauth.action.filter.OpRequestFilter;
+import com.op.oauth.action.filter.OpResponseFilter;
+import com.op.oauth.exception.ExceptionMapperSupport;
+import com.op.oauth.library.provide.GsonMessageBodyHandler;
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -9,9 +11,7 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
 
-import com.op.oauth.action.filter.OpRequestFilter;
-import com.op.oauth.action.filter.OpResponseFilter;
-import com.op.oauth.library.provide.GsonMessageBodyHandler;
+import javax.ws.rs.ApplicationPath;
 
 /****************************************
  * Copyright (c) xuning.
@@ -25,6 +25,7 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		setJerseyComponentsLocation();
 		registerJerseyFilter();
+		registerExceptionProcessProvode();
 		registerJsonProvider();
 		registerCompressionEncoder();
 		registerSwagger();
@@ -45,7 +46,10 @@ public class JerseyConfig extends ResourceConfig {
 		property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
 		property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
 	}
-
+	
+	public void registerExceptionProcessProvode(){
+		register(ExceptionMapperSupport.class);
+	}
 	/**
 	 * 注册Response body压缩时用到的encoder
 	 */
