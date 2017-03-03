@@ -1,5 +1,6 @@
 package com.op.oauth.bean.action.output.user;
 
+import com.google.gson.annotations.SerializedName;
 import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.entity.User;
 
@@ -10,6 +11,7 @@ import com.op.oauth.bean.entity.User;
  * @Auther is xuning on 2017/3/2.
  ****************************************/
 public class GetUserOutput extends BaseOutput{
+    @SerializedName("result")
     private User user;
 
     public User getUser() {

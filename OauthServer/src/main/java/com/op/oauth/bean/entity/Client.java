@@ -2,27 +2,26 @@ package com.op.oauth.bean.entity;
 
 import java.util.Date;
 
-public class Client {
+import com.google.gson.annotations.SerializedName;
+
+public class Client{
     private Integer id;
-
+    @SerializedName("client_name")
     private String clientName;
-
+    @SerializedName("client_id")
     private String clientId;
-
+    @SerializedName("client_secret")
     private String clientSecret;
-
     private Long state;
-
+    @SerializedName("user_id")
     private String userId;
-
+    @SerializedName("create_date")
     private Date createDate;
-
+    @SerializedName("grant_type")
     private String grantType;
-
     private String code;
-
     private String scope;
-
+    @SerializedName("redirect_uri")
     private String redirectUri;
 
     public Integer getId() {

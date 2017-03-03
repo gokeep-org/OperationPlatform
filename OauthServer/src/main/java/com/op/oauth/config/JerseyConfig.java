@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.op.oauth.action.filter.OpRequestFilter;
 import com.op.oauth.action.filter.OpResponseFilter;
+import com.op.oauth.library.provide.GsonMessageBodyHandler;
 
 /****************************************
  * Copyright (c) xuning.
@@ -39,7 +40,7 @@ public class JerseyConfig extends ResourceConfig {
 	}
 
 	private void registerJsonProvider() {
-//		register(GsonMessageBodyHandler.class);
+		register(GsonMessageBodyHandler.class);
 		property(ServerProperties.METAINF_SERVICES_LOOKUP_DISABLE, false);
 		property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
 		property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);

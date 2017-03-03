@@ -2,13 +2,16 @@ package com.op.oauth.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.op.oauth.bean.entity.Client;
 import com.op.oauth.bean.entity.User;
+import com.op.oauth.dao.ClientMapper;
 import com.op.oauth.service.BaseService;
 import com.op.oauth.service.ClientService;
 import com.op.oauth.service.ServiceBeanNames;
+import com.op.oauth.util.OpUtils;
 
 /****************************************
  * Copyright (c) xuning.
@@ -17,10 +20,13 @@ import com.op.oauth.service.ServiceBeanNames;
  * @Auther is xuning on 2017/3/2.
  ****************************************/
 @Service(ServiceBeanNames.CLIENT_SERVICE)
-public class ClientServiceImpl extends BaseService implements ClientService<Client, Boolean, User>{
+public class ClientServiceImpl extends BaseService implements ClientService<Client, Boolean, User> {
+    @Autowired
+    private ClientMapper clientMapper;
+
     @Override
     public Boolean createClient(Client client) {
-        return null;
+        return OpUtils.checkMapperCudIsSuccess(clientMapper.insert(client));
     }
 
     @Override

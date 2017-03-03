@@ -2,17 +2,16 @@ package com.op.oauth.bean.entity;
 
 import java.util.Date;
 
-public class User {
+import com.google.gson.annotations.SerializedName;
+
+public class User{
     private Integer id;
-
+    @SerializedName("user_id")
     private String userId;
-
     private String username;
-
     private String password;
-
     private Boolean status;
-
+    @SerializedName("create_date")
     private Date createDate;
 
     public Integer getId() {

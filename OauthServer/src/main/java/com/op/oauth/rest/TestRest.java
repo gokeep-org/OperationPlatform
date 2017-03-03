@@ -26,7 +26,7 @@ public class TestRest {
 //    @GET
 //    @Path("/hello")
 //    public String test() {
-//        User user = mapper.selectByPrimaryKey(1);
+//        User user = mapper.selectByClientId(1);
 //        JsonObject obj = new JsonObject();
 ////        obj.addProperty("name", user.getName());
 //        return obj.toString();

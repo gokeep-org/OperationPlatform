@@ -46,7 +46,7 @@ public class UserServiceImpl extends BaseService implements UserService<User, Bo
 
     @Override
     public User getUserById(String userId) {
-       User user =  userMapper.selectByPrimaryKey(userId);
+       User user =  userMapper.selectByUserId(userId);
        return user;
     }
 
