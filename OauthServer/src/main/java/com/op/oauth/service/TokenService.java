@@ -7,7 +7,9 @@ package com.op.oauth.service;
  * @Auther is xuning on 2017/3/2.
  ****************************************/
 public interface TokenService<T, S, U> {
-    T createToken(String clientId);
+    T createTokenByClientId(String clientId);
+
+    T createTokenByUserId(String userId);
 
     T getTokenByUserLogin(U u);
 

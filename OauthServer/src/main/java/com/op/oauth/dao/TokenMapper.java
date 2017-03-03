@@ -21,11 +21,11 @@ public interface TokenMapper {
     int deleteByPrimaryKey(Integer id);
 
     @Insert({
-        "insert into token (id, token_id, ",
+        "insert into token (token_id, ",
         "access_token, refresh_token, ",
         "exprise_in, client_id, ",
         "create_date, user_id)",
-        "values (#{id,jdbcType=INTEGER}, #{tokenId,jdbcType=VARCHAR}, ",
+        "values (#{tokenId,jdbcType=VARCHAR}, ",
         "#{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, ",
         "#{expriseIn,jdbcType=BIGINT}, #{clientId,jdbcType=VARCHAR}, ",
         "#{createDate,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR})"
@@ -34,22 +34,20 @@ public interface TokenMapper {
 
     @Select({
         "select",
-        "id, token_id, access_token, refresh_token, exprise_in, client_id, create_date, ",
+        "access_token, refresh_token, exprise_in, client_id,",
         "user_id",
         "from token",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where token_id = #{tokenId,jdbcType=VARCHAR}"
     })
     @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="token_id", property="tokenId", jdbcType=JdbcType.VARCHAR),
         @Result(column="access_token", property="accessToken", jdbcType=JdbcType.VARCHAR),
         @Result(column="refresh_token", property="refreshToken", jdbcType=JdbcType.VARCHAR),
         @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
         @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
-        @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
     })
-    Token selectByPrimaryKey(Integer id);
+    Token selectByTokenId(String tokenId);
 
     @Select({
         "select",

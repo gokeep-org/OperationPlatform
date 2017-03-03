@@ -9,4 +9,5 @@ package com.op.oauth.exception;
 public final class ErrorCode {
     public static final String USER_IS_NULL = "create user object is null";
     public static final String USER_IS_EXIST = "create user object is exist";
+    public static final String NOT_PERMISSION = "not permission";
 }

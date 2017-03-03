@@ -2,12 +2,16 @@ package com.op.oauth.rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import com.op.oauth.action.factory.TokenActionFactory;
+import com.op.oauth.bean.action.input.token.CreateTokenInput;
+import com.op.oauth.bean.action.output.token.CreateTokenOutput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -28,19 +32,24 @@ public class TokenRest {
      * @param authorization
      * @return
      */
-    @POST
-    public String token(
+    @GET
+    public CreateTokenOutput createToken(
             @QueryParam("grant_type") @DefaultValue("password") String grantType,
             @QueryParam("redirect_uri") String redirectUri,
             @QueryParam("refresh_token") String refreshToke,
             @QueryParam("username") String userName,
             @QueryParam("password") String password,
             @QueryParam("code") String code,
-            @HeaderParam("authorization") String authorization) {
-        if (grantType.equals("authorization_code")) {
-            //authorization_code mode
-        }
-        //这里是默认使用密码模式
-        return "ok";
+            @HeaderParam("authorization") String authorization) throws Exception {
+        CreateTokenInput input = new CreateTokenInput();
+        input.setGrantType(grantType);
+        input.setAuthorization(authorization);
+        input.setCode(code);
+        input.setPassword(password);
+        input.setRedirectUri(redirectUri);
+        input.setRefreshToke(refreshToke);
+        input.setCode(code);
+        input.setUserName(userName);
+        return (CreateTokenOutput) TokenActionFactory.getCreateTokenAction(input).execute();
     }
 }

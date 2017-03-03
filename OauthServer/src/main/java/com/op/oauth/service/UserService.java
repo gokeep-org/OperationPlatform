@@ -25,4 +25,6 @@ public interface UserService<T, S> {
     List<T> getAllUser();
 
     S checkoutUserNameIsExist(T t);
+
+    List<T> checkUserIsLogin(T t);
 }

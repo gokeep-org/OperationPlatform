@@ -79,6 +79,4 @@ public class ClientRest {
         input.setClientIds(clientIds);
         return (DeleteClientOutput) ClientActionFactory.getDeleteClientAction(input).execute();
     }
-
-
 }
