@@ -4,6 +4,7 @@ import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.input.token.CreateTokenInput;
 import com.op.oauth.bean.action.input.token.GrantType;
 import com.op.oauth.bean.action.output.BaseOutput;
+import com.op.oauth.bean.action.output.HttpStatusCode;
 import com.op.oauth.bean.action.output.ResultOutput;
 import com.op.oauth.bean.action.output.token.CreateTokenOutput;
 import com.op.oauth.bean.entity.Token;
@@ -25,35 +26,20 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateTokenAction.class);
     private CreateTokenInput createTokenInput;
     private ResultOutput errorOutput;
-    private Token token;
-    private User user;
+    private Token token = new Token();
+    private User user = new User();
     public CreateTokenAction(CreateTokenInput input) {
         this.createTokenInput = input;
+        this.user.setUsername(input.getUserName());
+        this.user.setPassword(input.getPassword());
     }
 
     @Override
     protected void permissionValidate() throws Exception {
-
-    }
-
-    @Override
-    protected void additionalValidate() throws Exception {
-        if (OpUtils.checkObjectIsNull(this.createTokenInput)) {
-            throw new OperationPlatformException("create token object is null");
-        }
-        this.user = new User();
-        this.user.setUsername(this.createTokenInput.getUserName());
-        this.user.setPassword(this.createTokenInput.getPassword());
-        
-    }
-
-    @Override
-    protected void start() throws Exception {
         if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)){
             List<User> users = userService.checkUserIsLogin(this.user);
             if (users.size() == 1){
                 this.user = users.get(0);
-                this.token = (Token) tokenService.createTokenByUserId(this.user.getUserId());
             }else {
                 throw new OperationPlatformException("user login failds");
             }
@@ -63,10 +49,38 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
         }else {
             throw new OperationPlatformException("grant type is null");
         }
+        
+    }
+
+    @Override
+    protected void additionalValidate() throws Exception {
+        if (OpUtils.checkObjectIsNull(this.createTokenInput)) {
+            throw new OperationPlatformException("create token object is null");
+        }
+    }
+
+    @Override
+    protected void start() throws Exception {
+        if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)){
+            //如果用户的token没有过期，返回当前用户的token
+            //如果已经过期，创建一个新的token
+                this.token = (Token) tokenService.createTokenByUserId(this.user.getUserId());
+        }else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)){
+            LOGGER.error("password mode is not implement");
+        }else {
+            throw new OperationPlatformException("grant type is null");
+        }
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
+        if(OpUtils.checkObjectIsNull(this.token)){
+            this.errorOutput = new ResultOutput();
+            errorOutput.setCode(HttpStatusCode.SERVER_ERROR);
+            errorOutput.setSuccess(false);
+            errorOutput.setMesssage("not get token info");
+            return errorOutput;
+        }
         CreateTokenOutput output = new CreateTokenOutput();
         output.setToken(this.token);
         return output;

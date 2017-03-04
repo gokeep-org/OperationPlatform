@@ -25,7 +25,7 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		setJerseyComponentsLocation();
 		registerJerseyFilter();
-		registerExceptionProcessProvode();
+//		registerExceptionProcessProvode();
 		registerJsonProvider();
 		registerCompressionEncoder();
 		registerSwagger();

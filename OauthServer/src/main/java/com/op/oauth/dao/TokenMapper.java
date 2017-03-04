@@ -1,17 +1,10 @@
 package com.op.oauth.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.op.oauth.bean.entity.Token;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
-import com.op.oauth.bean.entity.Token;
+import java.util.List;
 @Mapper
 public interface TokenMapper {
     @Delete({
@@ -48,6 +41,23 @@ public interface TokenMapper {
         @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
     })
     Token selectByTokenId(String tokenId);
+    
+    @Select({
+            "select",
+            "token_id, access_token, refresh_token, exprise_in, client_id,",
+            "user_id",
+            "from token",
+            "where user_id = #{userId,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column="token_id", property="tokenId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="access_token", property="accessToken", jdbcType=JdbcType.VARCHAR),
+            @Result(column="refresh_token", property="refreshToken", jdbcType=JdbcType.VARCHAR),
+            @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
+            @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
+    })
+    List<Token> selectByUserId(String userId);
 
     @Select({
         "select",
@@ -69,14 +79,13 @@ public interface TokenMapper {
 
     @Update({
         "update token",
-        "set token_id = #{tokenId,jdbcType=VARCHAR},",
           "access_token = #{accessToken,jdbcType=VARCHAR},",
           "refresh_token = #{refreshToken,jdbcType=VARCHAR},",
           "exprise_in = #{expriseIn,jdbcType=BIGINT},",
           "client_id = #{clientId,jdbcType=VARCHAR},",
           "create_date = #{createDate,jdbcType=TIMESTAMP},",
           "user_id = #{userId,jdbcType=VARCHAR}",
-        "where id = #{id,jdbcType=INTEGER}"
+        "where token_id = #{tokenId,jdbcType=VARCHAR}"
     })
-    int updateByPrimaryKey(Token record);
+    int updateByTokenId(Token token);
 }
