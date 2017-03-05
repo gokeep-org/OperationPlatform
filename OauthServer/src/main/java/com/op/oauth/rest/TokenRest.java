@@ -1,17 +1,13 @@
 package com.op.oauth.rest;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import com.op.oauth.action.factory.TokenActionFactory;
+import com.op.oauth.bean.action.input.token.CheckTokenInput;
 import com.op.oauth.bean.action.input.token.CreateTokenInput;
+import com.op.oauth.bean.action.output.token.CheckTokenOutput;
 import com.op.oauth.bean.action.output.token.CreateTokenOutput;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /****************************************
  * Copyright (c) xuning.
@@ -33,7 +29,7 @@ public class TokenRest {
      * @return
      */
     @GET
-    public CreateTokenOutput createToken(
+    public CreateTokenOutput getToken(
             @QueryParam("grant_type") @DefaultValue("password") String grantType,
             @QueryParam("redirect_uri") String redirectUri,
             @QueryParam("refresh_token") String refreshToke,
@@ -52,4 +48,15 @@ public class TokenRest {
         input.setUserName(userName);
         return (CreateTokenOutput) TokenActionFactory.getCreateTokenAction(input).execute();
     }
+    
+    @Path("/{access_token}/check")
+    @POST
+    public CheckTokenOutput checkToken(
+            @PathParam("access_token") String accessToken) throws Exception {
+        CheckTokenInput input = new CheckTokenInput();
+        input.setAccessToken(accessToken);
+        return (CheckTokenOutput) TokenActionFactory.getCheckTokenAction(input).execute();
+    }
+    
+    
 }

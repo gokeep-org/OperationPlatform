@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /****************************************
  * Copyright (c) xuning.
@@ -22,6 +23,7 @@ import java.util.UUID;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/2.
  ****************************************/
+
 @Service(ServiceBeanNames.TOKEN_SERVICE)
 public class TokenServiceImpl extends BaseService implements TokenService<Token, Boolean, User> {
     @Autowired
@@ -31,7 +33,6 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
     public Token createTokenByClientId(String clientId) {
         return null;
     }
-
     @Override
     public Token createTokenByUserId(String userId) {
         List<Token> tokens = tokenMapper.selectByUserId(userId);
@@ -52,14 +53,29 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
                 throw new OperationPlatformException("get token info error");
             }
         }
-//        List<Token> oldTokens = tokens.stream().filter(e->{
-//            return  ((new Date().getTime() - e.getCreateDate().getTime()) < e.getExpriseIn());
-//        }).collect(Collectors.toList());
-        Token updToken = tokens.get(0);
+        List<Token> oldTokens = tokens.stream().filter(e->{
+            return  ((new Date().getTime() - e.getCreateDate().getTime()) < e.getExpriseIn() * 1000);
+        }).collect(Collectors.toList());
+        if (OpUtils.checkObjectIsNull(oldTokens)){
+            //是否刷新token
+            List<Token> needRefreshToken = tokens.stream().filter(e->{
+                return  ((new Date().getTime() - e.getCreateDate().getTime()) > e.getExpriseIn() * 1000);
+            }).collect(Collectors.toList());
+            if (OpUtils.checkObjectIsNull(needRefreshToken)){
+                throw new OperationPlatformException("获取旧的token为空");
+            }
+            Token refreshToken = needRefreshToken.get(0);
+            refreshToken.setCreateDate(new Date());
+            refreshToken.setAccessToken(UUID.randomUUID().toString());
+            if(OpUtils.checkMapperCudIsSuccess(tokenMapper.refreshTokenByTokenId(refreshToken))){
+                return tokenMapper.selectByTokenId(refreshToken.getTokenId());
+            }
+        }
+        Token updToken = oldTokens.get(0);
         updToken.setCreateDate(new Date());
-//        if (!OpUtils.checkMapperCudIsSuccess(tokenMapper.updateByTokenId(updToken))){
-//            throw new OperationPlatformException("更新已有token出现异常");
-//        }
+        if (!OpUtils.checkMapperCudIsSuccess(tokenMapper.updateCreateByTokenId(updToken))){
+            throw new OperationPlatformException("更新已有token出现异常");
+        }
         return tokenMapper.selectByTokenId(updToken.getTokenId());
     }
 

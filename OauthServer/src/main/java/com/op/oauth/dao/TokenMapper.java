@@ -26,25 +26,26 @@ public interface TokenMapper {
     int insert(Token record);
 
     @Select({
-        "select",
-        "access_token, refresh_token, exprise_in, client_id,",
-        "user_id",
-        "from token",
+            "select",
+            "token_id, access_token, refresh_token, exprise_in, client_id, create_date,",
+            "user_id",
+            "from token",
         "where token_id = #{tokenId,jdbcType=VARCHAR}"
     })
     @Results({
-        @Result(column="token_id", property="tokenId", jdbcType=JdbcType.VARCHAR),
-        @Result(column="access_token", property="accessToken", jdbcType=JdbcType.VARCHAR),
-        @Result(column="refresh_token", property="refreshToken", jdbcType=JdbcType.VARCHAR),
-        @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
-        @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
+            @Result(column="token_id", property="tokenId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="access_token", property="accessToken", jdbcType=JdbcType.VARCHAR),
+            @Result(column="refresh_token", property="refreshToken", jdbcType=JdbcType.VARCHAR),
+            @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
+            @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
     })
     Token selectByTokenId(String tokenId);
     
     @Select({
             "select",
-            "token_id, access_token, refresh_token, exprise_in, client_id,",
+            "token_id, access_token, refresh_token, exprise_in, client_id, create_date,",
             "user_id",
             "from token",
             "where user_id = #{userId,jdbcType=VARCHAR}"
@@ -55,6 +56,7 @@ public interface TokenMapper {
             @Result(column="refresh_token", property="refreshToken", jdbcType=JdbcType.VARCHAR),
             @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
             @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
             @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
     })
     List<Token> selectByUserId(String userId);
@@ -73,7 +75,7 @@ public interface TokenMapper {
         @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
         @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
+        @Result(column="user_id", property="userId", jdbcType = JdbcType.VARCHAR)
     })
     List<Token> selectAll();
 
@@ -88,4 +90,19 @@ public interface TokenMapper {
         "where token_id = #{tokenId,jdbcType=VARCHAR}"
     })
     int updateByTokenId(Token token);
+    
+    @Update({
+            "update token",
+            " set create_date = #{createDate,jdbcType=TIMESTAMP} ",
+            "where token_id = #{tokenId,jdbcType=VARCHAR}"
+    })
+    int updateCreateByTokenId(Token token);
+    
+    @Update({
+            "update token",
+            " set create_date = #{createDate,jdbcType=TIMESTAMP},",
+            "access_token = #{accessToken,jdbcType=VARCHAR} ",
+            "where token_id = #{tokenId,jdbcType=VARCHAR}"
+    })
+    int refreshTokenByTokenId(Token token);
 }

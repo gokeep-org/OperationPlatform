@@ -1,8 +1,8 @@
 package com.op.oauth.bean.entity;
 
-import java.util.Date;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
 
 public class User{
     private Integer id;

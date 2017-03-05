@@ -1,11 +1,11 @@
 package com.op.oauth.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Objects;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /****************************************
  * Copyright (c) xuning.
@@ -27,18 +27,19 @@ public final class OpUtils {
     }
 
     public final static Boolean checkObjectIsNull(Object obj) {
-        if (!Objects.equals(null, obj)) {
-            return false;
-        }
         try {
             List list = (List) obj;
-            if (list.size() > 0) {
-                return false;
+            if (list.size() <= 0) {
+                return true;
             }
         } catch (Exception e) {
             LOGGER.info("check obj is null transfrom list is faile");
         }
-        return true;
+        if (Objects.equals(null, obj)) {
+            return true;
+        }
+
+        return false;
     }
 
     public final static String getEnvValue(String key) {

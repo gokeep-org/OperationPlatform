@@ -1,22 +1,24 @@
 package com.op.oauth.bean.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Token {
     private Integer id;
-
+    @SerializedName("token_id")
     private String tokenId;
-
+    @SerializedName("access_token")
     private String accessToken;
-
+    @SerializedName("refresh_token")
     private String refreshToken;
-
+    @SerializedName("exprise_in")
     private Long expriseIn;
-
+    @SerializedName("client_id")
     private String clientId;
-
+    @SerializedName("create_date")
     private Date createDate;
-
+    @SerializedName("user_id")
     private String userId;
 
     public Integer getId() {

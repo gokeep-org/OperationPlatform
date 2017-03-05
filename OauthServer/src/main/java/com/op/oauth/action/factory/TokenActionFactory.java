@@ -1,7 +1,9 @@
 package com.op.oauth.action.factory;
 
 import com.op.oauth.action.BaseActionFactory;
+import com.op.oauth.action.token.CheckTokenAction;
 import com.op.oauth.action.token.CreateTokenAction;
+import com.op.oauth.bean.action.input.token.CheckTokenInput;
 import com.op.oauth.bean.action.input.token.CreateTokenInput;
 
 /****************************************
@@ -13,5 +15,9 @@ import com.op.oauth.bean.action.input.token.CreateTokenInput;
 public class TokenActionFactory extends BaseActionFactory {
     public static CreateTokenAction getCreateTokenAction(CreateTokenInput input){
         return new CreateTokenAction(input);
+    }
+    
+    public static CheckTokenAction getCheckTokenAction(CheckTokenInput input){
+        return new CheckTokenAction(input);
     }
 }
