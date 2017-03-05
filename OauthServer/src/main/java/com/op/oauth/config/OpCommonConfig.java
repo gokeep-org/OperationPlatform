@@ -7,5 +7,5 @@ package com.op.oauth.config;
  * @Auther is xuning on 17-3-4
  ****************************************/
 public class OpCommonConfig {
-    public static final Long TOKEN_EXPRISE_TIME = 36L;
+    public static final Long TOKEN_EXPRISE_TIME = 3600L;
 }
