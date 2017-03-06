@@ -39,7 +39,12 @@
         <fastjson.version>1.2.22</fastjson.version>
         <ixuning.requests.version>v2.0</ixuning.requests.version>
     </properties>
-
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>1.4.2.RELEASE</version>-->
+        <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+    <!--</parent>-->
     <!--依赖管理-->
     <dependencyManagement>
         <dependencies>

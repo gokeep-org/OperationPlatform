@@ -18,12 +18,12 @@ import javax.ws.rs.ext.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.op.exception.OperationPlatformException;
 import com.op.util.OpUtils;
 
 import requests.Requests;
+import requests.core.RequestImpl;
 
 /**
  * <p>request和response过滤器。<p>
@@ -38,8 +38,8 @@ public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
     @Context
     private HttpServletRequest request;
-    @Autowired
-    private Requests requests;
+
+    private Requests requests = new RequestImpl();
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
         getBrowerHeader(requestContext);

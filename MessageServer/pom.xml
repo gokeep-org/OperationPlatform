@@ -15,6 +15,7 @@
 
     <properties>
         <javax.mail.version>1.5.6</javax.mail.version>
+        <spring-cloud.version>1.2.5.RELEASE</spring-cloud.version>
     </properties>
 
     <dependencies>

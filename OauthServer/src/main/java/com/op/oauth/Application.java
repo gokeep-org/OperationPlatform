@@ -3,7 +3,6 @@ package com.op.oauth;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /****************************************
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @Auther is xuning on 2017/1/22.
  ****************************************/
 @SpringBootApplication
-@EnableTransactionManagement
 public class Application {
 	public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class)

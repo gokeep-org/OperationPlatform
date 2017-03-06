@@ -1,5 +1,5 @@
 
-import com.op.Application;
+import com.op.App;
 import com.op.queue.sender.QueueSender;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  ****************************************/
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = App.class)
 public class Trabbitmq {
 	@Autowired
 	public QueueSender queueSender;
