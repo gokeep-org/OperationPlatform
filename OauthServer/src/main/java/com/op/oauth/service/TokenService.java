@@ -1,5 +1,7 @@
 package com.op.oauth.service;
 
+import java.util.List;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -17,7 +19,7 @@ public interface TokenService<T, S, U> {
 
     T refreshTokenByRefreshToken(String refreshToken);
 
-    S checkToken(T t);
+    List<T> checkToken(T t);
 
     S deleteToken(T t);
 

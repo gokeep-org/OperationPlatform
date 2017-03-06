@@ -1,10 +1,17 @@
 package com.op.oauth.dao;
 
-import com.op.oauth.bean.entity.Token;
-import org.apache.ibatis.annotations.*;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 
-import java.util.List;
+import com.op.oauth.bean.entity.Token;
 @Mapper
 public interface TokenMapper {
     @Delete({
@@ -105,4 +112,31 @@ public interface TokenMapper {
             "where token_id = #{tokenId,jdbcType=VARCHAR}"
     })
     int refreshTokenByTokenId(Token token);
+
+    @Update({
+            "update token",
+            " set create_date = #{createDate,jdbcType=TIMESTAMP},",
+            "access_token = #{accessToken,jdbcType=VARCHAR} ",
+            "where token_id = #{tokenId,jdbcType=VARCHAR}"
+    })
+    int refreshTokenByRefreshToken(Token token);
+
+
+    @Select({
+            "select",
+            "token_id, access_token, refresh_token, exprise_in, client_id, create_date,",
+            "user_id",
+            "from token",
+            "where access_token = #{accessToken,jdbcType=VARCHAR}"
+    })
+    @Results({
+            @Result(column="token_id", property="tokenId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="access_token", property="accessToken", jdbcType=JdbcType.VARCHAR),
+            @Result(column="refresh_token", property="refreshToken", jdbcType=JdbcType.VARCHAR),
+            @Result(column="exprise_in", property="expriseIn", jdbcType=JdbcType.BIGINT),
+            @Result(column="client_id", property="clientId", jdbcType=JdbcType.VARCHAR),
+            @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
+            @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR)
+    })
+    List<Token> checkToken(String accessToken);
 }

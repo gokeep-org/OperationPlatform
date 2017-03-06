@@ -70,6 +70,6 @@ public class UserServiceImpl extends BaseService implements UserService<User, Bo
 
     @Override
     public List<User> checkUserIsLogin(User user) {
-        return userMapper.checkoutUserLogin(user);
+        return userMapper.checkUserLogin(user);
     }
 }

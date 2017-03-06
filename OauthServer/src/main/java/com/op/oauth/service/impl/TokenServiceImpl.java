@@ -1,21 +1,23 @@
 package com.op.oauth.service.impl;
 
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.op.oauth.bean.entity.Token;
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.config.OpCommonConfig;
 import com.op.oauth.dao.TokenMapper;
+import com.op.oauth.exception.ErrorCode;
 import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.service.BaseService;
 import com.op.oauth.service.ServiceBeanNames;
 import com.op.oauth.service.TokenService;
 import com.op.oauth.util.OpUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /****************************************
  * Copyright (c) xuning.
@@ -33,10 +35,11 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
     public Token createTokenByClientId(String clientId) {
         return null;
     }
+
     @Override
     public Token createTokenByUserId(String userId) {
         List<Token> tokens = tokenMapper.selectByUserId(userId);
-        if (OpUtils.checkObjectIsNull(tokens)||tokens.size()<=0){
+        if (OpUtils.checkObjectIsNull(tokens) || tokens.size() <= 0) {
             Token token = new Token();
             String tokenId = UUID.randomUUID().toString();
             token.setTokenId(tokenId);
@@ -49,31 +52,31 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
             int res = tokenMapper.insert(token);
             if (OpUtils.checkMapperCudIsSuccess(res)) {
                 return tokenMapper.selectByTokenId(tokenId);
-            }else {
+            } else {
                 throw new OperationPlatformException("get token info error");
             }
         }
-        List<Token> oldTokens = tokens.stream().filter(e->{
-            return  ((new Date().getTime() - e.getCreateDate().getTime()) < e.getExpriseIn() * 1000);
+        List<Token> oldTokens = tokens.stream().filter(e -> {
+            return ((new Date().getTime() - e.getCreateDate().getTime()) < e.getExpriseIn() * 1000);
         }).collect(Collectors.toList());
-        if (OpUtils.checkObjectIsNull(oldTokens)){
+        if (OpUtils.checkObjectIsNull(oldTokens)) {
             //是否刷新token
-            List<Token> needRefreshToken = tokens.stream().filter(e->{
-                return  ((new Date().getTime() - e.getCreateDate().getTime()) > e.getExpriseIn() * 1000);
+            List<Token> needRefreshToken = tokens.stream().filter(e -> {
+                return ((new Date().getTime() - e.getCreateDate().getTime()) > e.getExpriseIn() * 1000);
             }).collect(Collectors.toList());
-            if (OpUtils.checkObjectIsNull(needRefreshToken)){
+            if (OpUtils.checkObjectIsNull(needRefreshToken)) {
                 throw new OperationPlatformException("获取旧的token为空");
             }
             Token refreshToken = needRefreshToken.get(0);
             refreshToken.setCreateDate(new Date());
             refreshToken.setAccessToken(UUID.randomUUID().toString());
-            if(OpUtils.checkMapperCudIsSuccess(tokenMapper.refreshTokenByTokenId(refreshToken))){
+            if (OpUtils.checkMapperCudIsSuccess(tokenMapper.refreshTokenByTokenId(refreshToken))) {
                 return tokenMapper.selectByTokenId(refreshToken.getTokenId());
             }
         }
         Token updToken = oldTokens.get(0);
         updToken.setCreateDate(new Date());
-        if (!OpUtils.checkMapperCudIsSuccess(tokenMapper.updateCreateByTokenId(updToken))){
+        if (!OpUtils.checkMapperCudIsSuccess(tokenMapper.updateCreateByTokenId(updToken))) {
             throw new OperationPlatformException("更新已有token出现异常");
         }
         return tokenMapper.selectByTokenId(updToken.getTokenId());
@@ -91,12 +94,29 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
 
     @Override
     public Token refreshTokenByRefreshToken(String refreshToken) {
+        if (OpUtils.checkStringIsNull(refreshToken)) {
+            throw new OperationPlatformException("refresh token refresh token is null");
+        }
         return null;
     }
 
     @Override
-    public Boolean checkToken(Token token) {
-        return null;
+    public List<Token> checkToken(Token token) {
+        List<Token> tokens = tokenMapper.checkToken(token.getAccessToken());
+        List<Token> validToken = tokens.stream().filter(e -> {
+            if (e.getUserId().equals(token.getUserId())) {
+                return true;
+            }
+            return false;
+        }).collect(Collectors.toList());
+        if ((new Date().getTime() - validToken.get(0).getCreateDate().getTime())>validToken.get(0).getExpriseIn()*OpCommonConfig.TOKEN_EXPRISE_TIME){
+            Token refreshToken =createTokenByUserId(token.getUserId());
+            tokens.set(0, refreshToken);
+        }
+        if (OpUtils.checkObjectIsNull(tokens)) {
+            throw new OperationPlatformException(ErrorCode.CHECK_ACCESS_TOKEN_FAILED);
+        }
+        return tokens;
     }
 
     @Override

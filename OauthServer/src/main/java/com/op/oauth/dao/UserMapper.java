@@ -61,7 +61,7 @@ public interface UserMapper {
             @Result(column = "status", property = "status", jdbcType = JdbcType.BIT),
             @Result(column = "create_date", property = "createDate", jdbcType = JdbcType.TIMESTAMP)
     })
-    List<User> checkoutUserLogin(User user);
+    List<User> checkUserLogin(User user);
 
     @Select({
             "select",
