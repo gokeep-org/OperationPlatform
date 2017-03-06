@@ -50,6 +50,10 @@
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.ixuning</groupId>
+            <artifactId>requests</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring-boot.version}</version>
@@ -63,6 +67,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.22</version>
         </dependency>
         <dependency>
             <groupId>io.swagger</groupId>
@@ -113,6 +122,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <skip>true</skip>
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>

@@ -55,6 +55,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+        <!--http请求客户端-->
+        <dependency>
+            <groupId>com.ixuning</groupId>
+            <artifactId>requests</artifactId>
+        </dependency>
         <!--json-->
         <dependency>
             <groupId>com.alibaba</groupId>
