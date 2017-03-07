@@ -53,7 +53,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
             if (OpUtils.checkMapperCudIsSuccess(res)) {
                 return tokenMapper.selectByTokenId(tokenId);
             } else {
-                throw new OperationPlatformException("get token info error");
+                throw new OperationPlatformException(ErrorCode.GET_TOKEN_INFO_ERROR);
             }
         }
         List<Token> oldTokens = tokens.stream().filter(e -> {
@@ -65,7 +65,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
                 return ((new Date().getTime() - e.getCreateDate().getTime()) > e.getExpriseIn() * 1000);
             }).collect(Collectors.toList());
             if (OpUtils.checkObjectIsNull(needRefreshToken)) {
-                throw new OperationPlatformException("获取旧的token为空");
+                throw new OperationPlatformException(ErrorCode.GET_OLD_TOKEN_IS_NULL);
             }
             Token refreshToken = needRefreshToken.get(0);
             refreshToken.setCreateDate(new Date());
@@ -77,7 +77,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
         Token updToken = oldTokens.get(0);
         updToken.setCreateDate(new Date());
         if (!OpUtils.checkMapperCudIsSuccess(tokenMapper.updateCreateByTokenId(updToken))) {
-            throw new OperationPlatformException("更新已有token出现异常");
+            throw new OperationPlatformException(ErrorCode.UPDATE_TOKEN_IS_ERROR);
         }
         return tokenMapper.selectByTokenId(updToken.getTokenId());
     }
@@ -95,7 +95,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
     @Override
     public Token refreshTokenByRefreshToken(String refreshToken) {
         if (OpUtils.checkStringIsNull(refreshToken)) {
-            throw new OperationPlatformException("refresh token refresh token is null");
+            throw new OperationPlatformException(ErrorCode.REFRESH_TOKEN_IS_FAILED);
         }
         return null;
     }
@@ -109,6 +109,9 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
             }
             return false;
         }).collect(Collectors.toList());
+        if(OpUtils.checkObjectIsNull(validToken)){
+            throw new OperationPlatformException(ErrorCode.CHECK_ACCESS_TOKEN_FAILED);
+        }
         if ((new Date().getTime() - validToken.get(0).getCreateDate().getTime())>validToken.get(0).getExpriseIn()*OpCommonConfig.TOKEN_EXPRISE_TIME){
             Token refreshToken =createTokenByUserId(token.getUserId());
             tokens.set(0, refreshToken);

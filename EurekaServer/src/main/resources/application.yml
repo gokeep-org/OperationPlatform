@@ -1,0 +1,11 @@
+eureka:
+  instance:
+    hostname: localhost
+  server:
+      enableSelfPreservation: false
+      eviction-interval-timer-in-ms: 600000
+  client:
+      register-with-eureka: false
+      fetch-registry: false
+      service-url:
+        defaultzone: ${eureka.instance.hostname}:${server.port}/eureka/

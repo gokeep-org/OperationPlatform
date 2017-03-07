@@ -16,6 +16,9 @@ public final class ErrorCode {
     public static final String ACCESS_TOKEN_IS_NULL = "access token is null";
     public static final String USER_ID_IS_NULL = "user id is null";
     public static final String CHECK_ACCESS_TOKEN_FAILED = "check access_token is failed";
-
+    public static final String GET_OLD_TOKEN_IS_NULL = "get old token is null";
+    public static final String GET_TOKEN_INFO_ERROR = "get token is error";
+    public static final String UPDATE_TOKEN_IS_ERROR = "update token is error";
+    public static final String REFRESH_TOKEN_IS_FAILED = "refresh token is failed";
 
 }

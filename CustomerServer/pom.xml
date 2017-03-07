@@ -45,6 +45,10 @@
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.ixuning</groupId>
             <artifactId>requests</artifactId>
         </dependency>
