@@ -1,8 +1,6 @@
-server:
-  port: 10011
 spring:
   application:
-    name: proxy
+    name: message
 eureka:
   client:
     serviceUrl:
@@ -10,3 +8,5 @@ eureka:
   instance:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
+server:
+  port: 10030

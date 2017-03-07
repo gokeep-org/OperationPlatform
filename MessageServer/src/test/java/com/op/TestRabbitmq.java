@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @Auther is xuning on 2017/2/20.
  ****************************************/
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = MessageBootstrap.class)
 public class TestRabbitmq {
 	@Autowired
 	private Sender sender;

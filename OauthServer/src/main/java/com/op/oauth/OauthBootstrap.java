@@ -3,6 +3,7 @@ package com.op.oauth;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
 /****************************************
@@ -12,9 +13,10 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @Auther is xuning on 2017/1/22.
  ****************************************/
 @SpringBootApplication
-public class Application {
+@EnableDiscoveryClient
+public class OauthBootstrap {
 	public static void main(String[] args) {
-        new SpringApplicationBuilder(Application.class)
+        new SpringApplicationBuilder(OauthBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }

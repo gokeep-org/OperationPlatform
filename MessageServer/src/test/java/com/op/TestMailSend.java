@@ -21,7 +21,7 @@ import com.op.service.MailSendService;
  * Created by xuning on 17-2-17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+@SpringApplicationConfiguration(classes = MessageBootstrap.class)
 public class TestMailSend {
 	@Autowired
 	private MailSendService mailSendService;

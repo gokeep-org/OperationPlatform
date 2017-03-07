@@ -9,12 +9,14 @@ package com.op; /****************************************
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-public class Application {
+@EnableDiscoveryClient
+public class MessageBootstrap {
 
     public static void main(String[] args) {
-       new SpringApplicationBuilder(Application.class)
+       new SpringApplicationBuilder(MessageBootstrap.class)
                .bannerMode(Banner.Mode.OFF)
                .run(args);
     }
