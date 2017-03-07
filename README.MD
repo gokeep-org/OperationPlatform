@@ -6,6 +6,3 @@
     手机：18753377393
     Q Q :1748373312
     邮箱：1748373312@qq.com
-
-邮件发送：
-http://blog.sina.com.cn/s/blog_86e49b8f01018zet.html

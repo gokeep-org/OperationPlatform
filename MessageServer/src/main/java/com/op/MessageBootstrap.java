@@ -16,8 +16,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class MessageBootstrap {
 
     public static void main(String[] args) {
-       new SpringApplicationBuilder(MessageBootstrap.class)
-               .bannerMode(Banner.Mode.OFF)
-               .run(args);
+        new SpringApplicationBuilder(MessageBootstrap.class)
+                .bannerMode(Banner.Mode.OFF)
+                .run(args);
     }
 }
