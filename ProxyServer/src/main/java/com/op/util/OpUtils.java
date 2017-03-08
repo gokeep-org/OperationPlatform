@@ -106,10 +106,10 @@ public final class OpUtils {
             ServerListFilter<DiscoveryEnabledServer> filter = new ServerListSubsetFilter<DiscoveryEnabledServer>();
             loadBalancer = LoadBalancerBuilder.<DiscoveryEnabledServer> newBuilder().withDynamicServerList(list)
                     .withServerListFilter(filter).withPing(new PingPort()).withRule(new BestAvailableRule()).withClientConfig(config).buildDynamicServerListLoadBalancer();
-            namedLBMap.put("cloud-client", loadBalancer);
+            namedLBMap.put(vipAddress, loadBalancer);
         }
         DiscoveryEnabledServer server = (DiscoveryEnabledServer) loadBalancer.chooseServer();
-        if (server != null) {
+        if (null != server) {
             String serverUrl = server.getInstanceInfo().getIPAddr() + ":" + server.getInstanceInfo().getPort();
             LOGGER.info("discovery vip address "+vipAddress+" choose in "+serverUrl);
             return "http://"+serverUrl;

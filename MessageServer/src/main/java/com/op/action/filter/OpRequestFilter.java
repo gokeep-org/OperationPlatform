@@ -19,9 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
-import com.op.exception.OperationPlatformException;
-import com.op.util.OpUtils;
-
 import requests.Requests;
 import requests.core.RequestImpl;
 
@@ -48,12 +45,6 @@ public class OpRequestFilter implements ContainerRequestFilter {
         String requestPath = method + ":" + path;
         String accessToken = requestContext.getHeaderString("token");
         String userId = requestContext.getHeaderString("user_id");
-        if (OpUtils.checkStringIsNull(userId) || OpUtils.checkStringIsNull(accessToken)) {
-            throw new OperationPlatformException("header date user_id or token is null");
-        }
-        if (!OpUtils.checkUserToken(userId, accessToken)){
-            throw new OperationPlatformException("Token check failed");
-        }
         MDC.put("user_id", requestContext.getHeaderString(userId));
         MDC.put("access_token", requestContext.getHeaderString(accessToken));
         LOGGER.info("请求拦截到token is: "+accessToken);

@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @Auther is xuning on 2017/1/8.
  ****************************************/
 @Configuration
-@ApplicationPath("/msg")
+@ApplicationPath("/proxy")
 public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig() {
 		setJerseyComponentsLocation();

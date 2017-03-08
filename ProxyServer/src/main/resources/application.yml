@@ -10,3 +10,11 @@ eureka:
   instance:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
+zuul:
+  routes:
+    api-oauth:
+      path: /oauth/**
+      serviceId: oauth
+    api-msg:
+      path: /msg/**
+      serviceId: http://localhost:10030

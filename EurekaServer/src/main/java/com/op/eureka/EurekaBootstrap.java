@@ -14,7 +14,6 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 @EnableEurekaServer
 @SpringBootApplication
 public class EurekaBootstrap {
-
     public static void main(String[] args) {
         new SpringApplicationBuilder(EurekaBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)

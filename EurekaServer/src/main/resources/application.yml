@@ -9,3 +9,5 @@ eureka:
       fetch-registry: false
       service-url:
         defaultzone: ${eureka.instance.hostname}:${server.port}/eureka/
+server:
+  port: 10001

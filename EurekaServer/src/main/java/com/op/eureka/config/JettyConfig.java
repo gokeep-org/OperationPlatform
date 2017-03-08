@@ -51,11 +51,10 @@ public class JettyConfig extends JettyEmbeddedServletContainerFactory {
     }
 
     public void setServerPort() {
-        
-        if(null == serverPort || serverPort.trim().equals("")){
+        if (null == serverPort || serverPort.trim().equals("")) {
             serverPort = propertiesUtil.getValue("server.jetty.port");
         }
-        if (null != serverPort){
+        if (null != serverPort) {
             setPort(Integer.parseInt(serverPort));
         }
     }

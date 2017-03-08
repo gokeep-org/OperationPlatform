@@ -61,7 +61,7 @@ public class PropertiesUtil {
             if (null == valueStr) {
                 return null;
             }
-            value = new String(valueStr.getBytes("ISO-8859-1"),"utf-8");
+            value = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
         } catch (Exception e) {
             System.out.println("charset error,please use utf-8 charset code!");
         }
