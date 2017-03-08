@@ -1,6 +1,6 @@
 spring:
   application:
-    name: proxy
+    name: oauth
   datasource:
     name: dataSource
     type: com.alibaba.druid.pool.DruidDataSource

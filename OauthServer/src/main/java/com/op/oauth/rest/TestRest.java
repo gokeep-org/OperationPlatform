@@ -1,15 +1,12 @@
 package com.op.oauth.rest;
 
+import com.op.oauth.dao.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.gson.JsonObject;
-import com.op.oauth.bean.entity.User;
-import com.op.oauth.dao.UserMapper;
 
 /****************************************
  * Copyright (c) xuning.
@@ -23,12 +20,9 @@ public class TestRest {
     @Autowired
     private UserMapper mapper;
 
-//    @GET
-//    @Path("/hello")
-//    public String test() {
-//        User user = mapper.selectByClientId(1);
-//        JsonObject obj = new JsonObject();
-////        obj.addProperty("name", user.getName());
-//        return obj.toString();
-//    }
+    @GET
+    @Path("/hello")
+    public String test() {
+        return "is ok oauth";
+    }
 }

@@ -27,7 +27,7 @@ public class ProxyBootstrap
                 .run(args);
     }
     @Bean
-    public ProxyFilter accessFilter() {
+    public ProxyFilter proxyFilter() {
         return new ProxyFilter();
     }
 

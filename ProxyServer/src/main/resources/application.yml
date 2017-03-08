@@ -12,9 +12,9 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 zuul:
   routes:
-    api-oauth:
+    oauth:
       path: /oauth/**
       serviceId: oauth
-    api-msg:
+    msg:
       path: /msg/**
-      serviceId: http://localhost:10030
+      serviceId: message
