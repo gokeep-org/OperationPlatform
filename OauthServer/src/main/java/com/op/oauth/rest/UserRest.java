@@ -1,21 +1,14 @@
 package com.op.oauth.rest;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import com.op.oauth.action.factory.UserActionFactory;
 import com.op.oauth.bean.action.input.user.CreateUserInput;
 import com.op.oauth.bean.action.input.user.GetUserInput;
 import com.op.oauth.bean.action.output.user.CreateUserOutput;
 import com.op.oauth.bean.action.output.user.GetUserOutput;
 import com.op.oauth.bean.entity.User;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /****************************************
  * Copyright (c) xuning.

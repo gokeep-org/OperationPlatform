@@ -1,16 +1,15 @@
 package com.op.oauth.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.dao.UserMapper;
 import com.op.oauth.service.BaseService;
 import com.op.oauth.service.ServiceBeanNames;
 import com.op.oauth.service.UserService;
 import com.op.oauth.util.OpUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
