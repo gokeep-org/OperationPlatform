@@ -3,21 +3,20 @@
  */
 package com.op.oauth.action.filter;
 
-import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
+import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 /**
  * <p>request和response过滤器。<p>
@@ -39,6 +38,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
 		String method = requestContext.getMethod();
 		String path = requestContext.getUriInfo().getPath();
 		String requestPath = method + ":" + path;
+		
 		LOGGER.info(requestContext.getHeaderString("token"));
 		LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
 	}

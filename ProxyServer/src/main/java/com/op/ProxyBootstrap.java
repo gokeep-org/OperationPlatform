@@ -26,6 +26,7 @@ public class ProxyBootstrap
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
+    
     @Bean
     public ProxyFilter proxyFilter() {
         return new ProxyFilter();

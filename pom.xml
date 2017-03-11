@@ -131,6 +131,10 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
+                <configuration>
+                    <!--app_name start|stop|restart-->
+                    <executable>true</executable>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

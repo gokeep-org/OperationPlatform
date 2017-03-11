@@ -40,7 +40,7 @@ public class ProxyFilter extends ZuulFilter {
         String accessToken = request.getHeader("access_token");
         String userId = request.getHeader("user_id");
         LOGGER.info("proxy filte " + "get user_id :" + userId + " access_token is:" + accessToken);
-        
+        //TODO: 这里要对token和user_id进行校验
         return null;
     }
 }

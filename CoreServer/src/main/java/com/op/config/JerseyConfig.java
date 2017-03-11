@@ -2,6 +2,7 @@ package com.op.config;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
 
 /****************************************
  * Copyright (c) xuning.
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  ****************************************/
 @Configuration
 public class JerseyConfig extends ResourceConfig {
+
     public JerseyConfig() {
         setJerseyComponentsLocation();
     }
