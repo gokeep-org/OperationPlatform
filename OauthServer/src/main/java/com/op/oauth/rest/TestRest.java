@@ -1,12 +1,11 @@
 package com.op.oauth.rest;
 
 import com.google.gson.JsonObject;
-import com.netflix.ribbon.proxy.annotation.Http;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -23,9 +22,8 @@ public class TestRest {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
-    @GET
+    @POST
     @Path("/hello")
-    @Http.Header(name = "Access-Control-Allow-Origin", value = "*")
     public String test() {
         ServiceInstance instance = loadBalancerClient.choose("oauth");
         System.out.println(instance.getHost()+":"+instance.getPort());
