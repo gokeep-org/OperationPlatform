@@ -1,21 +1,13 @@
 package com.op.util;
 
-import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Context;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSONObject;
-
-import requests.Requests;
-import requests.bean.data.Params;
-import requests.core.RequestImpl;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+import java.security.MessageDigest;
+import java.util.List;
+import java.util.Objects;
 
 /****************************************
  * Copyright (c) xuning.
@@ -27,7 +19,7 @@ public final class OpUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpUtils.class);
     @Context
     private HttpServletRequest request;
-    private static final Requests requests = new RequestImpl();
+//    private static final Requests requests = new RequestImpl();
     private OpUtils() {
     }
 
@@ -95,15 +87,16 @@ public final class OpUtils {
     }
 
     public static final Boolean checkUserToken(String userId, String accessToken){
-        Params params = new Params("user_id", userId);
-        Params params1 = new Params("access_token", accessToken);
-        List<Params> paramsList = new ArrayList<>();
-        paramsList.add(params);
-        paramsList.add(params1);
-        String json = requests.get("http://localhost:10020/oauth/token/check", null, paramsList).json();
-        LOGGER.info(json);
-        JSONObject object = (JSONObject) JSONObject.parse(json);
-        String success = object.get("success").toString();
-        return success.equals("true");
+//        Params params = new Params("user_id", userId);
+//        Params params1 = new Params("access_token", accessToken);
+//        List<Params> paramsList = new ArrayList<>();
+//        paramsList.add(params);
+//        paramsList.add(params1);
+//        String json = requests.get("http://localhost:10020/oauth/token/check", null, paramsList).json();
+//        LOGGER.info(json);
+//        JSONObject object = (JSONObject) JSONObject.parse(json);
+//        String success = object.get("success").toString();
+//        return success.equals("true");
+        return  null;
     }
 }

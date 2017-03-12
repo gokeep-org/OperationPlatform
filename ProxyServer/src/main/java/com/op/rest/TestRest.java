@@ -1,7 +1,6 @@
 package com.op.rest;
 
-import javax.ws.rs.QueryParam;
-
+import com.op.util.OpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,8 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.op.util.OpUtils;
+import javax.ws.rs.QueryParam;
 
-import requests.Requests;
-import requests.core.RequestImpl;
 
 /****************************************
  * Copyright (c) xuning.
@@ -36,9 +33,10 @@ public class TestRest {
     }
     @RequestMapping("/discovery")
     public String testDiscovery(){
-        String serverUrl = OpUtils.discoveryServerByVipAddress("cloud-client_t");
-        Requests requests = new RequestImpl();
-        String res = requests.get(serverUrl+"/test").text();
-        return res;
+//        String serverUrl = OpUtils.discoveryServerByVipAddress("cloud-client_t");
+//        Requests requests = new RequestImpl();
+//        String res = requests.get(serverUrl+"/test").text();
+//        return res;
+        return null;
     }
 }

@@ -81,10 +81,6 @@
             <version>1.0.5</version>
         </dependency>
         <!--Http请求客户端-->
-        <dependency>
-            <groupId>com.ixuning</groupId>
-            <artifactId>requests</artifactId>
-        </dependency>
         <!--Test-->
         <dependency>
             <groupId>junit</groupId>
