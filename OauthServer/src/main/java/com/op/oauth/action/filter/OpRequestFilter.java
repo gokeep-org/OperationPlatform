@@ -39,7 +39,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
 		String path = requestContext.getUriInfo().getPath();
 		String requestPath = method + ":" + path;
 		
-		LOGGER.info(requestContext.getHeaderString("token"));
+		LOGGER.info("请求token-oauth："+requestContext.getHeaderString("access_token"));
 		LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
 	}
 
