@@ -1,12 +1,12 @@
-package com.op.config;
-
-import javax.ws.rs.ApplicationPath;
+package com.op.proxy.config;
 
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
+
+import javax.ws.rs.ApplicationPath;
 
 /****************************************
  * Copyright (c) xuning.

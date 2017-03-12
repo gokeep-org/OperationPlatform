@@ -1,6 +1,6 @@
 package com.op;
 
-import com.op.util.OpUtils;
+import com.op.proxy.util.OpUtils;
 import org.junit.Test;
 
 /****************************************

@@ -1,5 +1,6 @@
-package com.op;
+package com.op.proxy;
 
+import com.op.proxy.filter.ProxyFilter;
 import org.springframework.boot.Banner;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.SpringCloudApplication;
@@ -8,8 +9,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
-
-import com.op.rest.filter.ProxyFilter;
 
 /**
  * Hello world!
@@ -31,7 +30,7 @@ public class ProxyBootstrap
     public ProxyFilter proxyFilter() {
         return new ProxyFilter();
     }
-
+    
     @Bean
     @LoadBalanced
     RestTemplate restTemplate() {

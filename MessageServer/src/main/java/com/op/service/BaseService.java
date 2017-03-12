@@ -1,7 +1,7 @@
 package com.op.service;
 
 
-import com.op.util.ApplicationContextHolder;
+import com.op.proxy.util.ApplicationContextHolder;
 
 public abstract class BaseService {
     public static <T extends BaseService> T getService(Class<T> clazz) {

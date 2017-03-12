@@ -1,8 +1,7 @@
-package com.op.config;
+package com.op.proxy.config;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Scheduled;
 
 /****************************************
  * Copyright (c) xuning.

@@ -1,4 +1,4 @@
-package com.op.config;
+package com.op.proxy.config;
 
 import com.op.action.filter.OpRequestFilter;
 import com.op.action.filter.OpResponseFilter;

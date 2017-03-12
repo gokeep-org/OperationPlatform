@@ -1,4 +1,4 @@
-package com.op.rest.filter;
+package com.op.proxy.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -36,10 +36,14 @@ public class ProxyFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        LOGGER.info(String.format("proxy filter " + "%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+        LOGGER.info("***************Proxy Filter**************************");
+        LOGGER.info("请求url: "+request.getRequestURL());
+        LOGGER.info("请求方法： "+request.getMethod());
         String accessToken = request.getHeader("access_token");
         String userId = request.getHeader("user_id");
-        LOGGER.info("proxy filte " + "get user_id :" + userId + " access_token is:" + accessToken);
+        LOGGER.info("proxy filter " + "get user_id :" + userId + " access_token is:" + accessToken);
+        LOGGER.info("******************************************************");
+
         //TODO: 这里要对token和user_id进行校验
         return null;
     }

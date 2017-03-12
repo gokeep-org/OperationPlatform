@@ -1,4 +1,4 @@
-package com.op.config;
+package com.op.proxy.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

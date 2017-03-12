@@ -1,5 +1,6 @@
 server:
   port: 10011
+  connection-timeout: 60000
 spring:
   application:
     name: proxy

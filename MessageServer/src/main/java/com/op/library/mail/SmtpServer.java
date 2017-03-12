@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.op.bean.entity.email.Email;
-import com.op.util.OpUtils;
-import com.op.util.PropertiesUtil;
+import com.op.proxy.util.OpUtils;
+import com.op.proxy.util.PropertiesUtil;
 
 /****************************************
  * Copyright (c) xuning.

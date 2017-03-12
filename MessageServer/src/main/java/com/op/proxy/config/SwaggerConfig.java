@@ -1,4 +1,4 @@
-package com.op.config;
+package com.op.proxy.config;
 
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.PathSelectors;

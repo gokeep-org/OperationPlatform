@@ -1,4 +1,4 @@
-package com.op.config;
+package com.op.proxy.config;
 
 /****************************************
  * Copyright (c) xuning.
