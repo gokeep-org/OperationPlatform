@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PropertiesUtil {
 
-    private static String userConfigFile = "mail.properties";
+    private static String userConfigFile = "jetty-config.properties";
     private static PropertiesUtil propertiesUtil = new PropertiesUtil();
     private static final Properties properties = new Properties();
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesUtil.class);

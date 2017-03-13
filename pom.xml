@@ -81,18 +81,6 @@
                 <artifactId>spring-boot-starter-logging</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
-            <!--xml读取-->
-            <dependency>
-                <groupId>dom4j</groupId>
-                <artifactId>dom4j</artifactId>
-                <version>${dom4j.version}</version>
-            </dependency>
-            <!--JavaMail-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-mail</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
             <!-- Json字符串对象转换-->
             <dependency>
                 <groupId>com.google.code.gson</groupId>

@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 @Produces({MediaType.APPLICATION_JSON})
 public class InfoRest {
     @GET
-    public String info(){
+    public String info() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("info", "ok");
         return jsonObject.toString();
