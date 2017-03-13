@@ -19,3 +19,6 @@ zuul:
     msg:
       path: /msg/**
       serviceId: message
+    es:
+      path: /es/**
+      serviceId: es

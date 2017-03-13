@@ -35,10 +35,7 @@ public final class OpUtils {
     }
 
     public final static Boolean checkStringIsNull(String string) {
-        if (null == string || string.trim().equals("")) {
-            return true;
-        }
-        return false;
+        return null == string || string.trim().equals("");
     }
 
     public final static Boolean checkObjectIsNull(Object obj) {
@@ -50,11 +47,8 @@ public final class OpUtils {
         } catch (Exception e) {
             LOGGER.info("check obj is null transfrom list is faile");
         }
-        if (Objects.equals(null, obj)) {
-            return true;
-        }
-
-        return false;
+        return Objects.equals(null, obj);
+    
     }
 
     public final static String getEnvValue(String key) {
@@ -71,7 +65,7 @@ public final class OpUtils {
     }
 
     public final static Boolean checkMapperCudIsSuccess(int res) {
-        return res >= 0 ? true : false;
+        return res >= 0;
     }
 
     public final static String MD5(String pwd) {

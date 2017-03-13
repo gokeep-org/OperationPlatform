@@ -41,7 +41,7 @@ public class TestMailSend {
 	 */
 	@Test
 	public void testSimpleMailSend() throws MessagingException {
-		List<String> accepts = Arrays.asList(new String[]{eefungAccepter, qqAccepter});
+		List<String> accepts = Arrays.asList(eefungAccepter, qqAccepter);
 		email.setAccepter(accepts);
 		email.setTitle(title);
 		email.setContent(content);
@@ -59,7 +59,7 @@ public class TestMailSend {
 		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
-		List<String> recipientersList = Arrays.asList(new String[]{qqAccepter});
+		List<String> recipientersList = Arrays.asList(qqAccepter);
 		email.setRecipienters(recipientersList);
 		Boolean res = mailSendService.sendRecipientsEmail(email);
 		Assert.assertTrue(res);
@@ -75,7 +75,7 @@ public class TestMailSend {
 		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
-		List<String> bbcAccepterlist = Arrays.asList(new String[]{qqAccepter});
+		List<String> bbcAccepterlist = Arrays.asList(qqAccepter);
 		email.setBccAccepter(bbcAccepterlist);
 		Boolean res = mailSendService.sendBccEmail(email);
 		Assert.assertTrue(res);
@@ -88,12 +88,12 @@ public class TestMailSend {
 	 */
 	@Test
 	public void testAttachmentMailSens() throws MessagingException {
-		List<String> accepts = Arrays.asList(new String[]{qqAccepter});
+		List<String> accepts = Arrays.asList(qqAccepter);
 		email.setAccepter(accepts);
 		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
-		List<String> files = Arrays.asList(new String[]{"C:/Users/me/Desktop/test.txt"});
+		List<String> files = Arrays.asList("C:/Users/me/Desktop/test.txt");
 		email.setAttachmentPath(files);
 		Boolean res = mailSendService.sendAttachmentsEmail(email);
 		Assert.assertTrue(res);
@@ -107,20 +107,18 @@ public class TestMailSend {
 	 */
 	@Test
 	public void testCommonMailSend() throws MessagingException {
-		List<String> accepts = Arrays.asList(new String[]{eefungAccepter, qqAccepter});
+		List<String> accepts = Arrays.asList(eefungAccepter, qqAccepter);
 		email.setAccepter(accepts);
 		email.setSender(mailSender);
 		email.setTitle(title);
 		email.setContent(content);
-		List<String> recipientersList = Arrays.asList(new String[]{otherAccepter});
-		List<String> bccAccepts = Arrays.asList(new String[]{phoneAccepter});
+		List<String> recipientersList = Arrays.asList(otherAccepter);
+		List<String> bccAccepts = Arrays.asList(phoneAccepter);
 		email.setBccAccepter(bccAccepts);
 		email.setRecipienters(recipientersList);
-		List<File> files = Arrays.asList(new File[]{
-				new File("C:/Users/me/Desktop/test.txt"),
-				new File("C:/Users/me/Desktop/test1.txt"),
-				new File("C:/Users/me/Desktop/test.docx")
-		});
+		List<File> files = Arrays.asList(new File("C:/Users/me/Desktop/test.txt"),
+                new File("C:/Users/me/Desktop/test1.txt"),
+                new File("C:/Users/me/Desktop/test.docx"));
 		email.setAttachmentFile(files);
 		Boolean res = mailSendService.sendCommonEmail(email);
 		Assert.assertTrue(res);

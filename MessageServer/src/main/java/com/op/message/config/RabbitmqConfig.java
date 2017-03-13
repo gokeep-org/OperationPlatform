@@ -19,11 +19,11 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class RabbitmqConfig {
 	private static final PropertiesUtil propertiesUtil = new PropertiesUtil("rabbitmq.properties");
-	private static final String rabbitmqHost = propertiesUtil.getValue("spring.rabbitmq.host");
-	private static final String rabbitmqUsername = propertiesUtil.getValue("spring.rabbitmq.username");
-	private static final String rabbitmqPassword = propertiesUtil.getValue("spring.rabbitmq.password");
-	private static final String rabbitmqPublisherConfirms = propertiesUtil.getValue("spring.rabbitmq.publisher-confirms");
-	public static final int rabbitmqPort = Integer.parseInt(propertiesUtil.getValue("spring.rabbitmq.port"));
+	private static final String rabbitmqHost = PropertiesUtil.getValue("spring.rabbitmq.host");
+	private static final String rabbitmqUsername = PropertiesUtil.getValue("spring.rabbitmq.username");
+	private static final String rabbitmqPassword = PropertiesUtil.getValue("spring.rabbitmq.password");
+	private static final String rabbitmqPublisherConfirms = PropertiesUtil.getValue("spring.rabbitmq.publisher-confirms");
+	public static final int rabbitmqPort = Integer.parseInt(PropertiesUtil.getValue("spring.rabbitmq.port"));
 
 
 	@Bean

@@ -2,7 +2,6 @@ package com.op.user;
 
 
 import com.op.user.util.EsClientFactory;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;

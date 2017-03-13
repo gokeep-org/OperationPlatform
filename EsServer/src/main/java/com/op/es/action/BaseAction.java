@@ -1,11 +1,10 @@
-package com.op.message.library.rabbit.sender;
+package com.op.es.action;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/2/15.
+ * @Auther is xuning on 17-3-14
  ****************************************/
-public interface Sender {
-	void send(String queueName, String message);
+public class BaseAction {
 }

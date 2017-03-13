@@ -19,6 +19,7 @@
         <module>MessageServer</module>
         <module>EurekaServer</module>
         <module>UserServer</module>
+        <module>EsServer</module>
     </modules>
 
     <!--Maven相关配置属性-->

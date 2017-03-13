@@ -25,7 +25,7 @@ public class PropertiesUtil {
 	}
 
 	public PropertiesUtil(String userConfigFile) {
-		this.userConfigFile = userConfigFile;
+		PropertiesUtil.userConfigFile = userConfigFile;
 	}
 
 	public static PropertiesUtil setConfigFileName(String configFile) {

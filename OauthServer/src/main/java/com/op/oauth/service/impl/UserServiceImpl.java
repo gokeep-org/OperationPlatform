@@ -61,10 +61,7 @@ public class UserServiceImpl extends BaseService implements UserService<User, Bo
 
     @Override
     public Boolean checkoutUserNameIsExist(User user) {
-        if (userMapper.checkoutUserNameIsExist(user).size() == 0) {
-            return false;
-        }
-        return true;
+        return userMapper.checkoutUserNameIsExist(user).size() != 0;
     }
 
     @Override

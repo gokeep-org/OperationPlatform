@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
 public class JettyConfig extends JettyEmbeddedServletContainerFactory {
 
     private static PropertiesUtil propertiesUtil = new PropertiesUtil("jetty-config.properties");
-    private static final String maxThread = propertiesUtil.getValue("server.jetty.maxthread.size");
-    private static final String minThread = propertiesUtil.getValue("server.jetty.minthread.size");
-    private static final String timout = propertiesUtil.getValue("server.jetty.timeout");
-    private static final String queueSize = propertiesUtil.getValue("server.jetty.queue.size");
+    private static final String maxThread = PropertiesUtil.getValue("server.jetty.maxthread.size");
+    private static final String minThread = PropertiesUtil.getValue("server.jetty.minthread.size");
+    private static final String timout = PropertiesUtil.getValue("server.jetty.timeout");
+    private static final String queueSize = PropertiesUtil.getValue("server.jetty.queue.size");
     private static QueuedThreadPool threadPool = new QueuedThreadPool();
     public JettyConfig() {
         setMaxThread();

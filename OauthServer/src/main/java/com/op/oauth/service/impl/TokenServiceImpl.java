@@ -104,10 +104,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
     public List<Token> checkToken(Token token) {
         List<Token> tokens = tokenMapper.checkToken(token.getAccessToken());
         List<Token> validToken = tokens.stream().filter(e -> {
-            if (e.getUserId().equals(token.getUserId())) {
-                return true;
-            }
-            return false;
+            return e.getUserId().equals(token.getUserId());
         }).collect(Collectors.toList());
         if(OpUtils.checkObjectIsNull(validToken)){
             throw new OperationPlatformException(ErrorCode.CHECK_ACCESS_TOKEN_FAILED);

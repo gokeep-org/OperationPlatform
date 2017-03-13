@@ -12,9 +12,6 @@ public class OpUtils {
 
 	//验证字符串是不是空
 	public static Boolean checkStringIsNull(String string) {
-		if (null == string || string.trim().equals("")) {
-			return true;
-		}
-		return false;
-	}
+        return null == string || string.trim().equals("");
+    }
 }
