@@ -39,6 +39,7 @@
         <swagger.version>1.5.9</swagger.version>
         <fastjson.version>1.2.22</fastjson.version>
         <javaee-api.version>7.0</javaee-api.version>
+        <jest.version>2.0.1-SNAPSHOT</jest.version>
         <!--<ixuning.requests.version>v2.0</ixuning.requests.version>-->
     </properties>
     <!--依赖管理-->
@@ -74,7 +75,12 @@
                 <artifactId>spring-boot-starter-jersey</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
-            <!--Http请求client-->
+            <!--ES Http请求client-->
+            <dependency>
+                <groupId>io.searchbox</groupId>
+                <artifactId>jest</artifactId>
+                <version>${jest.version}</version>
+            </dependency>
             <!--log日志-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

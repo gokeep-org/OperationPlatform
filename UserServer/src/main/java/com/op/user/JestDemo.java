@@ -1,10 +1,9 @@
 package com.op.user;
 
-import java.io.IOException;
+
+import com.op.user.util.EsClientFactory;
 
 import io.searchbox.client.JestClient;
-import io.searchbox.client.JestClientFactory;
-import io.searchbox.client.config.HttpClientConfig;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
@@ -15,13 +14,15 @@ import io.searchbox.core.SearchResult;
  * @Auther is xuning on 2017/3/13.
  ****************************************/
 public class JestDemo {
-    public static void main(String[] args) throws IOException {
-        JestClientFactory factory = new JestClientFactory();
-        factory.setHttpClientConfig(new HttpClientConfig
-                .Builder("http://localhost:9200")
-                .multiThreaded(true)
-                .build());
-        JestClient client = factory.getObject();
+    public static void main(String[] args) throws Exception {
+//
+//        JestClientFactory factory = new JestClientFactory();
+//        factory.setHttpClientConfig(new HttpClientConfig
+//                .Builder("http://localhost:9200")
+//                .addServer("http://localhost:9201")
+//                .multiThreaded(true)
+//                .build());
+        JestClient client = EsClientFactory.getEsClient();
         Search search = new Search
                 .Builder("")
                 .addIndex("customer")
@@ -29,20 +30,21 @@ public class JestDemo {
                 .build();
         SearchResult searchResult = client.execute(search);
         System.out.println(searchResult.getJsonString());
-        client.shutdownClient();
+//        client.shutdownClient();
     }
 
-    public static JestClient getRestClient(){
-        JestClientFactory factory = new JestClientFactory();
-        factory.setHttpClientConfig(new HttpClientConfig
-                .Builder("http://localhost:9200")
-                .multiThreaded(true)
-                .build());
-        JestClient client = factory.getObject();
-        return client;
-    }
+//
+//    public static JestClient getRestClient(){
+//        JestClientFactory factory = new JestClientFactory();
+//        factory.setHttpClientConfig(new HttpClientConfig
+//                .Builder("http://localhost:9200")
+//                .multiThreaded(true)
+//                .build());
+//        JestClient client = factory.getObject();
+//        return client;
+//    }
 
-    public static void close(){
-
-    }
+//    public static void close(){
+//
+//    }
 }
