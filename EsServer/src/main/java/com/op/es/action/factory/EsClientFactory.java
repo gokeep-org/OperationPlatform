@@ -1,9 +1,11 @@
-package com.op.es.util;
+package com.op.es.action.factory;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.config.HttpClientConfig;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 /****************************************
@@ -21,8 +23,11 @@ public class EsClientFactory {
         if (Objects.equals(null, jestfactory)){
             jestfactory = new JestClientFactory();
         }
+        List<String> serverLists = new LinkedList<>();
+        serverLists.add("http://localhost:9200");
+        serverLists.add("http://localhost:9201");
         jestfactory.setHttpClientConfig(new HttpClientConfig
-                .Builder("http://localhost:9200")
+                .Builder(serverLists)
                 .multiThreaded(true)
                 .build());
         jestClient = jestfactory.getObject();
