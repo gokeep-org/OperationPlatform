@@ -14,8 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.op.bean.entity.email.Email;
-import com.op.service.MailSendService;
+import com.op.message.MessageBootstrap;
+import com.op.message.bean.entity.email.Email;
+import com.op.message.service.MailSendService;
 
 /**
  * Created by xuning on 17-2-17.

@@ -1,6 +1,7 @@
 package com.op;
 
-import com.op.library.rabbit.sender.Sender;
+import com.op.message.MessageBootstrap;
+import com.op.message.library.rabbit.sender.Sender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

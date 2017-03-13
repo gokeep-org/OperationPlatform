@@ -1,6 +1,6 @@
 
-import com.op.App;
-import com.op.queue.sender.QueueSender;
+import com.op.core.App;
+import com.op.core.queue.sender.QueueSender;
 import net.minidev.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
