@@ -1,7 +1,7 @@
 package com.op.es.rest;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -12,12 +12,16 @@ import javax.ws.rs.core.MediaType;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-3-14
  ****************************************/
-@Path("/test")
+@Path("/index")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
-public class TestRest {
-    @GET
-    public String test(){
-        return "HELLO ES";
+public class IndexRest {
+    /**
+     * 索引接口
+     */
+    @POST
+    public String createIndex(){
+        return null;
     }
+    
 }
