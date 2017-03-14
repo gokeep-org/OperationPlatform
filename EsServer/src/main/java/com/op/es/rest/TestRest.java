@@ -25,7 +25,7 @@ public class TestRest {
     @GET
     public String test(){
       String server_address =  loadBalancerClient.choose("OAUTH").getUri().toString();
-      String res=restTemplate.postForObject(server_address+"/test/hello", null, String.class);
+      String res=restTemplate.postForObject("http://OAUTH"+"/test/hello", null, String.class);
         return "status is ok"+server_address+"and res:"+res;
     }
 

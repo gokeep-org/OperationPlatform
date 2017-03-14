@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 public class SearchRest {
     @GET
-    @Path("/index/{index}/type/{type}/id/{id}")
+    @Path("/document/{index}/type/{type}/id/{id}")
     public String searchDocumentById(@PathParam("index") String index,
                                      @PathParam("type") String type,
                                      @PathParam("id") String id) {
@@ -25,7 +25,7 @@ public class SearchRest {
     }
 
     @GET
-    @Path("/index/{index}/type/{type}")
+    @Path("/document/{index}/type/{type}")
     public String searchAllDocumentByType(@PathParam("index") String index,
                                           @PathParam("type") String type) {
 
@@ -33,7 +33,7 @@ public class SearchRest {
     }
 
     @POST
-    @Path("/index/{index}/type/{type}")
+    @Path("/document/{index}/type/{type}")
     public String searchDocumentByDSL(@PathParam("index") String index,
                                       @PathParam("type") String type) {
         return null;

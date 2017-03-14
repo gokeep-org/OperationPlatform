@@ -1,0 +1,15 @@
+//用户文档模型设计
+
+{
+    "id":"String",
+    "name": "String",
+    "email": "String",
+    "phone": "String",
+    "address": "String",
+    "status": true,
+    "auth_id": [
+        "String", "String", "String"
+    ],
+    "role": "String"
+
+}

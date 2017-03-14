@@ -9,7 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>OperationPlatform</name>
-    <description>大数据分析运营平台</description>
+    <description>分布式大数据分析运营平台</description>
 
     <modules>
         <module>OauthServer</module>
