@@ -6,7 +6,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 import com.google.gson.JsonObject;
@@ -26,8 +25,8 @@ public class TestRest {
     @POST
     @Path("/hello")
     public String test() {
-        ServiceInstance instance = loadBalancerClient.choose("oauth");
-        System.out.println(instance.getHost()+":"+instance.getPort());
+//        ServiceInstance instance = loadBalancerClient.choose("oauth");
+//        System.out.println(instance.getHost()+":"+instance.getPort());
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("uri", "ok");
         return jsonObject.toString();

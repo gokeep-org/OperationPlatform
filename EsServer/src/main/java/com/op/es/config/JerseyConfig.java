@@ -1,8 +1,7 @@
 package com.op.es.config;
 
-import com.op.es.action.filter.OpRequestFilter;
-import com.op.es.action.filter.OpResponseFilter;
-import com.op.es.library.provide.GsonMessageBodyHandler;
+import javax.ws.rs.ApplicationPath;
+
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -10,7 +9,9 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
 
-import javax.ws.rs.ApplicationPath;
+import com.op.es.action.filter.OpRequestFilter;
+import com.op.es.action.filter.OpResponseFilter;
+import com.op.es.library.provide.GsonMessageBodyHandler;
 
 /****************************************
  * Copyright (c) xuning.

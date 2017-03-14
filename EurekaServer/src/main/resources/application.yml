@@ -3,7 +3,7 @@ eureka:
     hostname: localhost
   server:
       enableSelfPreservation: false
-      eviction-interval-timer-in-ms: 600000
+      eviction-interval-timer-in-ms: 60000
   client:
       register-with-eureka: false
       fetch-registry: false
@@ -11,3 +11,4 @@ eureka:
         defaultzone: ${eureka.instance.hostname}:${server.port}/eureka/
 server:
   port: 10001
+  connection-timeout: 600000

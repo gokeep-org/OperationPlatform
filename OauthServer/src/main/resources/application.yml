@@ -30,3 +30,4 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 server:
   port: 10020
+  connection-timeout: 600000

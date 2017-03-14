@@ -14,9 +14,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 public class EsServerBootstrap {
-    public static void main(String[] args){
-            new SpringApplicationBuilder(EsServerBootstrap.class)
-                    .bannerMode(Banner.Mode.OFF)
-                    .run(args);
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(EsServerBootstrap.class)
+                .bannerMode(Banner.Mode.OFF)
+                .run(args);
     }
 }

@@ -1,10 +1,13 @@
 package com.op.es.rest;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.web.client.RestTemplate;
 
 /****************************************
  * Copyright (c) xuning.
@@ -14,10 +17,16 @@ import javax.ws.rs.core.MediaType;
  ****************************************/
 @Path("/test")
 @Produces({MediaType.APPLICATION_JSON})
-@Consumes({MediaType.APPLICATION_JSON})
 public class TestRest {
+    @Autowired
+    private RestTemplate restTemplate;
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
     @GET
     public String test(){
-        return "HELLO ES";
+      String server_address =  loadBalancerClient.choose("OAUTH").getUri().toString();
+      String res=restTemplate.postForObject(server_address+"/test/hello", null, String.class);
+        return "status is ok"+server_address+"and res:"+res;
     }
+
 }
