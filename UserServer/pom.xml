@@ -90,8 +90,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
                 <configuration>
-                    <!--app_name start|stop|restart-->
-                    <executable>true</executable>
                 </configuration>
                 <executions>
                     <execution>

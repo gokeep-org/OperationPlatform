@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/14.
  ****************************************/
-@Path("/")
+@Path("/test")
 @Produces(MediaType.APPLICATION_JSON)
 public class TestRest {
     @GET
@@ -19,7 +19,7 @@ public class TestRest {
         return "user server sttus is ok";
     }
     @GET
-    @Path("/test")
+    @Path("/test1")
     public String test2(){
         return "test";
     }
