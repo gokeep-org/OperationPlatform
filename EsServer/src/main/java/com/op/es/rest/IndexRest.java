@@ -12,11 +12,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.op.es.action.factory.EsClientFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestResult;
-import io.searchbox.core.Index;
+import com.op.es.config.EsConfig;
+
+import requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.
@@ -27,7 +27,8 @@ import io.searchbox.core.Index;
 @Path("/document")
 @Produces({MediaType.APPLICATION_JSON})
 public class IndexRest {
-
+    @Autowired
+    private Requests requests;
     /**
      * 创建文档
      * @param index
@@ -39,15 +40,17 @@ public class IndexRest {
     public String createDocument(@PathParam("index") String index,
                                  @PathParam("type") String type,
                                  Map<String, Object> map) throws IOException {
-        JestClient client = EsClientFactory.getEsClient();
-        Index indx = new Index
-                .Builder(map)
-                .index(index)
-                .type(type)
-                .id(UUID.randomUUID().toString())
-                .build();
-       JestResult result = client.execute(indx);
-        return result.getJsonString();
+//        JestClient client = EsClientFactory.getEsClient();
+//        Index indx = new Index
+//                .Builder(map)
+//                .index(index)
+//                .type(type)
+//                .id(UUID.randomUUID().toString())
+//                .build();
+//       JestResult result = client.execute(indx);
+//        return result.getJsonString();
+        String document_id = UUID.randomUUID().toString();
+        return requests.post(EsConfig.masterNode+"/"+index+"/"+type+"/"+document_id, map, null).json();
     }
 
     /**
@@ -82,4 +85,12 @@ public class IndexRest {
         return null;
     }
 
+
+    public Requests getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Requests requests) {
+        this.requests = requests;
+    }
 }

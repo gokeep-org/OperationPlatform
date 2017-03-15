@@ -16,7 +16,7 @@ public class JerseyConfig extends ResourceConfig {
         setJerseyComponentsLocation();
     }
     private void setJerseyComponentsLocation() {
-        packages("com.op.rest");
+        packages("com.op.core.rest");
     }
 
 }

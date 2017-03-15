@@ -25,3 +25,9 @@ zuul:
     user:
       path: /user/**
       serviceId: user
+    core:
+      path: /core/**
+      serviceId: core
+    customer:
+      path: /customer/**
+      serviceId: customer
