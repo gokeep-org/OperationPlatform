@@ -12,6 +12,5 @@ public class CoreBootstrap {
         new SpringApplicationBuilder(CoreBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
-
     }
 }
