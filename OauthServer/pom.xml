@@ -62,7 +62,10 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${spring-boot-mybatis-version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.ixuning</groupId>
+            <artifactId>requests</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

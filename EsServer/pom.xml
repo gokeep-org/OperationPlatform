@@ -33,6 +33,10 @@
             <artifactId>javaee-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.ixuning</groupId>
+            <artifactId>requests</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
@@ -55,11 +59,6 @@
             <groupId>io.searchbox</groupId>
             <artifactId>jest</artifactId>
             <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ixuning</groupId>
-            <artifactId>requests</artifactId>
-            <version>3.0.1</version>
         </dependency>
         <!--Json-->
         <dependency>

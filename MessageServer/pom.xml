@@ -68,6 +68,10 @@
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.ixuning</groupId>
+            <artifactId>requests</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>${javax.mail.version}</version>

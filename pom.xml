@@ -41,7 +41,7 @@
         <fastjson.version>1.2.22</fastjson.version>
         <javaee-api.version>7.0</javaee-api.version>
         <jest.version>2.0.1-SNAPSHOT</jest.version>
-        <!--<ixuning.requests.version>v2.0</ixuning.requests.version>-->
+        <ixuning.requests.version>3.0.1</ixuning.requests.version>
     </properties>
     <!--依赖管理-->
     <dependencyManagement>
@@ -81,6 +81,12 @@
                 <groupId>io.searchbox</groupId>
                 <artifactId>jest</artifactId>
                 <version>${jest.version}</version>
+            </dependency>
+            <!--Rest Client-->
+            <dependency>
+                <groupId>com.ixuning</groupId>
+                <artifactId>requests</artifactId>
+                <version>${ixuning.requests.version}</version>
             </dependency>
             <!--log日志-->
             <dependency>

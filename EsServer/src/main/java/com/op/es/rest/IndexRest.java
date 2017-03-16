@@ -12,12 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.op.es.config.EsConfig;
-
-import requests.Requests;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -27,8 +21,6 @@ import requests.Requests;
 @Path("/document")
 @Produces({MediaType.APPLICATION_JSON})
 public class IndexRest {
-    @Autowired
-    private Requests requests;
     /**
      * 创建文档
      * @param index
@@ -50,7 +42,7 @@ public class IndexRest {
 //       JestResult result = client.execute(indx);
 //        return result.getJsonString();
         String document_id = UUID.randomUUID().toString();
-        return requests.post(EsConfig.masterNode+"/"+index+"/"+type+"/"+document_id, map, null).json();
+        return "";
     }
 
     /**
@@ -83,14 +75,5 @@ public class IndexRest {
                                      @PathParam("id") String id) {
 
         return null;
-    }
-
-
-    public Requests getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Requests requests) {
-        this.requests = requests;
     }
 }
