@@ -1,8 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import com.op.core.requests.Requests;
-import com.op.core.requests.core.RequestImpl;
+import requests.Requests;
+import requests.core.RequestImpl;
+
 
 /****************************************
  * Copyright (c) xuning.
