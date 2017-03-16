@@ -133,7 +133,7 @@ public class RequestImpl implements Requests {
     }
 
     private RequestClient parseHttpMethod(String method) {
-        LOGGER.debug("get request method is "+method);
+        LOGGER.info("request method:"+method);
         switch (method.toUpperCase()) {
             case Method.GET:
                 return new RequestGet();

@@ -1,12 +1,5 @@
 package com.op.core.requests.util;
 
-import com.op.core.requests.core.DefaultConfig;
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicNameValuePair;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,11 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.op.core.requests.core.DefaultConfig;
+
 public class RequestUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestUtil.class);
     private RequestUtil() {
     }
 
     public static String buildParames(Map<String, String> params) {
+        LOGGER.info("request params: "+params.toString());
         String res = "?";
         for (Map.Entry<String, String> param : params.entrySet()) {
             res += (param.getKey() + "=" + param.getValue() + "&");

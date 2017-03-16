@@ -1,17 +1,18 @@
 package com.op.core.requests.core;
 
-import com.op.core.requests.exception.ErrorCode;
-import com.op.core.requests.exception.RequestsException;
-import com.op.core.requests.filter.RequestFilter;
-import com.op.core.requests.util.RequestUtil;
+import java.io.IOException;
+import java.util.Map;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.util.Map;
+import com.op.core.requests.exception.ErrorCode;
+import com.op.core.requests.exception.RequestsException;
+import com.op.core.requests.filter.RequestFilter;
+import com.op.core.requests.util.RequestUtil;
 
 public class RequestGet extends RequestClient<HttpGet> {
     private HttpResponse httpResponse = null;
@@ -31,10 +32,9 @@ public class RequestGet extends RequestClient<HttpGet> {
             }
         }
         httpGet.setURI(RequestUtil.getURI(url));
+        LOGGER.info("request url: "+url);
         if (!RequestFilter.checkParamsIsNull(params)) {
-            for (Map.Entry<String, String> param : params.entrySet()) {
-                LOGGER.debug("key: " + param.getKey() + "value: " + param.getValue());
-            }
+            LOGGER.debug("request params: "+params);
             this.httpGet.setURI(
                     RequestUtil.getURI(url + RequestUtil.buildParames(params))
             );
