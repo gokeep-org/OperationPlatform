@@ -32,8 +32,10 @@ public class RequestUtil {
     }
 
     public static URI getURI(String uriStr) {
-        if (!uriStr.contains("http://")){
-            uriStr = "http://"+uriStr;
+        if (!uriStr.contains("https://")){
+            if ((!uriStr.contains("http://"))){
+                uriStr = "http://"+uriStr;
+            }
         }
         if (null != uriStr) {
             try {
