@@ -1,14 +1,17 @@
 package com.op.core.requests.core;
 
 
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.core.requests.Requests;
 import com.op.core.requests.bean.HttpResponse;
 import com.op.core.requests.bean.data.Method;
 
-import java.util.Map;
-
 public class RequestImpl implements Requests {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestImpl.class);
     @Override
     public HttpResponse get(String url) {
         return parseHttpMethod(Method.GET).execute(url);
@@ -130,6 +133,7 @@ public class RequestImpl implements Requests {
     }
 
     private RequestClient parseHttpMethod(String method) {
+        LOGGER.debug("get request method is "+method);
         switch (method.toUpperCase()) {
             case Method.GET:
                 return new RequestGet();

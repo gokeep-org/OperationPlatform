@@ -1,4 +1,4 @@
-package com.op.core.requests.util;
+package com.op.core.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
