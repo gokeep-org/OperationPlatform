@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -12,15 +13,26 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.op.es.util.DiscoveryServer;
+
+import requests.Requests;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-3-14
  ****************************************/
-@Path("/document")
+@Path("/index")
 @Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON})
 public class IndexRest {
+    @Autowired
+    private Requests requests;
+    @Autowired
+    private DiscoveryServer discoveryServer;
     /**
      * 创建文档
      * @param index
@@ -32,17 +44,12 @@ public class IndexRest {
     public String createDocument(@PathParam("index") String index,
                                  @PathParam("type") String type,
                                  Map<String, Object> map) throws IOException {
-//        JestClient client = EsClientFactory.getEsClient();
-//        Index indx = new Index
-//                .Builder(map)
-//                .index(index)
-//                .type(type)
-//                .id(UUID.randomUUID().toString())
-//                .build();
-//       JestResult result = client.execute(indx);
-//        return result.getJsonString();
+
         String document_id = UUID.randomUUID().toString();
-        return "";
+        String url = "http://localhost:9200"+"/"+
+                index+"/"+type+"/"+document_id;
+        String res=requests.post(url, map, null).json();
+        return res;
     }
 
     /**
@@ -75,5 +82,13 @@ public class IndexRest {
                                      @PathParam("id") String id) {
 
         return null;
+    }
+
+    public Requests getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Requests requests) {
+        this.requests = requests;
     }
 }

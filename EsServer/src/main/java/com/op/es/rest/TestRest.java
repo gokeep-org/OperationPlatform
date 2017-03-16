@@ -40,4 +40,5 @@ public class TestRest {
         return discoveryServer.getServerAddress(Server.CUSTOMER_SERVER);
     }
 
+
 }

@@ -7,6 +7,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import requests.Requests;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -16,12 +20,15 @@ import javax.ws.rs.core.MediaType;
 @Path("/search")
 @Produces({MediaType.APPLICATION_JSON})
 public class SearchRest {
+    @Autowired
+    private Requests requests;
     @GET
     @Path("/document/{index}/type/{type}/id/{id}")
     public String searchDocumentById(@PathParam("index") String index,
                                      @PathParam("type") String type,
                                      @PathParam("id") String id) {
-        return null;
+        String url = "http://localhost:9200/"+index+"/"+type+"/"+id;
+        return requests.get(url).json();
     }
 
     @GET

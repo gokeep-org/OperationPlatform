@@ -45,6 +45,8 @@ public class GetUserAction extends ItemAction<BaseOutput> {
     @Override
     protected BaseOutput formatOutput() throws Exception {
         GetUserOutput output = new GetUserOutput();
+        this.user.setId(null);
+        this.user.setPassword(null);
         output.setUser(this.user);
         return output;
     }
