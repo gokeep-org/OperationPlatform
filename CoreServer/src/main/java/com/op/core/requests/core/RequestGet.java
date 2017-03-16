@@ -32,9 +32,7 @@ public class RequestGet extends RequestClient<HttpGet> {
             }
         }
         httpGet.setURI(RequestUtil.getURI(url));
-        LOGGER.info("request url: "+url);
         if (!RequestFilter.checkParamsIsNull(params)) {
-            LOGGER.debug("request params: "+params);
             this.httpGet.setURI(
                     RequestUtil.getURI(url + RequestUtil.buildParames(params))
             );

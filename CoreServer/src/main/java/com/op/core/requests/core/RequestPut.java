@@ -28,7 +28,6 @@ public class RequestPut extends RequestClient<HttpPut> {
     @Override
     protected HttpResponse sendRequest(String url, Map<String, String> params, Map<String, String> postForms, Object body, Map<String, String> headers) {
         if (!RequestFilter.checkHeaderisNull(headers)) {
-            LOGGER.info("request headers: "+headers.toString());
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 httpPut.setHeader(header.getKey(), header.getValue());
             }
@@ -41,7 +40,6 @@ public class RequestPut extends RequestClient<HttpPut> {
         }
 
         if (!RequestFilter.checkPostFormIsNull(postForms)) {
-            LOGGER.info("request post form: "+postForms.toString());
             try {
                 httpPut.setEntity(RequestUtil.toHttpEntity(postForms));
             } catch (UnsupportedEncodingException e) {
@@ -52,10 +50,8 @@ public class RequestPut extends RequestClient<HttpPut> {
         if (!RequestFilter.checkBodyIsNull(body)) {
             String bodyString = null;
             if(body instanceof String) {
-                LOGGER.info("request body : "+body);
                 bodyString = body.toString();
             } else {
-                LOGGER.info("request body: is object or null");
                 bodyString = new GsonBuilder().serializeNulls().create().toJson(body);
             }
             httpPut.setEntity(RequestUtil.toStringEntity(bodyString));

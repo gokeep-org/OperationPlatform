@@ -23,7 +23,6 @@ public class RequestUtil {
     }
 
     public static String buildParames(Map<String, String> params) {
-        LOGGER.info("request params: "+params.toString());
         String res = "?";
         for (Map.Entry<String, String> param : params.entrySet()) {
             res += (param.getKey() + "=" + param.getValue() + "&");

@@ -27,7 +27,6 @@ public class RequestDelete extends RequestClient<HttpDelete> {
     @Override
     protected HttpResponse sendRequest(String url, Map<String, String> params, Map<String, String> postForms, Object body, Map<String, String> headers) {
         if (!RequestFilter.checkHeaderisNull(headers)) {
-            LOGGER.info("request headers : "+headers.toString());
             for (Map.Entry<String, String> header : headers.entrySet()) {
                 httpDelete.setHeader(header.getKey(), header.getValue());
             }
@@ -42,10 +41,8 @@ public class RequestDelete extends RequestClient<HttpDelete> {
         if (!RequestFilter.checkBodyIsNull(body)) {
             String bodyString = null;
             if(body instanceof String) {
-                LOGGER.info("request body : "+body);
                 bodyString = body.toString();
             } else {
-                LOGGER.info("request body: is object or null");
                 bodyString = new GsonBuilder().serializeNulls().create().toJson(body);
             }
             httpDelete.setEntity(RequestUtil.toStringEntity(bodyString));

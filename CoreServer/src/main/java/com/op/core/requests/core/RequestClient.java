@@ -57,6 +57,7 @@ public abstract class RequestClient<T> {
     }
 
     protected com.op.core.requests.bean.HttpResponse execute(String url, Map<String, String> params, Map<String, String> postForms, Object body, Map<String, String> headers) {
+        LOGGER.info("request: "+toLoggerMessage(url, params, headers, postForms, body));
         openHttpClient();
         setUpHttpMethod();
         requestParamterFilter(url);
@@ -77,15 +78,9 @@ public abstract class RequestClient<T> {
         }
     }
 
-    private String toLoggerMessage(String... strs) {
-        for (int i= 0; i < strs.length; i++){
-            if (null == strs[i]){
-                strs[i] = "";
-            }
-        }
-        String res = "";
-        res += String.format(DefaultConfig.LOGGER_FORMATE,
-                strs[0], strs[1], strs[2], strs[3]);
+    private String toLoggerMessage(String url, Map params,  Map headers, Map postForm, Object body ) {
+        String res = String.format(DefaultConfig.LOGGER_FORMATE,
+                url, headers, params, postForm, body);
         return res;
     }
 }
