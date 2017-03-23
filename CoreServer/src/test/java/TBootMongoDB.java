@@ -1,5 +1,3 @@
-import java.util.UUID;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,13 +29,13 @@ public class TBootMongoDB {
     @Test
     public void test() throws Exception {
         User user = new User();
-        user.setId(UUID.randomUUID().toString());
+//        user.setId(UUID.randomUUID().toString());
         user.setPassword("ningning");
         user.setUsername("aaaaa");
         // 创建三个User，并验证User总数
-//        userRepository.save(user);
-        User s = userRepository.findByUsername("aaaaa");
-        System.out.println(s.getUsername());
+        userRepository.save(user);
+//        User s = userRepository.findByUsername("aaaaa");
+//        System.out.println(s.getUsername());
     }
 
 }
