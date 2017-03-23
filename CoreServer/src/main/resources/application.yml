@@ -1,6 +1,11 @@
 spring:
   application:
     name: core
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/op
 eureka:
   client:
     serviceUrl:
