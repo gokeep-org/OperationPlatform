@@ -5,7 +5,14 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      uri: mongodb://${spring.data.mongodb.host}:${spring.data.mongodb.port}/op
+      database: op
+      repositories:
+        enabled: true
+management:
+  port: 54001
+  health:
+    mail:
+      enabled: false
 eureka:
   client:
     serviceUrl:
