@@ -1,13 +1,13 @@
+import com.op.core.CoreServerBootstrap;
+import com.op.core.bean.User;
+import com.op.core.bean.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.op.core.CoreServerBootstrap;
-import com.op.core.bean.User;
-import com.op.core.bean.UserRepository;
 
 /****************************************
  * Copyright (c) xuning.
@@ -19,8 +19,9 @@ import com.op.core.bean.UserRepository;
 @SpringApplicationConfiguration(CoreServerBootstrap.class)
 public class TBootMongoDB {
     @Autowired
-    private UserRepository userRepository;
-
+    public UserRepository userRepository;
+    @Autowired
+    public MongoTemplate mongoTemplate;
     @Before
     public void setUp() {
 //        userRepository.deleteAll();
@@ -30,12 +31,19 @@ public class TBootMongoDB {
     public void test() throws Exception {
         User user = new User();
 //        user.setId(UUID.randomUUID().toString());
-        user.setPassword("ningning");
-        user.setUsername("aaaaa");
+//        user.setPassword("wwwww");
+        user.setUsername("iiiii");
+        
+//        mongoTemplate.find()
+//        user.setId("046c69c8-3026-49f8-9736-7071d2ca6818");
         // 创建三个User，并验证User总数
-        userRepository.save(user);
-//        User s = userRepository.findByUsername("aaaaa");
-//        System.out.println(s.getUsername());
+//        userRepository.save(user);
+//        userRepository.insert(user);
+        
+//        User s =userRepository.findByUsername("iiiii");
+        User s =userRepository.findByUser(user);
+//        User s = userRepository.findOne("58d750afc0a16d1ee1bfbd54");
+        System.out.println(s.getUsername());
     }
 
 }

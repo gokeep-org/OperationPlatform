@@ -11,23 +11,23 @@ import org.bson.Document;
  * @Auther is xuning on 2017/3/23.
  ****************************************/
 public interface MongoClient {
-    public void insert(Object o);
+    void insert(Object o);
 
-    public void inserts(List<Object> os);
+    void inserts(List<Object> os);
 
-    public void delete(Object o);
+    void delete(Object o);
 
-    public void deletes(List<Object> os);
+    void deletes(List<Object> os);
 
-    public void update(Object o);
+    void update(Object o);
 
-    public void updates(List<Object> os);
+    void updates(List<Object> os);
 
-    public <T extends Document, R extends Object>  R searchOne(T document, Class classes);
+    <T extends Document, R extends Object>  R searchOne(T document, Class classes);
 
-    public <T extends Document> String searchAll(T document);
+    <T extends Document> String searchAll(T document);
 
-    public <T extends Document> String searchFirst(T document);
+    <T extends Document> String searchFirst(T document);
 
-    public <T extends Document> String getDocumentSize(T document);
+    <T extends Document> String getDocumentSize(T document);
 }

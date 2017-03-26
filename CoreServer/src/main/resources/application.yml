@@ -8,6 +8,8 @@ spring:
       database: op
       repositories:
         enabled: true
+server:
+  port: 10120
 management:
   port: 54001
   health:
@@ -20,5 +22,5 @@ eureka:
   instance:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
-server:
-  port: 10120
+encrypt:
+  key: null

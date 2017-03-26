@@ -1,9 +1,9 @@
 package com.op.core.util;
 
-import java.security.MessageDigest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.security.MessageDigest;
 
 /****************************************
  * Copyright (c) xuning.
@@ -46,9 +46,6 @@ public class Md5 {
     }
 
     public static Boolean checkSercretIsSuccess(String secretKey, String pwd) {
-        if (getSercretKey(pwd).equals(secretKey)) {
-            return true;
-        }
-        return false;
+        return getSercretKey(pwd).equals(secretKey);
     }
 }
