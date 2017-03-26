@@ -1,6 +1,6 @@
 import com.op.core.CoreServerBootstrap;
-import com.op.core.bean.User;
-import com.op.core.bean.UserRepository;
+import com.op.core.bean.entity.user.User;
+import com.op.core.bean.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,8 +40,8 @@ public class TBootMongoDB {
 //        userRepository.save(user);
 //        userRepository.insert(user);
         
-//        User s =userRepository.findByUsername("iiiii");
-        User s =userRepository.findByUser(user);
+        User s =userRepository.findByUsername("iiiii");
+//        User s =userRepository.findByUser(user);
 //        User s = userRepository.findOne("58d750afc0a16d1ee1bfbd54");
         System.out.println(s.getUsername());
     }

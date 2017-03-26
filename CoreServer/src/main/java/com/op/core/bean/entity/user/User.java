@@ -1,4 +1,4 @@
-package com.op.core.bean;
+package com.op.core.bean.entity.user;
 
 import javax.persistence.Id;
 
@@ -14,15 +14,8 @@ public class User {
     private String id;
     private String username;
     private String password;
-
-    public User() {
-    }
-
-    public User(String id, String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
+    private String realmId;
+    private String token;
 
     public String getUsername() {
         return username;

@@ -13,7 +13,7 @@ import com.mongodb.WriteResult;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.op.core.bean.User;
+import com.op.core.bean.entity.user.User;
 
 /****************************************
  * Copyright (c) xuning.

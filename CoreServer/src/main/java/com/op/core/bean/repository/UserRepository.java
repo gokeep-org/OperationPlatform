@@ -1,5 +1,6 @@
-package com.op.core.bean;
+package com.op.core.bean.repository;
 
+import com.op.core.bean.entity.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /****************************************
@@ -10,5 +11,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  ****************************************/
 public interface UserRepository extends MongoRepository<User, String> {
     public User findByUsername(String username);
-    public User findByUser(User user);
 }
