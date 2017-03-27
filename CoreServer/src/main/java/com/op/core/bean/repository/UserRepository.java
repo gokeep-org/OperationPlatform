@@ -1,7 +1,8 @@
 package com.op.core.bean.repository;
 
-import com.op.core.bean.entity.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.op.core.bean.entity.user.User;
 
 /****************************************
  * Copyright (c) xuning.

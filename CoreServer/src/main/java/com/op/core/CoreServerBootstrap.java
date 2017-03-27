@@ -4,6 +4,7 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /****************************************
@@ -15,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableScheduling
+@ImportResource("classpath:spring.xml")
 public class CoreServerBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(CoreServerBootstrap.class)

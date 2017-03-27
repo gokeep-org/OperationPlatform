@@ -1,13 +1,18 @@
-import com.op.core.CoreServerBootstrap;
-import com.op.core.bean.entity.user.User;
-import com.op.core.bean.repository.UserRepository;
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.op.core.CoreServerBootstrap;
+import com.op.core.bean.entity.user.User;
+import com.op.core.bean.repository.UserRepository;
 
 /****************************************
  * Copyright (c) xuning.
@@ -22,28 +27,41 @@ public class TBootMongoDB {
     public UserRepository userRepository;
     @Autowired
     public MongoTemplate mongoTemplate;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TBootMongoDB.class);
     @Before
     public void setUp() {
-//        userRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
     public void test() throws Exception {
         User user = new User();
-//        user.setId(UUID.randomUUID().toString());
-//        user.setPassword("wwwww");
         user.setUsername("iiiii");
-        
-//        mongoTemplate.find()
-//        user.setId("046c69c8-3026-49f8-9736-7071d2ca6818");
-        // 创建三个User，并验证User总数
-//        userRepository.save(user);
-//        userRepository.insert(user);
-        
         User s =userRepository.findByUsername("iiiii");
-//        User s =userRepository.findByUser(user);
-//        User s = userRepository.findOne("58d750afc0a16d1ee1bfbd54");
         System.out.println(s.getUsername());
+    }
+    @Test
+    public void testInsert(){
+        User user = new User();
+        user.setUsername(UUID.randomUUID().toString());
+        user.setPassword(UUID.randomUUID().toString());
+        user.setRealmId(UUID.randomUUID().toString());
+        user.setToken(UUID.randomUUID().toString());
+        userRepository.insert(user);
+    }
+
+    @Test
+    public void testDelete(){
+        User user = new User();
+        userRepository.delete("58d90237b3812e1f782eb366");
+    }
+
+    @Test
+    public void testDeleteByObj(){
+        User user = new User();
+        user.setId("");
+        userRepository.delete(user);
     }
 
 }

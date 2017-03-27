@@ -22,7 +22,7 @@
         <!--数据库连接信息-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/op?useUnicode=true&amp;characterEncoding=UTF-8"
-                        userId="root"
+                        id="root"
                         password="root">
         </jdbcConnection>
 
