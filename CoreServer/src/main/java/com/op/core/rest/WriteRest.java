@@ -9,7 +9,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+
+import com.op.core.service.WriteService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -21,11 +22,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @Produces({MediaType.APPLICATION_JSON})
 public class WriteRest {
     @Autowired
-    public MongoTemplate mongoTemplate;
+    private WriteService writeService;
     @POST
     public String insert(Object o) {
         try{
-            mongoTemplate.insert(o);
+            writeService.insert(o);
         }catch (Exception e){
             return "";
         }
