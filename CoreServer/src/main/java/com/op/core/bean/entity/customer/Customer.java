@@ -1,5 +1,7 @@
 package com.op.core.bean.entity.customer;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -13,10 +15,13 @@ public class Customer {
     private String phone;
     private String qq;
     private String address;
+    @Field("team_id")
     private String teamId;
     private String industry;
     private String remark;
-    
+    @Field("saleName")
+    private String saleName;
+
     public String getId() {
         return id;
     }
@@ -79,5 +84,13 @@ public class Customer {
     
     public void setIndustry(String industry) {
         this.industry = industry;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

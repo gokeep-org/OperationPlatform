@@ -1,5 +1,7 @@
 package com.op.core.bean.entity.logs;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -8,6 +10,7 @@ package com.op.core.bean.entity.logs;
  ****************************************/
 public class Logout {
     private String id;
+    @Field("user_id")
     private String userId;
     private String username;
     private String ip;
@@ -17,8 +20,10 @@ public class Logout {
     private String operation;
     private String remark;
     private Boolean status;
+    @Field("logout_success")
     private Boolean logoutSuccess;
     private int count;
+    @Field("verify_code")
     private String verifyCode;
     private String sessionId;
     

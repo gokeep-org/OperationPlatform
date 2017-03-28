@@ -1,6 +1,8 @@
 package com.op.core.bean.entity.user;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /****************************************
  * Copyright (c) xuning.
@@ -8,45 +10,22 @@ import com.google.gson.annotations.SerializedName;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/23.
  ****************************************/
-public class User{
+public class User {
     private String id;
-    private String username;
-    private String password;
-    @SerializedName("realm_id")
-    private String realmId;
-    private String token;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRealmId() {
-        return realmId;
-    }
-
-    public void setRealmId(String realmId) {
-        this.realmId = realmId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+    private String name;
+    private String age;
+    private String sex;
+    private String birthday;
+    private String phone;
+    private String email;
+    private String address;
+    private String status;
+    @Field("customer_ids")
+    private List<String> customerIds;
+    @Field("app_ids")
+    private List<String> appIds;
+    @Field("team_ids")
+    private List<String> teamIds;
 
     public String getId() {
         return id;
@@ -54,5 +33,93 @@ public class User{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<String> getCustomerIds() {
+        return customerIds;
+    }
+
+    public void setCustomerIds(List<String> customerIds) {
+        this.customerIds = customerIds;
+    }
+
+    public List<String> getAppIds() {
+        return appIds;
+    }
+
+    public void setAppIds(List<String> appIds) {
+        this.appIds = appIds;
+    }
+
+    public List<String> getTeamIds() {
+        return teamIds;
+    }
+
+    public void setTeamIds(List<String> teamIds) {
+        this.teamIds = teamIds;
     }
 }

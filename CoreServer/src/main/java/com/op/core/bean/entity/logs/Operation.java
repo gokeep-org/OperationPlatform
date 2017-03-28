@@ -1,5 +1,7 @@
 package com.op.core.bean.entity.logs;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -7,8 +9,11 @@ package com.op.core.bean.entity.logs;
  * @Auther is xuning on 17-3-27
  ****************************************/
 public class Operation {
+    @Field("is_write")
     private String isWirte;
+    @Field("is_read")
     private String isRead;
+
     private String isSchedu;
     private String isSyncLog;
     private String isQueue;

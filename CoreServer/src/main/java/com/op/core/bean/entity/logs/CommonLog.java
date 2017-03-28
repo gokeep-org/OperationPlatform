@@ -1,5 +1,7 @@
 package com.op.core.bean.entity.logs;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -8,7 +10,9 @@ package com.op.core.bean.entity.logs;
  ****************************************/
 public class CommonLog {
     private String id;
+    @Field("log_id")
     private String logId;
+    @Field("user_id")
     private String userId;
     private String username;
     private String content;

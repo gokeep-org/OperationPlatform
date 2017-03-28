@@ -1,5 +1,7 @@
 package com.op.core.bean.entity.auth;
 
+import org.springframework.data.mongodb.core.mapping.Field;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -8,9 +10,11 @@ package com.op.core.bean.entity.auth;
  ****************************************/
 public class OauthUser {
     private String id;
+    @Field("user_id")
     private String userId;
     private String password;
     private Boolean status;
+    @Field("create_date")
     private Long createDate;
     
     public String getId() {

@@ -19,7 +19,7 @@ public class InfoRest {
     @GET
     public String info() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("info", "ok");
+        jsonObject.addProperty("info", "Oauth2状态正常");
         return jsonObject.toString();
     }
 }
