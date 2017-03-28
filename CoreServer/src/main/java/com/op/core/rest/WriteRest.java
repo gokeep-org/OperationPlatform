@@ -1,16 +1,14 @@
 package com.op.core.rest;
 
-import java.util.List;
-
-import javax.ws.rs.DELETE;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
+import com.op.core.action.factory.WriteActionFactory;
+import com.op.core.bean.action.input.write.InsertInput;
+import com.op.core.bean.action.output.WriteOutput;
+import com.op.core.service.WriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.op.core.service.WriteService;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
@@ -23,14 +21,16 @@ import com.op.core.service.WriteService;
 public class WriteRest {
     @Autowired
     private WriteService writeService;
+    
     @POST
-    public String insert(Object o) {
-        try{
-            writeService.insert(o);
-        }catch (Exception e){
-            return "";
-        }
-        return null;
+    @Path("/{type}")
+    public WriteOutput insert(
+            Object o,
+            @PathParam("type") String collectionName) throws Exception {
+        InsertInput input = new InsertInput();
+        input.setCollectionName(collectionName);
+        input.setO(o);
+        return (WriteOutput) WriteActionFactory.getInsertAction(input).execute();
     }
 
     @POST
@@ -40,7 +40,9 @@ public class WriteRest {
     }
 
     @DELETE
-    public String deleteById(String collectionName, String id){
+    public String deleteById(
+            @QueryParam("c_name") String collectionName,
+            @QueryParam("id") String id){
         return null;
     }
 

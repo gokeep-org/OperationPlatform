@@ -1,7 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
+import com.mongodb.DB;
+import com.op.core.CoreServerBootstrap;
+import com.op.core.action.dao.BaseDao;
+import com.op.core.bean.entity.user.User;
+import com.op.core.bean.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +15,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mongodb.DB;
-import com.op.core.CoreServerBootstrap;
-import com.op.core.action.dao.BaseDao;
-import com.op.core.bean.entity.user.User;
-import com.op.core.bean.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /****************************************
  * Copyright (c) xuning.
@@ -63,7 +62,7 @@ public class MongoDbTemplateTest {
 
     @Test
     public void testSimplaeInsert() {
-        mongoTemplate.insert(userTemplate);
+        mongoTemplate.insert(userTemplate, "user");
     }
 
     @Test

@@ -1,14 +1,15 @@
 package com.op.core.service.impl;
 
-import java.util.List;
-
+import com.op.core.service.BaseService;
+import com.op.core.service.ServiceBeanNames;
+import com.op.core.service.WriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.op.core.service.WriteService;
+import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
@@ -16,15 +17,15 @@ import com.op.core.service.WriteService;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/28.
  ****************************************/
-@Component
-public class WriteServiceImpl implements WriteService {
+@Service(ServiceBeanNames.WRITE_SERVICE)
+public class WriteServiceImpl extends BaseService implements WriteService<Object> {
     @Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
-    public Boolean insert(Object o) {
+    public Boolean insert(Object o, String collectionName) {
         try {
-            mongoTemplate.insert(o);
+            mongoTemplate.insert(o, collectionName);
         } catch (Exception e) {
             return false;
         }
@@ -64,9 +65,9 @@ public class WriteServiceImpl implements WriteService {
     }
 
     @Override
-    public Boolean update(Object o) {
+    public Boolean update(Object o, String collectionName) {
         try {
-            mongoTemplate.save(o);
+            mongoTemplate.save(o, collectionName);
         } catch (Exception e) {
             return false;
         }

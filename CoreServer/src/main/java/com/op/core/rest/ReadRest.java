@@ -13,5 +13,8 @@ import javax.ws.rs.core.MediaType;
 @Path("/r")
 @Produces({MediaType.APPLICATION_JSON})
 public class ReadRest {
-
+    @Path("/read")
+    public String test(){
+        return null;
+    }
 }
