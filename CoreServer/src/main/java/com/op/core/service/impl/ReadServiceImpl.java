@@ -1,13 +1,14 @@
 package com.op.core.service.impl;
 
-import com.op.core.exception.OperationPlatformException;
-import com.op.core.service.BaseService;
-import com.op.core.service.ReadServices;
-import com.op.core.service.ServiceBeanNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
+import com.op.core.exception.OperationPlatformException;
+import com.op.core.service.BaseService;
+import com.op.core.service.ReadServices;
+import com.op.core.service.ServiceBeanNames;
 
 /****************************************
  * Copyright (c) xuning.
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/28.
  ****************************************/
-@Service(ServiceBeanNames.WRITE_SERVICE)
+@Service(value = ServiceBeanNames.READ_SERVICE)
 public class ReadServiceImpl extends BaseService implements ReadServices {
     @Autowired
     private MongoTemplate mongoTemplate;

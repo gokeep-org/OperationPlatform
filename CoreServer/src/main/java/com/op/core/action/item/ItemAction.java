@@ -1,7 +1,7 @@
 package com.op.core.action.item;
 
 
-import com.op.core.BaseAction;
+import com.op.core.action.BaseAction;
 import com.op.core.bean.action.output.BaseOutput;
 import com.op.core.service.BaseService;
 import com.op.core.service.ReadServices;
@@ -21,8 +21,8 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
     public static ReadServices readServices = BaseService.getService(
             ServiceBeanNames.READ_SERVICE, ReadServiceImpl.class
     );
-    
-    public static WriteService writeServices = BaseService.getService(
+
+    public static WriteService writeService = BaseService.getService(
             ServiceBeanNames.WRITE_SERVICE, WriteServiceImpl.class
     );
 }

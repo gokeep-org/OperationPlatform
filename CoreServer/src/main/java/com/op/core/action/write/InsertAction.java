@@ -14,26 +14,27 @@ import com.op.core.bean.action.output.WriteOutput;
 public class InsertAction extends ItemAction<BaseOutput> {
     private String collectionName;
     private Object o;
+
     public InsertAction(InsertInput input) {
         this.o = input.getO();
         this.collectionName = input.getCollectionName();
     }
-    
+
     @Override
     protected void permissionValidate() throws Exception {
-        
+
     }
-    
+
     @Override
     protected void additionalValidate() throws Exception {
-        
+
     }
-    
+
     @Override
     protected void start() throws Exception {
-        writeServices.insert(o, collectionName);
+        writeService.insert(o, collectionName);
     }
-    
+
     @Override
     protected BaseOutput formatOutput() throws Exception {
         WriteOutput output = new WriteOutput();
@@ -42,9 +43,9 @@ public class InsertAction extends ItemAction<BaseOutput> {
         output.setSuccess(true);
         return output;
     }
-    
+
     @Override
     protected void logSyncAction() throws Exception {
-        
+
     }
 }

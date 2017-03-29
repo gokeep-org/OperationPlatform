@@ -1,5 +1,5 @@
 server:
-  port: 10011
+  port: 8080
   connection-timeout: 600000
 spring:
   application:

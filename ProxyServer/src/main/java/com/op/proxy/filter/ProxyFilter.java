@@ -45,7 +45,7 @@ public class ProxyFilter extends ZuulFilter {
         LOGGER.info("proxy filter " + "get user_id :" + userId + " access_token is:" + accessToken);
         LOGGER.info("******************************************************");
 
-        //TODO: 这里要对token和user_id进行校验
+        //TODO: 这里要对token和user_id进行校验,请求Oauth2
         return null;
     }
 }

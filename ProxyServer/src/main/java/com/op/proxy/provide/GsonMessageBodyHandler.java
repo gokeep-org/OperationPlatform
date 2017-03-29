@@ -1,4 +1,4 @@
-package com.op.core.provide;
+package com.op.proxy.provide;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +35,7 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
     private Gson getGson() throws WebApplicationException {
         try {
             if (gson == null) {
-                GsonBuilder gsonbuilder = new GsonBuilder();
+                GsonBuilder gsonbuilder = new GsonBuilder().serializeNulls();
                 gson = gsonbuilder.create();
             }
         }

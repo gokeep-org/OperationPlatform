@@ -9,7 +9,8 @@ spring:
       repositories:
         enabled: true
 server:
-  port: 10129
+  port: 20001
+  connection-timeout: 60000
 eureka:
   client:
     serviceUrl:

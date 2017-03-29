@@ -9,18 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.netflix.client.config.CommonClientConfigKey;
-import com.netflix.client.config.DefaultClientConfigImpl;
-import com.netflix.config.ConfigurationManager;
-import com.netflix.loadbalancer.BestAvailableRule;
-import com.netflix.loadbalancer.DynamicServerListLoadBalancer;
 import com.netflix.loadbalancer.ILoadBalancer;
-import com.netflix.loadbalancer.LoadBalancerBuilder;
-import com.netflix.loadbalancer.ServerList;
-import com.netflix.loadbalancer.ServerListFilter;
-import com.netflix.loadbalancer.ServerListSubsetFilter;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 
 /****************************************
  * Copyright (c) xuning.
@@ -91,24 +80,4 @@ public final class OpUtils {
         return null;
     }
 
-    public static final String discoveryServerByVipAddress(String vipAddress){
-        DynamicServerListLoadBalancer loadBalancer = (DynamicServerListLoadBalancer) namedLBMap.get(vipAddress);
-        if (loadBalancer == null) {
-            DefaultClientConfigImpl config = DefaultClientConfigImpl.getClientConfigWithDefaultValues();
-            config.setProperty(CommonClientConfigKey.NFLoadBalancerPingInterval, ConfigurationManager.getConfigInstance().getInt("ribbon.NFLoadBalancerPingInterval",20));
-            ServerList<DiscoveryEnabledServer> list = new DiscoveryEnabledNIWSServerList(vipAddress);
-            ServerListFilter<DiscoveryEnabledServer> filter = new ServerListSubsetFilter<DiscoveryEnabledServer>();
-            loadBalancer = LoadBalancerBuilder.<DiscoveryEnabledServer> newBuilder().withDynamicServerList(list)
-                    .withServerListFilter(filter).withPing(new PingPort()).withRule(new BestAvailableRule()).withClientConfig(config).buildDynamicServerListLoadBalancer();
-            namedLBMap.put(vipAddress, loadBalancer);
-        }
-        DiscoveryEnabledServer server = (DiscoveryEnabledServer) loadBalancer.chooseServer();
-        if (null != server) {
-            String serverUrl = server.getInstanceInfo().getIPAddr() + ":" + server.getInstanceInfo().getPort();
-            LOGGER.info("discovery vip address "+vipAddress+" choose in "+serverUrl);
-            return "http://"+serverUrl;
-        }
-        LOGGER.error("not discovery server "+ vipAddress);
-        return null;
-    }
 }

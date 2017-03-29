@@ -7,7 +7,6 @@ package com.op.proxy.util;
  * @Auther is xuning on 2017/3/7.
  ****************************************/
 public class ServerName {
-
     public static final String CORE_SERVER = "com.op.core";
     public static final String CUSTOMER_SERVER = "com.op.customer";
     public static final String MESSAGE_SERVER = "com.op.message";

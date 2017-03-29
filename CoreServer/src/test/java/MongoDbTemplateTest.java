@@ -1,8 +1,7 @@
-import com.mongodb.DB;
-import com.op.core.CoreServerBootstrap;
-import com.op.core.action.dao.BaseDao;
-import com.op.core.bean.entity.user.User;
-import com.op.core.bean.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +14,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.mongodb.DB;
+import com.op.core.CoreServerBootstrap;
+import com.op.core.action.dao.BaseDao;
+import com.op.core.bean.entity.user.User;
+import com.op.core.bean.repository.UserRepository;
+
+import requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.
@@ -154,4 +157,15 @@ public class MongoDbTemplateTest {
 //        baseDao.update(user);
 //    }
 
+    @Autowired
+    Requests requests;
+    @Test
+    public void testRequest() {
+        User user = new User();
+        user.setId(UUID.randomUUID().toString());
+        user.setName("test request");
+        user.setAddress("dcdcd");
+        String res = requests.post("http://localhost:8080/core/w/user", user, null).text();
+        LOGGER.info("add user is success" + res);
+    }
 }

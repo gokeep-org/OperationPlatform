@@ -5,8 +5,14 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
+
+import com.op.proxy.filter.OpRequestFilter;
+import com.op.proxy.filter.OpResponseFilter;
+import com.op.proxy.provide.GsonMessageBodyHandler;
+
 
 /****************************************
  * Copyright (c) xuning.
@@ -30,11 +36,15 @@ public class JerseyConfig extends ResourceConfig {
 	}
 
 	private void registerJerseyFilter() {
-
+		register(OpRequestFilter.class);
+		register(OpResponseFilter.class);
 	}
 
 	private void registerJsonProvider() {
-
+		register(GsonMessageBodyHandler.class);
+		property(ServerProperties.METAINF_SERVICES_LOOKUP_DISABLE, false);
+		property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+		property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
 	}
 
 	/**
