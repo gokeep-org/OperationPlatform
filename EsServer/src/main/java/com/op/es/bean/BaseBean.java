@@ -7,4 +7,5 @@ package com.op.es.bean;
  * @Auther is xuning on 2017/3/14.
  ****************************************/
 public class BaseBean {
+
 }

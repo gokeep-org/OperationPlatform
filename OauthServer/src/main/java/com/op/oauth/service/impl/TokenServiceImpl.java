@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.op.oauth.bean.entity.Token;
 import com.op.oauth.bean.entity.User;
@@ -25,7 +26,6 @@ import com.op.oauth.util.OpUtils;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/2.
  ****************************************/
-
 @Service(ServiceBeanNames.TOKEN_SERVICE)
 public class TokenServiceImpl extends BaseService implements TokenService<Token, Boolean, User> {
     @Autowired
@@ -36,6 +36,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
         return null;
     }
 
+    @Transactional
     @Override
     public Token createTokenByUserId(String userId) {
         List<Token> tokens = tokenMapper.selectByUserId(userId);
@@ -92,6 +93,7 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
         return null;
     }
 
+    @Transactional
     @Override
     public Token refreshTokenByRefreshToken(String refreshToken) {
         if (OpUtils.checkStringIsNull(refreshToken)) {
@@ -100,17 +102,18 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
         return null;
     }
 
+    @Transactional
     @Override
     public List<Token> checkToken(Token token) {
         List<Token> tokens = tokenMapper.checkToken(token.getAccessToken());
         List<Token> validToken = tokens.stream().filter(e -> {
             return e.getUserId().equals(token.getUserId());
         }).collect(Collectors.toList());
-        if(OpUtils.checkObjectIsNull(validToken)){
+        if (OpUtils.checkObjectIsNull(validToken)) {
             throw new OperationPlatformException(ErrorCode.CHECK_ACCESS_TOKEN_FAILED);
         }
-        if ((new Date().getTime() - validToken.get(0).getCreateDate().getTime())>validToken.get(0).getExpriseIn()*OpCommonConfig.TOKEN_EXPRISE_TIME){
-            Token refreshToken =createTokenByUserId(token.getUserId());
+        if ((new Date().getTime() - validToken.get(0).getCreateDate().getTime()) > validToken.get(0).getExpriseIn() * OpCommonConfig.TOKEN_EXPRISE_TIME) {
+            Token refreshToken = createTokenByUserId(token.getUserId());
             tokens.set(0, refreshToken);
         }
         if (OpUtils.checkObjectIsNull(tokens)) {

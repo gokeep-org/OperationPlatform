@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.mongodb.DB;
 import com.op.core.CoreServerBootstrap;
 import com.op.core.action.dao.BaseDao;
-import com.op.core.bean.entity.user.User;
+import com.op.core.bean.entity.User;
 import com.op.core.bean.repository.UserRepository;
-
-import requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.
@@ -43,7 +40,7 @@ public class MongoDbTemplateTest {
 
     static {
         userTemplate = new User();
-        userTemplate.setId(UUID.randomUUID().toString());
+//        userTemplate.setId(UUID.randomUUID().toString());
         userTemplate.setName("xuning");
         userTemplate.setStatus("true");
     }
@@ -81,7 +78,7 @@ public class MongoDbTemplateTest {
     @Test
     public void testRemoveByObj() {
         User user = new User();
-        user.setId("bc9344ef-63ca-4ec3-be8a-fe5a9db237ec");
+//        user.setId("bc9344ef-63ca-4ec3-be8a-fe5a9db237ec");
         mongoTemplate.remove(user, "");
     }
 
@@ -97,7 +94,6 @@ public class MongoDbTemplateTest {
     @Test
     public void testUpdateById() {
         User user = new User();
-        user.setId("854790c9-088a-40cf-ad36-cecc449f8aa7");
         user.setAddress("中国山东");
         mongoTemplate.save(user);
     }
@@ -105,8 +101,8 @@ public class MongoDbTemplateTest {
 
     @Test
     public void testfindById() {
-        User user1 = mongoTemplate.findById("854790c9-088a-40cf-ad36-cecc449f8aa7", User.class);
-        System.out.println(user1.getAddress());
+        User user1 = mongoTemplate.findById("58dcab6d5e7ee317544c0922", User.class);
+       LOGGER.info("User name is :"+user1.getName());
     }
 
     @Test
@@ -157,15 +153,13 @@ public class MongoDbTemplateTest {
 //        baseDao.update(user);
 //    }
 
-    @Autowired
-    Requests requests;
-    @Test
-    public void testRequest() {
-        User user = new User();
-        user.setId(UUID.randomUUID().toString());
-        user.setName("test request");
-        user.setAddress("dcdcd");
-        String res = requests.post("http://localhost:8080/core/w/user", user, null).text();
-        LOGGER.info("add user is success" + res);
-    }
+//    Requests requests;
+//    @Test
+//    public void testRequest() {
+//        User user = new User();
+//        user.setName("test request");
+//        user.setAddress("dcdcd");
+//        String res = requests.post("http://localhost:8080/core/w/user", user, null).text();
+//        LOGGER.info("add user is success" + res);
+//    }
 }

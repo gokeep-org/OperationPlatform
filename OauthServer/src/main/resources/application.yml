@@ -3,19 +3,15 @@ spring:
     name: oauth
   datasource:
     name: dataSource
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/op?characterEncoding=utf8
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/op?useUnicode=true&characterEncoding=utf8
     username: root
     password: xnjm0611
     driver-class-name: com.mysql.jdbc.Driver
-    minIdle: 1
-    maxActive: 2
-    initialSize: 1
-    timeBetweenEvictionRunsMillis: 3000
-    minEvictableIdleTimeMillis: 300000
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
+    hikari:
+          idle-timeout: 10000
+          maximum-pool-size: 10
+          pool-name: hikari-pool
   profiles:
     active: dev
 mybatis:

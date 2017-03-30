@@ -3,6 +3,13 @@ spring:
     name: es
   profiles:
     active: dev
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: localhost:9300
+      repositories:
+        enabled: true
+
 eureka:
   client:
     serviceUrl:
@@ -12,3 +19,5 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 server:
   port: 10102
+logging:
+  level: info

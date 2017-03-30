@@ -1,15 +1,17 @@
 package com.op.oauth.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.dao.UserMapper;
 import com.op.oauth.service.BaseService;
 import com.op.oauth.service.ServiceBeanNames;
 import com.op.oauth.service.UserService;
 import com.op.oauth.util.OpUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
@@ -22,6 +24,7 @@ public class UserServiceImpl extends BaseService implements UserService<User, Bo
     @Autowired
     private UserMapper userMapper;
 
+    @Transactional
     @Override
     public Boolean createUser(User user) {
         int res = userMapper.insert(user);
@@ -45,8 +48,8 @@ public class UserServiceImpl extends BaseService implements UserService<User, Bo
 
     @Override
     public User getUserById(String userId) {
-       User user =  userMapper.selectByUserId(userId);
-       return user;
+        User user = userMapper.selectByUserId(userId);
+        return user;
     }
 
     @Override
@@ -59,11 +62,13 @@ public class UserServiceImpl extends BaseService implements UserService<User, Bo
         return null;
     }
 
+    @Transactional
     @Override
     public Boolean checkoutUserNameIsExist(User user) {
         return userMapper.checkoutUserNameIsExist(user).size() != 0;
     }
 
+    @Transactional
     @Override
     public List<User> checkUserIsLogin(User user) {
         return userMapper.checkUserLogin(user);

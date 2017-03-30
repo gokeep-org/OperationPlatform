@@ -1,8 +1,10 @@
-package com.op.core.bean.entity.user;
+package com.op.core.bean.entity;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.google.gson.annotations.SerializedName;
 
 /****************************************
  * Copyright (c) xuning.
@@ -21,20 +23,23 @@ public class User {
     private String address;
     private String status;
     @Field("customer_ids")
+    @SerializedName("customer_ids")
     private List<String> customerIds;
     @Field("app_ids")
+    @SerializedName("app_ids")
     private List<String> appIds;
     @Field("team_ids")
+    @SerializedName("team_ids")
     private List<String> teamIds;
 
     public String getId() {
+
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.op.oauth.bean.entity.Client;
 import com.op.oauth.bean.entity.User;
@@ -24,6 +25,7 @@ public class ClientServiceImpl extends BaseService implements ClientService<Clie
     @Autowired
     private ClientMapper clientMapper;
 
+    @Transactional
     @Override
     public Boolean createClient(Client client) {
         return OpUtils.checkMapperCudIsSuccess(
@@ -31,6 +33,7 @@ public class ClientServiceImpl extends BaseService implements ClientService<Clie
         );
     }
 
+    @Transactional
     @Override
     public Boolean deleteClient(String clientId) {
         return OpUtils.checkMapperCudIsSuccess(
@@ -38,6 +41,7 @@ public class ClientServiceImpl extends BaseService implements ClientService<Clie
         );
     }
 
+    @Transactional
     @Override
     public Boolean updateClient(Client client) {
         return OpUtils.checkMapperCudIsSuccess(
@@ -61,6 +65,7 @@ public class ClientServiceImpl extends BaseService implements ClientService<Clie
     }
 
     @Override
+    @Transactional
     public Boolean freezeClientByClientId(String clientId) {
         return OpUtils.checkMapperCudIsSuccess(
                 clientMapper.freezeClientByClientId(clientId)
