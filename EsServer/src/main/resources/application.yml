@@ -9,7 +9,6 @@ spring:
       cluster-nodes: localhost:9300
       repositories:
         enabled: true
-
 eureka:
   client:
     serviceUrl:

@@ -1,4 +1,4 @@
-package com.op.message.library.rabbit.receiver;
+package com.op.message.library.rabbit.receiver.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.op.message.library.rabbit.receiver.Receiver;
 import com.op.message.service.MailSendService;
 
 /****************************************
@@ -23,6 +24,8 @@ public class LogReceiverImpl implements Receiver {
 
     @Override
     public void process(String jsonStr) {
-        LOGGER.info("log" + jsonStr);
+        LOGGER.info("接受到的数据是"+jsonStr);
+
+        //这里接受到需要存到es
     }
 }

@@ -19,38 +19,28 @@ import com.op.message.service.BaseService;
  * @Auther is xuning on 2017/2/20.
  ****************************************/
 @Service(ServiceBeanNames.SENDER_SERVICE)
-public class SenderImpl extends BaseService implements Sender, RabbitTemplate.ConfirmCallback {
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
-	private static final Logger LOGGER = LoggerFactory.getLogger(SenderImpl.class);
+public class SenderImpl extends BaseService implements Sender {
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SenderImpl.class);
 
-	public SenderImpl() {
+    public SenderImpl() {
 
-	}
+    }
 
-	@Autowired
-	public SenderImpl(RabbitTemplate rabbitTemplate) {
-		this.rabbitTemplate = rabbitTemplate;
-		//		rabbitTemplate.setConfirmCallback(this); //rabbitTemplate如果为单例的话，那回调就是最后设置的内容
-	}
+    @Autowired
+    public SenderImpl(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+        //		rabbitTemplate.setConfirmCallback(this); //rabbitTemplate如果为单例的话，那回调就是最后设置的内容
+    }
 
 
-	@Override
-	public void send(String queueName, String message) {
-		CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
-		rabbitTemplate.convertAndSend(
-				queueName,
-				message
-		);
-	}
-
-	@Override
-	public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-		System.err.println(" 回调id:" + correlationData);
-		if (ack) {
-			LOGGER.info("消息成功消费");
-		} else {
-			LOGGER.info("消息消费失败" + cause);
-		}
-	}
+    @Override
+    public void send(String queueName, String message) {
+        CorrelationData correlationId = new CorrelationData(UUID.randomUUID().toString());
+        rabbitTemplate.convertAndSend(
+                queueName,
+                message
+        );
+    }
 }

@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
 
 import com.op.es.util.DiscoveryServer;
 
@@ -32,7 +34,10 @@ public class IndexRest {
     @Autowired
     private Requests requests;
     @Autowired
+    private ElasticsearchTemplate esTemplate;
+    @Autowired
     private DiscoveryServer discoveryServer;
+
     /**
      * 创建文档
      * @param index
@@ -45,11 +50,12 @@ public class IndexRest {
                                  @PathParam("type") String type,
                                  Map<String, Object> map) throws IOException {
 
-        String document_id = UUID.randomUUID().toString();
-        String url = "http://localhost:9200"+"/"+
-                index+"/"+type+"/"+document_id;
-        String res=requests.post(url, map, null).json();
-        return res;
+        IndexQuery query = new IndexQuery();
+        query.setIndexName(index);
+        query.setType(type);
+        query.setId(UUID.randomUUID().toString());
+        query.setObject(map);
+        return esTemplate.index(query);
     }
 
     /**
@@ -64,8 +70,7 @@ public class IndexRest {
     public String deleteDocumentById(@PathParam("index") String index,
                                      @PathParam("type") String type,
                                      @PathParam("id") String id) {
-
-        return null;
+        return esTemplate.delete(index, type, id);
     }
 
     /**
@@ -90,5 +95,21 @@ public class IndexRest {
 
     public void setRequests(Requests requests) {
         this.requests = requests;
+    }
+
+    public ElasticsearchTemplate getEsTemplate() {
+        return esTemplate;
+    }
+
+    public void setEsTemplate(ElasticsearchTemplate esTemplate) {
+        this.esTemplate = esTemplate;
+    }
+
+    public DiscoveryServer getDiscoveryServer() {
+        return discoveryServer;
+    }
+
+    public void setDiscoveryServer(DiscoveryServer discoveryServer) {
+        this.discoveryServer = discoveryServer;
     }
 }

@@ -1,4 +1,4 @@
-package com.op.message.library.rabbit.receiver;
+package com.op.message.library.rabbit.receiver.impl;
 
 
 import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.op.message.bean.action.input.email.MailSendInput;
 import com.op.message.exception.ErrorCode;
+import com.op.message.library.rabbit.receiver.Receiver;
 import com.op.message.service.MailSendService;
 import com.google.gson.Gson;
 
@@ -22,8 +23,8 @@ import com.google.gson.Gson;
 
 @Component
 @RabbitListener(queues = "message")
-public class ReceiverImpl implements Receiver {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReceiverImpl.class);
+public class MessageReceiverImpl implements Receiver {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageReceiverImpl.class);
     @Autowired
     MailSendService mailSendService;
 
@@ -31,7 +32,6 @@ public class ReceiverImpl implements Receiver {
     @Override
     public void process(String jsonStr) {
         LOGGER.info("message" + jsonStr);
-
         try {
             MailSendInput input = new Gson().fromJson(jsonStr, MailSendInput.class);
             mailSendService.sendCommonEmail(input);
@@ -39,5 +39,4 @@ public class ReceiverImpl implements Receiver {
             LOGGER.error(ErrorCode.SMTP_SEND_ERROR, e);
         }
     }
-
 }
