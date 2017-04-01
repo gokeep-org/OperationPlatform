@@ -13,36 +13,36 @@ import com.op.message.action.item.ItemAction;
  * @Auther is xuning on 17-2-18
  ****************************************/
 public class MailAsyncAction extends ItemAction<MailSendOutput> {
-    
+
     private Email email;
-    
+
     public MailAsyncAction(MailSendInput input) {
         this.email = input;
     }
-    
+
     @Override
     protected void permissionValidate() throws Exception {
-        
+
     }
-    
+
     @Override
     protected void additionalValidate() throws Exception {
-        
+
     }
-    
+
     @Override
     protected void start() {
-        senderService.send("message", new Gson().toJson(email));
+        mailSender.send(new Gson().toJson(email));
     }
-    
+
     @Override
     protected MailSendOutput formatOutput() throws Exception {
         MailSendOutput opt = new MailSendOutput();
         return opt;
     }
-    
+
     @Override
     protected void logSyncAction() throws Exception {
-        
+
     }
 }

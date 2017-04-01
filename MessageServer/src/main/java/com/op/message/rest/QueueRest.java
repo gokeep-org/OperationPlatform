@@ -8,10 +8,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
+import com.op.message.library.rabbit.Queue.SenderName;
 import com.op.message.library.rabbit.sender.Sender;
 
 /****************************************
@@ -24,14 +25,13 @@ import com.op.message.library.rabbit.sender.Sender;
 @Produces({MediaType.APPLICATION_JSON})
 public class QueueRest {
     @Autowired
-    public Sender sender;
+    @Qualifier(SenderName.LOG_SENDER)
+    public Sender logSender;
 
     @POST
     @Path("/log/async")
     public String asyncLog(Map<String, Object> body) {
-        JSONObject jsonObject = new JSONObject();
-        String json = JSON.toJSONString(body);
-        sender.send("log", json);
+        logSender.send(JSON.toJSONString(body));
         JsonObject object = new JsonObject();
         object.addProperty("success", true);
         return object.toString();

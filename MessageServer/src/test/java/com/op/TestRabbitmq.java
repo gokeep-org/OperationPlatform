@@ -1,12 +1,15 @@
 package com.op;
 
-import com.op.message.MessageBootstrap;
-import com.op.message.library.rabbit.sender.Sender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.op.message.MessageBootstrap;
+import com.op.message.library.rabbit.Queue.SenderName;
+import com.op.message.library.rabbit.sender.Sender;
 
 /****************************************
  * Copyright (c) xuning.
@@ -17,10 +20,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MessageBootstrap.class)
 public class TestRabbitmq {
-	@Autowired
-	private Sender sender;
-	@Test
-	public void testSendMessage(){
-		sender.send("message", "my name is xuning");
-	}
+    @Autowired
+    @Qualifier(value = SenderName.LOG_SENDER)
+    public Sender sender;
+
+    @Test
+    public void testSendMessage() {
+        sender.send("hello");
+    }
 }

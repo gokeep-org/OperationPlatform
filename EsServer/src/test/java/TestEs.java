@@ -37,17 +37,18 @@ public class TestEs {
         log.setId(UUID.randomUUID().toString());
         log.setContent("xuning");
         logRepository.index(log);
+
     }
 
     @Test
     public void setEsTemplate() {
         IndexQuery query = new IndexQuery();
-        query.setType("info");
-        Log log = new Log();
-        log.setId(UUID.randomUUID().toString());
-        log.setContent("CCCCCCCCCCCCCCCCCCCCC");
-        query.setObject(log);
+        query.setIndexName("log");
+        query.setId(UUID.randomUUID().toString());
+        Map<String, Object> map = new HashedMap();
+        query.setObject(map);
         esTemplate.index(query);
+
     }
     @Test
     public void testOPeration(){

@@ -7,8 +7,7 @@ package com.op.message.library.rabbit.Queue;
  * @Auther is xuning on 2017/2/28.
  ****************************************/
 public class QueueName {
-    private static final String MESSAGE = "message";
-    private static final String LOG = "log";
-    private static final String EMIAL = "email";
-
+    public static final String MESSAGE = "message";
+    public static final String LOG = "log";
+    public static final String EMIAL = "email";
 }
