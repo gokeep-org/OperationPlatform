@@ -1,6 +1,5 @@
 package com.op.es.rest;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,13 +12,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
 
-import com.op.es.util.DiscoveryServer;
-
-import requests.Requests;
+import com.op.es.bean.action.output.index.WriteOutput;
+import com.op.es.service.IndexService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -32,11 +30,8 @@ import requests.Requests;
 @Consumes({MediaType.APPLICATION_JSON})
 public class IndexRest {
     @Autowired
-    private Requests requests;
-    @Autowired
-    private ElasticsearchTemplate esTemplate;
-    @Autowired
-    private DiscoveryServer discoveryServer;
+    private IndexService indexService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndexRest.class);
 
     /**
      * 创建文档
@@ -46,16 +41,18 @@ public class IndexRest {
      */
     @POST
     @Path("/{index}/type/{type}")
-    public String createDocument(@PathParam("index") String index,
-                                 @PathParam("type") String type,
-                                 Map<String, Object> map) throws IOException {
-
-        IndexQuery query = new IndexQuery();
-        query.setIndexName(index);
-        query.setType(type);
-        query.setId(UUID.randomUUID().toString());
-        query.setObject(map);
-        return esTemplate.index(query);
+    public WriteOutput createDocument(@PathParam("index") String index,
+                                      @PathParam("type") String type,
+                                      Map<String, Object> map){
+        WriteOutput output = new WriteOutput(200, "操作成功");
+        if (indexService.insertIndex(index, type, UUID.randomUUID().toString(), map)) {
+            output.setSuccess("true");
+            return output;
+        }
+        output.setCode(500);
+        output.setMessage("操作失败");
+        output.setUuid(UUID.randomUUID().toString());
+        return output;
     }
 
     /**
@@ -67,10 +64,18 @@ public class IndexRest {
      */
     @DELETE
     @Path("/{index}/type/{type}/id/{id}")
-    public String deleteDocumentById(@PathParam("index") String index,
-                                     @PathParam("type") String type,
-                                     @PathParam("id") String id) {
-        return esTemplate.delete(index, type, id);
+    public WriteOutput deleteDocumentById(@PathParam("index") String index,
+                                          @PathParam("type") String type,
+                                          @PathParam("id") String id) {
+        WriteOutput output = new WriteOutput(200, "操作成功");
+        if (indexService.deleteIndexById(index, type, id)) {
+            output.setSuccess("true");
+            return output;
+        }
+        output.setCode(500);
+        output.setMessage("操作失败");
+        output.setUuid(UUID.randomUUID().toString());
+        return output;
     }
 
     /**
@@ -82,34 +87,18 @@ public class IndexRest {
      */
     @PUT
     @Path("/{index}/type/{type}/id/{id}")
-    public String updateDocumentById(@PathParam("index") String index,
-                                     @PathParam("type") String type,
-                                     @PathParam("id") String id) {
-
-        return null;
-    }
-
-    public Requests getRequests() {
-        return requests;
-    }
-
-    public void setRequests(Requests requests) {
-        this.requests = requests;
-    }
-
-    public ElasticsearchTemplate getEsTemplate() {
-        return esTemplate;
-    }
-
-    public void setEsTemplate(ElasticsearchTemplate esTemplate) {
-        this.esTemplate = esTemplate;
-    }
-
-    public DiscoveryServer getDiscoveryServer() {
-        return discoveryServer;
-    }
-
-    public void setDiscoveryServer(DiscoveryServer discoveryServer) {
-        this.discoveryServer = discoveryServer;
+    public WriteOutput updateDocumentById(@PathParam("index") String index,
+                                          @PathParam("type") String type,
+                                          @PathParam("id") String id,
+                                          Map<String, Object> body) {
+        WriteOutput output = new WriteOutput(200, "操作成功");
+        if (indexService.updateIndex(index, type, id, body)) {
+            output.setSuccess("true");
+            return output;
+        }
+        output.setCode(500);
+        output.setMessage("操作失败");
+        output.setUuid(UUID.randomUUID().toString());
+        return output;
     }
 }

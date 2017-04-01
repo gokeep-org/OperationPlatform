@@ -30,7 +30,7 @@ public class MailReceiverImpl implements Receiver {
     @Override
     @RabbitHandler
     public void process(String jsonStr) {
-        LOGGER.info("receiver message-->" + jsonStr);
+
         try {
             MailSendInput input = new Gson().fromJson(jsonStr, MailSendInput.class);
             mailSendService.sendCommonEmail(input);

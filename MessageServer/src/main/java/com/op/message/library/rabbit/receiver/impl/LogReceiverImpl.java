@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
+import com.op.message.bean.entity.log.Log;
+import com.op.message.exception.ErrorCode;
 import com.op.message.library.rabbit.Queue.QueueName;
 import com.op.message.library.rabbit.receiver.Receiver;
+import com.op.message.util.OpUtils;
 
 import requests.Requests;
 
@@ -32,10 +34,12 @@ public class LogReceiverImpl implements Receiver {
     @Override
     @RabbitHandler
     public void process(String jsonStr) {
-        String s = jsonStr;
-        String esUri = loadBalancerClient.choose("ES").getUri().toString();
-        Log log = new Gson().fromJson(jsonStr, Log.class);
-        requests.post(esUri + "/log/info", log, null);
-        LOGGER.info("log receiver message: " + jsonStr);
+        try {
+            String esUri = loadBalancerClient.choose("ES").getUri().toString();
+            Log log = OpUtils.gson().fromJson(jsonStr, Log.class);
+            requests.post(esUri + "/log/info", log, null);
+        } catch (Exception e) {
+            LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
+        }
     }
 }

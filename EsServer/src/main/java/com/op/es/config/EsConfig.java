@@ -1,10 +1,6 @@
 package com.op.es.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import requests.Requests;
-import requests.core.RequestImpl;
+import com.op.es.util.PropertiesUtil;
 
 /****************************************
  * Copyright (c) xuning.
@@ -13,22 +9,7 @@ import requests.core.RequestImpl;
  * @Auther is xuning on 2017/3/15.
  ****************************************/
 public class EsConfig {
-    private static List<String> ServerList = new ArrayList<>();
-    public static String masterNode = "http://localhost:9200";
-    private static Requests requests = null;
-
-    public static String getEsServer() {
-        requests = new RequestImpl();
-        return requests.get(masterNode + "/_nodes/").json();
-    }
-
-
-    public static List<String> getServerList() {
-        return ServerList;
-    }
-
-    public static void setServerList(List<String> serverList) {
-        ServerList = serverList;
-    }
-
+    public static final String esHost = PropertiesUtil.getValue("es.host");
+    public static final String esPort = PropertiesUtil.getValue("es.port");
+    public static final String esUri = esHost + ":" + esPort;
 }

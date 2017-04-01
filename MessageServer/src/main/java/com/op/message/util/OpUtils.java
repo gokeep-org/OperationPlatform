@@ -1,13 +1,18 @@
 package com.op.message.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Context;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /****************************************
  * Copyright (c) xuning.
@@ -19,7 +24,9 @@ public final class OpUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpUtils.class);
     @Context
     private HttpServletRequest request;
-//    private static final Requests requests = new RequestImpl();
+    private static Gson gson;
+
+    //    private static final Requests requests = new RequestImpl();
     private OpUtils() {
     }
 
@@ -37,7 +44,7 @@ public final class OpUtils {
             LOGGER.info("check obj is null transfrom list is faile");
         }
         return Objects.equals(null, obj);
-    
+
     }
 
     public final static String getEnvValue(String key) {
@@ -57,8 +64,20 @@ public final class OpUtils {
         return res >= 0;
     }
 
+    public static Gson gson() {
+        try {
+            if (gson == null) {
+                GsonBuilder gsonbuilder = new GsonBuilder().serializeNulls();
+                gson = gsonbuilder.create();
+            }
+        } catch (Exception e) {
+            throw new WebApplicationException(e.getMessage(), e);
+        }
+        return gson;
+    }
+
     public final static String MD5(String pwd) {
-        char md5String[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        char md5String[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             byte[] btInput = pwd.getBytes();
@@ -80,7 +99,7 @@ public final class OpUtils {
         return null;
     }
 
-    public static final Boolean checkUserToken(String userId, String accessToken){
+    public static final Boolean checkUserToken(String userId, String accessToken) {
 //        Params params = new Params("user_id", userId);
 //        Params params1 = new Params("access_token", accessToken);
 //        List<Params> paramsList = new ArrayList<>();
@@ -91,6 +110,6 @@ public final class OpUtils {
 //        JSONObject object = (JSONObject) JSONObject.parse(json);
 //        String success = object.get("success").toString();
 //        return success.equals("true");
-        return  null;
+        return null;
     }
 }
