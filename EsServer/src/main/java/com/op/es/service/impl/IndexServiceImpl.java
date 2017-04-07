@@ -23,7 +23,7 @@ public class IndexServiceImpl implements IndexService {
     private Requests requests;
 
     @Override
-    public Boolean insertIndex(String index, String type, String id, Map<String, Object> body) {
+    public Boolean insertIndex(String index, String type, String id, Object body) {
         try {
             requests.post(EsConfig.esUri + "/" + index + "/" + type + "/" + id, body, null);
             return true;
@@ -32,10 +32,11 @@ public class IndexServiceImpl implements IndexService {
         }
     }
 
+
     @Override
-    public Boolean updateIndex(String index, String type, String id, Map<String, Object> body) {
+    public Boolean updateIndex(String index, String type, String id, Object body) {
         try {
-            requests.put(EsConfig.esUri + "/" + index + "/" + type + "/" + id, body, null);
+            requests.post(EsConfig.esUri + "/" + index + "/" + type + "/" + id, body, null);
             return true;
         } catch (Exception e) {
             return false;

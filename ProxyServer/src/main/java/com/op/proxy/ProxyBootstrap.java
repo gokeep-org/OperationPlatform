@@ -25,14 +25,8 @@ public class ProxyBootstrap {
     }
 
     @Bean
-    public ProxyFilter proxyFilter() {
-        return new ProxyFilter();
-    }
-
-    @Bean
     @LoadBalanced
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
 }

@@ -9,9 +9,13 @@ import java.util.Map;
  * @Auther is xuning on 2017/4/1.
  ****************************************/
 public interface IndexService {
-    public Boolean insertIndex(String index, String type, String id, Map<String, Object> body);
+//    public Boolean insertIndex(String index, String type, String id, Map<String, Object> body);
 
-    public Boolean updateIndex(String index, String type, String id, Map<String, Object> body);
+    public Boolean insertIndex(String index, String type, String id, Object body);
+
+//    public Boolean updateIndex(String index, String type, String id, Map<String, Object> body);
+
+    public Boolean updateIndex(String index, String type, String id, Object body);
 
     public Boolean deleteIndexById(String index, String type, String id);
 
@@ -20,5 +24,6 @@ public interface IndexService {
     public String searchIndexByDSL(String index, String type, Map<String, Object> dsl);
 
     public String searchIndexByWord(String index, String type, Map<String, String> word);
+
 
 }

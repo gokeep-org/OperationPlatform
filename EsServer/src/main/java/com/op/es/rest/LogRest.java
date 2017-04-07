@@ -3,11 +3,14 @@ package com.op.es.rest;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
+import com.op.es.bean.action.output.log.WriteLogOutput;
+import com.op.es.bean.entity.index.IndexName;
+import com.op.es.bean.entity.log.Log;
+import com.op.es.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
 
-import com.op.es.bean.Log;
+import java.util.UUID;
 
 /****************************************
  * Copyright (c) xuning.
@@ -18,23 +21,19 @@ import com.op.es.bean.Log;
 @Path("/log")
 public class LogRest {
     @Autowired
-    private ElasticsearchTemplate esTemplate;
+    private IndexService indexService;
 
-    @Path("/info")
     @POST
-    public String saveLog(Log log) {
-        IndexQuery indexQuery = new IndexQuery();
-        indexQuery.setIndexName("log");
-        indexQuery.setType("info");
-        indexQuery.setObject(log);
-        return esTemplate.index(indexQuery);
-    }
-
-    public ElasticsearchTemplate getEsTemplate() {
-        return esTemplate;
-    }
-
-    public void setEsTemplate(ElasticsearchTemplate esTemplate) {
-        this.esTemplate = esTemplate;
+    public WriteLogOutput saveLog(Log log) {
+        WriteLogOutput output = new WriteLogOutput(200, "操作成功");
+        log.setId(UUID.randomUUID().toString());
+        if (indexService.insertIndex(IndexName.LOG, log.getType(), UUID.randomUUID().toString(), log)) {
+            output.setSuccess("true");
+            return output;
+        }
+        output.setCode(500);
+        output.setMessage("操作失败");
+        output.setUuid(UUID.randomUUID().toString());
+        return output;
     }
 }

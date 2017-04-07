@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.springframework.context.annotation.Configuration;
 
 /****************************************
  * Copyright (c) xuning.
@@ -14,7 +15,7 @@ import com.netflix.zuul.context.RequestContext;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/8.
  ****************************************/
-
+@Configuration
 public class ProxyFilter extends ZuulFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProxyFilter.class);
 
@@ -38,11 +39,11 @@ public class ProxyFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         LOGGER.info("***************Proxy Filter**************************");
-        LOGGER.info("请求url: "+request.getRequestURL());
-        LOGGER.info("请求方法： "+request.getMethod());
+        LOGGER.info("*请求url: "+request.getRequestURL());
+        LOGGER.info("*请求方法： "+request.getMethod());
         String accessToken = request.getHeader("access_token");
         String userId = request.getHeader("user_id");
-        LOGGER.info("proxy filter " + "get user_id :" + userId + " access_token is:" + accessToken);
+        LOGGER.info("*proxy filter " + "get user_id :" + userId + " access_token is:" + accessToken);
         LOGGER.info("******************************************************");
 
         //TODO: 这里要对token和user_id进行校验,请求Oauth2

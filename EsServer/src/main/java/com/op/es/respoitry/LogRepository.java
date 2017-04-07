@@ -1,8 +1,8 @@
 package com.op.es.respoitry;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import com.op.es.bean.Log;
+import com.op.es.bean.entity.log.Log;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /****************************************
  * Copyright (c) xuning.

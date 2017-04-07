@@ -35,6 +35,7 @@ public class IndexRest {
 
     /**
      * 创建文档
+     *
      * @param index
      * @param type
      * @return
@@ -43,7 +44,7 @@ public class IndexRest {
     @Path("/{index}/type/{type}")
     public WriteOutput createDocument(@PathParam("index") String index,
                                       @PathParam("type") String type,
-                                      Map<String, Object> map){
+                                      Map<String, Object> map) {
         WriteOutput output = new WriteOutput(200, "操作成功");
         if (indexService.insertIndex(index, type, UUID.randomUUID().toString(), map)) {
             output.setSuccess("true");
@@ -57,6 +58,7 @@ public class IndexRest {
 
     /**
      * 根据ID删除文档
+     *
      * @param index
      * @param type
      * @param id
@@ -80,6 +82,7 @@ public class IndexRest {
 
     /**
      * 根据ID更新文档
+     *
      * @param index
      * @param type
      * @param id

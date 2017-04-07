@@ -35,7 +35,7 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>, 
     private Gson getGson() throws WebApplicationException {
         try {
             if (gson == null) {
-                GsonBuilder gsonbuilder = new GsonBuilder().serializeNulls();
+                GsonBuilder gsonbuilder = new GsonBuilder();
                 gson = gsonbuilder.create();
             }
         }

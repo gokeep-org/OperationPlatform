@@ -15,12 +15,13 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class TestRest {
     @GET
-    public String test(){
+    public String test() {
         return "user server sttus is ok";
     }
+
     @GET
     @Path("/test1")
-    public String test2(){
+    public String test2() {
         return "test";
     }
 }
