@@ -14,6 +14,10 @@ spring:
           pool-name: hikari-pool
   profiles:
     active: dev
+  http:
+    encoding:
+      charset: utf-8
+      force: true
 mybatis:
   mapperLocations: classpath*:mybatis/*Mapper.xml
   typeAliasesPackage: com.op.oauth.bean.entity
@@ -26,4 +30,4 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 server:
   port: 30001
-  connection-timeout: 600000
+  connection-timeout: 60000

@@ -1,6 +1,10 @@
 spring:
   application:
     name: user
+  http:
+    encoding:
+      charset: utf-8
+      force: true
 eureka:
   client:
     serviceUrl:

@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: proxy
+  http:
+    encoding:
+      charset: utf-8
+      force: true
 eureka:
   client:
     serviceUrl:
