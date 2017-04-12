@@ -1,15 +1,14 @@
 package com.op.es.service.impl;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonObject;
 import com.op.es.config.EsConfig;
 import com.op.es.service.IndexService;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import requests.Requests;
+
+import java.util.Map;
 
 /****************************************
  * Copyright (c) xuning.
@@ -88,5 +87,19 @@ public class IndexServiceImpl implements IndexService {
             res.addProperty("result", false);
             return res.toString();
         }
+    }
+    
+    @Override
+    public Boolean deleteAll(String index, String type) {
+        try {
+            JsonObject match = new JsonObject();
+            match.add("match_all", new JsonObject());
+            JsonObject query = new JsonObject();
+            query.add("query", match);
+            requests.delete(EsConfig.esUri + "/" + index + "/" + type + "/" +"_query", query, null).json();
+        } catch (Throwable e){
+            return true;
+        }
+        return false;
     }
 }

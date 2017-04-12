@@ -25,5 +25,6 @@ public interface IndexService {
 
     public String searchIndexByWord(String index, String type, Map<String, String> word);
 
+    public Boolean deleteAll(String index, String type);
 
 }

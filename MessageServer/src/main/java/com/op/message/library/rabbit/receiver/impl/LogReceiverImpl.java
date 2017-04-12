@@ -37,7 +37,7 @@ public class LogReceiverImpl implements Receiver {
         try {
             String esUri = loadBalancerClient.choose("ES").getUri().toString();
             Log log = OpUtils.gson().fromJson(jsonStr, Log.class);
-            requests.post(esUri + "/log/info", log, null);
+            requests.post(esUri + "/log", log, null);
         } catch (Exception e) {
             LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
         }
