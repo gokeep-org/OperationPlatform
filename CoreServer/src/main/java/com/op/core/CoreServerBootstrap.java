@@ -1,12 +1,12 @@
 package com.op.core;
 
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.RandomRule;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.Bean;
 
 /****************************************
  * Copyright (c) xuning.
@@ -21,5 +21,15 @@ public class CoreServerBootstrap {
         new SpringApplicationBuilder(CoreServerBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
+    }
+//    @Bean
+//    @LoadBalanced
+//    RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
+    
+    @Bean
+    public IRule ribbonRule(){
+        return new RandomRule();
     }
 }
