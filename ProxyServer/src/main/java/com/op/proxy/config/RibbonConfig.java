@@ -1,8 +1,11 @@
 package com.op.proxy.config;
 
+import com.netflix.loadbalancer.BestAvailableRule;
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
+import com.netflix.loadbalancer.RetryRule;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +26,7 @@ public class RibbonConfig {
     
     @Bean
     public IRule ribbonRule(){
-        return new RandomRule();
+        return new BestAvailableRule();
     }
+
 }

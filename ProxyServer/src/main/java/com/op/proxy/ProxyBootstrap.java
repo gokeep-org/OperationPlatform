@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import com.op.proxy.filter.ProxyFilter;
+import requests.Requests;
+import requests.core.RequestImpl;
 
 /**
  * Hello world!
@@ -24,9 +26,4 @@ public class ProxyBootstrap {
                 .run(args);
     }
 
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 }

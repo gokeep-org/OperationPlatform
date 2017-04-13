@@ -8,6 +8,9 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -15,9 +18,17 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.netflix.zuul.context.RequestContext;
+import com.op.proxy.bean.ServerName;
+import com.op.proxy.config.OperationPlatformException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import requests.Requests;
 
 /**
  * <p>request和response过滤器。<p>
@@ -32,20 +43,47 @@ public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
     @Context
     private HttpServletRequest request;
-
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
+    @Autowired
+    private Requests requests;
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        getBrowerHeader(requestContext);
-        String method = requestContext.getMethod();
-        String path = requestContext.getUriInfo().getPath();
-        String requestPath = method + ":" + path;
-        String accessToken = requestContext.getHeaderString("token");
-        String userId = requestContext.getHeaderString("user_id");
-        MDC.put("user_id", requestContext.getHeaderString(userId));
-        MDC.put("access_token", requestContext.getHeaderString(accessToken));
-        LOGGER.info("请求拦截到token is: " + accessToken);
-        LOGGER.info("请求拦截到user id is: " + accessToken);
-        LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
+//        getBrowerHeader(requestContext);
+//        String method = requestContext.getMethod();
+//        String path = requestContext.getUriInfo().getPath();
+//        String requestPath = method + ":" + path;
+//        String accessToken = requestContext.getHeaderString("token");
+//        String userId = requestContext.getHeaderString("user_id");
+//        MDC.put("user_id", requestContext.getHeaderString(userId));
+//        MDC.put("access_token", requestContext.getHeaderString(accessToken));
+//        LOGGER.info("请求拦截到token is: " + accessToken);
+//        LOGGER.info("请求拦截到user id is: " + accessToken);
+//        LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
+//        RequestContext ctx = RequestContext.getCurrentContext();
+//        //TODO: 这里要对token和user_id进行校验,请求Oauth2
+//        String a = loadBalancerClient.choose(ServerName.OAUTH).getHost();
+//        int b = loadBalancerClient.choose(ServerName.OAUTH).getPort();
+//        String c = loadBalancerClient.choose(ServerName.OAUTH).getServiceId();
+//        String url = loadBalancerClient.choose(ServerName.OAUTH).getUri()+"/token/check";
+//        Map<String, String> params = new HashMap<>();
+//        params.put("access_token", accessToken);
+//        params.put("user_id", userId);
+//        Map<String, String> headers = new HashMap<>();
+//        headers.put("Content-Type", "application/json");
+//        String res = requests.get(url, params, headers).json();
+//        JsonObject r = new Gson().fromJson(res, JsonObject.class);
+//        String success = r.get("success").getAsString();
+//        if (!r.get("success").getAsString().equals("true")){
+//            ctx.setResponseStatusCode(500);
+//            JsonObject jsonObject = new JsonObject();
+//            jsonObject.addProperty("msg", "token为空或者过期");
+//            jsonObject.addProperty("code", 500);
+//            jsonObject.addProperty("success", false);
+//            jsonObject.addProperty("uuid", UUID.randomUUID().toString());
+//            ctx.setResponseBody(jsonObject.toString());
+//            throw new OperationPlatformException("token is invoid or null");
+//        }
     }
 
     private void getBrowerHeader(ContainerRequestContext requestContext) {
