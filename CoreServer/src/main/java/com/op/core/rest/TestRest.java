@@ -1,15 +1,12 @@
 package com.op.core.rest;
 
-import com.google.gson.JsonObject;
-import com.netflix.loadbalancer.LoadBalancerContext;
-import com.op.core.util.discovery.DiscoveryClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.google.gson.JsonObject;
+import com.op.core.util.discovery.DiscoveryClient;
 
 /****************************************
  * Copyright (c) xuning.
@@ -22,19 +19,28 @@ import javax.ws.rs.core.MediaType;
 public class TestRest {
     @Path("/info")
     @GET
-    public String info(){
-        String s= DiscoveryClient.choose("oauth");
+    public String info() {
+        String s = DiscoveryClient.choose("oauth");
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("oauth", s);
         return jsonObject.toString();
     }
+
     @Path("/test")
     @GET
-    public String test(){
-        String s= DiscoveryClient.choose("proxy");
+    public String test() {
+        String s = DiscoveryClient.choose("proxy");
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("proxy", s);
         return jsonObject.toString();
+    }
+
+    @Path("/test1")
+    @GET
+    public String test1() {
+        JsonObject obj  = new JsonObject();
+        obj.addProperty("INFO", "this is test1");
+        return obj.toString();
     }
 
 
