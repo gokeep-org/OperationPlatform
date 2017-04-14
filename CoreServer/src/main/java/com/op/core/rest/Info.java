@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/info")
 @Produces({MediaType.APPLICATION_JSON})
 public class Info {
+
     @Autowired
     private LoadBalancerClient loadBalancerClient;
     

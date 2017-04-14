@@ -2,6 +2,7 @@ package com.op.core.rest;
 
 import com.google.gson.JsonObject;
 import com.netflix.loadbalancer.LoadBalancerContext;
+import com.op.core.util.discovery.DiscoveryClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
@@ -19,15 +20,10 @@ import javax.ws.rs.core.MediaType;
 @Path("/")
 @Produces({MediaType.APPLICATION_JSON})
 public class TestRest {
-    
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
-    @Autowired
-    private LoadBalancerContext loadBalancerContext;
     @Path("/info")
     @GET
     public String info(){
-        int s=loadBalancerContext.getLoadBalancer().chooseServer("oauth").getPort();
+        String s= DiscoveryClient.choose("oauth");
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("oauth", s);
         return jsonObject.toString();
@@ -35,7 +31,7 @@ public class TestRest {
     @Path("/test")
     @GET
     public String test(){
-        int s=loadBalancerContext.getLoadBalancer().chooseServer("proxy").getPort();
+        String s= DiscoveryClient.choose("proxy");
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("proxy", s);
         return jsonObject.toString();

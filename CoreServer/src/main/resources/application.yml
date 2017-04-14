@@ -8,9 +8,12 @@ spring:
       database: op
       repositories:
         enabled: true
-server:
-  port: 20001
-  connection-timeout: 60000
+  profiles:
+      active: dev
+  http:
+      encoding:
+        charset: utf-8
+        force: true
 eureka:
   client:
     serviceUrl:
@@ -18,3 +21,6 @@ eureka:
   instance:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
+server:
+  port: 20001
+  connection-timeout: 60000
