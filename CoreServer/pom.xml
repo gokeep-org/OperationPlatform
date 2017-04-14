@@ -24,6 +24,11 @@
 
     <dependencies>
         <dependency>
+            <artifactId>Util</artifactId>
+            <groupId>com.op</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
@@ -56,10 +61,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.ixuning</groupId>
-            <artifactId>requests</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

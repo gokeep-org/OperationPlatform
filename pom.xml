@@ -20,7 +20,7 @@
         <module>EurekaServer</module>
         <module>UserServer</module>
         <module>EsServer</module>
-        <module>Util</module>
+        <module>UtilServer</module>
     </modules>
 
     <!--Maven相关配置属性-->
@@ -47,6 +47,11 @@
     <!--依赖管理-->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <artifactId>Util</artifactId>
+                <groupId>com.op</groupId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
             <!--SpringBoot-starter-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

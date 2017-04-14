@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 /****************************************
@@ -20,6 +21,8 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableEurekaClient
+//@ImportResource("classpath:spring.xml")
+@ComponentScan(basePackages ={"com.op.core","com.op.util"})
 public class CoreServerBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(CoreServerBootstrap.class)

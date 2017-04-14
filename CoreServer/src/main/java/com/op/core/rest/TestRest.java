@@ -1,12 +1,14 @@
 package com.op.core.rest;
 
+import com.google.gson.JsonObject;
+import com.op.core.util.discovery.DiscoveryClient;
+import com.op.util.requests.Requests;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import com.google.gson.JsonObject;
-import com.op.core.util.discovery.DiscoveryClient;
 
 /****************************************
  * Copyright (c) xuning.
@@ -17,6 +19,8 @@ import com.op.core.util.discovery.DiscoveryClient;
 @Path("/")
 @Produces({MediaType.APPLICATION_JSON})
 public class TestRest {
+    @Autowired
+    Requests requests;
     @Path("/info")
     @GET
     public String info() {
@@ -42,6 +46,9 @@ public class TestRest {
         obj.addProperty("INFO", "this is test1");
         return obj.toString();
     }
-
-
+    @GET
+    @Path("/test2")
+    public String test2(){
+        return requests.get(DiscoveryClient.choose("core")+"/test1").text();
+    }
 }
