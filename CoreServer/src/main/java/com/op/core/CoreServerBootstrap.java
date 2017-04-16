@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  ****************************************/
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(basePackages ={"com.op.core", "com.op.util"})
+@ComponentScan(basePackages = {"com.op.core", "com.op.util"})
 public class CoreServerBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(CoreServerBootstrap.class)
