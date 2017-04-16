@@ -1,4 +1,4 @@
-package com.op.core.util.discovery;
+package com.op.util.discovery;
 
 import com.netflix.client.config.CommonClientConfigKey;
 import com.netflix.client.config.DefaultClientConfigImpl;
@@ -19,11 +19,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/14.
  ****************************************/
-public class DiscoveryClient {
-    private static Logger logger = LoggerFactory.getLogger(DiscoveryClient.class);
+@Component
+public class DiscoveryClientImpl implements DiscoveryClient {
+    private static Logger LOGGER = LoggerFactory.getLogger(DiscoveryClientImpl.class);
     private static Map<String, ILoadBalancer> namedLBMap = new ConcurrentHashMap<String, ILoadBalancer>();
-    private DiscoveryClient(){}
-    public static String choose(String serverId){
+    public DiscoveryClientImpl(){}
+    public String choose(String serverId){
         String serverStr = null;
         try {
             DynamicServerListLoadBalancer lb = (DynamicServerListLoadBalancer) namedLBMap.get(serverId);
@@ -34,8 +35,7 @@ public class DiscoveryClient {
                 ServerListFilter<DiscoveryEnabledServer> filter = new ServerListSubsetFilter<DiscoveryEnabledServer>();
                 lb = LoadBalancerBuilder.<DiscoveryEnabledServer> newBuilder().withDynamicServerList(list)
                         .withServerListFilter(filter).withPing(new PingPort()).withRule(new BestAvailableRule()).withClientConfig(config).buildDynamicServerListLoadBalancer();
-                logger.info("建立负载平衡器:" + lb);
-                logger.info("NFLoadBalancerPingInterval:" +config.get(CommonClientConfigKey.NFLoadBalancerPingInterval));
+                LOGGER.info("NFLoadBalancerPingInterval:" +config.get(CommonClientConfigKey.NFLoadBalancerPingInterval));
                 namedLBMap.put(serverId, lb);
             }
             DiscoveryEnabledServer server = (DiscoveryEnabledServer) lb.chooseServer();
@@ -43,7 +43,7 @@ public class DiscoveryClient {
                 serverStr = server.getInstanceInfo().getIPAddr() + ":" + server.getInstanceInfo().getPort();
             }
         } catch (Throwable t) {
-            logger.error("查询服务时异常", t);
+            LOGGER.error("查询服务时异常", t);
         }
         return serverStr;
     }

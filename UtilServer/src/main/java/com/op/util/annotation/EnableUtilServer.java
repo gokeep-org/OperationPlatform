@@ -8,6 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-4-15
  ****************************************/
-@ComponentScan("com.op.util")
+@ComponentScan(basePackages ={"com.op.util"})
 public @interface EnableUtilServer {
 }

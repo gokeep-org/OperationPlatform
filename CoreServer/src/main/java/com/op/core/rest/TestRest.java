@@ -1,7 +1,8 @@
 package com.op.core.rest;
 
 import com.google.gson.JsonObject;
-import com.op.core.util.discovery.DiscoveryClient;
+
+import com.op.util.discovery.DiscoveryClient;
 import com.op.util.requests.Requests;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,10 +22,12 @@ import javax.ws.rs.core.MediaType;
 public class TestRest {
     @Autowired
     Requests requests;
+    @Autowired
+    DiscoveryClient discoveryClient;
     @Path("/info")
     @GET
     public String info() {
-        String s = DiscoveryClient.choose("oauth");
+        String s = discoveryClient.choose("oauth");
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("oauth", s);
         return jsonObject.toString();
@@ -33,7 +36,7 @@ public class TestRest {
     @Path("/test")
     @GET
     public String test() {
-        String s = DiscoveryClient.choose("proxy");
+        String s = discoveryClient.choose("proxy");
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("proxy", s);
         return jsonObject.toString();
@@ -49,6 +52,6 @@ public class TestRest {
     @GET
     @Path("/test2")
     public String test2(){
-        return requests.get(DiscoveryClient.choose("core")+"/test1").text();
+        return requests.get(discoveryClient.choose("core")+"/test1").text();
     }
 }
