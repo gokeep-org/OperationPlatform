@@ -4,10 +4,8 @@ package com.op.util.requests.core;
 import com.op.util.requests.Requests;
 import com.op.util.requests.bean.HttpResponse;
 import com.op.util.requests.bean.data.Method;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
-@Component
 public class RequestImpl implements Requests {
 
     @Override

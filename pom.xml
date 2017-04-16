@@ -85,6 +85,11 @@
                 <artifactId>spring-cloud-starter-zuul</artifactId>
                 <version>${spring-cloud.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-hystrix</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
             <!--JavaEE7-->
             <dependency>
                 <groupId>javax</groupId>

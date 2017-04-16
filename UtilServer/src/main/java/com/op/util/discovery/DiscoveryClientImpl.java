@@ -8,7 +8,6 @@ import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/14.
  ****************************************/
-@Component
 public class DiscoveryClientImpl implements DiscoveryClient {
     private static Logger LOGGER = LoggerFactory.getLogger(DiscoveryClientImpl.class);
     private static Map<String, ILoadBalancer> namedLBMap = new ConcurrentHashMap<String, ILoadBalancer>();

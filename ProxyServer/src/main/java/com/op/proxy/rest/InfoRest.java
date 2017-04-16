@@ -1,11 +1,11 @@
 package com.op.proxy.rest;
 
+import com.google.gson.JsonObject;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import com.google.gson.JsonObject;
 
 /****************************************
  * Copyright (c) xuning.
@@ -20,7 +20,7 @@ public class InfoRest {
     @GET
     public String info(){
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("info", "successful");
+        jsonObject.addProperty("Get Proxy Server info", "successful");
         return jsonObject.toString();
     }
 }
