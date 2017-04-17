@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ImportResource;
  ****************************************/
 @EnableDiscoveryClient
 @SpringBootApplication
-@ImportResource(value = {"classpath:spring.xml"})
+@ImportResource(value = {"classpath:spring.xml","classpath:mongo.xml"})
 public class CoreServerBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(CoreServerBootstrap.class)
