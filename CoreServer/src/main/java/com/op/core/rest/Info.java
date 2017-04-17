@@ -1,12 +1,11 @@
 package com.op.core.rest;
 
 
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.op.util.discovery.DiscoveryClient;
+import com.op.util.discovery.DiscoveryVip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
@@ -25,7 +24,7 @@ public class Info {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
     @Autowired
-    DiscoveryClient discoveryServer;
+    DiscoveryVip discoveryServer;
 //    @Path("/info")
 //    @GET
 //    public String info(){

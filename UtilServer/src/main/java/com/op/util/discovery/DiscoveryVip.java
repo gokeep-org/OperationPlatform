@@ -6,6 +6,6 @@ package com.op.util.discovery;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-4-16
  ****************************************/
-public interface DiscoveryClient {
+public interface DiscoveryVip {
     public String choose(String serverId);
 }

@@ -10,10 +10,10 @@ import org.springframework.context.annotation.ImportResource;
 /**
  * Hello world!
  */
-@SpringCloudApplication
 @EnableDiscoveryClient
+@SpringCloudApplication
 @EnableZuulProxy
-@ImportResource({"classpath:spring.xml"})
+@ImportResource(value = {"classpath:spring.xml"})
 public class ProxyBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(ProxyBootstrap.class)

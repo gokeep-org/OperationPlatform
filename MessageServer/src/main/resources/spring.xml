@@ -3,5 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--邮件发送实现-->
-<bean id="requests" class="requests.core.RequestImpl"/>
+    <bean id="requests" class="com.op.util.requests.core.RequestImpl"/>
+    <bean id="discoveryVip" class="com.op.util.discovery.DiscoveryVipImpl"/>
 </beans>

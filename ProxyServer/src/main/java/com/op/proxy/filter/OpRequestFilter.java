@@ -8,9 +8,6 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -18,17 +15,14 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.netflix.zuul.context.RequestContext;
-import com.op.proxy.bean.ServerName;
-import com.op.proxy.config.OperationPlatformException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import requests.Requests;
+
+import com.op.util.requests.Requests;
+
 
 /**
  * <p>request和response过滤器。<p>

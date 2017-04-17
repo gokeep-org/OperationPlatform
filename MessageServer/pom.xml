@@ -19,6 +19,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.op</groupId>
+            <artifactId>Util</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
@@ -68,10 +72,6 @@
             <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.ixuning</groupId>
-            <artifactId>requests</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>${javax.mail.version}</version>
@@ -116,6 +116,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <!--Spring Cloud Dependency-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Brixton.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>

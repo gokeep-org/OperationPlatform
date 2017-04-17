@@ -13,8 +13,8 @@ import com.op.message.exception.ErrorCode;
 import com.op.message.library.rabbit.Queue.QueueName;
 import com.op.message.library.rabbit.receiver.Receiver;
 import com.op.message.util.OpUtils;
+import com.op.util.requests.Requests;
 
-import requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.

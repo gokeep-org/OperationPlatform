@@ -13,15 +13,10 @@
     <name>OperationPlatform::EurekaServer</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-        <spring-cloud.version>1.2.5.RELEASE</spring-cloud.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
-            <version>${spring-cloud.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -58,6 +53,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
+    <!--Spring Cloud Dependency-->
     <dependencyManagement>
         <dependencies>
             <dependency>

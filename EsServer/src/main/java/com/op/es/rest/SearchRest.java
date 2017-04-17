@@ -9,7 +9,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import requests.Requests;
+import com.op.util.requests.Requests;
+
 
 /****************************************
  * Copyright (c) xuning.

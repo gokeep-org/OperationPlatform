@@ -1,14 +1,15 @@
 package com.op.es.service.impl;
 
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.gson.JsonObject;
 import com.op.es.config.EsConfig;
 import com.op.es.service.IndexService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import requests.Requests;
-
-import java.util.Map;
+import com.op.util.requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.

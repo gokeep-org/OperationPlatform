@@ -1,16 +1,23 @@
 package com.op.util.discovery;
 
-import com.netflix.client.config.CommonClientConfigKey;
-import com.netflix.client.config.DefaultClientConfigImpl;
-import com.netflix.config.ConfigurationManager;
-import com.netflix.loadbalancer.*;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import com.netflix.client.config.CommonClientConfigKey;
+import com.netflix.client.config.DefaultClientConfigImpl;
+import com.netflix.config.ConfigurationManager;
+import com.netflix.loadbalancer.BestAvailableRule;
+import com.netflix.loadbalancer.DynamicServerListLoadBalancer;
+import com.netflix.loadbalancer.ILoadBalancer;
+import com.netflix.loadbalancer.LoadBalancerBuilder;
+import com.netflix.loadbalancer.ServerList;
+import com.netflix.loadbalancer.ServerListFilter;
+import com.netflix.loadbalancer.ServerListSubsetFilter;
+import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
+import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 
 /****************************************
  * Copyright (c) xuning.
@@ -18,10 +25,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/14.
  ****************************************/
-public class DiscoveryClientImpl implements DiscoveryClient {
-    private static Logger LOGGER = LoggerFactory.getLogger(DiscoveryClientImpl.class);
+public class DiscoveryVipImpl implements DiscoveryVip {
+    private static Logger LOGGER = LoggerFactory.getLogger(DiscoveryVipImpl.class);
     private static Map<String, ILoadBalancer> namedLBMap = new ConcurrentHashMap<String, ILoadBalancer>();
-    public DiscoveryClientImpl(){}
+    public DiscoveryVipImpl(){}
     public String choose(String serverId){
         String serverStr = null;
         try {
