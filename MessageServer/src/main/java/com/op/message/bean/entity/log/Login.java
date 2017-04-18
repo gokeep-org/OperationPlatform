@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-3-27
  ****************************************/
+
 /**
  * document: log
  * type: login

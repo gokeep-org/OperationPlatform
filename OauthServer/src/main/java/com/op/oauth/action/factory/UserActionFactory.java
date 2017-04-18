@@ -17,7 +17,7 @@ public class UserActionFactory extends BaseActionFactory {
         return new CreateUserAction(input);
     }
 
-    public static GetUserAction getUserAction(GetUserInput input){
+    public static GetUserAction getUserAction(GetUserInput input) {
         return new GetUserAction(input);
     }
 }

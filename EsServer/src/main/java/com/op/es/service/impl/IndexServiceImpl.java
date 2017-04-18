@@ -89,7 +89,7 @@ public class IndexServiceImpl implements IndexService {
             return res.toString();
         }
     }
-    
+
     @Override
     public Boolean deleteAll(String index, String type) {
         try {
@@ -97,8 +97,8 @@ public class IndexServiceImpl implements IndexService {
             match.add("match_all", new JsonObject());
             JsonObject query = new JsonObject();
             query.add("query", match);
-            requests.delete(EsConfig.esUri + "/" + index + "/" + type + "/" +"_query", query, null).json();
-        } catch (Throwable e){
+            requests.delete(EsConfig.esUri + "/" + index + "/" + type + "/" + "_query", query, null).json();
+        } catch (Throwable e) {
             return true;
         }
         return false;

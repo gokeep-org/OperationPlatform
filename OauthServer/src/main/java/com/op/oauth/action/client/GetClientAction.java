@@ -21,6 +21,7 @@ public class GetClientAction extends ItemAction<BaseOutput> {
     private String clientId;
     private Client client;
     private static final Logger LOGGER = LoggerFactory.getLogger(GetClientAction.class);
+
     public GetClientAction(GetClientInput input) {
         this.clientId = input.getClientId();
     }
@@ -32,8 +33,8 @@ public class GetClientAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-        if (OpUtils.checkStringIsNull(this.clientId)){
-            throw  new OperationPlatformException("get client client id is null");
+        if (OpUtils.checkStringIsNull(this.clientId)) {
+            throw new OperationPlatformException("get client client id is null");
         }
     }
 

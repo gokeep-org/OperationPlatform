@@ -1,7 +1,5 @@
 package com.op.core.rest;
 
-import java.util.List;
-
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,9 +24,8 @@ import com.op.core.bean.entity.BaseBean;
 public class WriteRest {
     @POST
     @Path("/{type}")
-    public WriteOutput insert(
-            BaseBean o,
-            @PathParam("type") String collectionName) throws Exception {
+    public WriteOutput insert(BaseBean o,
+                              @PathParam("type") String collectionName) throws Exception {
         InsertInput input = new InsertInput();
         input.setCollectionName(collectionName);
         input.setO(o);
@@ -36,9 +33,13 @@ public class WriteRest {
     }
 
     @POST
-    @Path("/batch")
-    public String inserts(List<Object> os) {
-        return null;
+    @Path("/batch/{type}")
+    public WriteOutput inserts(BaseBean os,
+                               @PathParam("type") String collectionName) throws Exception {
+        InsertInput input = new InsertInput();
+        input.setCollectionName(collectionName);
+        input.setO(os);
+        return (WriteOutput) WriteActionFactory.getInsertsAction(input).execute();
     }
 
     @DELETE

@@ -33,7 +33,7 @@ public final class OpUtils {
             LOGGER.info("check obj is null transfrom list is faile");
         }
         return Objects.equals(null, obj);
-    
+
     }
 
     public final static String getEnvValue(String key) {

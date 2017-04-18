@@ -9,7 +9,7 @@ import com.op.oauth.bean.action.input.BaseInput;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/3.
  ****************************************/
-public class CreateTokenInput extends BaseInput{
+public class CreateTokenInput extends BaseInput {
     @SerializedName("grant_type")
     private String grantType;
     @SerializedName("redirect_uri")

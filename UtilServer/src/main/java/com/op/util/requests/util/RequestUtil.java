@@ -1,6 +1,7 @@
 package com.op.util.requests.util;
 
 import com.op.util.requests.core.DefaultConfig;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -27,9 +28,9 @@ public class RequestUtil {
     }
 
     public static URI getURI(String uriStr) {
-        if (!uriStr.contains("https://")){
-            if ((!uriStr.contains("http://"))){
-                uriStr = "http://"+uriStr;
+        if (!uriStr.contains("https://")) {
+            if ((!uriStr.contains("http://"))) {
+                uriStr = "http://" + uriStr;
             }
         }
         if (null != uriStr) {

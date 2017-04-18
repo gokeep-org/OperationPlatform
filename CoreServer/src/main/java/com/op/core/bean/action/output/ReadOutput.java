@@ -7,5 +7,5 @@ package com.op.core.bean.action.output;
  * @Auther is xuning on 17-3-28
  ****************************************/
 public class ReadOutput extends BaseOutput {
-    
+
 }

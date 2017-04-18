@@ -21,7 +21,7 @@ public interface WriteService<O> {
 
     public Boolean deleteByQuery(Query query, String collectionName);
 
-    public Boolean update(O o,String collectionName);
+    public Boolean update(O o, String collectionName);
 
     public Boolean updateByQuery(Query query, String collectionName);
 

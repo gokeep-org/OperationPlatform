@@ -1,6 +1,8 @@
 package com.op.core.action.factory;
 
+import com.op.core.action.write.DeleteAction;
 import com.op.core.action.write.InsertAction;
+import com.op.core.action.write.InsertsAction;
 import com.op.core.bean.action.input.write.InsertInput;
 
 /****************************************
@@ -10,8 +12,15 @@ import com.op.core.bean.action.input.write.InsertInput;
  * @Auther is xuning on 17-3-28
  ****************************************/
 public class WriteActionFactory extends BaseActionFactory {
-    public static InsertAction getInsertAction(InsertInput input){
+    public static InsertAction getInsertAction(InsertInput input) {
         return new InsertAction(input);
     }
-    
+
+    public static InsertsAction getInsertsAction(InsertInput input) {
+        return new InsertsAction(input);
+    }
+
+    public static DeleteAction getDeleteAction() {
+        return null;
+    }
 }

@@ -21,6 +21,7 @@ public class GetUserAction extends ItemAction<BaseOutput> {
     private String userId;
     private User user;
     private static final Logger LOGGER = LoggerFactory.getLogger(GetUserAction.class);
+
     public GetUserAction(GetUserInput input) {
         this.userId = input.getId();
     }
@@ -32,14 +33,14 @@ public class GetUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-        if (OpUtils.checkStringIsNull(this.userId)){
+        if (OpUtils.checkStringIsNull(this.userId)) {
             throw new OperationPlatformException("get user ids is null");
         }
     }
 
     @Override
     protected void start() throws Exception {
-           this.user = (User) userService.getUserById(userId);
+        this.user = (User) userService.getUserById(userId);
     }
 
     @Override
@@ -53,6 +54,6 @@ public class GetUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("查询用户："+this.userId);
+        LOGGER.info("查询用户：" + this.userId);
     }
 }

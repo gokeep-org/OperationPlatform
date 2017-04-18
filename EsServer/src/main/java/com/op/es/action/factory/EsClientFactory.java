@@ -19,8 +19,9 @@ public class EsClientFactory {
     private static EsClientFactory esClientInstance = new EsClientFactory();
     private static JestClient jestClient;
     private static JestClientFactory jestfactory;
+
     private EsClientFactory() {
-        if (Objects.equals(null, jestfactory)){
+        if (Objects.equals(null, jestfactory)) {
             jestfactory = new JestClientFactory();
         }
         List<String> serverLists = new LinkedList<>();
@@ -32,15 +33,16 @@ public class EsClientFactory {
                 .build());
         jestClient = jestfactory.getObject();
     }
-    public static JestClient getEsClient(){
-        if (Objects.equals(null, jestClient)){
+
+    public static JestClient getEsClient() {
+        if (Objects.equals(null, jestClient)) {
             jestClient = jestfactory.getObject();
         }
         return jestClient;
     }
 
     public static void closeClient() {
-        if (!Objects.equals(null, jestClient)){
+        if (!Objects.equals(null, jestClient)) {
             jestClient.shutdownClient();
         }
     }

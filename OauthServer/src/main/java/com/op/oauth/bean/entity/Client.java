@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Client{
+public class Client {
     private Integer id;
     @SerializedName("client_name")
     private String clientName;

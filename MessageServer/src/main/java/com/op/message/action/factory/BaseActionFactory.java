@@ -25,7 +25,7 @@ public abstract class BaseActionFactory {
         BaseActionFactory.mailSendService = mailSendService;
     }
 
-    public final static User getUser(){
+    public final static User getUser() {
         User user = new User(MDC.get("user_id"));
         return user;
     }

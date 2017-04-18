@@ -22,43 +22,43 @@ import com.op.message.library.provide.GsonMessageBodyHandler;
 @Configuration
 @ApplicationPath("/")
 public class JerseyConfig extends ResourceConfig {
-	public JerseyConfig() {
-		setJerseyComponentsLocation();
-		registerJerseyFilter();
-		registerJsonProvider();
-		registerCompressionEncoder();
-		registerSwagger();
-	}
+    public JerseyConfig() {
+        setJerseyComponentsLocation();
+        registerJerseyFilter();
+        registerJsonProvider();
+        registerCompressionEncoder();
+        registerSwagger();
+    }
 
-	private void setJerseyComponentsLocation() {
-		packages("com.op.message.rest");
-	}
+    private void setJerseyComponentsLocation() {
+        packages("com.op.message.rest");
+    }
 
-	private void registerJerseyFilter() {
-		register(OpRequestFilter.class);
-		register(OpResponseFilter.class);
-	}
+    private void registerJerseyFilter() {
+        register(OpRequestFilter.class);
+        register(OpResponseFilter.class);
+    }
 
-	private void registerJsonProvider() {
-		register(GsonMessageBodyHandler.class);
-		property(ServerProperties.METAINF_SERVICES_LOOKUP_DISABLE, false);
-		property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-		property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
-	}
+    private void registerJsonProvider() {
+        register(GsonMessageBodyHandler.class);
+        property(ServerProperties.METAINF_SERVICES_LOOKUP_DISABLE, false);
+        property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+        property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
+    }
 
-	/**
-	 * 注册Response body压缩时用到的encoder
-	 */
-	private void registerCompressionEncoder() {
-		registerClasses(EncodingFilter.class, GZipEncoder.class, DeflateEncoder.class);
-	}
+    /**
+     * 注册Response body压缩时用到的encoder
+     */
+    private void registerCompressionEncoder() {
+        registerClasses(EncodingFilter.class, GZipEncoder.class, DeflateEncoder.class);
+    }
 
-	/**
-	 * 注册Swagger,用于生成api文档
-	 */
-	private void registerSwagger() {
-		register(io.swagger.jaxrs.listing.ApiListingResource.class);
-		register(io.swagger.jaxrs.listing.AcceptHeaderApiListingResource.class);
-		register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
-	}
+    /**
+     * 注册Swagger,用于生成api文档
+     */
+    private void registerSwagger() {
+        register(io.swagger.jaxrs.listing.ApiListingResource.class);
+        register(io.swagger.jaxrs.listing.AcceptHeaderApiListingResource.class);
+        register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+    }
 }

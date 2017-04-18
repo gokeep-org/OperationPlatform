@@ -16,6 +16,7 @@ import com.op.oauth.util.OpUtils;
  ****************************************/
 public class UpdateClientAction extends ItemAction<BaseOutput> {
     private Client client;
+
     public UpdateClientAction(UpdateClientInput input) {
         this.client = input;
     }
@@ -27,7 +28,7 @@ public class UpdateClientAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-        if (OpUtils.checkObjectIsNull(this.client)){
+        if (OpUtils.checkObjectIsNull(this.client)) {
             throw new OperationPlatformException("update client object is null");
         }
         Client exist = (Client) clientService.getClientByClientId(this.client.getClientId());

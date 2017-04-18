@@ -18,51 +18,51 @@ public class Operation {
     private String isSyncLog;
     private String isQueue;
     private String isRedirect;
-    
+
     public String getIsWirte() {
         return isWirte;
     }
-    
+
     public void setIsWirte(String isWirte) {
         this.isWirte = isWirte;
     }
-    
+
     public String getIsRead() {
         return isRead;
     }
-    
+
     public void setIsRead(String isRead) {
         this.isRead = isRead;
     }
-    
+
     public String getIsSchedu() {
         return isSchedu;
     }
-    
+
     public void setIsSchedu(String isSchedu) {
         this.isSchedu = isSchedu;
     }
-    
+
     public String getIsSyncLog() {
         return isSyncLog;
     }
-    
+
     public void setIsSyncLog(String isSyncLog) {
         this.isSyncLog = isSyncLog;
     }
-    
+
     public String getIsQueue() {
         return isQueue;
     }
-    
+
     public void setIsQueue(String isQueue) {
         this.isQueue = isQueue;
     }
-    
+
     public String getIsRedirect() {
         return isRedirect;
     }
-    
+
     public void setIsRedirect(String isRedirect) {
         this.isRedirect = isRedirect;
     }

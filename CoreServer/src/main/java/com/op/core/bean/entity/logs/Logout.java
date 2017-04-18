@@ -26,115 +26,115 @@ public class Logout {
     @Field("verify_code")
     private String verifyCode;
     private String sessionId;
-    
+
     public String getId() {
         return id;
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public String getUserId() {
         return userId;
     }
-    
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    
+
     public String getUsername() {
         return username;
     }
-    
+
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     public String getIp() {
         return ip;
     }
-    
+
     public void setIp(String ip) {
         this.ip = ip;
     }
-    
+
     public String getProxy() {
         return proxy;
     }
-    
+
     public void setProxy(String proxy) {
         this.proxy = proxy;
     }
-    
+
     public String getAddress() {
         return address;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public Long getDate() {
         return date;
     }
-    
+
     public void setDate(Long date) {
         this.date = date;
     }
-    
+
     public String getOperation() {
         return operation;
     }
-    
+
     public void setOperation(String operation) {
         this.operation = operation;
     }
-    
+
     public String getRemark() {
         return remark;
     }
-    
+
     public void setRemark(String remark) {
         this.remark = remark;
     }
-    
+
     public Boolean getStatus() {
         return status;
     }
-    
+
     public void setStatus(Boolean status) {
         this.status = status;
     }
-    
+
     public Boolean getLogoutSuccess() {
         return logoutSuccess;
     }
-    
+
     public void setLogoutSuccess(Boolean logoutSuccess) {
         this.logoutSuccess = logoutSuccess;
     }
-    
+
     public int getCount() {
         return count;
     }
-    
+
     public void setCount(int count) {
         this.count = count;
     }
-    
+
     public String getVerifyCode() {
         return verifyCode;
     }
-    
+
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
     }
-    
+
     public String getSessionId() {
         return sessionId;
     }
-    
+
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }

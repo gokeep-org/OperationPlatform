@@ -9,5 +9,5 @@ import com.op.core.bean.action.input.BaseInput;
  * @Auther is xuning on 17-3-28
  ****************************************/
 public class InsertSInput extends BaseInput {
-    
+
 }

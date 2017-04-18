@@ -1,6 +1,7 @@
 package com.op.es.bean.entity.log;
 
 import com.google.gson.annotations.SerializedName;
+
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;

@@ -33,18 +33,18 @@ public class DeleteClientAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-        if (OpUtils.checkObjectIsNull(clientIds)){
+        if (OpUtils.checkObjectIsNull(clientIds)) {
             throw new OperationPlatformException("delete client client ids is null");
         }
     }
 
     @Override
     protected void start() throws Exception {
-        this.clientIds.forEach(clientId->{
-            try{
+        this.clientIds.forEach(clientId -> {
+            try {
                 clientService.deleteClient(clientId);
-            }catch (Throwable e){
-                LOGGER.error("delete client error, clienr id is:"+clientId);
+            } catch (Throwable e) {
+                LOGGER.error("delete client error, clienr id is:" + clientId);
             }
 
         });

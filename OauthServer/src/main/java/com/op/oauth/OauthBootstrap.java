@@ -17,10 +17,10 @@ import org.springframework.context.annotation.ImportResource;
 @EnableDiscoveryClient
 @ImportResource(value = {"classpath:spring.xml"})
 public class OauthBootstrap {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         new SpringApplicationBuilder(OauthBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
-    
+
 }

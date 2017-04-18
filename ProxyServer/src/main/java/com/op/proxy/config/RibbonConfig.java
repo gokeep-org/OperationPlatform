@@ -4,6 +4,7 @@ import com.netflix.loadbalancer.BestAvailableRule;
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
 import com.netflix.loadbalancer.RetryRule;
+
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.context.annotation.Bean;
@@ -23,9 +24,9 @@ public class RibbonConfig {
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    
+
     @Bean
-    public IRule ribbonRule(){
+    public IRule ribbonRule() {
         return new BestAvailableRule();
     }
 

@@ -2,6 +2,7 @@ package com.op.util.requests.core;
 
 import com.op.util.requests.exception.ErrorCode;
 import com.op.util.requests.exception.RequestsException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -17,6 +18,7 @@ public abstract class RequestClient<T> {
     public static CloseableHttpClient httpClient;
     public static final Logger LOGGER = LoggerFactory.getLogger(RequestClient.class);
     private String loggerString = "";
+
     protected CloseableHttpClient openHttpClient() {
         httpClient = HttpClients.createDefault();
         return httpClient;
@@ -55,7 +57,7 @@ public abstract class RequestClient<T> {
     }
 
     protected com.op.util.requests.bean.HttpResponse execute(String url, Map<String, String> params, Map<String, String> postForms, Object body, Map<String, String> headers) {
-        LOGGER.info("request: "+toLoggerMessage(url, params, headers, postForms, body));
+        LOGGER.info("request: " + toLoggerMessage(url, params, headers, postForms, body));
         openHttpClient();
         setUpHttpMethod();
         requestParamterFilter(url);
@@ -76,7 +78,7 @@ public abstract class RequestClient<T> {
         }
     }
 
-    private String toLoggerMessage(String url, Map params,  Map headers, Map postForm, Object body ) {
+    private String toLoggerMessage(String url, Map params, Map headers, Map postForm, Object body) {
         String res = String.format(DefaultConfig.LOGGER_FORMATE,
                 url, headers, params, postForm, body);
         return res;

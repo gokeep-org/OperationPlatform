@@ -7,14 +7,14 @@ package com.op.util.discovery;
  * @Auther is xuning on 2017/4/13.
  ****************************************/
 public class ServerName {
-    public static final String LOG  = "LOG";
-    public static final String MESSAGE  = "MESSAGE";
-    public static final String PROXY  = "PROXY";
-    public static final String CORE  = "CORE";
-    public static final String OAUTH  = "oauth";
-    public static final String ES  = "ES";
-    public static final String EUREKA  = "EUREKA";
-    public static final String CUSTOMER  = "CUSTOMER";
-    public static final String USER  = "USER";
+    public static final String LOG = "LOG";
+    public static final String MESSAGE = "MESSAGE";
+    public static final String PROXY = "PROXY";
+    public static final String CORE = "CORE";
+    public static final String OAUTH = "oauth";
+    public static final String ES = "ES";
+    public static final String EUREKA = "EUREKA";
+    public static final String CUSTOMER = "CUSTOMER";
+    public static final String USER = "USER";
 
 }

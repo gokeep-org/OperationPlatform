@@ -27,20 +27,21 @@ public class Server {
             OAUTH_SERVER,
             MESSAGE_SERVER
     );
-    private Server(){
+
+    private Server() {
     }
 
-    public static List<String> getServerList(){
+    public static List<String> getServerList() {
         return serverList;
     }
 
-    public final static List<String> removeServer(String... serverName){
+    public final static List<String> removeServer(String... serverName) {
         serverList.remove(serverName);
         return serverList;
     }
 
-    public final static List<String> addServer(String... serverName){
-        for (String name : serverName){
+    public final static List<String> addServer(String... serverName) {
+        for (String name : serverName) {
             serverList.add(name);
         }
         return serverList;

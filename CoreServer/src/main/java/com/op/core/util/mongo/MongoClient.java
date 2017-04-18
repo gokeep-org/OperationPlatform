@@ -23,7 +23,7 @@ public interface MongoClient {
 
     void updates(List<Object> os);
 
-    <T extends Document, R extends Object>  R searchOne(T document, Class classes);
+    <T extends Document, R extends Object> R searchOne(T document, Class classes);
 
     <T extends Document> String searchAll(T document);
 

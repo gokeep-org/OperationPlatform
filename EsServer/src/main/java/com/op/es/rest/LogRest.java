@@ -4,11 +4,13 @@ import com.op.es.bean.action.output.log.WriteLogOutput;
 import com.op.es.bean.entity.index.IndexName;
 import com.op.es.bean.entity.log.Log;
 import com.op.es.service.IndexService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+
 import java.util.UUID;
 
 /****************************************
@@ -35,7 +37,7 @@ public class LogRest {
         output.setUuid(UUID.randomUUID().toString());
         return output;
     }
-    
+
     @DELETE
     public WriteLogOutput deleteAllLog() {
         WriteLogOutput output = new WriteLogOutput(200, "操作成功");

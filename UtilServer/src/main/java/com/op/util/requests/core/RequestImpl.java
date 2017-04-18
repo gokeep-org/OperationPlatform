@@ -6,6 +6,7 @@ import com.op.util.requests.bean.HttpResponse;
 import com.op.util.requests.bean.data.Method;
 
 import java.util.Map;
+
 public class RequestImpl implements Requests {
 
     @Override

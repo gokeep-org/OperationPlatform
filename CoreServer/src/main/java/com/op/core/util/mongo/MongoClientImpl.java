@@ -12,6 +12,7 @@ import org.bson.Document;
  ****************************************/
 public class MongoClientImpl implements MongoClient {
     private static com.mongodb.MongoClient client = ClientFactory.getMongoClient();
+
     @Override
     public void insert(Object o) {
 

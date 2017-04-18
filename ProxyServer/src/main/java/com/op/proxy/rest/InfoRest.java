@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 public class InfoRest {
     @Path("/info")
     @GET
-    public String info(){
+    public String info() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("Get Proxy Server info", "successful");
         return jsonObject.toString();

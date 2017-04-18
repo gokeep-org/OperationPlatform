@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 17-3-26
  ****************************************/
-public class BaseBean extends HashMap<String, Object>{
+public class BaseBean extends HashMap<String, Object> {
     @SerializedName("_id")
     private String id;
 

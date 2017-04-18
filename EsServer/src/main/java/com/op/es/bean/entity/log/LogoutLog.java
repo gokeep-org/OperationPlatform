@@ -9,6 +9,5 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * @Auther is xuning on 2017/3/31.
  ****************************************/
 @Document(indexName = "log", type = "logout")
-public class LogoutLog
-{
+public class LogoutLog {
 }

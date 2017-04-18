@@ -23,7 +23,7 @@ public class ErrorOutput extends BaseOutput {
         setSuccess(success);
     }
 
-    public void setBaseOut(String code, String msg, Boolean success){
+    public void setBaseOut(String code, String msg, Boolean success) {
         setCode(code);
         setMessage(msg);
         setSuccess(success);

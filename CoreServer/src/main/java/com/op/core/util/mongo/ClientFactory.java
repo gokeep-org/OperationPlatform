@@ -7,7 +7,7 @@ package com.op.core.util.mongo;
  * @Auther is xuning on 2017/3/23.
  ****************************************/
 public class ClientFactory {
-    public static com.mongodb.MongoClient getMongoClient(){
+    public static com.mongodb.MongoClient getMongoClient() {
         return MongoUtil.getMongoClient();
     }
 }

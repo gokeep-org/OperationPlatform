@@ -13,13 +13,13 @@ import com.op.message.bean.entity.user.User;
  * @Auther is xuning on 17-2-18
  ****************************************/
 public class EmailActionFactory extends BaseActionFactory {
-    
+
     public static MailAsyncAction getMailAsyncSendAction(MailSendInput input) throws Exception {
         User user = getUser();
         return new MailAsyncAction(input);
     }
 
-    public static MailSyncAction getMailSyncSendAction(MailSendInput input) throws Exception{
+    public static MailSyncAction getMailSyncSendAction(MailSendInput input) throws Exception {
         User user = getUser();
         return new MailSyncAction(input);
     }

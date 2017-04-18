@@ -9,7 +9,7 @@ import com.op.oauth.bean.entity.Client;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/3.
  ****************************************/
-public class GetClientOutput extends ItemOutput{
+public class GetClientOutput extends ItemOutput {
     private Client client;
 
     public Client getClient() {

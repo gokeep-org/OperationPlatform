@@ -19,9 +19,10 @@ public class DiscoveryServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscoveryServer.class);
     @Autowired
     private LoadBalancerClient loadBalancerClient;
+
     public String getServerAddress(String serverName) {
         List<String> list = Server.getServerList();
-        if (!list.contains(serverName)){
+        if (!list.contains(serverName)) {
             LOGGER.error("server not exist server list");
         }
         return loadBalancerClient.choose(serverName).getUri().toString();

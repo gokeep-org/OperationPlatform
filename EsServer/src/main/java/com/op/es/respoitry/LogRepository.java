@@ -2,6 +2,7 @@ package com.op.es.respoitry;
 
 
 import com.op.es.bean.entity.log.Log;
+
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /****************************************

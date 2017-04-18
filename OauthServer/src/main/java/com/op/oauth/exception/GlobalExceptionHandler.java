@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public OperationPlatformException exceptionHandler(RuntimeException e, HttpServletResponse response) {
         OperationPlatformException opException = new OperationPlatformException();
-            opException.setCode("300");
-            return opException;
+        opException.setCode("300");
+        return opException;
     }
 }

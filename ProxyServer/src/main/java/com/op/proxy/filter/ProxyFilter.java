@@ -19,6 +19,7 @@ public class ProxyFilter extends ZuulFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProxyFilter.class);
     @Autowired
     public Requests requests;
+
     @Override
     public String filterType() {
         return "pre";
@@ -61,6 +62,7 @@ public class ProxyFilter extends ZuulFilter {
 //        }
         return null;
     }
+
     public Requests getRequests() {
         return requests;
     }

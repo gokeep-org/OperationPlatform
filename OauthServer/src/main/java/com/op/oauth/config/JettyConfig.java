@@ -1,6 +1,7 @@
 package com.op.oauth.config;
 
 import com.op.oauth.util.PropertiesUtil;
+
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Configuration;

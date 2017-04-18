@@ -33,7 +33,7 @@ public final class OpUtils {
             LOGGER.info("check obj is null transfrom list is faile");
         }
         return Objects.equals(null, obj);
-    
+
     }
 
     public final static String getEnvValue(String key) {
@@ -54,7 +54,7 @@ public final class OpUtils {
     }
 
     public final static String MD5(String pwd) {
-        char md5String[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        char md5String[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             byte[] btInput = pwd.getBytes();

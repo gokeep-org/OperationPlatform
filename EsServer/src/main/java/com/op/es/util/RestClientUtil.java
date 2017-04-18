@@ -61,11 +61,11 @@ public class RestClientUtil {
         return restTemplate.exchange(url, HttpMethod.POST, entity, String.class, params).getBody();
     }
 
-    public String put(String url){
-        try{
+    public String put(String url) {
+        try {
             restTemplate.put(url, null);
-        }catch (Exception e){
-            LOGGER.error("发送put请求错误，url:"+url);
+        } catch (Exception e) {
+            LOGGER.error("发送put请求错误，url:" + url);
         }
         return "true";
     }

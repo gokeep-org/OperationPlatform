@@ -13,11 +13,11 @@ import com.op.oauth.bean.action.input.token.CreateTokenInput;
  * @Auther is xuning on 2017/3/3.
  ****************************************/
 public class TokenActionFactory extends BaseActionFactory {
-    public static CreateTokenAction getCreateTokenAction(CreateTokenInput input){
+    public static CreateTokenAction getCreateTokenAction(CreateTokenInput input) {
         return new CreateTokenAction(input);
     }
-    
-    public static CheckTokenAction getCheckTokenAction(CheckTokenInput input){
+
+    public static CheckTokenAction getCheckTokenAction(CheckTokenInput input) {
         return new CheckTokenAction(input);
     }
 }

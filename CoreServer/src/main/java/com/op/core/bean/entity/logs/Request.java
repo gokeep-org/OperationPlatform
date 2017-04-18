@@ -18,59 +18,59 @@ public class Request {
     private Map postForm;
     private String body;
     private List<File> file;
-    
+
     public String getPath() {
         return path;
     }
-    
+
     public void setPath(String path) {
         this.path = path;
     }
-    
+
     public String getMethod() {
         return method;
     }
-    
+
     public void setMethod(String method) {
         this.method = method;
     }
-    
+
     public Map getHeaders() {
         return headers;
     }
-    
+
     public void setHeaders(Map headers) {
         this.headers = headers;
     }
-    
+
     public Map getParams() {
         return params;
     }
-    
+
     public void setParams(Map params) {
         this.params = params;
     }
-    
+
     public Map getPostForm() {
         return postForm;
     }
-    
+
     public void setPostForm(Map postForm) {
         this.postForm = postForm;
     }
-    
+
     public String getBody() {
         return body;
     }
-    
+
     public void setBody(String body) {
         this.body = body;
     }
-    
+
     public List<File> getFile() {
         return file;
     }
-    
+
     public void setFile(List<File> file) {
         this.file = file;
     }

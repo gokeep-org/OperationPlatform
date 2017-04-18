@@ -1,6 +1,7 @@
 package com.op.user.rest;
 
 import com.google.gson.JsonObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
@@ -20,9 +21,10 @@ import javax.ws.rs.core.MediaType;
 public class TestRest {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
+
     @Path("/info")
     @GET
-    public String info(){
+    public String info() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("info", "successful");
         jsonObject.addProperty("oauth", loadBalancerClient.choose("oauth").getUri().toString());

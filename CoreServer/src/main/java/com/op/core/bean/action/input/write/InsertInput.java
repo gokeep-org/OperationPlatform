@@ -12,21 +12,21 @@ import com.op.core.bean.action.input.BaseInput;
 public class InsertInput extends BaseInput {
     @SerializedName("type")
     private String collectionName;
-    
+
     public String getCollectionName() {
         return collectionName;
     }
-    
+
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;
     }
-    
+
     private Object o;
-    
+
     public Object getO() {
         return o;
     }
-    
+
     public void setO(Object o) {
         this.o = o;
     }

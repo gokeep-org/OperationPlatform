@@ -8,13 +8,11 @@ import org.springframework.context.annotation.ImportResource;
 
 /**
  * Hello world!
- *
  */
 @SpringBootApplication
 @EnableDiscoveryClient
 @ImportResource(value = {"classpath:spring.xml"})
-public class CustomerBootstrap
-{
+public class CustomerBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(CustomerBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)

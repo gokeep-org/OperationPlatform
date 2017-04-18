@@ -12,26 +12,26 @@ import com.op.core.bean.action.output.BaseOutput;
 public class ReadAction extends ItemAction<BaseOutput> {
     @Override
     protected void permissionValidate() throws Exception {
-        
+
     }
-    
+
     @Override
     protected void additionalValidate() throws Exception {
-        
+
     }
-    
+
     @Override
     protected void start() throws Exception {
-        
+
     }
-    
+
     @Override
     protected BaseOutput formatOutput() throws Exception {
         return null;
     }
-    
+
     @Override
     protected void logSyncAction() throws Exception {
-        
+
     }
 }

@@ -30,6 +30,7 @@ public class MongoDbRepositoryTest {
     @Autowired
     public MongoTemplate mongoTemplate;
     public static User userTemplate;
+
     static {
         userTemplate = new User();
         String[] strs = {"1111", "222", "3333"};

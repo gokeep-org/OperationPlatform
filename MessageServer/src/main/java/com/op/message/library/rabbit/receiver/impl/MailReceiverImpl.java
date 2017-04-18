@@ -27,6 +27,7 @@ public class MailReceiverImpl implements Receiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(MailSenderImpl.class);
     @Autowired
     MailSendService mailSendService;
+
     @Override
     @RabbitHandler
     public void process(String jsonStr) {

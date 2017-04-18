@@ -9,44 +9,44 @@ import java.util.UUID;
  * @Auther is xuning on 2017/2/15.
  ****************************************/
 public class OperationPlatformException extends RuntimeException {
-	private String code;
-	private String uuid = UUID.randomUUID().toString();
-	
-	public String getUuid() {
-		return uuid;
-	}
-	
-	public OperationPlatformException() {
-	}
+    private String code;
+    private String uuid = UUID.randomUUID().toString();
 
-	public OperationPlatformException(Throwable cause) {
-		super(cause);
-	}
+    public String getUuid() {
+        return uuid;
+    }
 
-	public OperationPlatformException(String message) {
-		super(message);
-	}
-	
-	public OperationPlatformException(String message, String code, Throwable cause) {
-		super(message, cause);
-		this.setCode(code);
-	}
+    public OperationPlatformException() {
+    }
 
-	public OperationPlatformException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-	
-	public String getCode() {
-		return code;
-	}
-	
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
-	
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-		this.getMessage();
-	}
+    public OperationPlatformException(Throwable cause) {
+        super(cause);
+    }
+
+    public OperationPlatformException(String message) {
+        super(message);
+    }
+
+    public OperationPlatformException(String message, String code, Throwable cause) {
+        super(message, cause);
+        this.setCode(code);
+    }
+
+    public OperationPlatformException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+        this.getMessage();
+    }
 }

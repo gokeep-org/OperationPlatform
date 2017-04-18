@@ -24,5 +24,4 @@
         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
         <constructor-arg name="mongoConverter" ref="mappingMongoConverter"/>
     </bean>
-    <!--<bean id="requests" class="com.op.util.requests.core.RequestImpl"/>-->
 </beans>

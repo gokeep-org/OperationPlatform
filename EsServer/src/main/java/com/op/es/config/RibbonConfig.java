@@ -21,9 +21,9 @@ public class RibbonConfig {
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
-    
+
     @Bean
-    public IRule ribbonRule(){
+    public IRule ribbonRule() {
         return new RandomRule();
     }
 }

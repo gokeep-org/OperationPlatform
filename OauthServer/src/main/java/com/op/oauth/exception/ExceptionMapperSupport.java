@@ -1,6 +1,7 @@
 package com.op.oauth.exception;
 
 import com.op.oauth.bean.action.output.HttpStatusCode;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
@@ -25,9 +26,10 @@ public class ExceptionMapperSupport implements ExceptionMapper<Exception> {
     private static final String CONTEXT_ATTRIBUTE = WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE;
     @Context
     private HttpServletRequest request;
-    
+
     @Context
     private ServletContext servletContext;
+
     @Override
     public Response toResponse(Exception exception) {
         String code = HttpStatusCode.SERVER_ERROR;
@@ -36,8 +38,8 @@ public class ExceptionMapperSupport implements ExceptionMapper<Exception> {
         if (exception instanceof OperationPlatformException) {
             OperationPlatformException operationPlatformException = (OperationPlatformException) exception;
             code = operationPlatformException.getCode();
-            code = (null == code?HttpStatusCode.SERVER_ERROR:operationPlatformException.getCode());
-            String message = context.getMessage(code,null, exception.getMessage(),
+            code = (null == code ? HttpStatusCode.SERVER_ERROR : operationPlatformException.getCode());
+            String message = context.getMessage(code, null, exception.getMessage(),
                     request.getLocale());
             return Response.ok(message, MediaType.TEXT_PLAIN).status(Integer.parseInt(code))
                     .build();

@@ -67,10 +67,10 @@ public class TokenRest {
             @QueryParam("access_token") String accessToken,
             @QueryParam("user_id") String userId) throws Exception {
         CheckTokenInput input = new CheckTokenInput();
-        if (OpUtils.checkStringIsNull(accessToken)){
+        if (OpUtils.checkStringIsNull(accessToken)) {
             throw new OperationPlatformException(ErrorCode.ACCESS_TOKEN_IS_NULL);
         }
-        if (OpUtils.checkStringIsNull(userId)){
+        if (OpUtils.checkStringIsNull(userId)) {
             throw new OperationPlatformException(ErrorCode.USER_ID_IS_NULL);
         }
         input.setAccessToken(accessToken);

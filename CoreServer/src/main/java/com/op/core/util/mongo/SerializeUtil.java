@@ -37,8 +37,8 @@ public class SerializeUtil {
         return (BSONObject) JSON.parse(json);
     }
 
-    public static String getCollectionNameByClass(Class classes){
-        if (classes.isInstance(new ArrayList())){
+    public static String getCollectionNameByClass(Class classes) {
+        if (classes.isInstance(new ArrayList())) {
 
         }
         return classes.getSimpleName().toLowerCase();

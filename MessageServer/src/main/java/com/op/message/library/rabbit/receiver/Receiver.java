@@ -7,5 +7,5 @@ package com.op.message.library.rabbit.receiver;
  * @Auther is xuning on 2017/2/20.
  ****************************************/
 public interface Receiver {
-	void process(String jsonStr);
+    void process(String jsonStr);
 }

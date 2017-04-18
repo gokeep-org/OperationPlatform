@@ -1,11 +1,11 @@
 package com.op.es.rest;
 
 import com.op.util.requests.Requests;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
 
 
 /****************************************
@@ -19,12 +19,13 @@ import javax.ws.rs.core.MediaType;
 public class SearchRest {
     @Autowired
     private Requests requests;
+
     @GET
     @Path("/document/{index}/type/{type}/id/{id}")
     public String searchDocumentById(@PathParam("index") String index,
                                      @PathParam("type") String type,
                                      @PathParam("id") String id) {
-        String url = "http://localhost:9200/"+index+"/"+type+"/"+id;
+        String url = "http://localhost:9200/" + index + "/" + type + "/" + id;
         return requests.get(url).json();
     }
 

@@ -9,19 +9,19 @@ package com.op.core.bean.action.output;
 public class BaseOutput {
     private Boolean success;
     private String uuid;
-    
+
     public String getUuid() {
         return uuid;
     }
-    
+
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-    
+
     public Boolean getSuccess() {
         return success;
     }
-    
+
     public void setSuccess(Boolean success) {
         this.success = success;
     }

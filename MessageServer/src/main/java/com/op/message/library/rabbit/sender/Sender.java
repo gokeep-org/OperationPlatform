@@ -11,5 +11,5 @@ package com.op.message.library.rabbit.sender;
  * 发送消息队列接口
  */
 public interface Sender {
-	void send(String message);
+    void send(String message);
 }

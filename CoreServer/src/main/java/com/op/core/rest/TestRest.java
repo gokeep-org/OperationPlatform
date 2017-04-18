@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.requests.Requests;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.GET;
@@ -24,6 +25,7 @@ public class TestRest {
     Requests requests;
     @Autowired
     DiscoveryVip discoveryVip;
+
     @Path("/info")
     @GET
     public String info() {
@@ -45,13 +47,14 @@ public class TestRest {
     @Path("/test1")
     @GET
     public String test1() {
-        JsonObject obj  = new JsonObject();
+        JsonObject obj = new JsonObject();
         obj.addProperty("INFO", "this is test1");
         return obj.toString();
     }
+
     @GET
     @Path("/test2")
-    public String test2(){
-        return requests.get(discoveryVip.choose("core")+"/test1").text();
+    public String test2() {
+        return requests.get(discoveryVip.choose("core") + "/test1").text();
     }
 }

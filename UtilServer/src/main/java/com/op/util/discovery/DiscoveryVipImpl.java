@@ -28,19 +28,22 @@ import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 public class DiscoveryVipImpl implements DiscoveryVip {
     private static Logger LOGGER = LoggerFactory.getLogger(DiscoveryVipImpl.class);
     private static Map<String, ILoadBalancer> namedLBMap = new ConcurrentHashMap<String, ILoadBalancer>();
-    public DiscoveryVipImpl(){}
-    public String choose(String serverId){
+
+    public DiscoveryVipImpl() {
+    }
+
+    public String choose(String serverId) {
         String serverStr = null;
         try {
             DynamicServerListLoadBalancer lb = (DynamicServerListLoadBalancer) namedLBMap.get(serverId);
             if (lb == null) {
                 DefaultClientConfigImpl config = DefaultClientConfigImpl.getClientConfigWithDefaultValues();
-                config.setProperty(CommonClientConfigKey.NFLoadBalancerPingInterval, ConfigurationManager.getConfigInstance().getInt("ribbon.NFLoadBalancerPingInterval",20));
+                config.setProperty(CommonClientConfigKey.NFLoadBalancerPingInterval, ConfigurationManager.getConfigInstance().getInt("ribbon.NFLoadBalancerPingInterval", 20));
                 ServerList<DiscoveryEnabledServer> list = new DiscoveryEnabledNIWSServerList(serverId);
                 ServerListFilter<DiscoveryEnabledServer> filter = new ServerListSubsetFilter<DiscoveryEnabledServer>();
-                lb = LoadBalancerBuilder.<DiscoveryEnabledServer> newBuilder().withDynamicServerList(list)
+                lb = LoadBalancerBuilder.<DiscoveryEnabledServer>newBuilder().withDynamicServerList(list)
                         .withServerListFilter(filter).withPing(new PingPort()).withRule(new BestAvailableRule()).withClientConfig(config).buildDynamicServerListLoadBalancer();
-                LOGGER.info("NFLoadBalancerPingInterval:" +config.get(CommonClientConfigKey.NFLoadBalancerPingInterval));
+                LOGGER.info("NFLoadBalancerPingInterval:" + config.get(CommonClientConfigKey.NFLoadBalancerPingInterval));
                 namedLBMap.put(serverId, lb);
             }
             DiscoveryEnabledServer server = (DiscoveryEnabledServer) lb.chooseServer();

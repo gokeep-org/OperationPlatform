@@ -20,5 +20,4 @@ public class ProxyBootstrap {
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
-
 }

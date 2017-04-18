@@ -3,6 +3,7 @@ package com.op.util.requests.exception;
 public class RequestsException extends RuntimeException {
     private String code;
     private String message;
+
     public RequestsException() {
     }
 

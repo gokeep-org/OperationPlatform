@@ -7,22 +7,22 @@ package com.op.message.exception;
  * @Auther is xuning on 2017/2/15.
  ****************************************/
 public class OperationPlatformException extends RuntimeException {
-	public OperationPlatformException() {
-	}
+    public OperationPlatformException() {
+    }
 
-	public OperationPlatformException(Throwable cause) {
-		super(cause);
-	}
+    public OperationPlatformException(Throwable cause) {
+        super(cause);
+    }
 
-	public OperationPlatformException(String message) {
-		super(message);
-	}
+    public OperationPlatformException(String message) {
+        super(message);
+    }
 
-	public OperationPlatformException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public OperationPlatformException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public OperationPlatformException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+    public OperationPlatformException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

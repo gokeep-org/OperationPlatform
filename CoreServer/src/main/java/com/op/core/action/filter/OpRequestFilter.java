@@ -32,7 +32,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
     @Context
     private HttpServletRequest request;
-    
+
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
         getBrowerHeader(requestContext);
@@ -43,8 +43,8 @@ public class OpRequestFilter implements ContainerRequestFilter {
         String userId = requestContext.getHeaderString("user_id");
         MDC.put("user_id", requestContext.getHeaderString(userId));
         MDC.put("access_token", requestContext.getHeaderString(accessToken));
-        LOGGER.info("请求拦截到token is: "+accessToken);
-        LOGGER.info("请求拦截到user id is: "+accessToken);
+        LOGGER.info("请求拦截到token is: " + accessToken);
+        LOGGER.info("请求拦截到user id is: " + accessToken);
         LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
     }
 

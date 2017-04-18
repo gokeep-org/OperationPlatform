@@ -4,6 +4,7 @@ import com.netflix.config.ConfigurationManager;
 import com.netflix.loadbalancer.IPing;
 import com.netflix.loadbalancer.Server;
 import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,18 +21,19 @@ import java.net.SocketAddress;
  ****************************************/
 public class PingPort implements IPing {
     private static Logger logger = LoggerFactory.getLogger(PingPort.class);
+
     public boolean isAlive(Server server) {
         logger.trace("检查端口状态,线程名称：" + Thread.currentThread().getName());
         DiscoveryEnabledServer enabledServer = (DiscoveryEnabledServer) server;
-        int IpSocketTimeOut= ConfigurationManager.getConfigInstance().getInt("iping.socket.timeout",3000);
-        logger.trace("socket超时时间："+IpSocketTimeOut);
+        int IpSocketTimeOut = ConfigurationManager.getConfigInstance().getInt("iping.socket.timeout", 3000);
+        logger.trace("socket超时时间：" + IpSocketTimeOut);
         boolean isAlive = false;
         Socket client = new Socket();
         String ip = enabledServer.getInstanceInfo().getIPAddr();
         int port = enabledServer.getInstanceInfo().getPort();
         try {
-            SocketAddress socketAddress = new InetSocketAddress(ip,port);
-            client.connect(socketAddress,IpSocketTimeOut);
+            SocketAddress socketAddress = new InetSocketAddress(ip, port);
+            client.connect(socketAddress, IpSocketTimeOut);
             isAlive = true;
         } catch (Exception e) {
             logger.error("获取端口状态时异常:" + ip + ":" + port, e.getMessage());

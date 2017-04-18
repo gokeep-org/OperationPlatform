@@ -3,6 +3,7 @@ package com.op.message.rest;
 import com.google.gson.JsonObject;
 import com.op.message.bean.entity.email.Email;
 import com.op.message.service.MailSendService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -15,9 +16,10 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
 public class TestRest {
-    public String tpf(){
+    public String tpf() {
         return "* is tfg";
     }
+
     @Autowired
     private MailSendService mailSendService;
 

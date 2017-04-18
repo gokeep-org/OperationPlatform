@@ -22,6 +22,7 @@ public class JettyConfig extends JettyEmbeddedServletContainerFactory {
     private static final String timout = PropertiesUtil.getValue("server.jetty.timeout");
     private static final String queueSize = PropertiesUtil.getValue("server.jetty.queue.size");
     private static QueuedThreadPool threadPool = new QueuedThreadPool();
+
     public JettyConfig() {
         setMaxThread();
         setMinThread();

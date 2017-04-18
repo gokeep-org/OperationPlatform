@@ -15,37 +15,37 @@ public class ErrorInfoOutput extends BaseOutput {
     @SerializedName("msg")
     private String messsage;
     private UUID uuid;
-    
+
     public ErrorInfoOutput() {
     }
-    
+
     public ErrorInfoOutput(String code, String messsage) {
         this.code = code;
         this.messsage = messsage;
         this.uuid = UUID.randomUUID();
         setSuccess("false");
     }
-    
+
     public String getCode() {
         return code;
     }
-    
+
     public void setCode(String code) {
         this.code = code;
     }
-    
+
     public String getMesssage() {
         return messsage;
     }
-    
+
     public void setMesssage(String messsage) {
         this.messsage = messsage;
     }
-    
+
     public UUID getUuid() {
         return uuid;
     }
-    
+
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }

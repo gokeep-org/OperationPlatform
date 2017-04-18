@@ -74,7 +74,6 @@ public class MongoDbTemplateTest {
     }
 
 
-
     @Test
     public void testRemoveByObj() {
         User user = new User();
@@ -102,7 +101,7 @@ public class MongoDbTemplateTest {
     @Test
     public void testfindById() {
         User user1 = mongoTemplate.findById("58dcab6d5e7ee317544c0922", User.class);
-       LOGGER.info("User name is :"+user1.getName());
+        LOGGER.info("User name is :" + user1.getName());
     }
 
     @Test

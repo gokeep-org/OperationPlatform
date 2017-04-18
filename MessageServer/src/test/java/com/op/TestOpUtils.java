@@ -1,6 +1,7 @@
 package com.op;
 
 import com.op.message.util.OpUtils;
+
 import org.junit.Test;
 
 /****************************************
@@ -10,9 +11,9 @@ import org.junit.Test;
  * @Auther is xuning on 2017/2/17.
  ****************************************/
 public class TestOpUtils {
-	@Test
-	public void testGetEnvValue(){
-		String s= OpUtils.getEnvValue("JAVA_HOME");
-		System.out.println(s);
-	}
+    @Test
+    public void testGetEnvValue() {
+        String s = OpUtils.getEnvValue("JAVA_HOME");
+        System.out.println(s);
+    }
 }

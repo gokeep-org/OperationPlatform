@@ -10,5 +10,5 @@ import com.op.core.bean.entity.auth.OauthClient;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/28.
  ****************************************/
-public interface OauthClientRepository  extends MongoRepository<OauthClient, String> {
+public interface OauthClientRepository extends MongoRepository<OauthClient, String> {
 }

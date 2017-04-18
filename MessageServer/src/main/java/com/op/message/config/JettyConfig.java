@@ -43,6 +43,6 @@ public class JettyConfig extends JettyEmbeddedServletContainerFactory {
     }
 
     public void setQueueSize() {
-    
+
     }
 }

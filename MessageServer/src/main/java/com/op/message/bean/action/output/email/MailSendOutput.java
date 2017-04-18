@@ -10,5 +10,5 @@ import com.op.message.bean.action.output.item.ItemOutput;
  * @Auther is xuning on 17-2-18
  ****************************************/
 public class MailSendOutput extends ItemOutput {
-    
+
 }

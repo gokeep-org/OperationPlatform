@@ -35,7 +35,6 @@ public class IndexRest {
 
     /**
      * 创建文档
-     *
      * @param index
      * @param type
      * @return
@@ -58,7 +57,6 @@ public class IndexRest {
 
     /**
      * 根据ID删除文档
-     *
      * @param index
      * @param type
      * @param id
@@ -82,7 +80,6 @@ public class IndexRest {
 
     /**
      * 根据ID更新文档
-     *
      * @param index
      * @param type
      * @param id

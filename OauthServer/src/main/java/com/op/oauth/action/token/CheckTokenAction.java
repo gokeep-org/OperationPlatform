@@ -44,7 +44,7 @@ public class CheckTokenAction extends ItemAction<BaseOutput> {
 
         permissionToken = tokenService.checkToken(token);
         //获取权限信息
-        if (permissionToken.size() != 1){
+        if (permissionToken.size() != 1) {
             throw new OperationPlatformException(ErrorCode.CHECK_ACCESS_TOKEN_FAILED);
         }
     }

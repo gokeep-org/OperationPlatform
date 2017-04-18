@@ -38,7 +38,7 @@ public class UserRest {
      * @return
      */
     @PUT
-    public String updateUser(User user){
+    public String updateUser(User user) {
         return null;
     }
 
@@ -49,7 +49,7 @@ public class UserRest {
      * @return
      */
     @DELETE
-    public String deleteUser(@QueryParam("user_id") String userId){
+    public String deleteUser(@QueryParam("user_id") String userId) {
         return null;
     }
 
@@ -73,7 +73,7 @@ public class UserRest {
 
     @GET
     @Path("/all")
-    public String getAllUser(){
+    public String getAllUser() {
         return null;
     }
 
@@ -84,7 +84,7 @@ public class UserRest {
      */
     @POST
     @Path("/check")
-    public String checkUser(User user){
+    public String checkUser(User user) {
         return null;
     }
 
@@ -95,7 +95,7 @@ public class UserRest {
      */
     @PUT
     @Path("/freeze")
-    public String freezeUser(@QueryParam("user_id") String userId){
+    public String freezeUser(@QueryParam("user_id") String userId) {
         return null;
     }
 }

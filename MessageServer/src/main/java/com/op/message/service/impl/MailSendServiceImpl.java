@@ -17,111 +17,111 @@ import org.springframework.stereotype.Service;
  ****************************************/
 @Service(ServiceBeanNames.MAIL_SEND_SERVICE)
 public class MailSendServiceImpl extends BaseService implements MailSendService {
-	@Autowired
-	private SmtpServer smtpServer;
+    @Autowired
+    private SmtpServer smtpServer;
 
-	@Override
-	public Boolean sendSimpleEmail(Email email) {
-		try {
-			smtpServer.setMailSessionInfo()
-					.setEmail(email)
-					.setSender()
-					.setReceiver()
-					.setTitle()
-					.setContent()
-					.execute();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Boolean sendSimpleEmail(Email email) {
+        try {
+            smtpServer.setMailSessionInfo()
+                    .setEmail(email)
+                    .setSender()
+                    .setReceiver()
+                    .setTitle()
+                    .setContent()
+                    .execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	@Override
-	public Boolean sendRecipientsEmail(Email email) {
-		try {
-			smtpServer.setMailSessionInfo()
-					.setEmail(email)
-					.setSender()
-					.setReceiver()
-					.setRecipients()
-					.setTitle()
-					.setContent()
-					.execute();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Boolean sendRecipientsEmail(Email email) {
+        try {
+            smtpServer.setMailSessionInfo()
+                    .setEmail(email)
+                    .setSender()
+                    .setReceiver()
+                    .setRecipients()
+                    .setTitle()
+                    .setContent()
+                    .execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	@Override
-	public Boolean sendBccEmail(Email email) {
-		try {
-			smtpServer.setMailSessionInfo()
-					.setEmail(email)
-					.setSender()
-					.setReceiver()
-					.setBccAccepter()
-					.setTitle()
-					.setContent()
-					.execute();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Boolean sendBccEmail(Email email) {
+        try {
+            smtpServer.setMailSessionInfo()
+                    .setEmail(email)
+                    .setSender()
+                    .setReceiver()
+                    .setBccAccepter()
+                    .setTitle()
+                    .setContent()
+                    .execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	@Override
-	public Boolean sendAttachmentsEmail(Email email) {
-		try {
-			smtpServer.setMailSessionInfo()
-					.setEmail(email)
-					.setSender()
-					.setReceiver()
-					.setTitle()
-					.setContent()
-					.setAttachment()
-					.execute();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Boolean sendAttachmentsEmail(Email email) {
+        try {
+            smtpServer.setMailSessionInfo()
+                    .setEmail(email)
+                    .setSender()
+                    .setReceiver()
+                    .setTitle()
+                    .setContent()
+                    .setAttachment()
+                    .execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	@Override
-	public Boolean sendCommonEmail(Email email) {
-		try {
-			smtpServer.setMailSessionInfo()
-					.setEmail(email)
-					.setSender()
-					.setReceiver()
-					.setRecipients()
-					.setBccAccepter()
-					.setTitle()
-					.setContent()
-					.setAttachment()
-					.execute();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Boolean sendCommonEmail(Email email) {
+        try {
+            smtpServer.setMailSessionInfo()
+                    .setEmail(email)
+                    .setSender()
+                    .setReceiver()
+                    .setRecipients()
+                    .setBccAccepter()
+                    .setTitle()
+                    .setContent()
+                    .setAttachment()
+                    .execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	@Override
-	public Boolean sendTemplate(Email email) {
-		try {
-			smtpServer.setMailSessionInfo()
-					.setEmail(email)
-					.setSender()
-					.setReceiver()
-					.setRecipients()
-					.setBccAccepter()
-					.setTitle()
-					.setContent()
-					.setAttachment()
-					.execute();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    @Override
+    public Boolean sendTemplate(Email email) {
+        try {
+            smtpServer.setMailSessionInfo()
+                    .setEmail(email)
+                    .setSender()
+                    .setReceiver()
+                    .setRecipients()
+                    .setBccAccepter()
+                    .setTitle()
+                    .setContent()
+                    .setAttachment()
+                    .execute();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

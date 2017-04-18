@@ -20,11 +20,12 @@ import org.slf4j.LoggerFactory;
  ****************************************/
 @Provider
 public class OpResponseFilter implements ContainerResponseFilter {
-	private static final Logger LOGGER = LoggerFactory.getLogger(OpResponseFilter.class);
-	@Context
-	private HttpServletRequest request;
-	@Override
-	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-		LOGGER.info("response sttaus is "+responseContext.getStatus());
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(OpResponseFilter.class);
+    @Context
+    private HttpServletRequest request;
+
+    @Override
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+        LOGGER.info("response sttaus is " + responseContext.getStatus());
+    }
 }
