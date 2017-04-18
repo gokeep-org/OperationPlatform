@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
  * @Auther is xuning on 2017/3/28.
  ****************************************/
 public interface ReadServices<T> {
-    public T findOneById(String id, Class<T> classes);
+    public T findOneById(String id, String collectionName);
 
-    public T findByQuery(Query query, Class<T> classes);
+    public T findByQuery(Query query, String collectionName);
 }

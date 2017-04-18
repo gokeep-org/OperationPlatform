@@ -1,7 +1,10 @@
 package com.op.core.rest;
 
+import java.util.List;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -9,7 +12,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.core.action.factory.WriteActionFactory;
-import com.op.core.bean.action.input.write.InsertInput;
+import com.op.core.bean.action.input.DeleteInput;
+import com.op.core.bean.action.input.InsertInput;
+import com.op.core.bean.action.input.UpdateInput;
+import com.op.core.bean.action.output.BaseOutput;
 import com.op.core.bean.action.output.WriteOutput;
 import com.op.core.bean.entity.BaseBean;
 
@@ -34,7 +40,7 @@ public class WriteRest {
 
     @POST
     @Path("/batch/{type}")
-    public WriteOutput inserts(BaseBean os,
+    public WriteOutput inserts(List<BaseBean> os,
                                @PathParam("type") String collectionName) throws Exception {
         InsertInput input = new InsertInput();
         input.setCollectionName(collectionName);
@@ -43,15 +49,22 @@ public class WriteRest {
     }
 
     @DELETE
-    public String deleteById(
-            @QueryParam("c_name") String collectionName,
-            @QueryParam("id") String id) {
-        return null;
+    @Path("/{type}")
+    public BaseOutput deleteById(@PathParam("type") String collectionName,
+                                 @QueryParam("id") String id) throws Exception {
+        DeleteInput input = new DeleteInput();
+        input.setId(id);
+        input.setCollectionName(collectionName);
+        return WriteActionFactory.getDeleteAction(input).execute();
     }
 
-    @DELETE
-    @Path("/deletes")
-    public String deletesByids() {
-        return null;
+    @PUT
+    @Path("/{type}")
+    public WriteOutput updateById(BaseBean o,
+                                  @PathParam("type") String collectionName) throws Exception {
+        UpdateInput input = new UpdateInput();
+        input.setCollectionName(collectionName);
+        input.setO(o);
+        return (WriteOutput) WriteActionFactory.getUpdateAction(input).execute();
     }
 }

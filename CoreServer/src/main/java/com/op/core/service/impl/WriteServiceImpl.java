@@ -36,7 +36,10 @@ public class WriteServiceImpl extends BaseService implements WriteService {
     @Override
     public Boolean inserts(Iterable iterable, String collectionName) {
         try {
-            mongoTemplate.insert(iterable, collectionName);
+            iterable.forEach(doc->{
+                mongoTemplate.insert(doc, collectionName);
+            });
+
         } catch (Exception e) {
             return false;
         }

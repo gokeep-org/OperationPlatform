@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.core.action.item.ItemAction;
-import com.op.core.bean.action.input.write.InsertInput;
+import com.op.core.bean.action.input.InsertInput;
 import com.op.core.bean.action.output.BaseOutput;
 import com.op.core.bean.action.output.WriteOutput;
 

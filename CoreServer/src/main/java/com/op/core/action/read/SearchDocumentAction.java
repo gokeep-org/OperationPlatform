@@ -1,26 +1,29 @@
-package com.op.core.action.write;
+package com.op.core.action.read;
+
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
 import com.op.core.action.item.ItemAction;
-import com.op.core.bean.action.input.DeleteInput;
+import com.op.core.bean.action.input.SearchInput;
 import com.op.core.bean.action.output.BaseOutput;
-import com.op.core.bean.action.output.WriteOutput;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 17-3-28
+ * @Auther is xuning on 2017/4/18.
  ****************************************/
-public class DeleteAction extends ItemAction<BaseOutput> {
+public class SearchDocumentAction extends ItemAction<BaseOutput> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchDocumentAction.class);
+    private String collectionNmae;
     private String id;
-    private String collectionName;
-    private Logger LOGGER = LoggerFactory.getLogger(DeleteAction.class);
-    public DeleteAction(DeleteInput input) {
+    private JsonObject res;
+    public SearchDocumentAction(SearchInput input) {
         this.id = input.getId();
-        this.collectionName = input.getCollectionName();
+        this.collectionNmae = input.getCollectionName();
     }
 
     @Override
@@ -35,20 +38,17 @@ public class DeleteAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        writeService.delete(this.id, this.collectionName);
+       Map<String, Object> map = (Map<String, Object>) readServices.findOneById(this.id, this.collectionNmae);
+        LOGGER.info(map.toString());
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
-        WriteOutput output = new WriteOutput();
-        output.setCode("200");
-        output.setMessage("操作成功");
-        output.setSuccess(true);
-        return output;
+        return null;
     }
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("delete a obj is successful, id is: "+this.id);
+
     }
 }

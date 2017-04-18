@@ -3,7 +3,10 @@ package com.op.core.action.factory;
 import com.op.core.action.write.DeleteAction;
 import com.op.core.action.write.InsertAction;
 import com.op.core.action.write.InsertsAction;
-import com.op.core.bean.action.input.write.InsertInput;
+import com.op.core.action.write.UpdateAction;
+import com.op.core.bean.action.input.DeleteInput;
+import com.op.core.bean.action.input.InsertInput;
+import com.op.core.bean.action.input.UpdateInput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -20,7 +23,11 @@ public class WriteActionFactory extends BaseActionFactory {
         return new InsertsAction(input);
     }
 
-    public static DeleteAction getDeleteAction() {
-        return null;
+    public static DeleteAction getDeleteAction(DeleteInput input) {
+        return new DeleteAction(input);
+    }
+
+    public static UpdateAction getUpdateAction(UpdateInput input) {
+        return new UpdateAction(input);
     }
 }

@@ -1,5 +1,8 @@
 package com.op.core.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,18 +25,18 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public Object findOneById(String id, Class classes) {
+    public Map<String, Object> findOneById(String id, String collectionName) {
         try {
-            return mongoTemplate.findById(id, classes);
+            return mongoTemplate.findById(id, null, collectionName);
         } catch (Exception e) {
             throw new OperationPlatformException("find by id is error");
         }
     }
 
     @Override
-    public Object findByQuery(Query query, Class classes) {
+    public List<Map<String, Object>> findByQuery(Query query, String collectionName) {
         try {
-            return mongoTemplate.find(query, classes);
+            return mongoTemplate.find(query, null, collectionName);
         } catch (Exception e) {
             throw new OperationPlatformException("find by query is error");
         }

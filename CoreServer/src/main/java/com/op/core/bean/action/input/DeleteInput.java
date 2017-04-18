@@ -1,18 +1,18 @@
-package com.op.core.bean.action.input.write;
+package com.op.core.bean.action.input;
 
 import com.google.gson.annotations.SerializedName;
-import com.op.core.bean.action.input.BaseInput;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 17-3-28
+ * @Auther is xuning on 2017/4/18.
  ****************************************/
-public class InsertInput extends BaseInput {
+public class DeleteInput extends BaseInput {
     @SerializedName("type")
     private String collectionName;
-
+    @SerializedName("_id")
+    private String id;
     public String getCollectionName() {
         return collectionName;
     }
@@ -25,6 +25,14 @@ public class InsertInput extends BaseInput {
 
     public Object getO() {
         return o;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setO(Object o) {

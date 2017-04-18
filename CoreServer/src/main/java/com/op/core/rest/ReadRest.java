@@ -1,8 +1,15 @@
 package com.op.core.rest;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import com.op.core.action.factory.ReadActionFactory;
+import com.op.core.bean.action.input.SearchInput;
+import com.op.core.bean.action.output.ReadOutput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -13,8 +20,13 @@ import javax.ws.rs.core.MediaType;
 @Path("/r")
 @Produces({MediaType.APPLICATION_JSON})
 public class ReadRest {
-    @Path("/read")
-    public String test() {
-        return null;
+    @GET
+    @Path("/{type}")
+    public ReadOutput searchDocumentById(@PathParam("type") String collectionName,
+                                         @QueryParam("id") String id) throws Exception {
+        SearchInput input = new SearchInput();
+        input.setCollectionName(collectionName);
+        input.setId(id);
+        return (ReadOutput) ReadActionFactory.getSearchDocumentByIdAction(input).execute();
     }
 }
