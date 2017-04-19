@@ -9,6 +9,9 @@ import com.google.gson.JsonObject;
 import com.op.core.action.item.ItemAction;
 import com.op.core.bean.action.input.SearchInput;
 import com.op.core.bean.action.output.BaseOutput;
+import com.op.core.bean.action.output.ReadOutput;
+import com.op.core.exception.OperationPlatformException;
+import com.op.util.gson.SerializeUtil;
 
 /****************************************
  * Copyright (c) xuning.
@@ -20,7 +23,8 @@ public class SearchDocumentAction extends ItemAction<BaseOutput> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchDocumentAction.class);
     private String collectionNmae;
     private String id;
-    private JsonObject res;
+    private Map res;
+
     public SearchDocumentAction(SearchInput input) {
         this.id = input.getId();
         this.collectionNmae = input.getCollectionName();
@@ -33,22 +37,25 @@ public class SearchDocumentAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-
+        if (null == this.id){
+            throw new OperationPlatformException("search obj id is must not null");
+        }
     }
 
     @Override
     protected void start() throws Exception {
-       Map<String, Object> map = (Map<String, Object>) readServices.findOneById(this.id, this.collectionNmae);
-        LOGGER.info(map.toString());
+        res = (Map<String, Object>) readServices.findOneById(this.id, this.collectionNmae);
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
-        return null;
+        JsonObject result = SerializeUtil.transfromMaptoJsonObject(res);
+        ReadOutput output = new ReadOutput(result, "200", "操作成功");
+        return output;
     }
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("search a obj is successful, id:" + id);
     }
 }

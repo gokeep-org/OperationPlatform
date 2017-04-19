@@ -24,7 +24,7 @@ import com.op.core.bean.action.output.WriteOutput;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/28.
  ****************************************/
-@Path("/w/")
+@Path("/write/")
 @Produces({MediaType.APPLICATION_JSON})
 public class WriteRest {
     @POST
@@ -38,7 +38,7 @@ public class WriteRest {
     }
 
     @POST
-    @Path("/batch/{type}")
+    @Path("/{type}/batch")
     public WriteOutput inserts(List<Map> os,
                                @PathParam("type") String collectionName) throws Exception {
         InsertInput input = new InsertInput();

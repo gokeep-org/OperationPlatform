@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.op.core.action.dao.BaseDao;
-import com.op.core.util.mongo.SerializeUtil;
+import com.op.core.util.mongo.GsonUtil;
 
 /****************************************
  * Copyright (c) xuning.
@@ -23,8 +23,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public void insert(Object o) {
         mongo.insert(
-                SerializeUtil.parseToBson(o),
-                SerializeUtil.getCollectionNameByClass(o.getClass())
+                GsonUtil.parseToBson(o),
+                GsonUtil.getCollectionNameByClass(o.getClass())
         );
     }
 
@@ -32,8 +32,8 @@ public class BaseDaoImpl implements BaseDao {
     public void inserts(Iterable os, Class classes) {
         os.forEach(o -> {
             mongo.insert(
-                    SerializeUtil.parseToBson(o),
-                    SerializeUtil.getCollectionNameByClass(classes)
+                    GsonUtil.parseToBson(o),
+                    GsonUtil.getCollectionNameByClass(classes)
             );
         });
 
@@ -42,8 +42,8 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public void delete(Object o) {
         mongo.remove(
-                SerializeUtil.parseToBson(o),
-                SerializeUtil.getCollectionNameByClass(o.getClass())
+                GsonUtil.parseToBson(o),
+                GsonUtil.getCollectionNameByClass(o.getClass())
         );
     }
 
@@ -51,15 +51,15 @@ public class BaseDaoImpl implements BaseDao {
     public void deleteById(String id, Class classes) {
         mongo.remove(
                 id,
-                SerializeUtil.getCollectionNameByClass(classes)
+                GsonUtil.getCollectionNameByClass(classes)
         );
     }
 
     @Override
     public void update(Object o) {
         mongo.save(
-                SerializeUtil.parseToBson(o),
-                SerializeUtil.getCollectionNameByClass(o.getClass())
+                GsonUtil.parseToBson(o),
+                GsonUtil.getCollectionNameByClass(o.getClass())
         );
     }
 
@@ -72,7 +72,7 @@ public class BaseDaoImpl implements BaseDao {
     public long size(Object o, Class classes) {
         return mongo.findAll(
                 classes,
-                SerializeUtil.getCollectionNameByClass(o.getClass())
+                GsonUtil.getCollectionNameByClass(o.getClass())
         ).size();
     }
 
@@ -84,7 +84,7 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public void deletesByIds(Iterable ids, Class classes) {
         ids.forEach(id -> {
-            mongo.remove(id, SerializeUtil.getCollectionNameByClass(classes));
+            mongo.remove(id, GsonUtil.getCollectionNameByClass(classes));
         });
     }
 

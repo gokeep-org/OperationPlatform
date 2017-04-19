@@ -16,6 +16,17 @@ public class ReadOutput extends BaseOutput {
     @SerializedName("msg")
     private String message;
 
+    public ReadOutput(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public ReadOutput(JsonObject result, String code, String message) {
+        this.result = result;
+        this.code = code;
+        this.message = message;
+    }
+
     public String getCode() {
         return code;
     }

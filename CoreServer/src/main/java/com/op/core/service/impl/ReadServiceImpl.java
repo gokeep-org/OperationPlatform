@@ -27,7 +27,7 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
     @Override
     public Map<String, Object> findOneById(String id, String collectionName) {
         try {
-            return mongoTemplate.findById(id, null, collectionName);
+            return mongoTemplate.findById(id, Map.class, collectionName);
         } catch (Exception e) {
             throw new OperationPlatformException("find by id is error");
         }

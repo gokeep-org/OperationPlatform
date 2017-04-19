@@ -17,12 +17,12 @@ import com.mongodb.util.JSON;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/27.
  ****************************************/
-public class SerializeUtil {
+public class GsonUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SerializeUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GsonUtil.class);
     public static Gson gson = new Gson();
 
-    private SerializeUtil() {
+    private GsonUtil() {
         if (Objects.equals(null, gson)) {
             gson = new Gson();
         }

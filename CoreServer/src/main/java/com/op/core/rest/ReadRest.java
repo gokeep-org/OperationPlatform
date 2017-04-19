@@ -4,7 +4,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.core.action.factory.ReadActionFactory;
@@ -17,13 +16,13 @@ import com.op.core.bean.action.output.ReadOutput;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/3/28.
  ****************************************/
-@Path("/r")
+@Path("/read")
 @Produces({MediaType.APPLICATION_JSON})
 public class ReadRest {
     @GET
-    @Path("/{type}")
+    @Path("/{type}/{id}")
     public ReadOutput searchDocumentById(@PathParam("type") String collectionName,
-                                         @QueryParam("id") String id) throws Exception {
+                                         @PathParam("id") String id) throws Exception {
         SearchInput input = new SearchInput();
         input.setCollectionName(collectionName);
         input.setId(id);
