@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +20,7 @@ import com.op.core.CoreServerBootstrap;
 import com.op.core.action.dao.BaseDao;
 import com.op.core.bean.entity.User;
 import com.op.core.bean.repository.UserRepository;
+import com.op.util.requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.
@@ -35,7 +38,8 @@ public class MongoDbTemplateTest {
     public UserRepository userRepository;
     @Autowired
     public BaseDao baseDao;
-
+    @Autowired
+    public Requests requests;
     public static User userTemplate;
 
     static {
@@ -92,12 +96,25 @@ public class MongoDbTemplateTest {
 
     @Test
     public void testUpdateById() {
+        Map map = new HashedMap();
         User user = new User();
-        user.setAddress("中国山东");
-        mongoTemplate.save(user);
+        user.setAddress("中国中国中国中国");
+        user.setId("58f6d844240b162298fcc085");
+        user.setAge("qqqqqqqq");
+//        map.put("_id", "58f6d844240b162298fcc085");
+//        map.put("inter", "meinv");
+
+        mongoTemplate.save(user, "user");
     }
-
-
+    @Test
+    public void testMapUpdate(){
+        User user = new User();
+        user.setAddress("中国中国中国中国");
+        user.setId("58f6d844240b162298fcc085");
+        user.setAge("222eeeeeeeeeeeeee222");
+//        requests.get("www.baidu.com");
+        requests.put("localhost:20001/w/user", user, null);
+    }
     @Test
     public void testfindById() {
         User user1 = mongoTemplate.findById("58dcab6d5e7ee317544c0922", User.class);

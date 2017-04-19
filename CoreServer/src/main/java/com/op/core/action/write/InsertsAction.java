@@ -1,6 +1,7 @@
 package com.op.core.action.write;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +19,12 @@ import com.op.core.bean.action.output.WriteOutput;
  ****************************************/
 public class InsertsAction extends ItemAction<BaseOutput> {
     private String collectionName;
-    private List<Object> os;
+    private List<Map> bodys;
     private static final Logger LOGGER = LoggerFactory.getLogger(InsertsAction.class);
 
     public InsertsAction(InsertInput input) {
         this.collectionName = input.getCollectionName();
-        this.os = (List<Object>) input.getO();
+        this.bodys = (List<Map>) input.getO();
     }
 
     @Override
@@ -38,7 +39,7 @@ public class InsertsAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        writeService.inserts(this.os, collectionName);
+        writeService.inserts(this.bodys, collectionName);
     }
 
     @Override

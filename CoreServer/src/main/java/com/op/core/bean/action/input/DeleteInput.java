@@ -1,5 +1,7 @@
 package com.op.core.bean.action.input;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 /****************************************
@@ -11,8 +13,8 @@ import com.google.gson.annotations.SerializedName;
 public class DeleteInput extends BaseInput {
     @SerializedName("type")
     private String collectionName;
-    @SerializedName("_id")
-    private String id;
+    private List<String> ids;
+
     public String getCollectionName() {
         return collectionName;
     }
@@ -21,21 +23,11 @@ public class DeleteInput extends BaseInput {
         this.collectionName = collectionName;
     }
 
-    private Object o;
-
-    public Object getO() {
-        return o;
+    public List<String> getIds() {
+        return ids;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setO(Object o) {
-        this.o = o;
+    public void setIds(List<String> ids) {
+        this.ids = ids;
     }
 }

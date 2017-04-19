@@ -1,5 +1,7 @@
 package com.op.core.bean.action.input;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 /****************************************
@@ -13,6 +15,16 @@ public class UpdateInput extends BaseInput {
     private String collectionName;
     @SerializedName("_id")
     private String id;
+    private List<String> ids;
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<String> ids) {
+        this.ids = ids;
+    }
+
     public String getCollectionName() {
         return collectionName;
     }

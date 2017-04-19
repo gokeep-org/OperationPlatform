@@ -35,3 +35,6 @@ zuul:
     customer:
       path: /customer/**
       serviceId: customer
+    proxy:
+      path: /proxy/**
+      serviceId: proxy

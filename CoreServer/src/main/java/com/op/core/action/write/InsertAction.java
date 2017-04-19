@@ -1,5 +1,7 @@
 package com.op.core.action.write;
 
+import java.util.Map;
+
 import com.op.core.action.item.ItemAction;
 import com.op.core.bean.action.input.InsertInput;
 import com.op.core.bean.action.output.BaseOutput;
@@ -13,10 +15,10 @@ import com.op.core.bean.action.output.WriteOutput;
  ****************************************/
 public class InsertAction extends ItemAction<BaseOutput> {
     private String collectionName;
-    private Object o;
+    private Map<String, Object> body;
 
     public InsertAction(InsertInput input) {
-        this.o = input.getO();
+        this.body = (Map<String, Object>) input.getO();
         this.collectionName = input.getCollectionName();
     }
 
@@ -32,7 +34,7 @@ public class InsertAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        writeService.insert(o, collectionName);
+        writeService.insert(this.body, collectionName);
     }
 
     @Override

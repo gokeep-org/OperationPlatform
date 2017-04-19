@@ -21,6 +21,7 @@ import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
+import com.netflix.zuul.context.RequestContext;
 import com.op.util.requests.Requests;
 
 
@@ -43,18 +44,18 @@ public class OpRequestFilter implements ContainerRequestFilter {
     private Requests requests;
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
-//        getBrowerHeader(requestContext);
-//        String method = requestContext.getMethod();
-//        String path = requestContext.getUriInfo().getPath();
-//        String requestPath = method + ":" + path;
-//        String accessToken = requestContext.getHeaderString("token");
-//        String userId = requestContext.getHeaderString("user_id");
-//        MDC.put("user_id", requestContext.getHeaderString(userId));
-//        MDC.put("access_token", requestContext.getHeaderString(accessToken));
-//        LOGGER.info("请求拦截到token is: " + accessToken);
-//        LOGGER.info("请求拦截到user id is: " + accessToken);
-//        LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
-//        RequestContext ctx = RequestContext.getCurrentContext();
+        getBrowerHeader(requestContext);
+        String method = requestContext.getMethod();
+        String path = requestContext.getUriInfo().getPath();
+        String requestPath = method + ":" + path;
+        String accessToken = requestContext.getHeaderString("token");
+        String userId = requestContext.getHeaderString("user_id");
+        MDC.put("user_id", requestContext.getHeaderString(userId));
+        MDC.put("access_token", requestContext.getHeaderString(accessToken));
+        LOGGER.info("请求拦截到token is: " + accessToken);
+        LOGGER.info("请求拦截到user id is: " + accessToken);
+        LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
+        RequestContext ctx = RequestContext.getCurrentContext();
 //        //TODO: 这里要对token和user_id进行校验,请求Oauth2
 //        String a = loadBalancerClient.choose(ServerName.OAUTH).getHost();
 //        int b = loadBalancerClient.choose(ServerName.OAUTH).getPort();

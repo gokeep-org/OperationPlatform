@@ -1,5 +1,9 @@
 package com.op.core.action.write;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,6 +11,7 @@ import com.op.core.action.item.ItemAction;
 import com.op.core.bean.action.input.UpdateInput;
 import com.op.core.bean.action.output.BaseOutput;
 import com.op.core.bean.action.output.WriteOutput;
+import com.op.core.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.
@@ -16,10 +21,13 @@ import com.op.core.bean.action.output.WriteOutput;
  ****************************************/
 public class UpdateAction extends ItemAction<BaseOutput> {
     private String collectionName;
-    private Object o;
+    private Map body;
+    private List<String> ids;
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateAction.class);
+
     public UpdateAction(UpdateInput input) {
-        this.o = input.getO();
+        this.ids = input.getIds();
+        this.body = (Map) input.getO();
         this.collectionName = input.getCollectionName();
     }
 
@@ -30,12 +38,15 @@ public class UpdateAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-
+        if(Objects.equals(null, this.body)||0>=this.body.size()||0>=this.ids.size())
+            throw new OperationPlatformException("update body is must not null");
     }
 
     @Override
     protected void start() throws Exception {
-        writeService.update(o, collectionName);
+        this.ids.stream().forEach(id->{
+            writeService.updateById(id, this.body, this.collectionName);
+        });
     }
 
     @Override

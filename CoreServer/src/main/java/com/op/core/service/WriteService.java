@@ -1,8 +1,9 @@
 package com.op.core.service;
 
-import org.springframework.data.mongodb.core.query.Query;
-
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.mongodb.core.query.Query;
 
 /****************************************
  * Copyright (c) xuning.
@@ -21,7 +22,9 @@ public interface WriteService<O> {
 
     public Boolean deleteByQuery(Query query, String collectionName);
 
-    public Boolean update(O o, String collectionName);
+    public Boolean update(Map o, String collectionName);
+
+    public Boolean updateById(String id, Map o, String collectionName);
 
     public Boolean updateByQuery(Query query, String collectionName);
 

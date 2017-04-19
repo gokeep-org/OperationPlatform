@@ -2,10 +2,6 @@ package com.op.core.bean.entity;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.google.gson.annotations.SerializedName;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -22,14 +18,14 @@ public class User {
     private String email;
     private String address;
     private String status;
-    @Field("customer_ids")
-    @SerializedName("customer_ids")
+//    @Field("customer_ids")
+//    @SerializedName("customer_ids")
     private List<String> customerIds;
-    @Field("app_ids")
-    @SerializedName("app_ids")
+//    @Field("app_ids")
+//    @SerializedName("app_ids")
     private List<String> appIds;
-    @Field("team_ids")
-    @SerializedName("team_ids")
+//    @Field("team_ids")
+//    @SerializedName("team_ids")
     private List<String> teamIds;
 
     public String getId() {

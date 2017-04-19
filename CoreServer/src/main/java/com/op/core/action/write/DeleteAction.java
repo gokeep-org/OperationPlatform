@@ -1,5 +1,7 @@
 package com.op.core.action.write;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,11 +17,12 @@ import com.op.core.bean.action.output.WriteOutput;
  * @Auther is xuning on 17-3-28
  ****************************************/
 public class DeleteAction extends ItemAction<BaseOutput> {
-    private String id;
+    private List<String> ids;
     private String collectionName;
     private Logger LOGGER = LoggerFactory.getLogger(DeleteAction.class);
+
     public DeleteAction(DeleteInput input) {
-        this.id = input.getId();
+        this.ids = input.getIds();
         this.collectionName = input.getCollectionName();
     }
 
@@ -35,7 +38,9 @@ public class DeleteAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        writeService.delete(this.id, this.collectionName);
+        this.ids.stream().forEach(id -> {
+            writeService.delete(id, this.collectionName);
+        });
     }
 
     @Override
@@ -49,6 +54,6 @@ public class DeleteAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("delete a obj is successful, id is: "+this.id);
+        LOGGER.info("delete a obj is successful, ids is: " + this.ids);
     }
 }

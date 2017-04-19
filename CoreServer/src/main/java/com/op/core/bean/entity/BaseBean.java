@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * @Auther is xuning on 17-3-26
  ****************************************/
 public class BaseBean extends HashMap<String, Object> {
-    @SerializedName("_id")
+    @SerializedName("id")
     private String id;
 
     public String getId() {
