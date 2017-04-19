@@ -1,6 +1,7 @@
 package com.op.core.rest;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -27,5 +28,17 @@ public class ReadRest {
         input.setCollectionName(collectionName);
         input.setId(id);
         return (ReadOutput) ReadActionFactory.getSearchDocumentByIdAction(input).execute();
+    }
+
+    @POST
+    @Path("/")
+    public ReadOutput searchDocumentByQuery(SearchInput input) throws Exception {
+        return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input).execute();
+    }
+
+    @GET
+    @Path("/{type}/size")
+    public ReadOutput searchCollectionSize(@PathParam("type") String collectionNmae) throws Exception {
+        return (ReadOutput) ReadActionFactory.getSearchCollectionSizeAction(null, collectionNmae).execute();
     }
 }

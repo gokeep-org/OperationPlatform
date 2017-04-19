@@ -41,4 +41,22 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
             throw new OperationPlatformException("find by query is error");
         }
     }
+
+    @Override
+    public Long findCollectionSize(String collection) {
+        try {
+            return mongoTemplate.count(null, collection);
+        } catch (Exception e) {
+            throw new OperationPlatformException("find collection size is error");
+        }
+    }
+
+    @Override
+    public Object findCollectionSizeByQuery(Query query, String collection) {
+        try {
+            return mongoTemplate.count(query, collection);
+        } catch (Exception e) {
+            throw new OperationPlatformException("find collection size by query is error");
+        }
+    }
 }

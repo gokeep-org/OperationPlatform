@@ -21,6 +21,7 @@
         <module>UserServer</module>
         <module>EsServer</module>
         <module>UtilServer</module>
+        <module>AnalysisServer</module>
     </modules>
 
     <!--Maven相关配置属性-->

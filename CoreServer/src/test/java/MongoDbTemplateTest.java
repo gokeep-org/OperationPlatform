@@ -20,6 +20,7 @@ import com.op.core.CoreServerBootstrap;
 import com.op.core.action.dao.BaseDao;
 import com.op.core.bean.entity.User;
 import com.op.core.bean.repository.UserRepository;
+import com.op.core.service.ReadServices;
 import com.op.util.requests.Requests;
 
 /****************************************
@@ -41,6 +42,8 @@ public class MongoDbTemplateTest {
     @Autowired
     public Requests requests;
     public static User userTemplate;
+    @Autowired
+    private ReadServices readServices;
 
     static {
         userTemplate = new User();
@@ -131,6 +134,11 @@ public class MongoDbTemplateTest {
         System.out.println(s.get(0).getAddress());
     }
 
+    @Test
+    public void testReadSize(){
+        Long res = (Long) readServices.findCollectionSize("user");
+        LOGGER.info("user size is :"+res);
+    }
 
 //    @Test
 //    public void testFindOne() {

@@ -10,11 +10,12 @@ import com.google.gson.annotations.SerializedName;
  * @Auther is xuning on 17-3-28
  ****************************************/
 public class ReadOutput extends BaseOutput {
-    @SerializedName("res")
+    @SerializedName("result")
     private JsonObject result;
     private String code;
     @SerializedName("msg")
     private String message;
+    private Long total;
 
     public ReadOutput(String code, String message) {
         this.code = code;
@@ -49,5 +50,13 @@ public class ReadOutput extends BaseOutput {
 
     public void setResult(JsonObject result) {
         this.result = result;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 }

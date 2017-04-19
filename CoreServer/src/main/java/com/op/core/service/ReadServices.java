@@ -12,4 +12,8 @@ public interface ReadServices<T> {
     public T findOneById(String id, String collectionName);
 
     public T findByQuery(Query query, String collectionName);
+
+    public T findCollectionSize(String collection);
+
+    public T findCollectionSizeByQuery(Query query, String collection);
 }

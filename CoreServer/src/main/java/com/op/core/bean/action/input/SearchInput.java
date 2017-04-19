@@ -1,5 +1,9 @@
 package com.op.core.bean.action.input;
 
+import java.util.Map;
+
+import org.springframework.data.mongodb.core.query.Query;
+
 import com.google.gson.annotations.SerializedName;
 
 /****************************************
@@ -13,6 +17,35 @@ public class SearchInput extends BaseInput{
     private String collectionName;
     @SerializedName("id")
     private String id;
+    private Map<String, Object> term;
+    private String logic;
+    private Query query;
+
+    public Query getQuery() {
+        return query;
+    }
+
+    public void setQuery(Query query) {
+        this.query = query;
+    }
+
+    public String getLogic() {
+        return logic;
+    }
+
+    public void setLogic(String logic) {
+        this.logic = logic;
+    }
+
+    public Map<String, Object> getTerm() {
+        return term;
+    }
+
+    public void setTerm(Map<String, Object> term) {
+        this.term = term;
+    }
+
+
     public String getCollectionName() {
         return collectionName;
     }

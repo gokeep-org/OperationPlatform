@@ -1,6 +1,10 @@
 package com.op.core.action.factory;
 
+import org.springframework.data.mongodb.core.query.Query;
+
+import com.op.core.action.read.SearchCollectionSizeAction;
 import com.op.core.action.read.SearchDocumentAction;
+import com.op.core.action.read.SearchDocumentBytermAction;
 import com.op.core.bean.action.input.SearchInput;
 
 /****************************************
@@ -10,8 +14,15 @@ import com.op.core.bean.action.input.SearchInput;
  * @Auther is xuning on 17-3-28
  ****************************************/
 public class ReadActionFactory extends BaseActionFactory {
-    public static SearchDocumentAction getSearchDocumentByIdAction(SearchInput input){
+    public static SearchDocumentAction getSearchDocumentByIdAction(SearchInput input) {
         return new SearchDocumentAction(input);
     }
 
+    public static SearchDocumentBytermAction getSearchDocumentBytermAction(SearchInput input) {
+        return new SearchDocumentBytermAction(input);
+    }
+
+    public static SearchCollectionSizeAction getSearchCollectionSizeAction(Query query, String collectionName){
+        return new SearchCollectionSizeAction(query, collectionName);
+    }
 }
