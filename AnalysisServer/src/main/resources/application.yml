@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: analysis
+  profiles:
+      active: dev
+  http:
+      encoding:
+        charset: utf-8
+        force: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10001/eureka/
+  instance:
+      lease-expiration-duration-in-seconds: 30
+      lease-renewal-interval-in-seconds: 10
+server:
+  port: 34334
+  connection-timeout: 60000

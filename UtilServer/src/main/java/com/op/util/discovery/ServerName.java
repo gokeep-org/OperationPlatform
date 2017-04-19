@@ -16,5 +16,6 @@ public class ServerName {
     public static final String EUREKA = "EUREKA";
     public static final String CUSTOMER = "CUSTOMER";
     public static final String USER = "USER";
+    public static final String ANALYSIS = "ANALYSIS";
 
 }

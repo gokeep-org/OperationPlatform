@@ -38,3 +38,6 @@ zuul:
     proxy:
       path: /proxy/**
       serviceId: proxy
+    analysis:
+      path: /analysis/**
+      serviceId: analysis
