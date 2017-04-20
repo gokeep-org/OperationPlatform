@@ -69,8 +69,8 @@ public class JerseyConfig extends ResourceConfig {
         config.setVersion("v1");
         config.setContact("Orlando L Otero");
         config.setSchemes(new String[] { "http", "https" });
-        config.setBasePath("/");
-        config.setResourcePackage("com.asimio.jerseyexample.rest.v1");
+        config.setBasePath("/swagger");
+        config.setResourcePackage("com.op.core.rest");
         config.setPrettyPrint(true);
         config.setScan(true);
     }

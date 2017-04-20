@@ -40,7 +40,6 @@ public class UserRest {
     public ResultMessage updateByUserId(User user,
                                         @PathParam("id") String userId) throws Exception {
         return (ResultMessage) UserActionFactory.getUpdateUserAction(userId, user).execute();
-
     }
 
     @GET
@@ -48,6 +47,5 @@ public class UserRest {
     public SearchOutput getUserByUserId(@PathParam("id") String userId) throws Exception {
         return (SearchOutput) UserActionFactory.getSearchUserAction(userId, null).execute();
     }
-
 
 }
