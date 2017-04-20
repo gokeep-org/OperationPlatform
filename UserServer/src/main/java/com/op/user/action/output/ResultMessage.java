@@ -2,7 +2,7 @@ package com.op.user.action.output;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.google.gson.annotations.SerializedName;
 
 /****************************************
  * Copyright (c) xuning.
@@ -14,23 +14,29 @@ import org.springframework.beans.factory.annotation.Value;
 /**
  * rest结果信息
  */
-public class ResultMessage {
-    @Value("200")
+public class ResultMessage extends BaseOutput {
     private String code;
-    @Value("操作成功")
+    @SerializedName("msg")
     private String messsage;
-    @Value("true")
-    private Boolean success;
     private UUID uuid;
 
     public ResultMessage() {
-
+        super();
+        this.code = "200";
+        this.messsage = "操作成功";
+        super.setSuccess("true");
     }
 
-    public ResultMessage(String code, String messsage, Boolean success, UUID uuid) {
+    public void setUUID(String uuid) {
+        this.code = "500";
+        this.messsage = "操作失败";
+        this.setSuccess(false);
+    }
+
+    public ResultMessage(String code, String messsage, String success, UUID uuid) {
         this.code = code;
         this.messsage = messsage;
-        this.success = success;
+        setSuccess(success);
         this.uuid = uuid;
     }
 
@@ -50,15 +56,9 @@ public class ResultMessage {
         this.messsage = messsage;
     }
 
-    public Boolean getSuccess() {
-        return success;
-    }
 
     public void setSuccess(Boolean success) {
-        this.success = success;
-        if (success.equals(false)) {
-            setUuid(UUID.randomUUID());
-        }
+        this.setSuccess(success);
     }
 
     public UUID getUuid() {

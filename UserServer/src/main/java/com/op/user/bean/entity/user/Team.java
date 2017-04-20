@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName;
  * @Auther is xuning on 2017/4/20.
  ****************************************/
 public class Team {
+    @SerializedName("_id")
     private String id;
     @SerializedName("team_id")
     private String teamId;

@@ -1,11 +1,14 @@
 package com.op.user.service;
 
-/****************************************
- * Copyright (c) xuning.
- * 尊重版权，禁止抄袭!
- * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/4/20.
- ****************************************/
-public interface BaseService {
 
+import com.op.user.util.ApplicationContextHolder;
+
+public abstract class BaseService {
+    public static <T extends BaseService> T getService(Class<T> clazz) {
+        return ApplicationContextHolder.getContext().getBean(clazz);
+    }
+
+    public static <T extends BaseService> T getService(String serviceName, Class<T> clazz) {
+        return ApplicationContextHolder.getContext().getBean(serviceName, clazz);
+    }
 }

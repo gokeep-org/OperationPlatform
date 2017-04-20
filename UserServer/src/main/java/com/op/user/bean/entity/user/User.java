@@ -13,6 +13,7 @@ import com.google.gson.annotations.SerializedName;
  * 用户基本信息
  */
 public class User {
+    @SerializedName("_id")
     private String id;
     private String username;
     @SerializedName("user_id")
@@ -29,21 +30,36 @@ public class User {
     private String teamId;
     private String remark;
     private Boolean activated;
-
     public String getTeamId() {
         return teamId;
-    }
-
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
     }
 
     public String getId() {
         return id;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 
     public String getUsername() {

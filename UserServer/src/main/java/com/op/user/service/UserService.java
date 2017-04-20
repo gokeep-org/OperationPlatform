@@ -10,7 +10,7 @@ import com.op.user.bean.entity.user.User;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/20.
  ****************************************/
-public interface UserService extends BaseService {
+public interface UserService{
     String createOneUser(User user);
 
     String createUsers(List<User> users);
@@ -23,7 +23,7 @@ public interface UserService extends BaseService {
 
     String updateUser(User user);
 
-    User searchUserByUserId(String userId);
+    String searchUserByUserId(String userId);
 
     List<User> searchUser(User user);
 

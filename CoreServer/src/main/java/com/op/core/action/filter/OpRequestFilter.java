@@ -42,8 +42,6 @@ public class OpRequestFilter implements ContainerRequestFilter {
         String accessToken = requestContext.getHeaderString("token");
         String userId = requestContext.getHeaderString("user_id");
         MDC.put("user_id", requestContext.getHeaderString(userId));
-        MDC.put("access_token", requestContext.getHeaderString(accessToken));
-        LOGGER.info("请求拦截到token is: " + accessToken);
         LOGGER.info("请求拦截到user id is: " + accessToken);
         LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
     }

@@ -1,14 +1,17 @@
 package com.op.user.rest;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.op.user.action.factory.UserActionFactory;
+import com.op.user.action.output.ResultMessage;
+import com.op.user.action.output.SearchOutput;
 import com.op.user.bean.entity.user.User;
-import com.op.user.service.UserService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -19,10 +22,24 @@ import com.op.user.service.UserService;
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRest {
-    @Autowired
-    public UserService userService;
+
     @POST
-    public String createUser(User user){
-        return userService.createOneUser(user);
+    public ResultMessage createUser(User user) throws Exception {
+        return (ResultMessage) UserActionFactory.getCreateUserAction(user).execute();
     }
+
+    @DELETE
+    @Path("/{id}")
+    public ResultMessage deleteByUserId(@PathParam("id") String userId) throws Exception {
+        return (ResultMessage) UserActionFactory.getDeleteUserAction(userId).execute();
+    }
+
+
+    @GET
+    @Path("/{id}")
+    public SearchOutput getUserByUserId(@PathParam("id") String userId) throws Exception {
+        return (SearchOutput) UserActionFactory.getSearchUserAction(userId, null).execute();
+    }
+
+
 }

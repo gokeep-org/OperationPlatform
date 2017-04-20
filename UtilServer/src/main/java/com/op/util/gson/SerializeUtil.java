@@ -45,4 +45,11 @@ public class SerializeUtil {
         }
         return gson.toJson(o);
     }
+
+    public static Object transfromStringToObject(String json, Class classes){
+        if (null == json){
+            return null;
+        }
+        return gson.fromJson(json, classes);
+    }
 }
