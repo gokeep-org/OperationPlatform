@@ -31,11 +31,18 @@ public class SerializeUtil {
         return gson;
     }
 
-    public static JsonObject transfromMaptoJsonObject(Map map) {
+    public static JsonObject transfromMapToJsonObject(Map map) {
         if (Objects.equals(null, map) || 0 >= map.size()) {
             return null;
         }
         String str = gson.toJson(map);
         return gson.fromJson(str, JsonObject.class);
+    }
+
+    public static String transfromObjectToString(Object o){
+        if (Objects.equals(null, o)){
+            return null;
+        }
+        return gson.toJson(o);
     }
 }

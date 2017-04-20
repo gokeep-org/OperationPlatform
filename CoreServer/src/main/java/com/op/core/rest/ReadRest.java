@@ -31,8 +31,10 @@ public class ReadRest {
     }
 
     @POST
-    @Path("/")
-    public ReadOutput searchDocumentByQuery(SearchInput input) throws Exception {
+    @Path("/{type}")
+    public ReadOutput searchDocumentByQuery(SearchInput input,
+                                            @PathParam("type") String collectionName) throws Exception {
+        input.setCollectionName(collectionName);
         return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input).execute();
     }
 

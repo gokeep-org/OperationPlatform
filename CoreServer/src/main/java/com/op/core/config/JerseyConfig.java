@@ -13,6 +13,8 @@ import com.op.core.action.filter.OpRequestFilter;
 import com.op.core.action.filter.OpResponseFilter;
 import com.op.core.provide.GsonMessageBodyHandler;
 
+import io.swagger.jaxrs.config.BeanConfig;
+
 
 /****************************************
  * Copyright (c) xuning.
@@ -58,5 +60,18 @@ public class JerseyConfig extends ResourceConfig {
      * 注册Swagger,用于生成api文档
      */
     private void registerSwagger() {
+        register(io.swagger.jaxrs.listing.ApiListingResource.class);
+        register(io.swagger.jaxrs.listing.AcceptHeaderApiListingResource.class);
+        register(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+        BeanConfig config = new BeanConfig();
+        config.setConfigId("springboot-jersey-swagger-docker-example");
+        config.setTitle("Spring Boot + Jersey + Swagger + Docker Example");
+        config.setVersion("v1");
+        config.setContact("Orlando L Otero");
+        config.setSchemes(new String[] { "http", "https" });
+        config.setBasePath("/");
+        config.setResourcePackage("com.asimio.jerseyexample.rest.v1");
+        config.setPrettyPrint(true);
+        config.setScan(true);
     }
 }

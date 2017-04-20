@@ -27,7 +27,6 @@ public class Customer {
     private String remark;
     @Field("saleName")
     private String saleName;
-
     public String getId() {
         return id;
     }

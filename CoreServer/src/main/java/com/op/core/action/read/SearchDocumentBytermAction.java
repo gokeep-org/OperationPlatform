@@ -74,7 +74,7 @@ public class SearchDocumentBytermAction extends ItemAction<BaseOutput> {
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
-        JsonObject result = SerializeUtil.transfromMaptoJsonObject(res);
+        JsonObject result = SerializeUtil.transfromMapToJsonObject(res);
         ReadOutput output = new ReadOutput(result, "200", "操作成功");
         return output;
     }

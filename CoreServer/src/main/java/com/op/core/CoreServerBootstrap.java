@@ -7,6 +7,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ImportResource;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.ImportResource;
  ****************************************/
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableSwagger2
 @ImportResource(value = {"classpath:spring.xml", "classpath:mongo.xml"})
 public class CoreServerBootstrap {
     public static void main(String[] args) {
