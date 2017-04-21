@@ -32,7 +32,8 @@ public class MailAsyncAction extends ItemAction<MailSendOutput> {
 
     @Override
     protected void start() {
-        mailSender.send(new Gson().toJson(email));
+        String mail = new Gson().toJson(email, Email.class);
+        mailSender.send(mail);
     }
 
     @Override

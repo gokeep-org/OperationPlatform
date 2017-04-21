@@ -10,4 +10,6 @@ public final class SenderName {
     public static final String MAIL_SENDER = "mailSendImpl";
     public static final String LOG_SENDER = "logSenderImpl";
     public static final String MESSAGE_SENDER = "messageSenderImpl";
+    public static final String COMMON_SENDER = "commonSenderImpl";
+
 }

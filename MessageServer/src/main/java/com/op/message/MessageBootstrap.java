@@ -16,7 +16,6 @@ import org.springframework.context.annotation.ImportResource;
 @EnableDiscoveryClient
 @ImportResource("classpath:spring.xml")
 public class MessageBootstrap {
-
     public static void main(String[] args) {
         new SpringApplicationBuilder(MessageBootstrap.class)
                 .bannerMode(Banner.Mode.OFF)

@@ -1,12 +1,12 @@
 package com.op.message.action.item;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
 import com.op.message.action.factory.BaseAction;
 import com.op.message.bean.action.output.BaseOutput;
 import com.op.message.library.rabbit.Queue.SenderName;
 import com.op.message.library.rabbit.sender.CommonSender;
+import com.op.message.library.rabbit.sender.CommonSenderImpl;
+import com.op.message.library.rabbit.sender.LogSenderImpl;
+import com.op.message.library.rabbit.sender.MailSenderImpl;
 import com.op.message.library.rabbit.sender.Sender;
 import com.op.message.service.BaseService;
 import com.op.message.service.MailSendService;
@@ -22,46 +22,10 @@ import com.op.message.service.impl.MailSendServiceImpl;
 public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
     public static MailSendService mailSendService = BaseService.getService(ServiceBeanNames.MAIL_SEND_SERVICE, MailSendServiceImpl.class);
 
-    @Autowired
-    @Qualifier(SenderName.MAIL_SENDER)
-    public static Sender mailSender;
+    public static Sender mailSender = BaseService.getService(SenderName.MAIL_SENDER, MailSenderImpl.class);
 
-    @Autowired
-    @Qualifier(SenderName.LOG_SENDER)
-    public static Sender logSender;
+    public static Sender logSender = BaseService.getService(SenderName.LOG_SENDER, LogSenderImpl.class);
 
-    @Autowired
-    public CommonSender commonSender;
+    public CommonSender commonSender = BaseService.getService(SenderName.COMMON_SENDER, CommonSenderImpl.class);
 
-    public static MailSendService getMailSendService() {
-        return mailSendService;
-    }
-
-    public static void setMailSendService(MailSendService mailSendService) {
-        ItemAction.mailSendService = mailSendService;
-    }
-
-    public static Sender getMailSender() {
-        return mailSender;
-    }
-
-    public static void setMailSender(Sender mailSender) {
-        ItemAction.mailSender = mailSender;
-    }
-
-    public static Sender getLogSender() {
-        return logSender;
-    }
-
-    public static void setLogSender(Sender logSender) {
-        ItemAction.logSender = logSender;
-    }
-
-    public CommonSender getCommonSender() {
-        return commonSender;
-    }
-
-    public void setCommonSender(CommonSender commonSender) {
-        this.commonSender = commonSender;
-    }
 }

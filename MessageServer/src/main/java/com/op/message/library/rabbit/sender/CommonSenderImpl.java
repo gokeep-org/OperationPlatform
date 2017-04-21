@@ -6,14 +6,17 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.op.message.library.rabbit.Queue.SenderName;
+import com.op.message.service.BaseService;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/1.
  ****************************************/
-@Component
-public class CommonSenderImpl implements CommonSender {
+@Component(value = SenderName.COMMON_SENDER)
+public class CommonSenderImpl extends BaseService implements CommonSender {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonSenderImpl.class);
     @Autowired
     public AmqpTemplate rabbitTemplate;

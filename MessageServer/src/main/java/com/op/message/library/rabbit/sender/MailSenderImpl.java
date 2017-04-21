@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.op.message.library.rabbit.Queue.QueueName;
 import com.op.message.library.rabbit.Queue.SenderName;
+import com.op.message.service.BaseService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -16,7 +17,7 @@ import com.op.message.library.rabbit.Queue.SenderName;
  * @Auther is xuning on 2017/4/1.
  ****************************************/
 @Component(value = SenderName.MAIL_SENDER)
-public class MailSenderImpl implements Sender {
+public class MailSenderImpl  extends BaseService implements Sender {
     private static final Logger LOGGER = LoggerFactory.getLogger(MailSenderImpl.class);
     @Autowired
     public AmqpTemplate rabbitTemplate;
