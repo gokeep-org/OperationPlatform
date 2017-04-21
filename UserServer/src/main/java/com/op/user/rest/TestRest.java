@@ -1,14 +1,14 @@
 package com.op.user.rest;
 
-import com.google.gson.JsonObject;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+
+import com.google.gson.JsonObject;
 
 /****************************************
  * Copyright (c) xuning.

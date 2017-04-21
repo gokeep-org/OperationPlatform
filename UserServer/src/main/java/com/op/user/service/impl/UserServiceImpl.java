@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     private Requests requests;
     @Autowired
     private DiscoveryVip discoveryVip;
-
+    @Autowired
+    HttpServletRequest httpServletRequest;
     @Override
     public String createOneUser(User user) {
         String result;
@@ -134,10 +136,11 @@ public class UserServiceImpl extends BaseService implements UserService {
         this.requests = requests;
     }
 
-    public static final Map getHeaders() {
+    public final Map getHeaders() {
         final Map headers = new HashMap();
         headers.put("Content-Type", MediaType.APPLICATION_JSON);
         headers.put("Accept", MediaType.APPLICATION_JSON);
+        headers.put("user_id", httpServletRequest.getHeader("user_id"));
         return headers;
     }
 }

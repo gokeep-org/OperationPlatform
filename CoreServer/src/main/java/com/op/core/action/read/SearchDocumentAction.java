@@ -44,6 +44,7 @@ public class SearchDocumentAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
+        String userId = getUserId();
         res = (Map<String, Object>) readServices.findOneById(this.id, this.collectionNmae);
     }
 
