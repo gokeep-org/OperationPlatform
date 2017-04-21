@@ -22,6 +22,7 @@
         <module>EsServer</module>
         <module>UtilServer</module>
         <module>AnalysisServer</module>
+        <module>AdminServer</module>
     </modules>
 
     <!--Maven相关配置属性-->

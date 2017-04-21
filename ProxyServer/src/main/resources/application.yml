@@ -41,3 +41,6 @@ zuul:
     analysis:
       path: /analysis/**
       serviceId: analysis
+    admin:
+      path: /admin/**
+      serviceId: admin
