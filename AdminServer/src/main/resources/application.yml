@@ -1,6 +1,11 @@
 spring:
   application:
     name: admin
+  boot:
+    admin:
+      url: http://localhost:${server.port}
+  jackson:
+    serialization: true
 eureka:
   client:
     serviceUrl:

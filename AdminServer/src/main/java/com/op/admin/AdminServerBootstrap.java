@@ -1,11 +1,10 @@
 package com.op.admin;
 
+import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-
-import de.codecentric.boot.admin.config.EnableAdminServer;
 
 /****************************************
  * Copyright (c) xuning.
@@ -13,8 +12,8 @@ import de.codecentric.boot.admin.config.EnableAdminServer;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/21.
  ****************************************/
-@EnableDiscoveryClient
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableAdminServer
 public class AdminServerBootstrap {
     public static void main(String[] args) {

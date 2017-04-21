@@ -97,23 +97,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.2.2</version>
-        </dependency>
         <!--Test-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
     <!--Spring Cloud Dependency-->
