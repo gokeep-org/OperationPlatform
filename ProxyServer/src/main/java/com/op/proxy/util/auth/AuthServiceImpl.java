@@ -1,20 +1,17 @@
 package com.op.proxy.util.auth;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.MediaType;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.google.gson.JsonObject;
 import com.op.proxy.config.OperationPlatformException;
 import com.op.util.discovery.DiscoveryVip;
-import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
+import java.util.Map;
 
 /****************************************
  * Copyright (c) xuning.
@@ -43,7 +40,7 @@ public class AuthServiceImpl implements AuthService{
         Map params = new HashMap();
         params.put("access_token", accessToken);
         params.put("user_id", userId);
-        String url = discoveryVip.choose(ServerName.OAUTH+"/token/check");
+        String url = discoveryVip.choose(com.op.util.discovery.ServerName.OAUTH+"/token/check");
         String res = requests.get(url, params, getHeaders()).json();
         JsonObject result = (JsonObject) SerializeUtil.transfromStringToObject(res, JsonObject.class);
         return true;

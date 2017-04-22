@@ -5,8 +5,6 @@
  * @Auther is xuning on 17-4-14
  ****************************************/
 public class UtilMain {
-    private UtilMain() {
-    }
 
     public static void main(String[] args) {
         System.exit(0);

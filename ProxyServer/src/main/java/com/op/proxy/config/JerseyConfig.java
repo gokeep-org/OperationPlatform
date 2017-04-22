@@ -1,7 +1,8 @@
 package com.op.proxy.config;
 
-import javax.ws.rs.ApplicationPath;
-
+import com.op.proxy.filter.OpRequestFilter;
+import com.op.proxy.filter.OpResponseFilter;
+import com.op.proxy.provide.GsonMessageBodyHandler;
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -9,11 +10,7 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
 
-import com.op.proxy.filter.OpRequestFilter;
-import com.op.proxy.filter.OpResponseFilter;
-import com.op.proxy.provide.GsonMessageBodyHandler;
-
-
+import javax.ws.rs.ApplicationPath;
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
