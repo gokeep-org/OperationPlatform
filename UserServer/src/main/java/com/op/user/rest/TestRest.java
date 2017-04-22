@@ -1,14 +1,12 @@
 package com.op.user.rest;
 
+import com.op.util.requests.Requests;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-
-import com.google.gson.JsonObject;
 
 /****************************************
  * Copyright (c) xuning.
@@ -20,16 +18,11 @@ import com.google.gson.JsonObject;
 @Produces({MediaType.APPLICATION_JSON})
 public class TestRest {
     @Autowired
-    private LoadBalancerClient loadBalancerClient;
+    private Requests requests;
 
     @Path("/info")
     @GET
     public String info() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("info", "successful");
-        jsonObject.addProperty("oauth", loadBalancerClient.choose("oauth").getUri().toString());
-        jsonObject.addProperty("core", loadBalancerClient.choose("core").getUri().toString());
-        jsonObject.addProperty("proxy", loadBalancerClient.choose("proxy").getUri().toString());
-        return jsonObject.toString();
+        return requests.get("http://www.baidu.com").text();
     }
 }
