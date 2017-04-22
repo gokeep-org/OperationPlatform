@@ -1,6 +1,7 @@
 package com.op.admin.rest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /****************************************
  * Copyright (c) xuning.
@@ -10,7 +11,8 @@ import org.springframework.stereotype.Controller;
  ****************************************/
 @Controller
 public class InfoRest {
+    @GetMapping("/")
     public String info(){
-        return "Ok";
+        return "it works";
     }
 }

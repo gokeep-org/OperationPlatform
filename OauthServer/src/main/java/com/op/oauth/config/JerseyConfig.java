@@ -21,7 +21,7 @@ import javax.ws.rs.ApplicationPath;
  * @Auther is xuning on 2017/1/8.
  ****************************************/
 @Configuration
-@ApplicationPath("/")
+@ApplicationPath("/oauth")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         setJerseyComponentsLocation();

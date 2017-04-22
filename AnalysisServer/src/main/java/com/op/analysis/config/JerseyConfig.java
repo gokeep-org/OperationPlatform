@@ -8,6 +8,9 @@ import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
+import org.springframework.context.annotation.Configuration;
+
+import javax.ws.rs.ApplicationPath;
 
 
 /****************************************
@@ -16,8 +19,8 @@ import org.glassfish.jersey.server.filter.EncodingFilter;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/1/8.
  ****************************************/
-//@Configuration
-//@ApplicationPath("/")
+@Configuration
+@ApplicationPath("/analysis")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         setJerseyComponentsLocation();

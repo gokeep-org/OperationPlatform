@@ -155,11 +155,11 @@
                 <artifactId>spring-boot-starter-data-mongodb</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
-                <!--<version>${spring-boot-actuator.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <!-- Json字符串对象转换-->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
