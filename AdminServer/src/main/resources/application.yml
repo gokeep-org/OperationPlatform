@@ -4,6 +4,7 @@ spring:
   boot:
     admin:
       url: http://localhost:${server.port}
+      client:
   jackson:
     serialization: true
 eureka:

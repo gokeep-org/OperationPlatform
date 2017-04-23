@@ -3,6 +3,7 @@ package com.op.proxy.util.auth;
 import com.google.gson.JsonObject;
 import com.op.proxy.config.OperationPlatformException;
 import com.op.util.discovery.DiscoveryVip;
+import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +35,20 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public Boolean checkToken(String accessToken, String userId) {
-        if (null == accessToken || null == null){
+        if (null == accessToken || null == userId){
             throw new OperationPlatformException("access_token or user_id is null");
         }
         Map params = new HashMap();
         params.put("access_token", accessToken);
         params.put("user_id", userId);
-        String url = discoveryVip.choose(com.op.util.discovery.ServerName.OAUTH+"/token/check");
-        String res = requests.get(url, params, getHeaders()).json();
+        String url = discoveryVip.choose(ServerName.OAUTH);
+        String res = requests.get(url+"/oauth/token/check", params, getHeaders()).json();
         JsonObject result = (JsonObject) SerializeUtil.transfromStringToObject(res, JsonObject.class);
-        return true;
-
+        String success = result.get("success").getAsString();
+        if (success.equals("true")){
+            return true;
+        }
+        return false;
     }
 
     public HttpServletRequest getHttpServletRequest() {
@@ -71,12 +75,13 @@ public class AuthServiceImpl implements AuthService{
         this.discoveryVip = discoveryVip;
     }
 
-    public final Map getHeaders() {
+    private Map getHeaders() {
         final Map headers = new HashMap();
         headers.put("Content-Type", MediaType.APPLICATION_JSON);
         headers.put("Accept", MediaType.APPLICATION_JSON);
         headers.put("user_id", httpServletRequest.getHeader("user_id"));
         return headers;
     }
+    
 
 }

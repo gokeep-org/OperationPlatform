@@ -1,12 +1,16 @@
 package com.op.proxy.filter;
 
+import com.google.gson.JsonObject;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.op.proxy.config.OperationPlatformException;
+import com.op.proxy.util.auth.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import com.netflix.zuul.ZuulFilter;
-import com.op.util.requests.Requests;
+import java.util.UUID;
 
 /****************************************
  * Copyright (c) xuning.
@@ -18,8 +22,7 @@ import com.op.util.requests.Requests;
 public class ProxyFilter extends ZuulFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProxyFilter.class);
     @Autowired
-    public Requests requests;
-
+    private AuthService authService;
     @Override
     public String filterType() {
         return "pre";
@@ -37,9 +40,24 @@ public class ProxyFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-//        RequestContext ctx = RequestContext.getCurrentContext();
-//        String accessToken  = ctx.getRequest().getParameter("access_token");
-//        String userId = ctx.getRequest().getParameter("user_id");
+        RequestContext ctx = RequestContext.getCurrentContext();
+        String accessToken  = ctx.getRequest().getHeader("access_token");
+        String userId = ctx.getRequest().getHeader("user_id");
+        Boolean check = authService.checkToken(accessToken, userId);
+        if (check){
+            return null;
+        }else {
+            ctx.setResponseStatusCode(500);
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("msg", "token为空或者过期");
+            jsonObject.addProperty("code", 500);
+            jsonObject.addProperty("success", false);
+            jsonObject.addProperty("uuid", UUID.randomUUID().toString());
+            ctx.setResponseBody(jsonObject.toString());
+            throw new OperationPlatformException("token is invoid or null");
+        }
+
+        
 //        //TODO: 这里要对token和user_id进行校验,请求Oauth2
 //        String url = loadBalancerClient.choose(ServerName.OAUTH).getUri()+"/token/check";
 //        Map<String, String> params = new HashMap<>();
@@ -60,14 +78,13 @@ public class ProxyFilter extends ZuulFilter {
 //            ctx.setResponseBody(jsonObject.toString());
 //            throw new OperationPlatformException("token is invoid or null");
 //        }
-        return null;
     }
-
-    public Requests getRequests() {
-        return requests;
+    
+    public AuthService getAuthService() {
+        return authService;
     }
-
-    public void setRequests(Requests requests) {
-        this.requests = requests;
+    
+    public void setAuthService(AuthService authService) {
+        this.authService = authService;
     }
 }
