@@ -44,9 +44,13 @@ public class AuthServiceImpl implements AuthService{
         String url = discoveryVip.choose(ServerName.OAUTH);
         String res = requests.get(url+"/oauth/token/check", params, getHeaders()).json();
         JsonObject result = (JsonObject) SerializeUtil.transfromStringToObject(res, JsonObject.class);
-        String success = result.get("success").getAsString();
-        if (success.equals("true")){
-            return true;
+        try {
+            String success = result.get("success").getAsString();
+            if (success.equals("true")){
+                return true;
+            }
+        }catch (Throwable e){
+            return false;
         }
         return false;
     }

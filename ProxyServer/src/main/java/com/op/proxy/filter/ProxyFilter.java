@@ -43,41 +43,19 @@ public class ProxyFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         String accessToken  = ctx.getRequest().getHeader("access_token");
         String userId = ctx.getRequest().getHeader("user_id");
-        Boolean check = authService.checkToken(accessToken, userId);
-        if (check){
+        if (authService.checkToken(accessToken, userId)){
             return null;
         }else {
             ctx.setResponseStatusCode(500);
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("msg", "token为空或者过期");
+            jsonObject.addProperty("msg", "token过期或者为空");
             jsonObject.addProperty("code", 500);
             jsonObject.addProperty("success", false);
             jsonObject.addProperty("uuid", UUID.randomUUID().toString());
             ctx.setResponseBody(jsonObject.toString());
+            LOGGER.error("token is null or lose, user_id: "+userId+", access_token: "+accessToken);
             throw new OperationPlatformException("token is invoid or null");
         }
-
-        
-//        //TODO: 这里要对token和user_id进行校验,请求Oauth2
-//        String url = loadBalancerClient.choose(ServerName.OAUTH).getUri()+"/token/check";
-//        Map<String, String> params = new HashMap<>();
-//        params.put("access_token", accessToken);
-//        params.put("user_id", userId);
-//        Map<String, String> headers = new HashMap<>();
-//        headers.put("Content-Type", "application/json");
-//        String res = requests.get(url, params, headers).json();
-//        JsonObject r = new Gson().fromJson(res, JsonObject.class);
-//        String success = r.get("success").getAsString();
-//        if (!r.get("success").getAsString().equals("true")){
-//            ctx.setResponseStatusCode(500);
-//            JsonObject jsonObject = new JsonObject();
-//            jsonObject.addProperty("msg", "token为空或者过期");
-//            jsonObject.addProperty("code", 500);
-//            jsonObject.addProperty("success", false);
-//            jsonObject.addProperty("uuid", UUID.randomUUID().toString());
-//            ctx.setResponseBody(jsonObject.toString());
-//            throw new OperationPlatformException("token is invoid or null");
-//        }
     }
     
     public AuthService getAuthService() {
