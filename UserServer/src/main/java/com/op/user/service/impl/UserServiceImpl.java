@@ -16,6 +16,7 @@ import com.op.user.bean.ServiceName;
 import com.op.user.bean.entity.user.User;
 import com.op.user.service.BaseService;
 import com.op.user.service.UserService;
+import com.op.util.bean.UriPath;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
@@ -35,12 +36,13 @@ public class UserServiceImpl extends BaseService implements UserService {
     private DiscoveryVip discoveryVip;
     @Autowired
     HttpServletRequest httpServletRequest;
+
     @Override
     public String createOneUser(User user) {
         String result;
         try {
             user.setId(UUID.randomUUID().toString());
-            result = requests.post(discoveryVip.choose(ServerName.CORE) + "/write/user", user, getHeaders()).json();
+            result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user", user, getHeaders()).json();
         } catch (Throwable e) {
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "添加用户失败"));
         }
@@ -52,7 +54,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         String result;
         //验证
         try {
-            result = requests.post(discoveryVip.choose(ServerName.CORE) + "/write/user/batch", users, getHeaders()).json();
+            result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/batch", users, getHeaders()).json();
         } catch (Throwable e) {
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "批量添加用户失败"));
         }
@@ -64,7 +66,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         String result;
         //验证
         try {
-            result = requests.delete(discoveryVip.choose(ServerName.CORE) + "/write/user/" + userId, null, getHeaders()).json();
+            result = requests.delete(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/" + userId, null, getHeaders()).json();
         } catch (Throwable e) {
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "删除用户失败"));
         }
@@ -76,7 +78,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         String result;
         //验证
         try {
-            result = requests.delete(discoveryVip.choose(ServerName.CORE) + "/write/user/", null, getHeaders()).json();
+            result = requests.delete(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/", null, getHeaders()).json();
         } catch (Throwable e) {
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "添加失败"));
         }
@@ -88,7 +90,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         String result;
         //验证
         try {
-            result = requests.put(discoveryVip.choose(ServerName.CORE) + "/write/user/" + user.getId(), user, getHeaders()).json();
+            result = requests.put(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/" + user.getId(), user, getHeaders()).json();
         } catch (Throwable e) {
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
         }
@@ -105,7 +107,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         String result;
         //验证
         try {
-            result = requests.get(discoveryVip.choose(ServerName.CORE) + "/read/user/" + userId, null, getHeaders()).json();
+            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/" + userId, null, getHeaders()).json();
         } catch (Throwable e) {
             //跑出异常
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));

@@ -23,6 +23,7 @@ public class SearchUserAction extends ItemAction<BaseOutput> {
     private User user;
     private String result;
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchUserAction.class);
+
     public SearchUserAction(String userId, User user) {
         this.userId = userId;
         this.user = user;
@@ -40,10 +41,8 @@ public class SearchUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        if (Objects.equals(null, user))
+        if (Objects.equals(null, user) && !Objects.equals(null, userId))
             result = userService.searchUserByUserId(userId);
-        else
-            result = null;
     }
 
     @Override

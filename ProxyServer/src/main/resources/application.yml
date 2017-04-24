@@ -35,12 +35,6 @@ zuul:
     customer:
       path: /customer/api/**
       serviceId: customer
-    proxy:
-      path: /proxy/api/**
-      serviceId: proxy
     analysis:
       path: /analysis/api/**
       serviceId: analysis
-    admin:
-      path: /admin/api/**
-      serviceId: admin
