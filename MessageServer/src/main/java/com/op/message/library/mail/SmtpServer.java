@@ -1,33 +1,22 @@
 package com.op.message.library.mail;
 
+import com.op.message.bean.entity.email.Email;
+import com.op.message.util.OpUtils;
+import com.op.message.util.PropertiesUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.op.message.bean.entity.email.Email;
-import com.op.message.util.OpUtils;
-import com.op.message.util.PropertiesUtil;
 
 /****************************************
  * Copyright (c) xuning.
@@ -92,11 +81,11 @@ public class SmtpServer {
                 try {
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress(e));
                 } catch (MessagingException e1) {
-                    LOGGER.info("add email accepter is exception");
+                    LOGGER.error("add email accepter is exception");
                 }
             });
         } else {
-            LOGGER.info("add email receiver is exception");
+            LOGGER.error("add email receiver is exception");
         }
         return this;
     }
@@ -107,11 +96,11 @@ public class SmtpServer {
                 try {
                     message.addRecipient(Message.RecipientType.CC, new InternetAddress(e));
                 } catch (MessagingException e1) {
-                    LOGGER.info("add email recipient is exception");
+                    LOGGER.error("add email recipient is exception");
                 }
             });
         } else {
-            LOGGER.info("SMTP_RECIPIENTERS_IS_NULL");
+            LOGGER.error("SMTP_RECIPIENTERS_IS_NULL");
         }
         return this;
     }
@@ -122,11 +111,11 @@ public class SmtpServer {
                 try {
                     message.addRecipient(Message.RecipientType.BCC, new InternetAddress(e));
                 } catch (MessagingException e1) {
-                    LOGGER.info("add email bccaccepter is exception");
+                    LOGGER.error("add email bccaccepter is exception");
                 }
             });
         } else {
-            LOGGER.info("SMTP_RECIPIENTERS_IS_NULL");
+            LOGGER.error("SMTP_RECIPIENTERS_IS_NULL");
         }
         return this;
     }
@@ -165,9 +154,9 @@ public class SmtpServer {
                     messageBodyPart.setFileName(MimeUtility.encodeText(e.getName()));
                     multipart.addBodyPart(messageBodyPart);
                 } catch (MessagingException e1) {
-                    LOGGER.info("set attachment error");
+                    LOGGER.error("set attachment error");
                 } catch (UnsupportedEncodingException e1) {
-                    LOGGER.info("get attachment file name error");
+                    LOGGER.error("get attachment file name error");
                 }
             });
             message.setContent(multipart);
@@ -181,7 +170,7 @@ public class SmtpServer {
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         } catch (MessagingException e) {
-            LOGGER.info("sender email is error: ", e);
+            LOGGER.error("sender email is error: ", e);
         }
     }
 
