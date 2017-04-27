@@ -10,13 +10,13 @@ public class UriPath {
     private UriPath(){}
     public static final String OAUTH_CHECK_TOKEN = "/oauth/token/check";
     //----------------Basic
-    public static final String MESSAGE = "/msg";
-    public static final String PROXY = "/proxy";
-    public static final String CORE = "/core";
-    public static final String OAUTH = "/oauth";
-    public static final String ES = "/es";
-    public static final String EUREKA = "/eureka";
-    public static final String CUSTOMER = "/customer";
-    public static final String USER = "/user";
-    public static final String ANALYSIS = "/analysis";
+    public static final String MESSAGE = BasePath.MESSAGE;
+    public static final String PROXY = BasePath.PROXY;
+    public static final String CORE = BasePath.CORE;
+    public static final String OAUTH = BasePath.OAUTH;
+    public static final String ES = BasePath.ES;
+    public static final String EUREKA = BasePath.EUREKA;
+    public static final String CUSTOMER = BasePath.CUSTOMER;
+    public static final String USER = BasePath.USER;
+    public static final String ANALYSIS = BasePath.ANALYSIS;
 }

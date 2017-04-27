@@ -1,8 +1,7 @@
 package com.op.analysis.config;
 
-import com.op.analysis.action.filter.OpRequestFilter;
-import com.op.analysis.action.filter.OpResponseFilter;
-import com.op.analysis.library.provide.GsonMessageBodyHandler;
+import javax.ws.rs.ApplicationPath;
+
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -10,7 +9,10 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.springframework.context.annotation.Configuration;
 
-import javax.ws.rs.ApplicationPath;
+import com.op.analysis.action.filter.OpRequestFilter;
+import com.op.analysis.action.filter.OpResponseFilter;
+import com.op.analysis.library.provide.GsonMessageBodyHandler;
+import com.op.util.bean.BasePath;
 
 
 /****************************************
@@ -20,7 +22,7 @@ import javax.ws.rs.ApplicationPath;
  * @Auther is xuning on 2017/1/8.
  ****************************************/
 @Configuration
-@ApplicationPath("/analysis")
+@ApplicationPath(BasePath.ANALYSIS)
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         setJerseyComponentsLocation();
