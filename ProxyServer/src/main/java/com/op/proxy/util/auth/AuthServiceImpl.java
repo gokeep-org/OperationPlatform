@@ -1,18 +1,21 @@
 package com.op.proxy.util.auth;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.gson.JsonObject;
 import com.op.proxy.config.OperationPlatformException;
+import com.op.util.bean.UriPath;
+import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.MediaType;
-import java.util.HashMap;
-import java.util.Map;
 
 /****************************************
  * Copyright (c) xuning.
@@ -41,12 +44,14 @@ public class AuthServiceImpl implements AuthService{
         Map params = new HashMap();
         params.put("access_token", accessToken);
         params.put("user_id", userId);
+
         String url = discoveryVip.choose(ServerName.OAUTH);
-        String res = requests.get(url+"/oauth/token/check", params, getHeaders()).json();
+        String res = requests.get(url+ UriPath.OAUTH+"/token/check", params, getHeaders()).json();
         JsonObject result = (JsonObject) SerializeUtil.transfromStringToObject(res, JsonObject.class);
         try {
+            String newAccessToken = result.getAsJsonObject("result").get("access_token").getAsString();
             String success = result.get("success").getAsString();
-            if (success.equals("true")){
+            if (success.equals("true") && null != newAccessToken){
                 return true;
             }
         }catch (Throwable e){
@@ -79,13 +84,9 @@ public class AuthServiceImpl implements AuthService{
         this.discoveryVip = discoveryVip;
     }
 
-    private Map getHeaders() {
-        final Map headers = new HashMap();
-        headers.put("Content-Type", MediaType.APPLICATION_JSON);
-        headers.put("Accept", MediaType.APPLICATION_JSON);
-        headers.put("user_id", httpServletRequest.getHeader("user_id"));
-        return headers;
+    public Map getHeaders() {
+        String userId = httpServletRequest.getHeader("user_id");
+        return RequestUtil.setUserIdToRequest(userId);
     }
-    
 
 }

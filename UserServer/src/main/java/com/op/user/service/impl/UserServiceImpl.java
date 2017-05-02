@@ -1,12 +1,10 @@
 package com.op.user.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,7 @@ import com.op.user.bean.entity.user.User;
 import com.op.user.service.BaseService;
 import com.op.user.service.UserService;
 import com.op.util.bean.UriPath;
+import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
@@ -35,8 +34,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Autowired
     private DiscoveryVip discoveryVip;
     @Autowired
-    HttpServletRequest httpServletRequest;
-
+    private HttpServletRequest httpServletRequest;
     @Override
     public String createOneUser(User user) {
         String result;
@@ -138,11 +136,24 @@ public class UserServiceImpl extends BaseService implements UserService {
         this.requests = requests;
     }
 
-    public final Map getHeaders() {
-        final Map headers = new HashMap();
-        headers.put("Content-Type", MediaType.APPLICATION_JSON);
-        headers.put("Accept", MediaType.APPLICATION_JSON);
-        headers.put("user_id", httpServletRequest.getHeader("user_id"));
-        return headers;
+    public DiscoveryVip getDiscoveryVip() {
+        return discoveryVip;
+    }
+
+    public void setDiscoveryVip(DiscoveryVip discoveryVip) {
+        this.discoveryVip = discoveryVip;
+    }
+
+    public HttpServletRequest getHttpServletRequest() {
+        return httpServletRequest;
+    }
+
+    public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
+        this.httpServletRequest = httpServletRequest;
+    }
+
+    public Map getHeaders() {
+        String userId = httpServletRequest.getHeader("user_id");
+        return RequestUtil.setUserIdToRequest(userId);
     }
 }

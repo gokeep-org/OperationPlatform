@@ -11,8 +11,6 @@ import com.op.core.action.factory.ReadActionFactory;
 import com.op.core.bean.action.input.SearchInput;
 import com.op.core.bean.action.output.ReadOutput;
 
-import io.swagger.annotations.ApiOperation;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -22,7 +20,6 @@ import io.swagger.annotations.ApiOperation;
 @Path("/read")
 @Produces({MediaType.APPLICATION_JSON})
 public class ReadRest {
-    @ApiOperation(value = "cdscds")
     @GET
     @Path("/{type}/{id}")
     public ReadOutput searchDocumentById(@PathParam("type") String collectionName,

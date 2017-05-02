@@ -11,4 +11,5 @@ public abstract class BaseService {
     public static <T extends BaseService> T getService(String serviceName, Class<T> clazz) {
         return ApplicationContextHolder.getContext().getBean(serviceName, clazz);
     }
+
 }

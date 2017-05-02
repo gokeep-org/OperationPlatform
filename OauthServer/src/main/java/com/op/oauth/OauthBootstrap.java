@@ -22,5 +22,4 @@ public class OauthBootstrap {
                 .bannerMode(Banner.Mode.OFF)
                 .run(args);
     }
-
 }
