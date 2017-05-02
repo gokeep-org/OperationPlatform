@@ -1,5 +1,10 @@
 package com.op.oauth.action.token;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.input.token.CreateTokenInput;
 import com.op.oauth.bean.action.input.token.GrantType;
@@ -11,11 +16,6 @@ import com.op.oauth.bean.entity.Token;
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.util.OpUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
@@ -40,7 +40,7 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
     protected void permissionValidate() throws Exception {
         if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)) {
             List<User> users = userService.checkUserIsLogin(this.user);
-            if (users.size() == 1) {
+            if (users.size() >= 1) {
                 this.user = users.get(0);
             } else {
                 throw new OperationPlatformException("user login failds");

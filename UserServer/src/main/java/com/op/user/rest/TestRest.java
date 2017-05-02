@@ -1,12 +1,13 @@
 package com.op.user.rest;
 
-import com.op.util.requests.Requests;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.op.util.requests.Requests;
 
 /****************************************
  * Copyright (c) xuning.
@@ -20,6 +21,10 @@ public class TestRest {
     @Autowired
     private Requests requests;
 
+    /**
+     * 内部测试
+     * @return
+     */
     @Path("/info")
     @GET
     public String info() {

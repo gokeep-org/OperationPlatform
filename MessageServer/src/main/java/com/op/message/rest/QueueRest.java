@@ -1,19 +1,19 @@
 package com.op.message.rest;
 
-import com.alibaba.fastjson.JSON;
-import com.google.gson.JsonObject;
-import com.op.message.library.rabbit.Queue.SenderName;
-import com.op.message.library.rabbit.sender.Sender;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import java.util.Map;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import com.alibaba.fastjson.JSON;
+import com.google.gson.JsonObject;
+import com.op.message.library.rabbit.Queue.SenderName;
+import com.op.message.library.rabbit.sender.Sender;
 
 /****************************************
  * Copyright (c) xuning.
@@ -28,6 +28,12 @@ public class QueueRest {
     @Qualifier(SenderName.LOG_SENDER)
     public Sender logSender;
 
+    /**
+     * 异步插入RabbitMQ消费Log队列存入ElasticSearch
+     * 备注：所有的日志都通过异步插入
+     * @param body
+     * @return
+     */
     @POST
     @Path("/log/async")
     public String asyncLog(Map<String, Object> body) {

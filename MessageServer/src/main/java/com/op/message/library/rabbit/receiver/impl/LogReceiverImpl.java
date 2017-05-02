@@ -35,13 +35,16 @@ public class LogReceiverImpl implements Receiver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogReceiverImpl.class);
 
+    /**
+     * 异步处理日志的插入： log->rabbitmq->elasticsearch
+     * @param jsonStr TODO：时间允许需要对Log的插入情况反馈
+     */
     @Override
     @RabbitHandler
     public void process(String jsonStr) {
         try {
             String esUri = discoveryVip.choose(ServerName.ES);
-            Log log = OpUtils.gson().fromJson(jsonStr, Log.class);
-            requests.post(esUri + UriPath.ES+"/log", log, null);
+            requests.post(esUri + UriPath.ES + "/log", OpUtils.gson().fromJson(jsonStr, Log.class), null);
         } catch (Exception e) {
             LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
         }
