@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.op.core.action.read.SearchCollectionSizeAction;
 import com.op.core.action.read.SearchDocumentAction;
 import com.op.core.action.read.SearchDocumentBytermAction;
+import com.op.core.action.read.SearchRepeatCollectionNameAction;
 import com.op.core.bean.action.input.SearchInput;
 
 /****************************************
@@ -24,5 +25,9 @@ public class ReadActionFactory extends BaseActionFactory {
 
     public static SearchCollectionSizeAction getSearchCollectionSizeAction(Query query, String collectionName){
         return new SearchCollectionSizeAction(query, collectionName);
+    }
+
+    public static SearchRepeatCollectionNameAction getSearchRepeatCollectionNameAction(String name, String collectionName){
+        return new SearchRepeatCollectionNameAction(name, collectionName);
     }
 }

@@ -1,5 +1,7 @@
 package com.op.core.bean.action.output;
 
+import java.util.List;
+
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,6 +18,7 @@ public class ReadOutput extends BaseOutput {
     @SerializedName("msg")
     private String message;
     private Long total;
+    private List list;
 
     public ReadOutput(String code, String message) {
         this.code = code;
@@ -58,5 +61,13 @@ public class ReadOutput extends BaseOutput {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
     }
 }

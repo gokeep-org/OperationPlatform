@@ -34,9 +34,9 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
     }
 
     @Override
-    public List<Map<String, Object>> findByQuery(Query query, String collectionName) {
+    public List<Map> findByQuery(Query query, String collectionName) {
         try {
-            return mongoTemplate.find(query, null, collectionName);
+            return mongoTemplate.find(query, Map.class,  collectionName);
         } catch (Exception e) {
             throw new OperationPlatformException("find by query is error");
         }

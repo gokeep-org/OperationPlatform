@@ -5,6 +5,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.core.action.factory.ReadActionFactory;
@@ -42,5 +43,12 @@ public class ReadRest {
     @Path("/{type}/size")
     public ReadOutput searchCollectionSize(@PathParam("type") String collectionNmae) throws Exception {
         return (ReadOutput) ReadActionFactory.getSearchCollectionSizeAction(null, collectionNmae).execute();
+    }
+
+    @GET
+    @Path("/{type}/repeat")
+    public ReadOutput searchCollectionRepeatName(@QueryParam("name") String name,
+                                                 @PathParam("type") String collectionName) throws Exception {
+        return (ReadOutput) ReadActionFactory.getSearchRepeatCollectionNameAction(name, collectionName).execute();
     }
 }
