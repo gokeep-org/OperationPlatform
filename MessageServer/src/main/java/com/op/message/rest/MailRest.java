@@ -19,37 +19,72 @@ import com.op.message.bean.action.output.email.MailSendOutput;
 @Path("/email")
 @Produces({MediaType.APPLICATION_JSON})
 public class MailRest {
-
+    /**
+     * 发送异步消息到消息队列-发送简单邮件
+     * @param input
+     * @return
+     * @throws Exception
+     */
     @Path("/simple/send")
     @POST
     public MailSendOutput simpleMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailAsyncSendAction(input).execute();
     }
 
+    /**
+     * 发送异步消息到消息队列-发送抄送邮件
+     * @param input
+     * @return
+     * @throws Exception
+     */
     @Path("/recipienters/send")
     @POST
     public MailSendOutput RecipientersMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailAsyncSendAction(input).execute();
     }
 
+    /**
+     * 发送异步消息到消息队列-发送密送邮件
+     * @param input
+     * @return
+     * @throws Exception
+     */
     @Path("/bcc/send")
     @POST
     public MailSendOutput bccMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailAsyncSendAction(input).execute();
     }
 
+    /**
+     * 发送异步消息到消息队列-发送附件邮件
+     * @param input
+     * @return
+     * @throws Exception
+     */
     @Path("/attachment/send")
     @POST
     public MailSendOutput attachmentMailSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailAsyncSendAction(input).execute();
     }
 
+    /**
+     * 发送异步消息到消息队列-发送通用邮件
+     * @param input
+     * @return
+     * @throws Exception
+     */
     @Path("/send")
     @POST
     public MailSendOutput mailAsyncSend(MailSendInput input) throws Exception {
         return EmailActionFactory.getMailAsyncSendAction(input).execute();
     }
 
+    /**
+     * 发送同步消息-发送通用邮件
+     * @param input
+     * @return
+     * @throws Exception
+     */
     @Path("/sync/send")
     @POST
     public MailSendOutput mailSyncSend(MailSendInput input) throws Exception {

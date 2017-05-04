@@ -59,8 +59,13 @@ public class TokenRest {
     }
 
 
-    //刷新token接口，也可以不写
-
+    /**
+     * 验证token和user_id的有效性，支持自动刷新
+     * @param accessToken
+     * @param userId
+     * @return
+     * @throws Exception
+     */
     @Path("/check")
     @GET
     public CheckTokenOutput checkToken(

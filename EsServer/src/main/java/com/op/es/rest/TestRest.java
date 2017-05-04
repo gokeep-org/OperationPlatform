@@ -28,6 +28,10 @@ public class TestRest {
     @Autowired
     private DiscoveryServer discoveryServer;
 
+    /**
+     * 服务测试接口
+     * @return
+     */
     @GET
     public String test() {
 //      String server_address =  loadBalancerClient.choose("OAUTH").getUri().toString();
