@@ -16,6 +16,10 @@ import com.google.gson.JsonObject;
 @Path("/info")
 @Produces({MediaType.APPLICATION_JSON})
 public class InfoRest {
+    /**
+     * 服务状态测试接口
+     * @return
+     */
     @GET
     public String info(){
         JsonObject object = new JsonObject();

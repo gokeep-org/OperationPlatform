@@ -27,6 +27,13 @@ import com.op.core.bean.action.output.WriteOutput;
 @Path("/write/")
 @Produces({MediaType.APPLICATION_JSON})
 public class WriteRest {
+    /**
+     * 插入指定类型的文档
+     * @param o
+     * @param collectionName
+     * @return
+     * @throws Exception
+     */
     @POST
     @Path("/{type}")
     public WriteOutput insert(Map o,
@@ -37,6 +44,13 @@ public class WriteRest {
         return (WriteOutput) WriteActionFactory.getInsertAction(input).execute();
     }
 
+    /**
+     * 批量插入指定类型文档
+     * @param os
+     * @param collectionName
+     * @return
+     * @throws Exception
+     */
     @POST
     @Path("/{type}/batch")
     public WriteOutput inserts(List<Map> os,
@@ -47,6 +61,13 @@ public class WriteRest {
         return (WriteOutput) WriteActionFactory.getInsertsAction(input).execute();
     }
 
+    /**
+     * 删除指定ID的文档
+     * @param collectionName
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @DELETE
     @Path("/{type}/{id}")
     public WriteOutput deleteById(@PathParam("type") String collectionName,
@@ -57,6 +78,13 @@ public class WriteRest {
         return (WriteOutput) WriteActionFactory.getDeleteAction(input).execute();
     }
 
+    /**
+     * 批量删除指定ID的文档
+     * @param ids
+     * @param collectionName
+     * @return
+     * @throws Exception
+     */
     @DELETE
     @Path("/{type}")
     public WriteOutput deleteByIds(List<String> ids,
@@ -67,6 +95,15 @@ public class WriteRest {
         return (WriteOutput) WriteActionFactory.getDeleteAction(input).execute();
     }
 
+    /**
+     * 根据ID更新一条文档信息
+     * 不损害文档本身信息
+     * @param o
+     * @param collectionName
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @PUT
     @Path("/{type}/{id}")
     public WriteOutput updateById(Map o,
@@ -79,6 +116,13 @@ public class WriteRest {
         return (WriteOutput) WriteActionFactory.getUpdateAction(input).execute();
     }
 
+    /**
+     * 批量根据ID更新信息
+     * @param o
+     * @param collectionName
+     * @return
+     * @throws Exception
+     */
     @PUT
     @Path("/{type}")
     public WriteOutput updateByIds(Map o,

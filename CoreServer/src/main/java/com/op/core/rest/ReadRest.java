@@ -21,6 +21,13 @@ import com.op.core.bean.action.output.ReadOutput;
 @Path("/read")
 @Produces({MediaType.APPLICATION_JSON})
 public class ReadRest {
+    /**
+     * 根据文档ID获取是定文档数据
+     * @param collectionName
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @GET
     @Path("/{type}/{id}")
     public ReadOutput searchDocumentById(@PathParam("type") String collectionName,
@@ -31,6 +38,13 @@ public class ReadRest {
         return (ReadOutput) ReadActionFactory.getSearchDocumentByIdAction(input).execute();
     }
 
+    /**
+     * 查询符合查询条件的文档
+     * @param input
+     * @param collectionName
+     * @return
+     * @throws Exception
+     */
     @POST
     @Path("/{type}")
     public ReadOutput searchDocumentByQuery(SearchInput input,
@@ -39,12 +53,25 @@ public class ReadRest {
         return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input).execute();
     }
 
+    /**
+     *
+     * @param collectionNmae
+     * @return
+     * @throws Exception
+     */
     @GET
     @Path("/{type}/size")
     public ReadOutput searchCollectionSize(@PathParam("type") String collectionNmae) throws Exception {
         return (ReadOutput) ReadActionFactory.getSearchCollectionSizeAction(null, collectionNmae).execute();
     }
 
+    /**
+     * 查询重复name的文档
+     * @param name
+     * @param collectionName
+     * @return
+     * @throws Exception
+     */
     @GET
     @Path("/{type}/repeat")
     public ReadOutput searchCollectionRepeatName(@QueryParam("name") String name,
