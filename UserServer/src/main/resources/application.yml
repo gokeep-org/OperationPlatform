@@ -6,9 +6,11 @@ spring:
       charset: utf-8
       force: true
 eureka:
+  server:
+    url: http://localhost:10001/eureka/
   client:
     serviceUrl:
-      defaultZone: http://localhost:10001/eureka/
+      defaultZone: ${eureka.server.url}
   instance:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
