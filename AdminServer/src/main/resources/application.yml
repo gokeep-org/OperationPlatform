@@ -1,10 +1,11 @@
+server:
+  port: 37332
 spring:
   application:
     name: admin
   boot:
     admin:
       url: http://localhost:${server.port}
-      client:
   jackson:
     serialization: true
 eureka:
@@ -16,7 +17,5 @@ eureka:
   instance:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
-server:
-  port: 37332
 info:
   version: 1.0
