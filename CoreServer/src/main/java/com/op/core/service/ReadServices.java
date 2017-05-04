@@ -16,4 +16,6 @@ public interface ReadServices<T> {
     public T findCollectionSize(String collection);
 
     public T findCollectionSizeByQuery(Query query, String collection);
+
+    public T findCollectionToSort(Query query, String collection, String field, String order);
 }

@@ -19,15 +19,15 @@ public class ReadActionFactory extends BaseActionFactory {
         return new SearchDocumentAction(input);
     }
 
-    public static SearchDocumentBytermAction getSearchDocumentBytermAction(SearchInput input) {
-        return new SearchDocumentBytermAction(input);
+    public static SearchDocumentBytermAction getSearchDocumentBytermAction(SearchInput input, int pageNow, int pageSize, String field, String order) {
+        return new SearchDocumentBytermAction(input, pageNow, pageSize, field, order);
     }
 
-    public static SearchCollectionSizeAction getSearchCollectionSizeAction(Query query, String collectionName){
+    public static SearchCollectionSizeAction getSearchCollectionSizeAction(Query query, String collectionName) {
         return new SearchCollectionSizeAction(query, collectionName);
     }
 
-    public static SearchRepeatCollectionNameAction getSearchRepeatCollectionNameAction(String name, String collectionName){
+    public static SearchRepeatCollectionNameAction getSearchRepeatCollectionNameAction(String name, String collectionName) {
         return new SearchRepeatCollectionNameAction(name, collectionName);
     }
 }

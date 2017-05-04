@@ -1,5 +1,6 @@
 package com.op.core.rest;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -39,7 +40,7 @@ public class ReadRest {
     }
 
     /**
-     * 查询符合查询条件的文档
+     * 查询符合查询条件的文档,支持分页
      * @param input
      * @param collectionName
      * @return
@@ -48,13 +49,18 @@ public class ReadRest {
     @POST
     @Path("/{type}")
     public ReadOutput searchDocumentByQuery(SearchInput input,
-                                            @PathParam("type") String collectionName) throws Exception {
+                                            @PathParam("type") String collectionName,
+                                            @QueryParam("page_now") @DefaultValue("1") int pageNow,
+                                            @QueryParam("page_size") @DefaultValue("10") int pageSize,
+                                            @QueryParam("field") @DefaultValue("id") String field,
+                                            @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
         input.setCollectionName(collectionName);
-        return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input).execute();
+
+        return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input, pageNow, pageSize, field, order).execute();
     }
 
     /**
-     *
+     * 查询集合内文档数目
      * @param collectionNmae
      * @return
      * @throws Exception
@@ -78,4 +84,6 @@ public class ReadRest {
                                                  @PathParam("type") String collectionName) throws Exception {
         return (ReadOutput) ReadActionFactory.getSearchRepeatCollectionNameAction(name, collectionName).execute();
     }
+
+
 }
