@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -69,6 +70,11 @@ public class SearchDocumentBytermAction extends ItemAction<BaseOutput> {
 //        query.addCriteria(criteria);
         this.collectionSize = (long) readServices.findCollectionSize(this.collectionNmae);
         query.limit(pageSize).skip((pageNow - 1) * pageSize);
+        if (this.order.equals("descend")) {
+            query.with(new Sort(new Sort.Order(Sort.Direction.DESC, this.field)));
+        } else {
+            query.with(new Sort(new Sort.Order(Sort.Direction.DESC, this.field)));
+        }
         res = (List<Map>) readServices.findByQuery(query, collectionNmae);
     }
 

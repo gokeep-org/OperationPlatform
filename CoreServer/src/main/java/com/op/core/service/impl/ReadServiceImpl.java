@@ -1,6 +1,5 @@
 package com.op.core.service.impl;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.mongodb.client.model.Sorts;
 import com.op.core.exception.OperationPlatformException;
 import com.op.core.service.BaseService;
 import com.op.core.service.ReadServices;
@@ -59,17 +57,6 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
             return mongoTemplate.count(query, collection);
         } catch (Exception e) {
             throw new OperationPlatformException("find collection size by query is error");
-        }
-    }
-
-    @Override
-    public List<Map> findCollectionToSort(Query query, String collectionName, String field, String order) {
-        try {
-            Comparator comparator = (Comparator) Sorts.ascending("");
-            return mongoTemplate.
-                    find(query, Map.class, collectionName);
-        } catch (Exception e) {
-            throw new OperationPlatformException("find by query is error");
         }
     }
 }
