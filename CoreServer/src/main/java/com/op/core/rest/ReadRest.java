@@ -41,6 +41,8 @@ public class ReadRest {
 
     /**
      * 查询符合查询条件的文档,支持分页
+     * 升序：ascend
+     * 降序：descend
      * @param input
      * @param collectionName
      * @return
@@ -52,7 +54,7 @@ public class ReadRest {
                                             @PathParam("type") String collectionName,
                                             @QueryParam("page_now") @DefaultValue("1") int pageNow,
                                             @QueryParam("page_size") @DefaultValue("10") int pageSize,
-                                            @QueryParam("field") @DefaultValue("id") String field,
+                                            @QueryParam("field") @DefaultValue("_id") String field,
                                             @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
         input.setCollectionName(collectionName);
 

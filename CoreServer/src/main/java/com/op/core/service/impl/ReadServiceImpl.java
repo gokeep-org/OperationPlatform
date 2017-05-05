@@ -21,9 +21,19 @@ import com.op.core.service.ServiceBeanNames;
  ****************************************/
 @Service(value = ServiceBeanNames.READ_SERVICE)
 public class ReadServiceImpl extends BaseService implements ReadServices {
+    /**
+     * MongoDb核心查询服务
+     */
+
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    /**
+     * 根据ID标识符获取文档
+     * @param id
+     * @param collectionName
+     * @return
+     */
     @Override
     public Map<String, Object> findOneById(String id, String collectionName) {
         try {
@@ -33,6 +43,12 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
         }
     }
 
+    /**
+     * 根据查询条件查询
+     * @param query
+     * @param collectionName
+     * @return
+     */
     @Override
     public List<Map> findByQuery(Query query, String collectionName) {
         try {
@@ -42,6 +58,11 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
         }
     }
 
+    /**
+     * 查询所有的集合文档数目大小
+     * @param collection
+     * @return
+     */
     @Override
     public Long findCollectionSize(String collection) {
         try {
@@ -51,6 +72,12 @@ public class ReadServiceImpl extends BaseService implements ReadServices {
         }
     }
 
+    /**
+     * 查询符合条件的文档数目
+     * @param query
+     * @param collection
+     * @return
+     */
     @Override
     public Object findCollectionSizeByQuery(Query query, String collection) {
         try {

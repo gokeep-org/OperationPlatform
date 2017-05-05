@@ -7,7 +7,6 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.op.core.action.item.ItemAction;
@@ -59,7 +58,6 @@ public class SearchDocumentBytermAction extends ItemAction<BaseOutput> {
     @Override
     protected void start() throws Exception {
         Query query = new Query();
-        Criteria criteria = new Criteria();
 //        Iterator<Map.Entry<String, Object>> entries = term.entrySet().iterator();
 //
 //        for (Iterator<Map.Entry<String, Object>> it = entries; it.hasNext(); ) {
@@ -73,7 +71,7 @@ public class SearchDocumentBytermAction extends ItemAction<BaseOutput> {
         if (this.order.equals("descend")) {
             query.with(new Sort(new Sort.Order(Sort.Direction.DESC, this.field)));
         } else {
-            query.with(new Sort(new Sort.Order(Sort.Direction.DESC, this.field)));
+            query.with(new Sort(new Sort.Order(Sort.Direction.ASC, this.field)));
         }
         res = (List<Map>) readServices.findByQuery(query, collectionNmae);
     }
