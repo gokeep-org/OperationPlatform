@@ -157,9 +157,19 @@ public class UserServiceImpl extends BaseService implements UserService {
         return res.get("total").getAsLong();
     }
 
+    // TODO: 对象条件过滤未完成，这里临时为所有文档数目，改期
     @Override
     public Long size(User user) {
-        return null;
+        String result;
+        //验证
+        try {
+            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/size", null, getHeaders()).json();
+        } catch (Throwable e) {
+            //跑出异常
+            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
+        }
+        JsonObject res = (JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class);
+        return res.get("total").getAsLong();
     }
 
     public Requests getRequests() {
