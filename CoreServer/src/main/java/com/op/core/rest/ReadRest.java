@@ -68,13 +68,13 @@ public class ReadRest {
      * @throws Exception
      */
     @GET
-    @Path("/{type}/size")
+    @Path("/{type}/total")
     public ReadOutput searchCollectionSize(@PathParam("type") String collectionNmae) throws Exception {
         return (ReadOutput) ReadActionFactory.getSearchCollectionSizeAction(null, collectionNmae).execute();
     }
 
     /**
-     * 查询重复name的文档
+     * 查询重复name或者username的文档
      * @param name
      * @param collectionName
      * @return

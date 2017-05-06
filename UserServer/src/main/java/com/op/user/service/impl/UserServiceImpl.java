@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.op.user.action.output.ErrorInfoOutput;
 import com.op.user.bean.ServiceName;
 import com.op.user.bean.entity.user.User;
+import com.op.user.exception.OperationPlatformException;
 import com.op.user.service.BaseService;
 import com.op.user.service.UserService;
 import com.op.util.bean.Paging;
@@ -145,13 +146,11 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public Long size() {
-        String result;
-        //验证
+        String result = null;
         try {
-            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/size", null, getHeaders()).json();
+            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/total", null, getHeaders()).json();
         } catch (Throwable e) {
-            //跑出异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
+            throw new OperationPlatformException("获取用户数目失败");
         }
         JsonObject res = (JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class);
         return res.get("total").getAsLong();
@@ -160,13 +159,13 @@ public class UserServiceImpl extends BaseService implements UserService {
     // TODO: 对象条件过滤未完成，这里临时为所有文档数目，改期
     @Override
     public Long size(User user) {
-        String result;
+        String result = null;
         //验证
         try {
-            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/size", null, getHeaders()).json();
+            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/total", null, getHeaders()).json();
         } catch (Throwable e) {
             //跑出异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "获取用户数目失败"));
         }
         JsonObject res = (JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class);
         return res.get("total").getAsLong();

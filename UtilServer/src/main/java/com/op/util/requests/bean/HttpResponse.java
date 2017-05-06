@@ -1,17 +1,22 @@
 package com.op.util.requests.bean;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.op.util.requests.bean.data.DataType;
 import com.op.util.requests.exception.ErrorCode;
 import com.op.util.requests.exception.RequestsException;
 
-import org.apache.http.util.EntityUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
-
 public class HttpResponse implements DataType {
     private org.apache.http.HttpResponse httpResponse;
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpResponse.class);
+    private static final int BUFFER_SIZE = 1024;
 
     public HttpResponse() {
     }
@@ -54,15 +59,38 @@ public class HttpResponse implements DataType {
 
     private String getHttpResponseStr() {
         String strRes = falg;
+        InputStream inputStream = null;
         try {
-            strRes = EntityUtils.toString(httpResponse.getEntity(), "utf-8");
+            strRes = InputStreamTOString(httpResponse.getEntity().getContent(), "utf-8");
             if (strRes.equals(falg)) {
                 throw new RequestsException(ErrorCode.RESULT_TO_STR_IS_ERROR);
             }
             return strRes;
         } catch (IOException e) {
+            LOGGER.error("close http response input stream is error");
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (!Objects.equals(null, inputStream)) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    LOGGER.error("close input stream is error");
+                }
+            }
         }
         return strRes;
+    }
+
+    public static String InputStreamTOString(InputStream inputStream, String encoding) throws Exception {
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] data = new byte[BUFFER_SIZE];
+        int count = -1;
+        while ((count = inputStream.read(data, 0, BUFFER_SIZE)) != -1)
+            outStream.write(data, 0, count);
+        data = null;
+        String res = new String(outStream.toByteArray(), encoding);
+        inputStream.close();
+        return res;
     }
 }

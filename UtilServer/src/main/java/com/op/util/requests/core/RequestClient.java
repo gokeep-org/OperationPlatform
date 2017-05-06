@@ -1,17 +1,16 @@
 package com.op.util.requests.core;
 
-import com.op.util.requests.exception.ErrorCode;
-import com.op.util.requests.exception.RequestsException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.op.util.requests.exception.ErrorCode;
+import com.op.util.requests.exception.RequestsException;
 
 
 public abstract class RequestClient<T> {
@@ -20,7 +19,8 @@ public abstract class RequestClient<T> {
     private String loggerString = "";
 
     protected CloseableHttpClient openHttpClient() {
-        httpClient = HttpClients.createDefault();
+//        httpClient = HttpClients.createDefault();
+        httpClient = HttpConnectionManager.getHttpClient();
         return httpClient;
     }
 
@@ -62,7 +62,7 @@ public abstract class RequestClient<T> {
         setUpHttpMethod();
         requestParamterFilter(url);
         HttpResponse httpResponse = sendRequest(url, params, postForms, body, headers);
-        closeHttpClient();
+//        closeHttpClient();
         return new com.op.util.requests.bean.HttpResponse().setHttpResponse(httpResponse);
     }
 

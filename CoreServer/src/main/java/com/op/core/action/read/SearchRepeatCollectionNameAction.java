@@ -43,8 +43,9 @@ public class SearchRepeatCollectionNameAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        Query query = new Query(Criteria.where("name").is(name));
-        this.list = (List) readServices.findByQuery(query, collectionName);
+        Criteria criteria = new Criteria();
+        criteria.orOperator(Criteria.where("name").is(name), Criteria.where("username").is(name));
+        this.list = (List) readServices.findByQuery(new Query(criteria), collectionName);
     }
 
     @Override

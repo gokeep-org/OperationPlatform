@@ -1,17 +1,17 @@
 package com.op.util.discovery;
 
-import com.netflix.config.ConfigurationManager;
-import com.netflix.loadbalancer.IPing;
-import com.netflix.loadbalancer.Server;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.netflix.config.ConfigurationManager;
+import com.netflix.loadbalancer.IPing;
+import com.netflix.loadbalancer.Server;
+import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
 
 /****************************************
  * Copyright (c) xuning.
@@ -23,10 +23,8 @@ public class PingPort implements IPing {
     private static Logger logger = LoggerFactory.getLogger(PingPort.class);
 
     public boolean isAlive(Server server) {
-        logger.trace("检查端口状态,线程名称：" + Thread.currentThread().getName());
         DiscoveryEnabledServer enabledServer = (DiscoveryEnabledServer) server;
         int IpSocketTimeOut = ConfigurationManager.getConfigInstance().getInt("iping.socket.timeout", 3000);
-        logger.trace("socket超时时间：" + IpSocketTimeOut);
         boolean isAlive = false;
         Socket client = new Socket();
         String ip = enabledServer.getInstanceInfo().getIPAddr();
@@ -36,14 +34,14 @@ public class PingPort implements IPing {
             client.connect(socketAddress, IpSocketTimeOut);
             isAlive = true;
         } catch (Exception e) {
-            logger.error("获取端口状态时异常:" + ip + ":" + port, e.getMessage());
+            logger.error("get port status is exception " + ip + ":" + port, e.getMessage());
             return isAlive;
         } finally {
             if (client != null) {
                 try {
                     client.close();
                 } catch (IOException e) {
-                    logger.error("client close is error");
+                    logger.error("get vip is error, because client may not exist or not register");
                 }
             }
         }

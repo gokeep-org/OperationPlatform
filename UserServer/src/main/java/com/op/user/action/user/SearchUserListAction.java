@@ -23,6 +23,7 @@ public class SearchUserListAction extends ItemAction<BaseOutput> {
     private User user;
     private Paging paging;
     private List list;
+    private long total;
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchUserListAction.class);
     public SearchUserListAction(User user, Paging paging) {
         this.user = user;
@@ -44,13 +45,14 @@ public class SearchUserListAction extends ItemAction<BaseOutput> {
     @Override
     protected void start() throws Exception {
         this.list = userService.searchUserByPaging(this.user, this.paging);
+        this.total = userService.size(this.user);
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
         SearchOutput output = new SearchOutput();
         output.setList(this.list);
-        output.setTotal(this.list.size());
+        output.setTotal(this.total);
         return output;
     }
 
