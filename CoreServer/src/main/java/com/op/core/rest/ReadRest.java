@@ -86,6 +86,4 @@ public class ReadRest {
                                                  @PathParam("type") String collectionName) throws Exception {
         return (ReadOutput) ReadActionFactory.getSearchRepeatCollectionNameAction(name, collectionName).execute();
     }
-
-
 }

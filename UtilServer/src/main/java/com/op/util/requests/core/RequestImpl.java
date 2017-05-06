@@ -1,11 +1,11 @@
 package com.op.util.requests.core;
 
 
+import java.util.Map;
+
 import com.op.util.requests.Requests;
 import com.op.util.requests.bean.HttpResponse;
 import com.op.util.requests.bean.data.Method;
-
-import java.util.Map;
 
 public class RequestImpl implements Requests {
 
@@ -39,10 +39,10 @@ public class RequestImpl implements Requests {
         return parseHttpMethod(Method.POST).execute(url, params, headers);
     }
 
-    @Override
-    public HttpResponse post(String url, Map<String, String> params, Map<String, String> postForms, Map<String, String> headers) {
-        return parseHttpMethod(Method.POST).execute(url, params, postForms, headers);
-    }
+//    @Override
+//    public HttpResponse post(String url, Map<String, String> params, Map<String, String> postForms, Map<String, String> headers) {
+//        return parseHttpMethod(Method.POST).execute(url, params, postForms, headers);
+//    }
 
     @Override
     public HttpResponse post(String url, Object body, Map<String, String> headers) {

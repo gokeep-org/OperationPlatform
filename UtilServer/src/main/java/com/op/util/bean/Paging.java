@@ -62,6 +62,10 @@ public class Paging {
         return this;
     }
 
+    public Paging(int pageNow, int pageSize, String field, String order){
+        this(pageNow, pageSize, 0, null, field,  order);
+    }
+
     public int getPageNow() {
         return pageNow;
     }

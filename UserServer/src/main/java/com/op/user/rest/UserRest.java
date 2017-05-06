@@ -1,18 +1,21 @@
 package com.op.user.rest;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.user.action.factory.UserActionFactory;
 import com.op.user.action.output.ResultMessage;
 import com.op.user.action.output.SearchOutput;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.Paging;
 
 /****************************************
  * Copyright (c) xuning.
@@ -70,5 +73,32 @@ public class UserRest {
     @Path("/{id}")
     public SearchOutput getUserByUserId(@PathParam("id") String userId) throws Exception {
         return (SearchOutput) UserActionFactory.getSearchUserAction(userId, null).execute();
+    }
+
+    /**
+     * 按条件分页查询，支持排序
+     * @param
+     * @param pageNow
+     * @param pageSize
+     * @param field
+     * @param order
+     * @return
+     * @throws Exception
+     */
+    @POST
+    @Path("/search")
+    public SearchOutput getUserListByPaning(User user,
+                                            @QueryParam("page_now") @DefaultValue("1") int pageNow,
+                                            @QueryParam("page_size") @DefaultValue("10") int pageSize,
+                                            @QueryParam("field") @DefaultValue("create_time") String field,
+                                            @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
+        Paging paging = new Paging(pageNow, pageSize, field, order);
+        return (SearchOutput) UserActionFactory.getSearchUserListAction(user, paging).execute();
+    }
+
+    @POST
+    @Path("/total")
+    public SearchOutput getUserTotal(User user) throws Exception {
+        return (SearchOutput) UserActionFactory.getSearchUserTotalAction(user).execute();
     }
 }

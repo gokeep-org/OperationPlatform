@@ -3,9 +3,12 @@ package com.op.user.action.factory;
 import com.op.user.action.BaseActionFactory;
 import com.op.user.action.user.CreateUserAction;
 import com.op.user.action.user.DeleteUserAction;
+import com.op.user.action.user.SearchUserTotalAction;
 import com.op.user.action.user.SearchUserAction;
+import com.op.user.action.user.SearchUserListAction;
 import com.op.user.action.user.UpdateUserAction;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.Paging;
 
 /****************************************
  * Copyright (c) xuning.
@@ -18,6 +21,10 @@ public class UserActionFactory extends BaseActionFactory {
         return new CreateUserAction(user);
     }
 
+    public static SearchUserListAction getSearchUserListAction(User user, Paging paging) {
+        return new SearchUserListAction(user, paging);
+    }
+
     public static DeleteUserAction getDeleteUserAction(String userId) {
         return new DeleteUserAction(userId);
     }
@@ -28,5 +35,9 @@ public class UserActionFactory extends BaseActionFactory {
 
     public static UpdateUserAction getUpdateUserAction(String userId, User user) {
         return new UpdateUserAction(userId, user);
+    }
+
+    public static SearchUserTotalAction getSearchUserTotalAction(User user){
+        return new SearchUserTotalAction(user);
     }
 }

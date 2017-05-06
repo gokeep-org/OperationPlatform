@@ -1,9 +1,9 @@
 package com.op.util.requests;
 
 
-import com.op.util.requests.bean.HttpResponse;
-
 import java.util.Map;
+
+import com.op.util.requests.bean.HttpResponse;
 
 public interface Requests {
 
@@ -31,9 +31,6 @@ public interface Requests {
             String url, Map<String, String> params, Map<String, String> headers
     );
 
-    public HttpResponse post(
-            String url, Map<String, String> params, Map<String, String> postForms, Map<String, String> headers
-    );
 
     public HttpResponse post(
             String url, Object body, Map<String, String> headers

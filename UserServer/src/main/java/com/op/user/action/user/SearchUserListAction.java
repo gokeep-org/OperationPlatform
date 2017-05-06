@@ -1,26 +1,32 @@
 package com.op.user.action.user;
 
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
-import com.op.user.action.output.ResultMessage;
+import com.op.user.action.output.SearchOutput;
 import com.op.user.bean.entity.user.User;
 import com.op.user.exception.OperationPlatformException;
+import com.op.util.bean.Paging;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/4/20.
+ * @Auther is xuning on 2017/5/5.
  ****************************************/
-public class CreateUserAction extends ItemAction<BaseOutput> {
+public class SearchUserListAction extends ItemAction<BaseOutput> {
     private User user;
-
-    public CreateUserAction(User user) {
+    private Paging paging;
+    private List list;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchUserListAction.class);
+    public SearchUserListAction(User user, Paging paging) {
         this.user = user;
+        this.paging = paging;
     }
 
     @Override
@@ -31,35 +37,25 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void additionalValidate() throws Exception {
         if (Objects.equals(null, this.user)) {
-            throw new OperationPlatformException("add user is must not null");
+            throw new OperationPlatformException("search user is must not null");
         }
-        if (null == user.getUsername()){
-            throw new OperationPlatformException("add user username is must not null");
-        }
-        if (null == user.getActivated()) {
-            user.setActivated(true);
-        }
-        if (null == user.getStatus()) {
-            user.setStatus(true);
-        }
-        String commonId = UUID.randomUUID().toString();
-        user.setId(commonId);
-        user.setUserId(commonId);
-        user.setCreateDate(new Date().getTime());
     }
 
     @Override
     protected void start() throws Exception {
-        userService.createOneUser(user);
+        this.list = userService.searchUserByPaging(this.user, this.paging);
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
-        return new ResultMessage();
+        SearchOutput output = new SearchOutput();
+        output.setList(this.list);
+        output.setTotal(this.list.size());
+        return output;
     }
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("search user list is successful");
     }
 }

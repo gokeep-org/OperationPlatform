@@ -1,5 +1,6 @@
 package com.op.user.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -9,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonObject;
 import com.op.user.action.output.ErrorInfoOutput;
 import com.op.user.bean.ServiceName;
 import com.op.user.bean.entity.user.User;
 import com.op.user.service.BaseService;
 import com.op.user.service.UserService;
+import com.op.util.bean.Paging;
 import com.op.util.bean.UriPath;
 import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
@@ -35,6 +38,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     private DiscoveryVip discoveryVip;
     @Autowired
     private HttpServletRequest httpServletRequest;
+
     @Override
     public String createOneUser(User user) {
         String result;
@@ -114,13 +118,43 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    public List searchUserByPaging(User user, Paging paging) {
+        String result;
+        //验证
+        try {
+            Map<String, String> params = new HashMap<>();
+            params.put("page_now", String.valueOf(paging.getPageNow()));
+            params.put("page_size", String.valueOf(paging.getPageSize()));
+            params.put("field", paging.getField());
+            params.put("order", paging.getOrder());
+            result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/", params, user, getHeaders()).json();
+        } catch (Throwable e) {
+            //抛出结果获取异常
+            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
+        }
+        if (null != result) {
+            return (List) SerializeUtil.transfromStringToList(result);
+        }
+        return null;
+    }
+
+    @Override
     public List<User> searchUser(User user) {
         return null;
     }
 
     @Override
     public Long size() {
-        return null;
+        String result;
+        //验证
+        try {
+            result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/size", null, getHeaders()).json();
+        } catch (Throwable e) {
+            //跑出异常
+            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
+        }
+        JsonObject res = (JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class);
+        return res.get("total").getAsLong();
     }
 
     @Override
@@ -152,7 +186,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         this.httpServletRequest = httpServletRequest;
     }
 
-    public Map getHeaders() {
+    public Map<String, String> getHeaders() {
         String userId = httpServletRequest.getHeader("user_id");
         return RequestUtil.setUserIdToRequest(userId);
     }

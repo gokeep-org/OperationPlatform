@@ -1,5 +1,6 @@
 package com.op.user.action.output;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
@@ -14,9 +15,21 @@ public class SearchOutput extends ResultMessage {
     private Long total;
     @SerializedName("result")
     private Map<String, Object> result;
-
+    private List list;
     public Map<String, Object> getResult() {
         return result;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
     }
 
     public Long getTotal() {

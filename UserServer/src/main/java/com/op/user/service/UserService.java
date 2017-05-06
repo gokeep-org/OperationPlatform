@@ -3,6 +3,7 @@ package com.op.user.service;
 import java.util.List;
 
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.Paging;
 
 /****************************************
  * Copyright (c) xuning.
@@ -24,6 +25,8 @@ public interface UserService{
     String updateUser(User user);
 
     String searchUserByUserId(String userId);
+
+    List searchUserByPaging(User user, Paging paging);
 
     List<User> searchUser(User user);
 
