@@ -57,7 +57,6 @@ public class ReadRest {
                                             @QueryParam("field") @DefaultValue("_id") String field,
                                             @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
         input.setCollectionName(collectionName);
-
         return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input, pageNow, pageSize, field, order).execute();
     }
 

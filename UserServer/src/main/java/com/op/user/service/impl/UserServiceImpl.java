@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.output.ErrorInfoOutput;
 import com.op.user.bean.ServiceName;
 import com.op.user.bean.entity.user.User;
@@ -119,7 +120,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public List searchUserByPaging(User user, Paging paging) {
+    public List searchUserByPaging(SearchInput searchInput, Paging paging) {
         String result;
         //验证
         try {
@@ -128,7 +129,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             params.put("page_size", String.valueOf(paging.getPageSize()));
             params.put("field", paging.getField());
             params.put("order", paging.getOrder());
-            result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/", params, user, getHeaders()).json();
+            result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/", params, searchInput, getHeaders()).json();
         } catch (Throwable e) {
             //抛出结果获取异常
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
@@ -158,7 +159,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     // TODO: 对象条件过滤未完成，这里临时为所有文档数目，改期
     @Override
-    public Long size(User user) {
+    public Long size(SearchInput searchInput) {
         String result = null;
         //验证
         try {

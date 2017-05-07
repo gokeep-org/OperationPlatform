@@ -1,6 +1,7 @@
 package com.op.user.action.factory;
 
 import com.op.user.action.BaseActionFactory;
+import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.user.CreateUserAction;
 import com.op.user.action.user.DeleteUserAction;
 import com.op.user.action.user.SearchUserTotalAction;
@@ -21,8 +22,8 @@ public class UserActionFactory extends BaseActionFactory {
         return new CreateUserAction(user);
     }
 
-    public static SearchUserListAction getSearchUserListAction(User user, Paging paging) {
-        return new SearchUserListAction(user, paging);
+    public static SearchUserListAction getSearchUserListAction(SearchInput searchInput, Paging paging) {
+        return new SearchUserListAction(searchInput, paging);
     }
 
     public static DeleteUserAction getDeleteUserAction(String userId) {

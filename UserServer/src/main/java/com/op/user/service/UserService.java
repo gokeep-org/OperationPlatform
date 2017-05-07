@@ -2,6 +2,7 @@ package com.op.user.service;
 
 import java.util.List;
 
+import com.op.user.action.input.user.SearchInput;
 import com.op.user.bean.entity.user.User;
 import com.op.util.bean.Paging;
 
@@ -26,12 +27,12 @@ public interface UserService{
 
     String searchUserByUserId(String userId);
 
-    List searchUserByPaging(User user, Paging paging);
+    List searchUserByPaging(SearchInput searchInput, Paging paging);
 
     List<User> searchUser(User user);
 
     Long size();
 
-    Long size(User user);
+    Long size(SearchInput searchInput);
 
 }

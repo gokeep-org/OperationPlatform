@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.user.action.factory.UserActionFactory;
+import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.output.ResultMessage;
 import com.op.user.action.output.SearchOutput;
 import com.op.user.bean.entity.user.User;
@@ -87,18 +88,24 @@ public class UserRest {
      */
     @POST
     @Path("/search")
-    public SearchOutput getUserListByPaning(User user,
+    public SearchOutput getUserListByPaning(SearchInput searchInput,
                                             @QueryParam("page_now") @DefaultValue("1") int pageNow,
                                             @QueryParam("page_size") @DefaultValue("10") int pageSize,
                                             @QueryParam("field") @DefaultValue("create_time") String field,
                                             @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
         Paging paging = new Paging(pageNow, pageSize, field, order);
-        return (SearchOutput) UserActionFactory.getSearchUserListAction(user, paging).execute();
+        return (SearchOutput) UserActionFactory.getSearchUserListAction(searchInput, paging).execute();
     }
 
     @POST
     @Path("/total")
     public SearchOutput getUserTotal(User user) throws Exception {
         return (SearchOutput) UserActionFactory.getSearchUserTotalAction(user).execute();
+    }
+
+    @GET
+    @Path("/repeat")
+    public SearchOutput searchRepeatUserByUsername(@QueryParam("username") String username){
+        return null;
     }
 }
