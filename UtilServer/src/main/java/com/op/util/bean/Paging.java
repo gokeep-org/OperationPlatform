@@ -52,8 +52,11 @@ public class Paging {
         this.order = (null == order) ? "descend" : order;
         this.pageNext = this.pageNow + 1;
         this.pageUp = (this.pageNow == 0) ? 0 : this.pageNow - 1;
-        this.pageTotal = ((this.total % this.pageSize) == 0) ?
-                (int) (this.total / this.pageSize) : (int) (this.total / this.pageSize) + 1;
+        if (this.pageSize == 0)
+            this.pageTotal = 0;
+        else
+            this.pageTotal = ((this.total % this.pageSize) == 0) ?
+                    (int) (this.total / this.pageSize) : (int) (this.total / this.pageSize) + 1;
     }
 
     public Paging sort(String field, String order) {
