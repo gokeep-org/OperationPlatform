@@ -5,10 +5,8 @@ package com.op.proxy.filter;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
@@ -26,8 +24,6 @@ import org.slf4j.LoggerFactory;
 @Provider
 public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
-    @Context
-    private HttpServletRequest request;
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
         // 请求基本信息记录日志信息

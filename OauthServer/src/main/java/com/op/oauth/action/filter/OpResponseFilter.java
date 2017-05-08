@@ -1,9 +1,6 @@
 package com.op.oauth.action.filter;
 
-import com.op.oauth.bean.action.output.ErrorInfoOutput;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +10,10 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.op.oauth.bean.action.output.ErrorInfoOutput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -38,7 +38,6 @@ public class OpResponseFilter implements ContainerResponseFilter {
             );
             responseContext.setEntity(info);
         }
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        LOGGER.info("response sttaus is " + responseContext.getStatus());
+        LOGGER.info("oauth server request status code is :"+responseContext.getStatus());
     }
 }
