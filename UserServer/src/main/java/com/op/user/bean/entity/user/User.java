@@ -1,5 +1,7 @@
 package com.op.user.bean.entity.user;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 /****************************************
@@ -28,8 +30,11 @@ public class User {
     private Long createDate;
     @SerializedName("team_id")
     private String teamId;
+    @SerializedName("rule_ids")
+    private List<String> ruleIds;
     private String remark;
     private Boolean activated;
+
     public String getTeamId() {
         return teamId;
     }
@@ -132,5 +137,13 @@ public class User {
 
     public void setCreateDate(Long createDate) {
         this.createDate = createDate;
+    }
+
+    public List<String> getRuleIds() {
+        return ruleIds;
+    }
+
+    public void setRuleIds(List<String> ruleIds) {
+        this.ruleIds = ruleIds;
     }
 }

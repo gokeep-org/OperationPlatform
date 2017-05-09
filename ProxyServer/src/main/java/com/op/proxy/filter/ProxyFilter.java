@@ -1,17 +1,17 @@
 package com.op.proxy.filter;
 
-import com.google.gson.JsonObject;
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-import com.op.proxy.config.OperationPlatformException;
-import com.op.proxy.util.auth.AuthService;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.UUID;
+import com.google.gson.JsonObject;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
+import com.op.proxy.config.OperationPlatformException;
+import com.op.proxy.util.auth.AuthService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -50,11 +50,13 @@ public class ProxyFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         String accessToken = ctx.getRequest().getHeader("access_token");
         String userId = ctx.getRequest().getHeader("user_id");
+        if (null == accessToken || null == userId)
+            buildAuthErrorInfoToRequestContext(ctx);
         if (authService.checkToken(accessToken, userId)) {
             return null;
         } else {
             buildAuthErrorInfoToRequestContext(ctx);
-            throw new OperationPlatformException("token is invoid or null");
+            throw new OperationPlatformException("token is exprise in");
         }
     }
 
