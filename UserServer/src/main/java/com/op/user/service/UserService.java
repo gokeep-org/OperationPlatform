@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.op.user.action.input.user.SearchInput;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.CommonQueryBody;
 import com.op.util.bean.Paging;
 
 /****************************************
@@ -29,7 +30,7 @@ public interface UserService{
 
     List searchUserByPaging(SearchInput searchInput, Paging paging);
 
-    List<User> searchUser(User user);
+    List<User> searchUser(CommonQueryBody body);
 
     Long size();
 

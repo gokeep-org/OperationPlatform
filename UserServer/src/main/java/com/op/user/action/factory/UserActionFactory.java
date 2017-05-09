@@ -4,11 +4,13 @@ import com.op.user.action.BaseActionFactory;
 import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.user.CreateUserAction;
 import com.op.user.action.user.DeleteUserAction;
+import com.op.user.action.user.SearchRepeatUserAction;
 import com.op.user.action.user.SearchUserTotalAction;
 import com.op.user.action.user.SearchUserAction;
 import com.op.user.action.user.SearchUserListAction;
 import com.op.user.action.user.UpdateUserAction;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.CommonQueryBody;
 import com.op.util.bean.Paging;
 
 /****************************************
@@ -40,5 +42,9 @@ public class UserActionFactory extends BaseActionFactory {
 
     public static SearchUserTotalAction getSearchUserTotalAction(User user){
         return new SearchUserTotalAction(user);
+    }
+
+    public static SearchRepeatUserAction getSearchRepeatUserAction(CommonQueryBody body){
+        return new SearchRepeatUserAction(body);
     }
 }

@@ -7,5 +7,10 @@ package com.op.util.discovery;
  * @Auther is xuning on 17-4-16
  ****************************************/
 public interface DiscoveryVip {
+    /**
+     * 根据ServiceId获取服务的IP:PORT
+     * @param serverId
+     * @return
+     */
     public String choose(String serverId);
 }

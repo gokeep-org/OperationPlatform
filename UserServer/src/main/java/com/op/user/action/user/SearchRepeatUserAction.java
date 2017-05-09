@@ -1,11 +1,16 @@
 package com.op.user.action.user;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
+import com.op.user.action.output.SearchOutput;
+import com.op.user.bean.entity.user.User;
 import com.op.user.exception.OperationPlatformException;
+import com.op.util.bean.CommonQueryBody;
 
 /****************************************
  * Copyright (c) xuning.
@@ -14,10 +19,12 @@ import com.op.user.exception.OperationPlatformException;
  * @Auther is xuning on 2017/5/7.
  ****************************************/
 public class SearchRepeatUserAction extends ItemAction<BaseOutput> {
-    private String username;
+    private CommonQueryBody body;
+    private List<User> list;
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchRepeatUserAction.class);
-    public SearchRepeatUserAction(String username) {
-        this.username = username;
+
+    public SearchRepeatUserAction(CommonQueryBody body) {
+        this.body = body;
     }
 
     @Override
@@ -27,23 +34,32 @@ public class SearchRepeatUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void additionalValidate() throws Exception {
-        if (null == this.username){
-            throw new OperationPlatformException("search repeat user by username must username not is null");
+        if (null == this.body) {
+            throw new OperationPlatformException("search repeat user by body must body not is null");
         }
     }
 
     @Override
     protected void start() throws Exception {
-//        userService.searchUserByUserId()
+        if (null == this.body.getQuery())
+            this.list = null;
+        else
+            this.list = userService.searchUser(this.body);
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
-        return null;
+        SearchOutput output = new SearchOutput();
+        if (this.list == null)
+            output.setTotal(0);
+        else
+            output.setTotal(this.list.size());
+        output.setList(this.list);
+        return output;
     }
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("search repeat user is successful");
     }
 }

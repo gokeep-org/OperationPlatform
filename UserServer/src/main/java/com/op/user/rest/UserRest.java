@@ -16,6 +16,7 @@ import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.output.ResultMessage;
 import com.op.user.action.output.SearchOutput;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.CommonQueryBody;
 import com.op.util.bean.Paging;
 
 /****************************************
@@ -97,15 +98,27 @@ public class UserRest {
         return (SearchOutput) UserActionFactory.getSearchUserListAction(searchInput, paging).execute();
     }
 
+    /**
+     * 查询符合条件的用户数目
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @POST
     @Path("/total")
     public SearchOutput getUserTotal(User user) throws Exception {
         return (SearchOutput) UserActionFactory.getSearchUserTotalAction(user).execute();
     }
 
-    @GET
+    /**
+     * 查询重复用户列表
+     * @param body
+     * @return
+     * @throws Exception
+     */
+    @POST
     @Path("/repeat")
-    public SearchOutput searchRepeatUserByUsername(@QueryParam("username") String username){
-        return null;
+    public SearchOutput searchRepeatUser(CommonQueryBody body) throws Exception {
+        return (SearchOutput) UserActionFactory.getSearchRepeatUserAction(body).execute();
     }
 }

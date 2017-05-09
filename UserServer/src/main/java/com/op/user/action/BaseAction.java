@@ -18,11 +18,11 @@ public abstract class BaseAction<T extends BaseOutput> {
 
     public final T execute() throws Exception {
         try {
-            // 用户参数格式校验
+            // 用户参数格式校验，全局校验
             inputValidate();
             // 权限校验
             permissionValidate();
-            // 附加验证,外加参数组装
+            // 附加验证,外加参数组装，事件参数校验
             additionalValidate();
             // 业务逻辑
             start();
