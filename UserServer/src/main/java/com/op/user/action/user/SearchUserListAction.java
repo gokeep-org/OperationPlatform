@@ -1,7 +1,6 @@
 package com.op.user.action.user;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +9,6 @@ import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.SearchOutput;
-import com.op.user.bean.entity.user.User;
-import com.op.user.exception.OperationPlatformException;
 import com.op.util.bean.Paging;
 
 /****************************************
@@ -45,7 +42,8 @@ public class SearchUserListAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        this.list = userService.searchUserByPaging(this.searchBody, this.paging);
+        if (this.paging.getPageSize() != 0)
+            this.list = userService.searchUserByPaging(this.searchBody, this.paging);
         this.total = userService.size(this.searchBody);
     }
 

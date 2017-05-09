@@ -56,24 +56,24 @@ public class SearchDocumentBytermAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        Query query = new Query();
-        Criteria criteria = new Criteria();
-        if (!Objects.equals(null, this.query)) {
-            Iterator<Map.Entry<String, Object>> entries = this.query.entrySet().iterator();
-            for (Iterator<Map.Entry<String, Object>> it = entries; it.hasNext(); ) {
-                it.forEachRemaining(e -> {
-                    criteria.orOperator(Criteria.where(e.getKey()).is(e.getValue()));
-                });
+            Query query = new Query();
+            Criteria criteria = new Criteria();
+            if (!Objects.equals(null, this.query)) {
+                Iterator<Map.Entry<String, Object>> entries = this.query.entrySet().iterator();
+                for (Iterator<Map.Entry<String, Object>> it = entries; it.hasNext(); ) {
+                    it.forEachRemaining(e -> {
+                        criteria.orOperator(Criteria.where(e.getKey()).is(e.getValue()));
+                    });
+                }
+                query.addCriteria(criteria);
             }
-            query.addCriteria(criteria);
-        }
-        query.limit(pageSize).skip((pageNow - 1) * pageSize);
-        if (this.order.equals("descend")) {
-            query.with(new Sort(new Sort.Order(Sort.Direction.DESC, this.field)));
-        } else {
-            query.with(new Sort(new Sort.Order(Sort.Direction.ASC, this.field)));
-        }
-        res = (List<Map>) readServices.findByQuery(query, collectionNmae);
+            query.limit(pageSize).skip((pageNow - 1) * pageSize);
+            if (this.order.equals("descend")) {
+                query.with(new Sort(new Sort.Order(Sort.Direction.DESC, this.field)));
+            } else {
+                query.with(new Sort(new Sort.Order(Sort.Direction.ASC, this.field)));
+            }
+            res = (List<Map>) readServices.findByQuery(query, collectionNmae);
     }
 
     @Override
