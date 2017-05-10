@@ -1,5 +1,7 @@
 package com.op.oauth.service;
 
+import com.google.gson.JsonObject;
+import com.op.oauth.bean.entity.Event;
 import com.op.oauth.bean.entity.Rule;
 
 /****************************************
@@ -26,4 +28,18 @@ public interface AuthService<T, C> {
      * @return
      */
     public Boolean createRule(Rule rule);
+
+    /**
+     * 创建事件规则
+     * @param event
+     * @return
+     */
+    public Boolean createEvent(Event event);
+
+    /**
+     * 根据Id查询Event
+     * @param id
+     * @return
+     */
+    public JsonObject getRuleById(String id);
 }

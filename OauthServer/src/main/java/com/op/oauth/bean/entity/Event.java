@@ -1,5 +1,9 @@
 package com.op.oauth.bean.entity;
 
+import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -14,14 +18,18 @@ public class Event {
      * name：事件名称
      * path：请求路径
      * method：请求方法
+     * rule_ids: 角色id列表
      * status：event定义状态，true为可用状态，false为不可用状态
      * 注： 这是用户请求事件的定义最基本定义，上一层定义为Rule
      */
+    @SerializedName("_id")
     private String id;
     private String name;
     private String path;
     private String method;
     private Boolean status;
+    @SerializedName("rule_ids")
+    private List<String> ruleIds;
 
     public String getId() {
         return id;
@@ -61,5 +69,13 @@ public class Event {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public List<String> getRuleIds() {
+        return ruleIds;
+    }
+
+    public void setRuleIds(List<String> ruleIds) {
+        this.ruleIds = ruleIds;
     }
 }

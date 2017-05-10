@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.op.oauth.bean.entity.Client;
+import com.op.oauth.bean.entity.Event;
 import com.op.oauth.bean.entity.Rule;
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.service.AuthService;
@@ -36,6 +37,7 @@ public class AuthServiceImpl extends BaseService implements AuthService<Client, 
     private DiscoveryVip discoveryVip;
     @Autowired
     private HttpServletRequest httpServletRequest;
+
     @Override
     public Client authorization(User user) {
         return null;
@@ -44,8 +46,8 @@ public class AuthServiceImpl extends BaseService implements AuthService<Client, 
     @Override
     public Boolean checkUserAccessAuth(String path, String method, String userId) {
         //TODO: 验证用户访问权限
-        String resTotal = requests.get(discoveryVip.choose(ServerName.CORE)+UriPath.CORE+"/read/user/total").json();
-        long total = ((JsonObject)SerializeUtil.transfromStringToObject(resTotal, JsonObject.class)).get("total").getAsLong();
+        String resTotal = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/total").json();
+        long total = ((com.google.gson.JsonObject) SerializeUtil.transfromStringToObject(resTotal, com.google.gson.JsonObject.class)).get("total").getAsLong();
         if (total == 0)
             return false;
         Map<String, String> params = new HashMap<>();
@@ -57,14 +59,39 @@ public class AuthServiceImpl extends BaseService implements AuthService<Client, 
         String result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/rule/", params).json();
         return null;
     }
+
     @Override
-    public Boolean createRule(Rule rule){
-        String res = requests.post(discoveryVip.choose(ServerName.CORE)+UriPath.CORE+"/write/rule", rule, getHeaders()).json();
+    public Boolean createRule(Rule rule) {
+        String res = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/rule", rule, getHeaders()).json();
         Boolean result = false;
-        try{
-            result = ((JsonObject)SerializeUtil.transfromStringToObject(res, JsonObject.class)).get("success").getAsBoolean();
-        }catch (Throwable e){
+        try {
+            result = ((com.google.gson.JsonObject) SerializeUtil.transfromStringToObject(res, com.google.gson.JsonObject.class)).get("success").getAsBoolean();
+        } catch (Throwable e) {
             return false;
+        }
+        return result;
+    }
+
+    @Override
+    public Boolean createEvent(Event event) {
+        String res = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/event", event, getHeaders()).json();
+        Boolean result = false;
+        try {
+            result = ((com.google.gson.JsonObject) SerializeUtil.transfromStringToObject(res, com.google.gson.JsonObject.class)).get("success").getAsBoolean();
+        } catch (Throwable e) {
+            return false;
+        }
+        return result;
+    }
+
+    @Override
+    public JsonObject getRuleById(String id) {
+        String res = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/rule/" + id, getHeaders()).json();
+        JsonObject result;
+        try {
+            result = ((JsonObject) SerializeUtil.transfromStringToObject(res, JsonObject.class)).get("result").getAsJsonObject();
+        } catch (Throwable e) {
+            return null;
         }
         return result;
     }

@@ -4,12 +4,15 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.oauth.action.factory.AuthActionFactory;
 import com.op.oauth.bean.action.output.ResultOutput;
+import com.op.oauth.bean.action.output.common.SearchOutput;
+import com.op.oauth.bean.entity.Event;
 import com.op.oauth.bean.entity.Rule;
 
 /****************************************
@@ -44,5 +47,17 @@ public class AuthRest {
     @Path("/rule")
     public ResultOutput createRule(Rule rule) throws Exception {
         return (ResultOutput) AuthActionFactory.getCreateRuleAction(rule).execute();
+    }
+
+    @GET
+    @Path("rule/{id}")
+    public SearchOutput getRuleById(@PathParam("id") String id) throws Exception {
+        return (SearchOutput) AuthActionFactory.getGetEGetRuleByIdAction(id).execute();
+    }
+
+    @POST
+    @Path("/event")
+    public ResultOutput createEvent(Event event) throws Exception {
+        return (ResultOutput) AuthActionFactory.getCreateEventAction(event).execute();
     }
 }

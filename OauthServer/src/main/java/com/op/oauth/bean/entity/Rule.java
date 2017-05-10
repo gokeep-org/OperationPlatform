@@ -1,8 +1,6 @@
 package com.op.oauth.bean.entity;
 
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
 
 /****************************************
@@ -25,7 +23,7 @@ public class Rule {
     @SerializedName("_id")
     private String id;
     private String name;
-    private List<Event> events;
+    @SerializedName("event_ids")
     private Boolean status;
 
     public String getId() {
@@ -42,14 +40,6 @@ public class Rule {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 
     public Boolean getStatus() {
