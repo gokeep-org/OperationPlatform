@@ -4,11 +4,15 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.ResultMessage;
 import com.op.user.bean.entity.user.User;
 import com.op.user.exception.OperationPlatformException;
+import com.op.util.security.Md5;
 
 /****************************************
  * Copyright (c) xuning.
@@ -18,6 +22,7 @@ import com.op.user.exception.OperationPlatformException;
  ****************************************/
 public class CreateUserAction extends ItemAction<BaseOutput> {
     private User user;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateUserAction.class);
 
     public CreateUserAction(User user) {
         this.user = user;
@@ -33,7 +38,7 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
         if (Objects.equals(null, this.user)) {
             throw new OperationPlatformException("add user is must not null");
         }
-        if (null == user.getUsername()){
+        if (null == user.getUsername()) {
             throw new OperationPlatformException("add user username is must not null");
         }
         if (null == user.getActivated()) {
@@ -46,11 +51,14 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
         user.setId(commonId);
         user.setUserId(commonId);
         user.setCreateDate(new Date().getTime());
+        user.setPassword(Md5.getSercretKey(user.getPassword()));
     }
 
     @Override
     protected void start() throws Exception {
-        userService.createOneUser(user);
+        Boolean syncRes = userService.syncUserToMysql(user);
+        if (syncRes)
+            userService.createOneUser(user);
     }
 
     @Override
@@ -60,6 +68,6 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("create user is successful");
     }
 }

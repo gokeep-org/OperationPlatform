@@ -3,7 +3,6 @@ package com.op.user.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,7 +45,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     public String createOneUser(User user) {
         String result;
         try {
-            user.setId(UUID.randomUUID().toString());
             result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user", user, getHeaders()).json();
         } catch (Throwable e) {
             result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "添加用户失败"));
@@ -147,8 +145,8 @@ public class UserServiceImpl extends BaseService implements UserService {
         //验证
         try {
             String resTotal = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/total").json();
-            long total = ((JsonObject)SerializeUtil.transfromStringToObject(resTotal, JsonObject.class)).get("total").getAsLong();
-            if (total == 0){
+            long total = ((JsonObject) SerializeUtil.transfromStringToObject(resTotal, JsonObject.class)).get("total").getAsLong();
+            if (total == 0) {
                 return null;
             }
             Map<String, String> params = new HashMap<>();
@@ -193,6 +191,23 @@ public class UserServiceImpl extends BaseService implements UserService {
         JsonObject res = (JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class);
         return res.get("total").getAsLong();
     }
+
+    @Override
+    public Boolean syncUserToMysql(User user) {
+        String result;
+        //验证
+        try {
+            result = requests.post(discoveryVip.choose(ServerName.OAUTH) + UriPath.OAUTH + "/user", user, getHeaders()).json();
+        } catch (Throwable e) {
+            //抛出结果获取异常
+            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "根据body查询用户失败"));
+        }
+        if (null != result) {
+            return ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).get("success").getAsBoolean();
+        }
+        return false;
+    }
+
 
     public Requests getRequests() {
         return requests;

@@ -36,4 +36,5 @@ public interface UserService{
 
     Long size(SearchInput searchInput);
 
+    Boolean syncUserToMysql(User user);
 }

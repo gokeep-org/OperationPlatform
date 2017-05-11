@@ -15,15 +15,13 @@ public class Rule {
      * request->events关键参数
      * id: 唯一标识
      * name： 角色名称
-     * events: 把包含所有的Event全部放到Rule中来，为了简化业务操作这里使用强关联
      * sattus：规则状态
      * 设立使用的的每一条记录使用的增量添加的方式，evnets通过可视化管理界面动态添加
-     * 权限。为权限控制最低单位。
+     * 权限。为权限控制最低单位。角色作为最底层进行简单定义
      */
     @SerializedName("_id")
     private String id;
     private String name;
-    @SerializedName("event_ids")
     private Boolean status;
 
     public String getId() {

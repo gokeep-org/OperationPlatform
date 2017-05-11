@@ -1,7 +1,6 @@
 package com.op.oauth.action.user;
 
 import java.util.Date;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +41,7 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
         if ((Boolean) userService.checkoutUserNameIsExist(user)) {
             throw new OperationPlatformException(ErrorCode.USER_IS_EXIST);
         }
-        this.user.setUserId(UUID.randomUUID().toString());
+//        this.user.setUserId(UUID.randomUUID().toString());
         this.user.setPassword(OpUtils.MD5(this.user.getPassword()));
         if (null == this.user.getStatus()) {
             this.user.setStatus(true);
