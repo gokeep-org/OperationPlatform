@@ -20,11 +20,11 @@ import com.op.proxy.util.auth.AuthService;
  * @Auther is xuning on 2017/3/8.
  ****************************************/
 @Configuration
-public class ProxyFilter extends ZuulFilter {
+public class ZuulRequestFilter extends ZuulFilter {
 
     @Autowired
     private AuthService authService;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProxyFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ZuulRequestFilter.class);
     @Override
     public String filterType() {
         return "pre";
@@ -47,6 +47,7 @@ public class ProxyFilter extends ZuulFilter {
      */
     @Override
     public Object run() {
+        LOGGER.info("proxt request is user");
         RequestContext ctx = RequestContext.getCurrentContext();
         String accessToken = ctx.getRequest().getHeader("access_token");
         String userId = ctx.getRequest().getHeader("user_id");
