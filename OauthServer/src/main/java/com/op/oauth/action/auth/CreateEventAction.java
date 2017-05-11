@@ -1,8 +1,14 @@
 package com.op.oauth.action.auth;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonObject;
 import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.action.output.ResultOutput;
@@ -18,6 +24,7 @@ import com.op.oauth.exception.OperationPlatformException;
 public class CreateEventAction extends ItemAction<BaseOutput> {
     private Event event;
     private Boolean result;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateRuleAction.class);
 
     public CreateEventAction(Event event) {
         this.event = event;
@@ -32,8 +39,16 @@ public class CreateEventAction extends ItemAction<BaseOutput> {
     protected void additionalValidate() throws Exception {
         if (Objects.equals(null, this.event))
             throw new OperationPlatformException("create event must event body is not null");
+        List<String> ruleIds = this.event.getRuleIds();
+        this.event.setRuleIds(ruleIds.stream().filter(ruleId -> {
+            JsonObject ruleJson = authService.getRuleById(ruleId);
+            if (!Objects.equals(null, ruleJson)&&Objects.equals(true, ruleJson.get("status").getAsBoolean()))
+                return true;
+            return false;
+        }).collect(Collectors.toList()));
         this.event.setId(UUID.randomUUID().toString());
         this.event.setStatus((null == this.event.getStatus()) ? true : this.event.getStatus());
+
     }
 
     @Override
@@ -55,6 +70,6 @@ public class CreateEventAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("create event is successful");
     }
 }
