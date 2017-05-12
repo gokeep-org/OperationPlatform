@@ -13,6 +13,7 @@ import com.op.customer.action.filter.OpRequestFilter;
 import com.op.customer.action.filter.OpResponseFilter;
 import com.op.customer.library.provide.GsonMessageBodyHandler;
 import com.op.util.bean.BasePath;
+import com.op.util.library.provide.RequestExceptionHandler;
 
 
 /****************************************
@@ -28,6 +29,7 @@ public class JerseyConfig extends ResourceConfig {
         setJerseyComponentsLocation();
         registerJerseyFilter();
         registerJsonProvider();
+        registerExceptionProcessProvode();
         registerCompressionEncoder();
         registerSwagger();
     }
@@ -39,8 +41,11 @@ public class JerseyConfig extends ResourceConfig {
     private void registerJerseyFilter() {
         register(OpRequestFilter.class);
         register(OpResponseFilter.class);
-    }
 
+    }
+    public void registerExceptionProcessProvode() {
+        register(RequestExceptionHandler.class);
+    }
     private void registerJsonProvider() {
         register(GsonMessageBodyHandler.class);
         property(ServerProperties.METAINF_SERVICES_LOOKUP_DISABLE, false);
