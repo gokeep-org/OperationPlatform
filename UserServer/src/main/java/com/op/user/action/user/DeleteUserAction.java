@@ -3,7 +3,7 @@ package com.op.user.action.user;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.ResultMessage;
-import com.op.user.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.

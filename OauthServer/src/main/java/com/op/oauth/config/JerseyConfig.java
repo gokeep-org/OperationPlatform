@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 
 import com.op.oauth.action.filter.OpRequestFilter;
 import com.op.oauth.action.filter.OpResponseFilter;
-import com.op.oauth.exception.ExceptionMapperSupport;
 import com.op.oauth.library.provide.GsonMessageBodyHandler;
 import com.op.util.bean.BasePath;
+import com.op.util.library.provide.RequestExceptionHandler;
 
 /****************************************
  * Copyright (c) xuning.
@@ -50,8 +50,7 @@ public class JerseyConfig extends ResourceConfig {
     }
 
     public void registerExceptionProcessProvode() {
-//        register(ExceptionMapperSupport.class);
-        register(JerseyExceptionHandler.class);
+        register(RequestExceptionHandler.class);
     }
 
     /**

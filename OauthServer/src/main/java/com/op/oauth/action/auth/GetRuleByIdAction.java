@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.action.output.common.SearchOutput;
-import com.op.oauth.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.

@@ -1,11 +1,11 @@
 package com.op.oauth.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Objects;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /****************************************
  * Copyright (c) xuning.
@@ -71,7 +71,7 @@ public final class OpUtils {
             }
             return new String(str);
         } catch (Exception e) {
-            LOGGER.error("md5 add secret error");
+            LOGGER.error("md5 create secret error");
         }
         return null;
     }

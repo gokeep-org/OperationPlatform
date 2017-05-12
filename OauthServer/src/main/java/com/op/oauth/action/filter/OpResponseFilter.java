@@ -1,7 +1,5 @@
 package com.op.oauth.action.filter;
 
-import java.io.IOException;
-
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -9,8 +7,6 @@ import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.op.oauth.bean.action.output.ErrorInfoOutput;
 
 /****************************************
  * Copyright (c) xuning.
@@ -23,14 +19,10 @@ public class OpResponseFilter implements ContainerResponseFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpResponseFilter.class);
 
     @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        if (!(responseContext.getStatus() == 200)) {
-            ErrorInfoOutput info = new ErrorInfoOutput(
-                    String.valueOf(responseContext.getStatus()),
-                    responseContext.getStatusInfo().toString()
-            );
-            responseContext.setEntity(info);
-        }
-        LOGGER.info("oauth server request status code is :"+responseContext.getStatus());
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
+        if (responseContext.getStatus() == 200)
+            LOGGER.info("oauth server request status code is :" + responseContext.getStatus());
+        else
+            LOGGER.error("oauth server request error code is :" + responseContext.getStatus());
     }
 }

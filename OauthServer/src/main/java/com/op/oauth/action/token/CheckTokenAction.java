@@ -11,7 +11,7 @@ import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.action.output.token.CheckTokenOutput;
 import com.op.oauth.bean.entity.Token;
 import com.op.oauth.exception.ErrorCode;
-import com.op.oauth.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.

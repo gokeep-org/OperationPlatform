@@ -14,8 +14,8 @@ import com.op.oauth.bean.action.output.ResultOutput;
 import com.op.oauth.bean.action.output.token.CreateTokenOutput;
 import com.op.oauth.bean.entity.Token;
 import com.op.oauth.bean.entity.User;
-import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.util.OpUtils;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.
@@ -43,11 +43,12 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
             if (users.size() >= 1) {
                 this.user = users.get(0);
             } else {
-                throw new OperationPlatformException("user login failds");
+                throw new OperationPlatformException("username or password is invalid");
             }
         } else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)) {
             //授权码模式，暂时不实现,无需求
-            LOGGER.error("password mode is not implement");
+            LOGGER.error("auth code mode is not implement");
+            throw new OperationPlatformException("no support auth code mode");
         } else {
             throw new OperationPlatformException("grant type is null");
         }

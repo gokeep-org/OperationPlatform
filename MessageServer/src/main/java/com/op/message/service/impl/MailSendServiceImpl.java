@@ -1,13 +1,13 @@
 package com.op.message.service.impl;
 
-import com.op.message.bean.entity.email.Email;
-import com.op.message.library.mail.SmtpServer;
-import com.op.message.service.ServiceBeanNames;
-import com.op.message.service.BaseService;
-import com.op.message.service.MailSendService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.op.message.bean.entity.email.Email;
+import com.op.message.library.mail.SmtpServer;
+import com.op.message.service.BaseService;
+import com.op.message.service.MailSendService;
+import com.op.message.service.ServiceBeanNames;
 
 /****************************************
  * Copyright (c) xuning.
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/2/16.
  ****************************************/
+//TODO: 邮件服务以返回false需要改为抛出异常处理
 @Service(ServiceBeanNames.MAIL_SEND_SERVICE)
 public class MailSendServiceImpl extends BaseService implements MailSendService {
     @Autowired

@@ -17,6 +17,7 @@ import com.op.util.requests.Requests;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/1.
  ****************************************/
+//TODO: 对失败要添加异常处理
 @Component
 public class IndexServiceImpl implements IndexService {
     @Autowired

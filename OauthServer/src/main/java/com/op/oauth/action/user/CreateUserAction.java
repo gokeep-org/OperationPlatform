@@ -12,8 +12,8 @@ import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.action.output.user.CreateUserOutput;
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.exception.ErrorCode;
-import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.util.OpUtils;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.

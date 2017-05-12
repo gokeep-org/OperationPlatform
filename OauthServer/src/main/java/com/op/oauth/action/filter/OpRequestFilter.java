@@ -29,10 +29,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
         String path = requestContext.getUriInfo().getPath();
         String userId = requestContext.getHeaderString("user_id");
         String accessToken = requestContext.getHeaderString("access_token");
-        LOGGER.info(
-                "request params: [path: " + path + "]," +
-                        "[method: " + method + "]," +
-                        "[user_id: " + userId + "]," +
-                        "[access_token: " + accessToken + "]");
+        String filterInfo = "request params: [path: %s], [method:  %s], [user_id: %s], [access_token: %s]";
+        LOGGER.info(String.format(filterInfo, path, method, userId, accessToken));
     }
 }

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.es.bean.action.output.BaseOutput;
-import com.op.es.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
 
 
 /****************************************
@@ -34,7 +34,7 @@ public abstract class BaseAction<T extends BaseOutput> {
 
             return res;
         } catch (Exception e) {
-            throw new OperationPlatformException(e);
+            throw new OperationPlatformException(e.getMessage());
         }
     }
 

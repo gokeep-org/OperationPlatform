@@ -13,6 +13,7 @@ import com.op.message.action.filter.OpRequestFilter;
 import com.op.message.action.filter.OpResponseFilter;
 import com.op.message.library.provide.GsonMessageBodyHandler;
 import com.op.util.bean.BasePath;
+import com.op.util.library.provide.RequestExceptionHandler;
 
 /****************************************
  * Copyright (c) xuning.
@@ -27,8 +28,12 @@ public class JerseyConfig extends ResourceConfig {
         setJerseyComponentsLocation();
         registerJerseyFilter();
         registerJsonProvider();
+        registerExceptionProcessProvode();
         registerCompressionEncoder();
         registerSwagger();
+    }
+    private void registerExceptionProcessProvode() {
+        register(RequestExceptionHandler.class);
     }
 
     private void setJerseyComponentsLocation() {

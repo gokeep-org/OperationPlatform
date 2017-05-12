@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.op.user.action.input.user.SearchInput;
-import com.op.user.action.output.ErrorInfoOutput;
 import com.op.user.bean.ServiceName;
 import com.op.user.bean.entity.user.User;
-import com.op.user.exception.OperationPlatformException;
 import com.op.user.service.BaseService;
 import com.op.user.service.UserService;
 import com.op.util.bean.CommonQueryBody;
@@ -23,6 +21,8 @@ import com.op.util.bean.UriPath;
 import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
+import com.op.util.exception.OperationPlatformException;
+import com.op.util.exception.output.ErrorInfo;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
 
@@ -47,7 +47,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user", user, getHeaders()).json();
         } catch (Throwable e) {
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "添加用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "添加用户失败"));
         }
         return result;
     }
@@ -59,7 +59,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/batch", users, getHeaders()).json();
         } catch (Throwable e) {
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "批量添加用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "批量添加用户失败"));
         }
         return result;
     }
@@ -71,7 +71,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             result = requests.delete(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/" + userId, null, getHeaders()).json();
         } catch (Throwable e) {
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "根据ID删除用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "根据ID删除用户失败"));
         }
         return result;
     }
@@ -83,7 +83,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             result = requests.delete(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/", null, getHeaders()).json();
         } catch (Throwable e) {
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "删除用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "删除用户失败"));
         }
         return result;
     }
@@ -95,7 +95,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             result = requests.put(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/" + user.getId(), user, getHeaders()).json();
         } catch (Throwable e) {
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "更新用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "更新用户失败"));
         }
         return result;
     }
@@ -113,7 +113,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/" + userId, null, getHeaders()).json();
         } catch (Throwable e) {
             //跑出异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "根据用户Id查询用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "根据用户Id查询用户失败"));
         }
         return result;
     }
@@ -131,7 +131,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/", params, searchInput, getHeaders()).json();
         } catch (Throwable e) {
             //抛出结果获取异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "分页获取用户列表失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "分页获取用户列表失败"));
         }
         if (null != result) {
             return (List) SerializeUtil.transfromStringToList(result);
@@ -157,7 +157,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/", params, body, getHeaders()).json();
         } catch (Throwable e) {
             //抛出结果获取异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "根据body查询用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "根据body查询用户失败"));
         }
         if (null != result) {
             return (List) SerializeUtil.transfromStringToList(result);
@@ -186,7 +186,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/user/total", null, getHeaders()).json();
         } catch (Throwable e) {
             //跑出异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "获取用户数目失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "获取用户数目失败"));
         }
         JsonObject res = (JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class);
         return res.get("total").getAsLong();
@@ -200,7 +200,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             result = requests.post(discoveryVip.choose(ServerName.OAUTH) + UriPath.OAUTH + "/user", user, getHeaders()).json();
         } catch (Throwable e) {
             //抛出结果获取异常
-            result = SerializeUtil.transfromObjectToString(new ErrorInfoOutput("500", "根据body查询用户失败"));
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "根据body查询用户失败"));
         }
         if (null != result) {
             return  ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).get("success").getAsBoolean();

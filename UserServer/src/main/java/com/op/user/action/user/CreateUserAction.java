@@ -11,7 +11,7 @@ import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.ResultMessage;
 import com.op.user.bean.entity.user.User;
-import com.op.user.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
 import com.op.util.security.Md5;
 
 /****************************************
@@ -56,6 +56,7 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
+        //TODO: 需要校验要添加的用户是不是已经存在
         Boolean syncRes = userService.syncUserToMysql(user);
         user.setPassword(null);
         if (syncRes)

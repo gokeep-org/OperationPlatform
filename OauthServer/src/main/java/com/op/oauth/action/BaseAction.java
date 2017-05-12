@@ -4,7 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.oauth.bean.action.output.BaseOutput;
-import com.op.oauth.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
+
 
 /****************************************
  * Copyright (c) xuning.
@@ -30,12 +31,16 @@ public abstract class BaseAction<T extends BaseOutput> {
             T res = formatOutput();
             // 推送 sync 变化
             logSyncAction();
-
             return res;
         } catch (Exception e) {
-            throw new OperationPlatformException(e);
+            /**
+             * 这里对事件做统一异常处理,
+             * 接住所有的异常信息并处理
+             */
+            throw new OperationPlatformException(e.getMessage());
         }
     }
+
 
     private void inputValidate() throws Exception {
 

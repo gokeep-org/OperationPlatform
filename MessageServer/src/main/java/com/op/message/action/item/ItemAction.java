@@ -1,6 +1,6 @@
 package com.op.message.action.item;
 
-import com.op.message.action.factory.BaseAction;
+import com.op.message.action.BaseAction;
 import com.op.message.bean.action.output.BaseOutput;
 import com.op.message.library.rabbit.Queue.SenderName;
 import com.op.message.library.rabbit.sender.CommonSender;

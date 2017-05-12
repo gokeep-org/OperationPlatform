@@ -14,11 +14,11 @@ import com.op.oauth.bean.entity.User;
 import com.op.oauth.config.OpCommonConfig;
 import com.op.oauth.dao.TokenMapper;
 import com.op.oauth.exception.ErrorCode;
-import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.service.BaseService;
 import com.op.oauth.service.ServiceBeanNames;
 import com.op.oauth.service.TokenService;
 import com.op.oauth.util.OpUtils;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.

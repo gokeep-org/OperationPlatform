@@ -1,12 +1,15 @@
 package com.op.oauth.action.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.input.client.UpdateClientInput;
 import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.action.output.client.UpdateClientOutput;
 import com.op.oauth.bean.entity.Client;
-import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.util.OpUtils;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.
@@ -16,7 +19,7 @@ import com.op.oauth.util.OpUtils;
  ****************************************/
 public class UpdateClientAction extends ItemAction<BaseOutput> {
     private Client client;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateClientAction.class);
     public UpdateClientAction(UpdateClientInput input) {
         this.client = input;
     }
@@ -46,6 +49,6 @@ public class UpdateClientAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("update client info is successful");
     }
 }

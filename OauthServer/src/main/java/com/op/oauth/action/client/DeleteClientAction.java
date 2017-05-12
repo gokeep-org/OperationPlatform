@@ -9,8 +9,8 @@ import com.op.oauth.action.item.ItemAction;
 import com.op.oauth.bean.action.input.client.DeleteClientInput;
 import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.bean.action.output.client.DeleteClientOutput;
-import com.op.oauth.exception.OperationPlatformException;
 import com.op.oauth.util.OpUtils;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.
