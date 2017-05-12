@@ -28,7 +28,7 @@ import com.op.util.exception.OperationPlatformException;
  * @Auther is xuning on 2017/5/12.
  ****************************************/
 @Provider
-public class RequestExceptionHandler implements ExceptionMapper<Exception> {
+public class RequestExceptionHandler implements ExceptionMapper<Throwable> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RequestExceptionHandler.class);
     private static final String CONTEXT_ATTRIBUTE = WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE;
     @Context
@@ -39,10 +39,10 @@ public class RequestExceptionHandler implements ExceptionMapper<Exception> {
     private HttpServletResponse response;
 
     @Override
-    public Response toResponse(Exception exception) {
+    public Response toResponse(Throwable exception) {
         String code = HttpStatusCode.SERVER_ERROR;
         try{
-            code = String.valueOf(response.getStatus());
+            code = String.valueOf((200==response.getStatus())?HttpStatusCode.SERVER_ERROR:response.getStatus());
         }catch (Exception e){
             code = HttpStatusCode.SERVER_ERROR;
         }
