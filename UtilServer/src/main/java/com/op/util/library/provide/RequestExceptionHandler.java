@@ -1,4 +1,6 @@
-package com.op.oauth.config;
+package com.op.util.library.provide;
+
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.op.oauth.bean.action.output.ErrorInfoOutput;
-import com.op.oauth.bean.action.output.HttpStatusCode;
-import com.op.oauth.exception.OperationPlatformException;
+import com.op.util.exception.output.ErrorInfo;
+import com.op.util.bean.HttpStatusCode;
+import com.op.util.exception.OperationPlatformException;
+
 
 /****************************************
  * Copyright (c) xuning.
@@ -23,10 +26,9 @@ import com.op.oauth.exception.OperationPlatformException;
  * @Auther is xuning on 2017/5/12.
  ****************************************/
 @Provider
-public class JerseyExceptionHandler implements ExceptionMapper<Exception> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JerseyExceptionHandler.class);
+public class RequestExceptionHandler implements ExceptionMapper<Exception> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RequestExceptionHandler.class);
     private static final String CONTEXT_ATTRIBUTE = WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE;
-
     @Context
     private ServletContext servletContext;
     @Context
@@ -41,13 +43,33 @@ public class JerseyExceptionHandler implements ExceptionMapper<Exception> {
             OperationPlatformException operationPlatformException = (OperationPlatformException) exception;
             code = operationPlatformException.getCode();
             code = (null == code ? HttpStatusCode.SERVER_ERROR : operationPlatformException.getCode());
-            String message = context.getMessage(code, null, exception.getMessage().split(":")[1],
-                    request.getLocale());
-            ErrorInfoOutput errorOutput = new ErrorInfoOutput(String.valueOf(code), message);
+            String uuid = operationPlatformException.getUuid();
+            String message = operationPlatformException.getMessage();
+            message = (null == message) ? context.getMessage(code, null, exception.getMessage(),
+                    request.getLocale()) : message;
+            ErrorInfo errorOutput = new ErrorInfo(String.valueOf(code), message, uuid);
+            syncErrorLogOutput(errorOutput);
             return Response.ok(errorOutput, MediaType.APPLICATION_JSON_TYPE).status(Integer.parseInt(code))
                     .build();
         }
         return Response.ok(SERVER_ERROR, MediaType.TEXT_PLAIN).status(Integer.parseInt(code))
                 .build();
+    }
+
+    private void syncErrorLogOutput(ErrorInfo errorInfoOutput) {
+        String userId = request.getHeader("user_id");
+        String path = request.getRequestURI();
+        String method = request.getMethod();
+        Map<String, String[]> params = request.getParameterMap();
+        String error = "request event found error info: [user_id: %s], [path: %s], [method: %s], [params: %s] [message: %s]. [code: %s], [uuid: %s]";
+        error = String.format(error,
+                userId,
+                path,
+                method,
+                params,
+                errorInfoOutput.getMesssage(),
+                errorInfoOutput.getCode(),
+                errorInfoOutput.getUuid());
+        LOGGER.error(error);
     }
 }
