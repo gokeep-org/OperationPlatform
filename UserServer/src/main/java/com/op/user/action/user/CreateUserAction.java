@@ -57,6 +57,7 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void start() throws Exception {
         Boolean syncRes = userService.syncUserToMysql(user);
+        user.setPassword(null);
         if (syncRes)
             userService.createOneUser(user);
     }

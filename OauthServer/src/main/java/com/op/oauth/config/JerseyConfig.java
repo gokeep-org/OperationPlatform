@@ -27,7 +27,7 @@ public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
         setJerseyComponentsLocation();
         registerJerseyFilter();
-//		registerExceptionProcessProvode();
+		registerExceptionProcessProvode();
         registerJsonProvider();
         registerCompressionEncoder();
         registerSwagger();
@@ -50,7 +50,8 @@ public class JerseyConfig extends ResourceConfig {
     }
 
     public void registerExceptionProcessProvode() {
-        register(ExceptionMapperSupport.class);
+//        register(ExceptionMapperSupport.class);
+        register(JerseyExceptionHandler.class);
     }
 
     /**
