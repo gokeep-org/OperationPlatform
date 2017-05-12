@@ -1,5 +1,7 @@
 package com.op.core.rest;
 
+import java.util.Objects;
+
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -56,6 +58,9 @@ public class ReadRest {
                                             @QueryParam("page_size") @DefaultValue("10") int pageSize,
                                             @QueryParam("field") @DefaultValue("_id") String field,
                                             @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
+        if (Objects.equals(null, input)) {
+            input = new SearchInput();
+        }
         input.setCollectionName(collectionName);
         return (ReadOutput) ReadActionFactory.getSearchDocumentBytermAction(input, pageNow, pageSize, field, order).execute();
     }

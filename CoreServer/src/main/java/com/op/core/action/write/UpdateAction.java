@@ -11,7 +11,7 @@ import com.op.core.action.item.ItemAction;
 import com.op.core.bean.action.input.UpdateInput;
 import com.op.core.bean.action.output.BaseOutput;
 import com.op.core.bean.action.output.WriteOutput;
-import com.op.core.exception.OperationPlatformException;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.

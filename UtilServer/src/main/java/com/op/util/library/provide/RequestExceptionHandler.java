@@ -1,9 +1,11 @@
 package com.op.util.library.provide;
 
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -33,11 +35,19 @@ public class RequestExceptionHandler implements ExceptionMapper<Exception> {
     private ServletContext servletContext;
     @Context
     private HttpServletRequest request;
+    @Context
+    private HttpServletResponse response;
 
     @Override
     public Response toResponse(Exception exception) {
         String code = HttpStatusCode.SERVER_ERROR;
-        String SERVER_ERROR = "server error";
+        try{
+            code = String.valueOf(response.getStatus());
+        }catch (Exception e){
+            code = HttpStatusCode.SERVER_ERROR;
+        }
+        String SERVER_ERROR = "inside server error";
+
         WebApplicationContext context = (WebApplicationContext) servletContext.getAttribute(CONTEXT_ATTRIBUTE);
         if (exception instanceof OperationPlatformException) {
             OperationPlatformException operationPlatformException = (OperationPlatformException) exception;
@@ -52,7 +62,8 @@ public class RequestExceptionHandler implements ExceptionMapper<Exception> {
             return Response.ok(errorOutput, MediaType.APPLICATION_JSON_TYPE).status(Integer.parseInt(code))
                     .build();
         }
-        return Response.ok(SERVER_ERROR, MediaType.TEXT_PLAIN).status(Integer.parseInt(code))
+        ErrorInfo errorInfo = new ErrorInfo(code, SERVER_ERROR, UUID.randomUUID().toString());
+        return Response.ok(errorInfo, MediaType.APPLICATION_JSON_TYPE).status(Integer.parseInt(code))
                 .build();
     }
 

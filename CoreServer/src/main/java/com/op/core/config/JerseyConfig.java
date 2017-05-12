@@ -13,6 +13,7 @@ import com.op.core.action.filter.OpRequestFilter;
 import com.op.core.action.filter.OpResponseFilter;
 import com.op.core.provide.GsonMessageBodyHandler;
 import com.op.util.bean.BasePath;
+import com.op.util.library.provide.RequestExceptionHandler;
 
 import io.swagger.jaxrs.config.BeanConfig;
 
@@ -30,10 +31,14 @@ public class JerseyConfig extends ResourceConfig {
         setJerseyComponentsLocation();
         registerJerseyFilter();
         registerJsonProvider();
+        registerExceptionProcessProvode();
         registerCompressionEncoder();
         registerSwagger();
     }
 
+    public void registerExceptionProcessProvode() {
+        register(RequestExceptionHandler.class);
+    }
     private void setJerseyComponentsLocation() {
         packages("com.op.core.rest");
     }
