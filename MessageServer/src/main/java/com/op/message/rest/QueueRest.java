@@ -33,6 +33,7 @@ public class QueueRest {
     /**
      * 异步插入RabbitMQ消费Log队列存入ElasticSearch
      * 备注：所有的日志都通过异步插入
+     * 备注：已经过期，不建议使用费
      * @param body
      * @return
      */
@@ -50,6 +51,12 @@ public class QueueRest {
         return object.toString();
     }
 
+    /**
+     * 推送消息到ElasticSearch，统一推送接口
+     * @param message
+     * @return
+     * @throws Exception
+     */
     @POST
     @Path("/es/push")
     public ResultMessage pushMessageToElasticsearch(Map<String, Object> message) throws Exception {

@@ -16,6 +16,7 @@ import com.op.util.bean.UriPath;
 import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
+import com.op.util.exception.OperationPlatformException;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
 
@@ -36,7 +37,7 @@ public class EsReceiverImpl implements Receiver {
 
     /**
      * 异步处理日志的插入： log->rabbitmq->elasticsearch
-     * @param jsonStr TODO：时间允许需要对Log的插入情况反馈
+     * @param jsonStr
      */
     @Override
     @RabbitHandler
@@ -47,9 +48,15 @@ public class EsReceiverImpl implements Receiver {
             String esUri = discoveryVip.choose(ServerName.ES);
             String indexName = (String) message.get("index");
             String indexType = (String) message.get("type");
-            requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, message, RequestUtil.setUserIdToRequest(null));
+            Map<String, Object> body = (Map<String, Object>) message.get("body");
+//            EsEntity esEntity = new EsEntity();
+//            esEntity.setIndex(indexName);
+//            esEntity.setType(indexType);
+//            esEntity.setBody(body);
+            requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, body, RequestUtil.setUserIdToRequest(null));
         } catch (Exception e) {
             LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
+            throw new OperationPlatformException("request params is invalid, found error");
         }
     }
 }
