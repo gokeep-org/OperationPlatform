@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.op.es.bean.action.output.index.WriteOutput;
 import com.op.es.bean.action.output.log.WriteLogOutput;
 import com.op.es.bean.entity.index.IndexName;
 import com.op.es.bean.entity.log.Log;
@@ -47,6 +48,7 @@ public class LogRest {
      * 删除一个日志信息到ES
      * @return
      */
+    @Path("/all")
     @DELETE
     public WriteLogOutput deleteAllLog() {
         WriteLogOutput output = new WriteLogOutput(200, "操作成功");
@@ -58,5 +60,12 @@ public class LogRest {
         output.setMessage("操作失败");
         output.setUuid(UUID.randomUUID().toString());
         return output;
+    }
+
+    /**
+     * 添加信息到对应的索引
+     */
+    public WriteOutput comonWrite(){
+        return null;
     }
 }

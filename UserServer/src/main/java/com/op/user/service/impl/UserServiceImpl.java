@@ -203,7 +203,7 @@ public class UserServiceImpl extends BaseService implements UserService {
             result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "根据body查询用户失败"));
         }
         if (null != result) {
-            return  ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).get("success").getAsBoolean();
+            return ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).get("success").getAsBoolean();
         }
         return false;
     }

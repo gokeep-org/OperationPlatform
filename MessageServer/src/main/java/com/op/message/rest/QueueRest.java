@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonObject;
-import com.op.message.library.rabbit.Queue.SenderName;
+import com.op.message.action.factory.mq.MqActionFactory;
+import com.op.message.bean.action.output.ResultMessage;
+import com.op.message.library.rabbit.Queue.ServiceName;
 import com.op.message.library.rabbit.sender.Sender;
 
 /****************************************
@@ -25,7 +27,7 @@ import com.op.message.library.rabbit.sender.Sender;
 @Produces({MediaType.APPLICATION_JSON})
 public class QueueRest {
     @Autowired
-    @Qualifier(SenderName.LOG_SENDER)
+    @Qualifier(ServiceName.LOG_SENDER)
     public Sender logSender;
 
     /**
@@ -46,5 +48,11 @@ public class QueueRest {
         }
         object.addProperty("success", true);
         return object.toString();
+    }
+
+    @POST
+    @Path("/es/push")
+    public ResultMessage pushMessageToElasticsearch(Map<String, Object> message) throws Exception {
+        return (ResultMessage) MqActionFactory.getPushMessageToElasticsearchAction(message).execute();
     }
 }

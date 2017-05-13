@@ -12,7 +12,7 @@ import com.op.message.bean.action.input.email.MailSendInput;
 import com.op.message.exception.ErrorCode;
 import com.op.message.library.rabbit.Queue.QueueName;
 import com.op.message.library.rabbit.receiver.Receiver;
-import com.op.message.library.rabbit.sender.MailSenderImpl;
+import com.op.message.library.rabbit.sender.impl.MailSenderImpl;
 import com.op.message.service.MailSendService;
 
 /****************************************

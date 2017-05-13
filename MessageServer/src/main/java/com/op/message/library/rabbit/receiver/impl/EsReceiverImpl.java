@@ -19,23 +19,20 @@ import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
 
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/2/28.
+ * @Auther is xuning on 2017/5/13.
  ****************************************/
 @Component
-@RabbitListener(queues = QueueName.LOG)
-public class LogReceiverImpl implements Receiver {
-
+@RabbitListener(queues = QueueName.ES)
+public class EsReceiverImpl implements Receiver {
     @Autowired
     private Requests requests;
     @Autowired
     private DiscoveryVip discoveryVip;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogReceiverImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EsReceiverImpl.class);
 
     /**
      * 异步处理日志的插入： log->rabbitmq->elasticsearch
@@ -44,9 +41,13 @@ public class LogReceiverImpl implements Receiver {
     @Override
     @RabbitHandler
     public void process(String jsonStr) {
+
         try {
+            Map<String, Object> message = (Map<String, Object>) SerializeUtil.transfromStringToObject(jsonStr, Map.class);
             String esUri = discoveryVip.choose(ServerName.ES);
-            requests.post(esUri + UriPath.ES + "/log", SerializeUtil.transfromStringToObject(jsonStr, Map.class), RequestUtil.setUserIdToRequest(null));
+            String indexName = (String) message.get("index");
+            String indexType = (String) message.get("type");
+            requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, message, RequestUtil.setUserIdToRequest(null));
         } catch (Exception e) {
             LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
         }

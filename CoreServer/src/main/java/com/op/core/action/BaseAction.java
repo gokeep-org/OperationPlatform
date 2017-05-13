@@ -31,7 +31,6 @@ public abstract class BaseAction<T extends BaseOutput> {
             T res = formatOutput();
             // 推送 sync 变化
             logSyncAction();
-
             return res;
         } catch (Exception e) {
             throw new OperationPlatformException(e.getMessage());

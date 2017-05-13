@@ -8,7 +8,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.op.message.MessageBootstrap;
-import com.op.message.library.rabbit.Queue.SenderName;
+import com.op.message.library.rabbit.Queue.ServiceName;
 import com.op.message.library.rabbit.sender.Sender;
 
 /****************************************
@@ -21,7 +21,7 @@ import com.op.message.library.rabbit.sender.Sender;
 @SpringApplicationConfiguration(classes = MessageBootstrap.class)
 public class TestRabbitmq {
     @Autowired
-    @Qualifier(value = SenderName.LOG_SENDER)
+    @Qualifier(value = ServiceName.LOG_SENDER)
     public Sender sender;
 
     @Test

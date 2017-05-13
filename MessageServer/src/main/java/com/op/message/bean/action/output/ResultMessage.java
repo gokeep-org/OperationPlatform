@@ -1,8 +1,8 @@
 package com.op.message.bean.action.output;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Value;
 
 /****************************************
  * Copyright (c) xuning.
@@ -14,13 +14,11 @@ import java.util.UUID;
 /**
  * rest结果信息
  */
-public class ResultMessage {
+public class ResultMessage extends BaseOutput {
     @Value("200")
     private String code;
     @Value("操作成功")
     private String messsage;
-    @Value("true")
-    private Boolean success;
     private UUID uuid;
 
     public ResultMessage() {
@@ -30,7 +28,6 @@ public class ResultMessage {
     public ResultMessage(String code, String messsage, Boolean success, UUID uuid) {
         this.code = code;
         this.messsage = messsage;
-        this.success = success;
         this.uuid = uuid;
     }
 
@@ -50,12 +47,9 @@ public class ResultMessage {
         this.messsage = messsage;
     }
 
-    public Boolean getSuccess() {
-        return success;
-    }
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
+    public void setSuccess(String success) {
+        super.setSuccess(success);
         if (success.equals(false)) {
             setUuid(UUID.randomUUID());
         }

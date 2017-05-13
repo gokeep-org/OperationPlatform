@@ -1,10 +1,8 @@
 package com.op.es.bean.entity.log;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 
 /****************************************
  * Copyright (c) xuning.
@@ -18,7 +16,7 @@ import java.io.Serializable;
  * type: info
  */
 @Document(indexName = "log")
-public class Log implements Serializable {
+public class Log {
     private String id;
     @SerializedName("user_id")
     private String userId;
@@ -111,4 +109,5 @@ public class Log implements Serializable {
     public void setLogout(Logout logout) {
         this.logout = logout;
     }
+
 }

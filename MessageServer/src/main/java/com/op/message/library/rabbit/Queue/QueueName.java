@@ -10,4 +10,5 @@ public class QueueName {
     public static final String MESSAGE = "message";
     public static final String LOG = "log";
     public static final String EMIAL = "email";
+    public static final String ES = "es";
 }

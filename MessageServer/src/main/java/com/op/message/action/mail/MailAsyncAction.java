@@ -1,5 +1,8 @@
 package com.op.message.action.mail;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.message.bean.action.input.email.MailSendInput;
 import com.op.message.bean.action.output.email.MailSendOutput;
 import com.op.message.bean.entity.email.Email;
@@ -15,7 +18,7 @@ import com.op.message.action.item.ItemAction;
 public class MailAsyncAction extends ItemAction<MailSendOutput> {
 
     private Email email;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailAsyncAction.class);
     public MailAsyncAction(MailSendInput input) {
         this.email = input;
     }

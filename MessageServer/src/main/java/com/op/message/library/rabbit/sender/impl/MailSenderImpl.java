@@ -1,4 +1,4 @@
-package com.op.message.library.rabbit.sender;
+package com.op.message.library.rabbit.sender.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.op.message.library.rabbit.Queue.QueueName;
+import com.op.message.library.rabbit.Queue.ServiceName;
+import com.op.message.library.rabbit.sender.Sender;
+import com.op.message.service.BaseService;
 
 /****************************************
  * Copyright (c) xuning.
@@ -14,9 +17,9 @@ import com.op.message.library.rabbit.Queue.QueueName;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/1.
  ****************************************/
-@Component(value = QueueName.MESSAGE)
-public class MessageSenderImpl implements Sender {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageSenderImpl.class);
+@Component(value = ServiceName.MAIL_SENDER)
+public class MailSenderImpl  extends BaseService implements Sender {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailSenderImpl.class);
     @Autowired
     public AmqpTemplate rabbitTemplate;
 
@@ -25,7 +28,7 @@ public class MessageSenderImpl implements Sender {
         if (null == message) {
             LOGGER.info("消息发送为null, 没有发送");
         } else {
-            rabbitTemplate.convertAndSend(QueueName.MESSAGE, message);
+            rabbitTemplate.convertAndSend(QueueName.EMIAL, message);
         }
     }
 }

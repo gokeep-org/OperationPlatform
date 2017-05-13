@@ -8,4 +8,6 @@ package com.op.es.bean.entity.index;
  ****************************************/
 public class IndexType {
     public static final String LOG_INFO = "info";
+    public static final String LOG_REQUEST = "request";
+    public static final String LOG_ERROR = "error";
 }
