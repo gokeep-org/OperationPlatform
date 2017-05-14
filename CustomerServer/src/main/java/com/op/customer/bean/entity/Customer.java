@@ -26,7 +26,7 @@ public class Customer {
     private String teamId;
     private String industry;
     private String remark;
-    @Field("saleName")
+    @Field("sale_name")
     private String saleName;
 
     public String getId() {
