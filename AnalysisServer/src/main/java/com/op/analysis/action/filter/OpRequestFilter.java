@@ -4,10 +4,6 @@
 package com.op.analysis.action.filter;
 
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -35,7 +31,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
 
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        getBrowerHeader(requestContext);
+//            getBrowerHeader(requestContext);
         String method = requestContext.getMethod();
         String path = requestContext.getUriInfo().getPath();
         String requestPath = method + ":" + path;
@@ -46,41 +42,41 @@ public class OpRequestFilter implements ContainerRequestFilter {
         LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
     }
 
-    private void getBrowerHeader(ContainerRequestContext requestContext) {
-        try {
-            String userAgent = request.getHeader("User-Agent");
-            if (userAgent != null) {
-                MDC.put("User-Agent", userAgent);
-            }
-            String userIp = request.getHeader("user_ip");
-            if (userIp != null) {
-                MDC.put("user_ip", userIp);
-            } else {
-                MDC.put("user_ip", getLocalAddress());
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    public static String getLocalAddress() {
-        String ipStr = "127.0.0.1";
-        try {
-            Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();
-            InetAddress ip = null;
-            while (allNetInterfaces.hasMoreElements()) {
-                NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
-                Enumeration addresses = netInterface.getInetAddresses();
-                while (addresses.hasMoreElements()) {
-                    ip = (InetAddress) addresses.nextElement();
-                    if (ip != null && ip instanceof Inet4Address)
-                        ipStr = ip.getHostAddress();
-                }
-            }
-        } catch (Exception e) {
-            LOGGER.error("------>>>获取本机ip失败", e);
-        }
-        return ipStr;
-    }
+//    private void getBrowerHeader(ContainerRequestContext requestContext) {
+//        try {
+//            String userAgent = request.getHeader("User-Agent");
+//            if (userAgent != null) {
+//                MDC.put("User-Agent", userAgent);
+//            }
+//            String userIp = request.getHeader("user_ip");
+//            if (userIp != null) {
+//                MDC.put("user_ip", userIp);
+//            } else {
+//                MDC.put("user_ip", getLocalAddress());
+//            }
+//        } catch (Exception e) {
+//        }
+//    }
+//
+//    public static String getLocalAddress() {
+//        String ipStr = "127.0.0.1";
+//        try {
+//            Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+//            InetAddress ip = null;
+//            while (allNetInterfaces.hasMoreElements()) {
+//                NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+//                Enumeration addresses = netInterface.getInetAddresses();
+//                while (addresses.hasMoreElements()) {
+//                    ip = (InetAddress) addresses.nextElement();
+//                    if (ip != null && ip instanceof Inet4Address)
+//                        ipStr = ip.getHostAddress();
+//                }
+//            }
+//        } catch (Exception e) {
+//            LOGGER.error("------>>>获取本机ip失败", e);
+//        }
+//        return ipStr;
+//    }
 
     public HttpServletRequest getRequest() {
         return request;
