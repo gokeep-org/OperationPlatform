@@ -57,7 +57,8 @@ public class CustomerServiceImpl extends BaseService implements CustomerService 
     @Override
     public Customer searchCustomerByCustomerId(String customerId) {
         String result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/customer/" + customerId, getHeaders()).json();
-        return (Customer) SerializeUtil.transfromStringToObject(result, Customer.class);
+        JsonObject json = ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).getAsJsonObject("result");
+        return SerializeUtil.gson.fromJson(json, Customer.class);
     }
 
     @Override
@@ -67,7 +68,8 @@ public class CustomerServiceImpl extends BaseService implements CustomerService 
 
     @Override
     public long searchCustomerTotal() {
-        return 0;
+        String result = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/customer/total", getHeaders()).json();
+        return ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).get("total").getAsLong();
     }
 
     @Override

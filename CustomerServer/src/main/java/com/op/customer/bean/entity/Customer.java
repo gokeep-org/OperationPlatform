@@ -28,6 +28,15 @@ public class Customer {
     private String remark;
     @Field("sale_name")
     private String saleName;
+    private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.op.customer.action.customer;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,9 @@ public class CreateCustomerAction extends ItemAction<ResultMessage> {
     protected void additionalValidate() throws Exception {
         if (Objects.equals(null, this.customer))
             throw new OperationPlatformException("create customer must customer is not null");
+        this.customer.setId(UUID.randomUUID().toString());
+        this.customer.setStatus((null == this.customer.getStatus()) ? this.customer.getStatus() : null);
+        //TODO: 还需要校验当前客户是否已经存在
     }
 
     @Override

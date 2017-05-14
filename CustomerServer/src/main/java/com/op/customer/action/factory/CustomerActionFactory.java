@@ -3,6 +3,7 @@ package com.op.customer.action.factory;
 import com.op.customer.action.customer.CreateCustomerAction;
 import com.op.customer.action.customer.DeleteCustomerByCustomerIdAction;
 import com.op.customer.action.customer.SearchCustomerByCustomerIdAction;
+import com.op.customer.action.customer.SearchCustomerTotalAction;
 import com.op.customer.action.customer.UpdateCustomerByCustomerIdAction;
 import com.op.customer.bean.entity.Customer;
 
@@ -27,5 +28,9 @@ public class CustomerActionFactory extends BaseActionFactory {
 
     public static SearchCustomerByCustomerIdAction getSearchCustomerByCustomerIdAction(String customerId) {
         return new SearchCustomerByCustomerIdAction(customerId);
+    }
+
+    public static SearchCustomerTotalAction getSearchCustomerTotalAction(){
+        return new SearchCustomerTotalAction();
     }
 }

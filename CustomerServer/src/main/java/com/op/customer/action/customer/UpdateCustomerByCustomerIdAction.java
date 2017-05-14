@@ -48,7 +48,7 @@ public class UpdateCustomerByCustomerIdAction extends ItemAction<ResultMessage> 
     protected ResultMessage formatOutput() throws Exception {
         ResultMessage resultMessage = new ResultMessage();
         resultMessage.setCode("200");
-        resultMessage.setMesssage("delete customer is successful");
+        resultMessage.setMesssage("update customer is successful");
         return resultMessage;
     }
 
