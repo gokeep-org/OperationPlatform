@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
  * @Auther is xuning on 2017/4/19.
  ****************************************/
 public class Customer {
+    @SerializedName("_id")
     private String id;
     private String username;
     @SerializedName("nick_name")
@@ -27,6 +28,7 @@ public class Customer {
     private String remark;
     @Field("saleName")
     private String saleName;
+
     public String getId() {
         return id;
     }

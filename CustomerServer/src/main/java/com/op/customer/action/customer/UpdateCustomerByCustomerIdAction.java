@@ -16,11 +16,13 @@ import com.op.util.exception.OperationPlatformException;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/14.
  ****************************************/
-public class CreateCustomerAction extends ItemAction<ResultMessage> {
+public class UpdateCustomerByCustomerIdAction extends ItemAction<ResultMessage> {
+    private String customerId;
     private Customer customer;
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreateCustomerAction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateCustomerByCustomerIdAction.class);
 
-    public CreateCustomerAction(Customer customer) {
+    public UpdateCustomerByCustomerIdAction(String customerId, Customer customer) {
+        this.customerId = customerId;
         this.customer = customer;
     }
 
@@ -31,26 +33,27 @@ public class CreateCustomerAction extends ItemAction<ResultMessage> {
 
     @Override
     protected void additionalValidate() throws Exception {
+        if (null == this.customerId)
+            throw new OperationPlatformException("update customer must id is not null");
         if (Objects.equals(null, this.customer))
-            throw new OperationPlatformException("create customer must customer is not null");
+            throw new OperationPlatformException("update customer body customer must is not null");
     }
 
     @Override
     protected void start() throws Exception {
-        customerService.createCustomer(this.customer);
+        customerService.updateCustomerByCustomerId(this.customerId, this.customer);
     }
 
     @Override
     protected ResultMessage formatOutput() throws Exception {
         ResultMessage resultMessage = new ResultMessage();
         resultMessage.setCode("200");
-        resultMessage.setSuccess(true);
-        resultMessage.setMesssage("create customer is successful");
+        resultMessage.setMesssage("delete customer is successful");
         return resultMessage;
     }
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("create customer is successful");
+        LOGGER.info("update customer is successful");
     }
 }
