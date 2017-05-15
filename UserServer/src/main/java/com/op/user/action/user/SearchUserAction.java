@@ -42,12 +42,12 @@ public class SearchUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void start() throws Exception {
         if (Objects.equals(null, user) && !Objects.equals(null, userId))
-            result = userService.searchUserByUserId(userId);
+            this.result = userService.searchUserByUserId(userId);
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
-        Map<String, Object> map = (Map<String, Object>) SerializeUtil.transfromStringToObject(result, Map.class);
+        Map<String, Object> map = (Map<String, Object>) SerializeUtil.transfromStringToObject(this.result, Map.class);
         SearchOutput output = new SearchOutput();
         output.setResult((Map<String, Object>) map.get("result"));
         return output;

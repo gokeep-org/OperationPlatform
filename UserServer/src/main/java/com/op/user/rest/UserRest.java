@@ -121,4 +121,5 @@ public class UserRest {
     public SearchOutput searchRepeatUser(CommonQueryBody body) throws Exception {
         return (SearchOutput) UserActionFactory.getSearchRepeatUserAction(body).execute();
     }
+
 }
