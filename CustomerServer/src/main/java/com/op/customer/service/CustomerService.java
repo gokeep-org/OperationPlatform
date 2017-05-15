@@ -2,6 +2,7 @@ package com.op.customer.service;
 
 import java.util.List;
 
+import com.op.customer.bean.action.input.SearchInput;
 import com.op.customer.bean.entity.Customer;
 import com.op.util.bean.Paging;
 
@@ -42,11 +43,11 @@ public interface CustomerService {
 
     /**
      * 分页查询客户列表信息
-     * @param customer
+     * @param input
      * @param paging
      * @return
      */
-    public List<Customer> searchCustomerList(Customer customer, Paging paging);
+    public List<Customer> searchCustomerList(SearchInput input, Paging paging);
 
     /**
      * 查询客户总数

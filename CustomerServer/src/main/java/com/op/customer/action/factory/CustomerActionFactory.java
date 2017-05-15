@@ -2,10 +2,13 @@ package com.op.customer.action.factory;
 
 import com.op.customer.action.customer.CreateCustomerAction;
 import com.op.customer.action.customer.DeleteCustomerByCustomerIdAction;
+import com.op.customer.action.customer.PagingSearchCustomerAction;
 import com.op.customer.action.customer.SearchCustomerByCustomerIdAction;
 import com.op.customer.action.customer.SearchCustomerTotalAction;
 import com.op.customer.action.customer.UpdateCustomerByCustomerIdAction;
+import com.op.customer.bean.action.input.SearchInput;
 import com.op.customer.bean.entity.Customer;
+import com.op.util.bean.Paging;
 
 /****************************************
  * Copyright (c) xuning.
@@ -32,5 +35,9 @@ public class CustomerActionFactory extends BaseActionFactory {
 
     public static SearchCustomerTotalAction getSearchCustomerTotalAction(){
         return new SearchCustomerTotalAction();
+    }
+
+    public static PagingSearchCustomerAction getPagingSearchCustomerAction(SearchInput input, Paging paging){
+        return new PagingSearchCustomerAction(input, paging);
     }
 }

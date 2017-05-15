@@ -62,4 +62,10 @@ public class QueueRest {
     public ResultMessage pushMessageToElasticsearch(Map<String, Object> message) throws Exception {
         return (ResultMessage) MqActionFactory.getPushMessageToElasticsearchAction(message).execute();
     }
+
+    @POST
+    @Path("/mongo/push")
+    public String pushMessageToMongoDb(Map<String, Object> message) {
+        return null;
+    }
 }

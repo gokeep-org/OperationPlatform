@@ -1,18 +1,22 @@
 package com.op.customer.rest;
 
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.op.customer.action.factory.CustomerActionFactory;
+import com.op.customer.bean.action.input.SearchInput;
 import com.op.customer.bean.action.output.ResultMessage;
 import com.op.customer.bean.action.output.SearchOutput;
 import com.op.customer.bean.entity.Customer;
+import com.op.util.bean.Paging;
 
 /****************************************
  * Copyright (c) xuning.
@@ -71,10 +75,35 @@ public class CustomerRest {
         return CustomerActionFactory.getSearchCustomerByCustomerIdAction(customerId).execute();
     }
 
+    /**
+     * 分页查询客户信息列表
+     * @param input
+     * @param pageNow
+     * @param pageSize
+     * @param field
+     * @param order
+     * @return
+     * @throws Exception
+     */
+    @POST
+    @Path("/search")
+    public SearchOutput searchCustomerListBtPaging(SearchInput input,
+                                                   @QueryParam("page_now") @DefaultValue("1") int pageNow,
+                                                   @QueryParam("page_size") @DefaultValue("10") int pageSize,
+                                                   @QueryParam("field") @DefaultValue("create_time") String field,
+                                                   @QueryParam("order") @DefaultValue("descend") String order) throws Exception {
+        Paging paging = new Paging(pageNow, pageSize, field, order);
+        return CustomerActionFactory.getPagingSearchCustomerAction(input, paging).execute();
+    }
+
+    /**
+     * 查询客户总数
+     * @return
+     * @throws Exception
+     */
     @GET
     @Path("/total")
     public SearchOutput searchCustomerTotal() throws Exception {
         return CustomerActionFactory.getSearchCustomerTotalAction().execute();
     }
-
 }

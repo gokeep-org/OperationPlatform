@@ -1,5 +1,6 @@
 package com.op.customer.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.op.customer.bean.action.input.SearchInput;
 import com.op.customer.bean.entity.Customer;
 import com.op.customer.bean.entity.ServiceName;
 import com.op.customer.service.BaseService;
@@ -18,6 +20,7 @@ import com.op.util.bean.UriPath;
 import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
+import com.op.util.exception.output.ErrorInfo;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
 
@@ -62,7 +65,23 @@ public class CustomerServiceImpl extends BaseService implements CustomerService 
     }
 
     @Override
-    public List<Customer> searchCustomerList(Customer customer, Paging paging) {
+    public List<Customer> searchCustomerList(SearchInput input,  Paging paging) {
+        String result;
+        //验证
+        try {
+            Map<String, String> params = new HashMap<>();
+            params.put("page_now", String.valueOf(paging.getPageNow()));
+            params.put("page_size", String.valueOf(paging.getPageSize()));
+            params.put("field", paging.getField());
+            params.put("order", paging.getOrder());
+            result = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/customer/", params, input, getHeaders()).json();
+        } catch (Throwable e) {
+            //抛出结果获取异常
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "分页获取客户列表失败"));
+        }
+        if (null != result) {
+            return (List) SerializeUtil.transfromStringToList(result);
+        }
         return null;
     }
 
