@@ -26,7 +26,7 @@ public class DeleteUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void additionalValidate() throws Exception {
         if (null == this.userId){
-            throw  new OperationPlatformException("delete user user id is null");
+            throw  new OperationPlatformException("user id is null");
 
         }
     }

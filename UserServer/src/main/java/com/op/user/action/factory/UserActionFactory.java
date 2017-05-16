@@ -9,6 +9,7 @@ import com.op.user.action.user.SearchUserTotalAction;
 import com.op.user.action.user.SearchUserAction;
 import com.op.user.action.user.SearchUserListAction;
 import com.op.user.action.user.UpdateUserAction;
+import com.op.user.action.user.UpdateUserTeamAction;
 import com.op.user.bean.entity.user.User;
 import com.op.util.bean.CommonQueryBody;
 import com.op.util.bean.Paging;
@@ -40,11 +41,15 @@ public class UserActionFactory extends BaseActionFactory {
         return new UpdateUserAction(userId, user);
     }
 
-    public static SearchUserTotalAction getSearchUserTotalAction(User user){
+    public static SearchUserTotalAction getSearchUserTotalAction(User user) {
         return new SearchUserTotalAction(user);
     }
 
-    public static SearchRepeatUserAction getSearchRepeatUserAction(CommonQueryBody body){
+    public static SearchRepeatUserAction getSearchRepeatUserAction(CommonQueryBody body) {
         return new SearchRepeatUserAction(body);
+    }
+
+    public static UpdateUserTeamAction getUpdateUserTeamAction(String userId, String teamId) {
+        return new UpdateUserTeamAction(userId, teamId);
     }
 }

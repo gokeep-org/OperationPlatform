@@ -208,6 +208,19 @@ public class UserServiceImpl extends BaseService implements UserService {
         return false;
     }
 
+    @Override
+    public Boolean updateUserTeam(String userId, String teamId) {
+        String result;
+        User user = new User();
+        user.setTeamId(teamId);
+        try {
+            result = requests.put(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/write/user/" + userId, user, getHeaders()).json();
+        } catch (Throwable e) {
+            result = SerializeUtil.transfromObjectToString(new ErrorInfo("500", "更新用户失败"));
+        }
+        return ((JsonObject) SerializeUtil.transfromStringToObject(result, JsonObject.class)).get("success").getAsBoolean();
+    }
+
 
     public Requests getRequests() {
         return requests;

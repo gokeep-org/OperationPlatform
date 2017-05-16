@@ -36,10 +36,10 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void additionalValidate() throws Exception {
         if (Objects.equals(null, this.user)) {
-            throw new OperationPlatformException("add user is must not null");
+            throw new OperationPlatformException("user is must not null");
         }
         if (null == user.getUsername()) {
-            throw new OperationPlatformException("add user username is must not null");
+            throw new OperationPlatformException("username is must not null");
         }
         if (null == user.getActivated()) {
             user.setActivated(true);

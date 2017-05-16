@@ -35,7 +35,7 @@ public class SearchRepeatUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void additionalValidate() throws Exception {
         if (null == this.body) {
-            throw new OperationPlatformException("search repeat user by body must body not is null");
+            throw new OperationPlatformException("body must body not is null");
         }
     }
 

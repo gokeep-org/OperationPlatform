@@ -13,7 +13,7 @@ import com.op.util.bean.Paging;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/4/20.
  ****************************************/
-public interface UserService{
+public interface UserService {
     String createOneUser(User user);
 
     String createUsers(List<User> users);
@@ -37,4 +37,6 @@ public interface UserService{
     Long size(SearchInput searchInput);
 
     Boolean syncUserToMysql(User user);
+
+    public Boolean updateUserTeam(String userId, String teamId);
 }

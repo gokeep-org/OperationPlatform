@@ -21,4 +21,4 @@ eureka:
 server:
   port: 10102
 logging:
-  level: info
+  level: debug

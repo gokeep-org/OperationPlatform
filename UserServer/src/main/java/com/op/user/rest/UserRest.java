@@ -122,4 +122,10 @@ public class UserRest {
         return (SearchOutput) UserActionFactory.getSearchRepeatUserAction(body).execute();
     }
 
+    @PUT
+    @Path("/team")
+    public ResultMessage updateUserTeamByUserId(@QueryParam("id") String userId,
+                                                @QueryParam("team_id") String teamId) throws Exception {
+        return UserActionFactory.getUpdateUserTeamAction(userId, teamId).execute();
+    }
 }
