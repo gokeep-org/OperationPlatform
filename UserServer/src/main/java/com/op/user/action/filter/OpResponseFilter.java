@@ -23,8 +23,8 @@ public class OpResponseFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         if (responseContext.getStatus() == 200)
-            LOGGER.info("oauth server request status code is :" + responseContext.getStatus());
+            LOGGER.info("user server request status code is :" + responseContext.getStatus());
         else
-            LOGGER.error("oauth server request error code is :" + responseContext.getStatus());
+            LOGGER.error("user server request error code is :" + responseContext.getStatus());
     }
 }
