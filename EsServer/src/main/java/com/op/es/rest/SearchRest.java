@@ -1,14 +1,16 @@
 package com.op.es.rest;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.op.es.service.IndexService;
 import com.op.util.requests.Requests;
 
 
@@ -22,6 +24,8 @@ import com.op.util.requests.Requests;
 @Produces({MediaType.APPLICATION_JSON})
 public class SearchRest {
     @Autowired
+    private IndexService indexService;
+    @Autowired
     private Requests requests;
 
     /**
@@ -32,12 +36,11 @@ public class SearchRest {
      * @return
      */
     @GET
-    @Path("/document/{index}/type/{type}/id/{id}")
+    @Path("/index/{index}/type/{type}/id/{id}")
     public String searchDocumentById(@PathParam("index") String index,
                                      @PathParam("type") String type,
                                      @PathParam("id") String id) {
-        String url = "http://localhost:9200/" + index + "/" + type + "/" + id;
-        return requests.get(url).json();
+        return indexService.searchIndexById(index, type, id);
     }
 
     /**
@@ -60,10 +63,14 @@ public class SearchRest {
      * @param type
      * @return
      */
-    @POST
-    @Path("/document/{index}/type/{type}")
+    @GET
+    @Path("/index/{index}/type/{type}")
     public String searchDocumentByDSL(@PathParam("index") String index,
-                                      @PathParam("type") String type) {
-        return null;
+                                      @PathParam("type") String type,
+                                      @QueryParam("page_now") @DefaultValue("1") int pageNow,
+                                      @QueryParam("page_size") @DefaultValue("10") int pageSize,
+                                      @QueryParam("field") @DefaultValue("date") String field,
+                                      @QueryParam("order") @DefaultValue("desc") String order) {
+        return indexService.pagingSearch(index, type, pageNow, pageSize, field, order);
     }
 }

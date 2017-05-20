@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonObject;
+import com.op.es.bean.action.input.SearchInput;
 import com.op.es.config.EsConfig;
 import com.op.es.service.IndexService;
 import com.op.util.requests.Requests;
@@ -103,5 +104,18 @@ public class IndexServiceImpl implements IndexService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String pagingSearch(String index, String type, long pageNow, long pageSize, String field, String order) {
+        String res = null;
+        try {
+            SearchInput input = new SearchInput();
+            input.setPaging(pageNow, pageSize, field, order);
+            res = requests.post(EsConfig.esUri + "/" + index + "/" + type + "/" + "_search", input, null).json();
+        } catch (Throwable e) {
+            return null;
+        }
+        return res;
     }
 }

@@ -27,4 +27,6 @@ public interface IndexService {
 
     public Boolean deleteAll(String index, String type);
 
+    public String pagingSearch(String index, String type, long pageNow, long pageSize, String field, String order);
+
 }
