@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.customer.action.item.ItemAction;
+import com.op.customer.bean.LogMessage;
 import com.op.customer.bean.action.output.ResultMessage;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -47,6 +49,9 @@ public class DeleteCustomerByCustomerIdAction extends ItemAction<ResultMessage> 
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("delete customer is successful");
+        LOGGER.info(LogMessage.DELETE_CUSTOMER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.DELETE_CUSTOMER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.customer.action.item.ItemAction;
+import com.op.customer.bean.LogMessage;
 import com.op.customer.bean.action.output.ResultMessage;
 import com.op.customer.bean.entity.Customer;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -54,6 +56,9 @@ public class UpdateCustomerByCustomerIdAction extends ItemAction<ResultMessage> 
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("update customer is successful");
+        LOGGER.info(LogMessage.UPDATE_CUSTOMER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.UPDATE_CUSTOMER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

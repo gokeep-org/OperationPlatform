@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.customer.action.item.ItemAction;
+import com.op.customer.bean.LogMessage;
 import com.op.customer.bean.action.output.SearchOutput;
+import com.op.util.bean.log.MessageLog;
 
 /****************************************
  * Copyright (c) xuning.
@@ -43,6 +45,9 @@ public class SearchCustomerTotalAction extends ItemAction<SearchOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("search customer total is successful");
+        LOGGER.info(LogMessage.SEARCH_CUSTOMER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.SEARCH_CUSTOMER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

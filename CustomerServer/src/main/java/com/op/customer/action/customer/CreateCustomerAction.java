@@ -7,8 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.op.customer.action.item.ItemAction;
+import com.op.customer.bean.LogMessage;
 import com.op.customer.bean.action.output.ResultMessage;
 import com.op.customer.bean.entity.Customer;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -18,6 +20,7 @@ import com.op.util.exception.OperationPlatformException;
  * @Auther is xuning on 2017/5/14.
  ****************************************/
 public class CreateCustomerAction extends ItemAction<ResultMessage> {
+
     private Customer customer;
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateCustomerAction.class);
 
@@ -55,6 +58,9 @@ public class CreateCustomerAction extends ItemAction<ResultMessage> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("create customer is successful");
+        LOGGER.info(LogMessage.CREATE_CUSTOMER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.CREATE_CUSTOMER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }
