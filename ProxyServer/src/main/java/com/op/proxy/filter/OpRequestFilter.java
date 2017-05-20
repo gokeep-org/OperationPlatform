@@ -37,5 +37,4 @@ public class OpRequestFilter implements ContainerRequestFilter {
                         + accessToken + "]");
 
     }
-
 }

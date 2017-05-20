@@ -25,7 +25,7 @@ import com.op.customer.service.impl.CustomerServiceImpl;
 public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
     private HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     public CustomerService customerService = BaseService.getService(ServiceName.CUSTOMER_SERVICE, CustomerServiceImpl.class);
-    public CommonService commonService = BaseService.getService(ServiceName.CUSTOMER_SERVICE, CommonServiceImpl.class);
+    public CommonService commonService = BaseService.getService(ServiceName.COMMMON_SERVICE, CommonServiceImpl.class);
 
     public String getUserId() {
         return request.getHeader("user_id");

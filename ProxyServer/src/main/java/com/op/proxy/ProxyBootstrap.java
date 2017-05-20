@@ -6,6 +6,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * Hello world!
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.ImportResource;
 @SpringCloudApplication
 @EnableZuulProxy
 @ImportResource(value = {"classpath:spring.xml"})
+@EnableAsync
 public class ProxyBootstrap {
     public static void main(String[] args) {
         new SpringApplicationBuilder(ProxyBootstrap.class)

@@ -60,6 +60,17 @@ public class MessageLog {
         setBody(body);
     }
 
+    public void setRequestLog(String userId, String path, String method, Map<String, Object> params){
+        setType("request");
+        Map<String, Object> body = new HashMap<>();
+        body.put("path", path);
+        body.put("method", method);
+        body.put("params", params);
+        body.put("user_id", userId);
+        body.put("success", true);
+        body.put("date", new Date().getTime());
+        setBody(body);
+    }
     public MessageLog(String type, String message, String userId) {
         setType(type);
         Map<String, Object> body = new HashMap<>();
@@ -68,6 +79,7 @@ public class MessageLog {
         body.put("success", false);
         setBody(body);
     }
+
 
     public MessageLog() {
     }

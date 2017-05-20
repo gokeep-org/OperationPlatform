@@ -1,4 +1,4 @@
-package com.op.customer.service.impl;
+package com.op.proxy.service.impl;
 
 import java.util.Map;
 
@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.op.customer.bean.entity.ServiceName;
-import com.op.customer.service.BaseService;
-import com.op.customer.service.CommonService;
+import com.op.proxy.service.CommonService;
 import com.op.util.bean.UriPath;
 import com.op.util.bean.log.MessageLog;
 import com.op.util.common.RequestUtil;
@@ -26,8 +24,8 @@ import com.op.util.requests.Requests;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/20.
  ****************************************/
-@Service(ServiceName.COMMMON_SERVICE)
-public class CommonServiceImpl extends BaseService implements CommonService {
+@Service
+public class CommonServiceImpl implements CommonService {
     @Autowired
     private Requests requests;
     @Autowired

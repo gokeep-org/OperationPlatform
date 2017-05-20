@@ -1,17 +1,21 @@
 package com.op.proxy.filter;
 
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Async;
 
 import com.google.gson.JsonObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.op.proxy.config.OperationPlatformException;
+import com.op.proxy.service.CommonService;
 import com.op.proxy.util.auth.AuthService;
+import com.op.util.bean.log.MessageLog;
 
 /****************************************
  * Copyright (c) xuning.
@@ -21,10 +25,13 @@ import com.op.proxy.util.auth.AuthService;
  ****************************************/
 @Configuration
 public class ZuulRequestFilter extends ZuulFilter {
-
     @Autowired
     private AuthService authService;
+    @Autowired
+    private CommonService commonService;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ZuulRequestFilter.class);
+
     @Override
     public String filterType() {
         return "pre";
@@ -51,6 +58,9 @@ public class ZuulRequestFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         String accessToken = ctx.getRequest().getHeader("access_token");
         String userId = ctx.getRequest().getHeader("user_id");
+        String path = ctx.getRequest().getRequestURI();
+        String method = ctx.getRequest().getMethod();
+        pushRequestMessage(userId, path, method, null);
         if (null == accessToken || null == userId)
             buildAuthErrorInfoToRequestContext(ctx);
         if (authService.checkToken(accessToken, userId)) {
@@ -80,5 +90,12 @@ public class ZuulRequestFilter extends ZuulFilter {
         jsonObject.addProperty("uuid", uuidCode);
         ctx.setResponseBody(jsonObject.toString());
         LOGGER.error("uuid error is: " + uuidCode);
+    }
+
+    @Async
+    public void pushRequestMessage(String userId, String path, String method, Map<String, Object> params) {
+        MessageLog log = new MessageLog();
+        log.setRequestLog(userId, path, method, params);
+        commonService.pushLogMessage(log);
     }
 }
