@@ -2,11 +2,9 @@ package com.op.analysis.action.filter;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
@@ -21,11 +19,12 @@ import org.slf4j.LoggerFactory;
 @Provider
 public class OpResponseFilter implements ContainerResponseFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpResponseFilter.class);
-    @Context
-    private HttpServletRequest request;
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        LOGGER.info("response sttaus is " + responseContext.getStatus());
+        if (responseContext.getStatus() == 200)
+            LOGGER.info("user server request status code is :" + responseContext.getStatus());
+        else
+            LOGGER.error("user server request error code is :" + responseContext.getStatus());
     }
 }

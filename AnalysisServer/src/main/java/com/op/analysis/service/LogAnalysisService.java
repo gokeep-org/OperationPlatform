@@ -6,5 +6,5 @@ package com.op.analysis.service;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/20.
  ****************************************/
-public class LogAnalysisService {
+public interface LogAnalysisService {
 }

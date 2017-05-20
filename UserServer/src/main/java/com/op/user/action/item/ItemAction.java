@@ -19,4 +19,5 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
     public UserService userService = BaseService.getService(ServiceName.USER_SERVICE, UserServiceImpl.class);
     public TeamService teamService = BaseService.getService(ServiceName.TEAM_SERVICE, TeamServiceImpl.class);
 
+    //TODO: 获取Request对象以便对事件日志进行存储
 }

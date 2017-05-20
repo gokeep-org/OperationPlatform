@@ -1,4 +1,4 @@
-package com.op.customer.bean.action.output;
+package com.op.analysis.bean.action.output;
 
 /****************************************
  * Copyright (c) xuning.

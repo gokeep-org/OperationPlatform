@@ -1,6 +1,7 @@
-package com.op.customer.service;
+package com.op.analysis.service;
 
-import com.op.customer.util.ApplicationContextHolder;
+
+import com.op.analysis.util.ApplicationContextHolder;
 
 public abstract class BaseService {
     public static <T extends BaseService> T getService(Class<T> clazz) {

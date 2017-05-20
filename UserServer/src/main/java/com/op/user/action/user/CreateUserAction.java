@@ -71,5 +71,8 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
     @Override
     protected void logSyncAction() throws Exception {
         LOGGER.info("create user is successful");
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("index", "log");
+//        map.put("type", "oper");
     }
 }

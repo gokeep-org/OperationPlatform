@@ -5,15 +5,12 @@ package com.op.analysis.action.filter;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 
 /**
  * <p>request和response过滤器。<p>
@@ -26,22 +23,16 @@ import org.slf4j.MDC;
 @Provider
 public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
-    @Context
-    private HttpServletRequest request;
-
 
     public void filter(ContainerRequestContext requestContext) throws IOException {
-//            getBrowerHeader(requestContext);
         String method = requestContext.getMethod();
         String path = requestContext.getUriInfo().getPath();
-        String requestPath = method + ":" + path;
-        String accessToken = requestContext.getHeaderString("token");
         String userId = requestContext.getHeaderString("user_id");
-        MDC.put("user_id", requestContext.getHeaderString(userId));
-        LOGGER.info("请求拦截到user id: " + accessToken);
-        LOGGER.info("------>>>请求路径：" + requestPath + " header " + requestContext.getHeaders());
+        LOGGER.info(
+                "request params: [path: " + path + "]," +
+                        "[method: " + method + "]," +
+                        "[user_id: " + userId + "]");
     }
-
 //    private void getBrowerHeader(ContainerRequestContext requestContext) {
 //        try {
 //            String userAgent = request.getHeader("User-Agent");
@@ -77,12 +68,4 @@ public class OpRequestFilter implements ContainerRequestFilter {
 //        }
 //        return ipStr;
 //    }
-
-    public HttpServletRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-    }
 }

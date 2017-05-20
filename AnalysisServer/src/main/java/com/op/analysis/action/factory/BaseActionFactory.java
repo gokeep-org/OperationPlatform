@@ -1,4 +1,4 @@
-package com.op.core.action.factory;
+package com.op.analysis.action.factory;
 
 /****************************************
  * Copyright (c) xuning.

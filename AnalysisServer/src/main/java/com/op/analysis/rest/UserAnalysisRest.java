@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/user")
 @Produces({MediaType.APPLICATION_JSON})
 public class UserAnalysisRest {
+    @Path("/test")
     public String test() {
         return null;
     }

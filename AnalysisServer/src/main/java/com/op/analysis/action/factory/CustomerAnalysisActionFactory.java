@@ -6,5 +6,6 @@ package com.op.analysis.action.factory;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/20.
  ****************************************/
-public class CustomerAnalysisActionFactory {
+public class CustomerAnalysisActionFactory extends BaseActionFactory {
+
 }

@@ -1,4 +1,4 @@
-package com.op.customer.bean.action.input;
+package com.op.analysis.bean.action.input;
 
 import java.util.Map;
 

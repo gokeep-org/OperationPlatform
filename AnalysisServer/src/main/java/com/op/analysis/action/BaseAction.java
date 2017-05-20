@@ -1,10 +1,10 @@
-package com.op.customer.action;
+package com.op.analysis.action;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.op.customer.bean.action.output.BaseOutput;
+import com.op.analysis.bean.action.output.BaseOutput;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************

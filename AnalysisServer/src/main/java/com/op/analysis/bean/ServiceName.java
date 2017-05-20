@@ -7,4 +7,5 @@ package com.op.analysis.bean;
  * @Auther is xuning on 2017/5/20.
  ****************************************/
 public class ServiceName {
+
 }
