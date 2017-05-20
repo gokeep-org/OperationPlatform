@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.ResultMessage;
+import com.op.user.bean.LogMessage;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 import com.op.util.security.Md5;
 
@@ -70,9 +72,9 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("create user is successful");
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("index", "log");
-//        map.put("type", "oper");
+        LOGGER.info(LogMessage.CREATE_USER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.CREATE_USER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

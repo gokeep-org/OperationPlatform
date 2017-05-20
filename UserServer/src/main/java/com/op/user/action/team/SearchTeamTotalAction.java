@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.SearchOutput;
+import com.op.user.bean.LogMessage;
+import com.op.util.bean.log.MessageLog;
 
 /****************************************
  * Copyright (c) xuning.
@@ -43,6 +45,9 @@ public class SearchTeamTotalAction extends ItemAction<SearchOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("search team total is successful");
+        LOGGER.info(LogMessage.SEARCH_TEAM_TOTAL_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.SEARCH_TEAM_TOTAL_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

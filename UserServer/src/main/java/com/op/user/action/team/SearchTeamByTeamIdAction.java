@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.SearchOutput;
+import com.op.user.bean.LogMessage;
 import com.op.user.bean.entity.user.Team;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -48,6 +50,9 @@ public class SearchTeamByTeamIdAction extends ItemAction<SearchOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("search team is successful");
+        LOGGER.info(LogMessage.SEARCH_TEAM_SECCUSS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.SEARCH_TEAM_SECCUSS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

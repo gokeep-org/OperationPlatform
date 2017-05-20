@@ -29,6 +29,10 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
 
     private HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
+    /**
+     * 获取当前请求事件的user_id
+     * @return
+     */
     public String getUserId() {
         return request.getHeader("user_id");
     }

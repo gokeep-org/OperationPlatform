@@ -1,8 +1,13 @@
 package com.op.user.action.team;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.ResultMessage;
+import com.op.user.bean.LogMessage;
 import com.op.user.bean.entity.user.Team;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -14,6 +19,7 @@ import com.op.util.exception.OperationPlatformException;
 public class UpdateTeamAction extends ItemAction<ResultMessage> {
     private String teamId;
     private Team team;
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateTeamAction.class);
 
     public UpdateTeamAction(String teamId, Team team) {
         this.teamId = teamId;
@@ -46,6 +52,9 @@ public class UpdateTeamAction extends ItemAction<ResultMessage> {
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info(LogMessage.UPDATE_TEAM_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.UPDATE_TEAM_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

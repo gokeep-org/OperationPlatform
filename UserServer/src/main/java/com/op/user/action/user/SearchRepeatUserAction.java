@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.SearchOutput;
+import com.op.user.bean.LogMessage;
 import com.op.user.bean.entity.user.User;
 import com.op.util.bean.CommonQueryBody;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -60,6 +62,9 @@ public class SearchRepeatUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("search repeat user is successful");
+        LOGGER.info(LogMessage.SEARCH_REPEAT_USER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.SEARCH_REPEAT_USER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

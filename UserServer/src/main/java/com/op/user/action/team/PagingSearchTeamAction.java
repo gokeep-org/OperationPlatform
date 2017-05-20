@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.SearchOutput;
+import com.op.user.bean.LogMessage;
 import com.op.util.bean.Paging;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -57,6 +59,9 @@ public class PagingSearchTeamAction extends ItemAction<SearchOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("pang search team is successful");
+        LOGGER.info(LogMessage.SEARCH_TEAM_SECCUSS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.SEARCH_TEAM_SECCUSS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

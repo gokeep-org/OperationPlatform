@@ -9,7 +9,9 @@ import com.op.user.action.input.user.SearchInput;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.SearchOutput;
+import com.op.user.bean.LogMessage;
 import com.op.util.bean.Paging;
+import com.op.util.bean.log.MessageLog;
 
 /****************************************
  * Copyright (c) xuning.
@@ -57,6 +59,9 @@ public class SearchUserListAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("search user list is successful");
+        LOGGER.info(LogMessage.SEARCH_USER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.SEARCH_USER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.BaseOutput;
 import com.op.user.action.output.ResultMessage;
+import com.op.user.bean.LogMessage;
 import com.op.user.bean.entity.user.User;
+import com.op.util.bean.log.MessageLog;
 
 /****************************************
  * Copyright (c) xuning.
@@ -53,6 +55,9 @@ public class UpdateUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("update user is successful");
+        LOGGER.info(LogMessage.UPDATE_USER_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.UPDATE_USER_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }

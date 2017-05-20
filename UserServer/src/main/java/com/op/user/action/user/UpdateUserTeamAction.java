@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import com.op.user.action.item.ItemAction;
 import com.op.user.action.output.ResultMessage;
+import com.op.user.bean.LogMessage;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -53,6 +55,9 @@ public class UpdateUserTeamAction extends ItemAction<ResultMessage> {
 
     @Override
     protected void logSyncAction() throws Exception {
-        LOGGER.info("update user team is successful");
+        LOGGER.info(LogMessage.UPDATE_USER_TEAM_SUCCESS);
+        MessageLog messageLog = new MessageLog();
+        messageLog.setOperLog(LogMessage.UPDATE_USER_TEAM_SUCCESS, getUserId());
+        commonService.pushLogMessage(messageLog);
     }
 }
