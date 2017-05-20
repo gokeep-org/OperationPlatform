@@ -10,4 +10,5 @@ public class ServiceName {
     public static final String USER_SERVICE = "user_service";
     public static final String TEAM_SERVICE = "team_service";
     public static final String REQUEST_BEAN = "requests";
+    public static final String COMMON_SERVICE = "common_service";
 }

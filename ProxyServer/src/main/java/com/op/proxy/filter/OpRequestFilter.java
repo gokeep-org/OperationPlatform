@@ -24,9 +24,7 @@ import org.slf4j.LoggerFactory;
 @Provider
 public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
-
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        // 请求基本信息记录日志信息
         String method = requestContext.getMethod();
         String path = requestContext.getUriInfo().getPath();
         String accessToken = requestContext.getHeaderString("token");
@@ -37,5 +35,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
                         + method + "],[user_id: "
                         + userId + "],[access_token: "
                         + accessToken + "]");
+
     }
+
 }

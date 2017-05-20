@@ -49,10 +49,6 @@ public class EsReceiverImpl implements Receiver {
             String indexName = (String) message.get("index");
             String indexType = (String) message.get("type");
             Map<String, Object> body = (Map<String, Object>) message.get("body");
-//            EsEntity esEntity = new EsEntity();
-//            esEntity.setIndex(indexName);
-//            esEntity.setType(indexType);
-//            esEntity.setBody(body);
             requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, body, RequestUtil.setUserIdToRequest(null));
         } catch (Exception e) {
             LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
