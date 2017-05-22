@@ -9,5 +9,5 @@ package com.op.message.library.rabbit.Queue;
 public class ExchangeName {
     public static final String OP_MAIL = "op_mail";
     public static final String OP_LOG = "op_log";
-    public static final String OP_ES = "op_es";
+    public static final String OP_ES = "op_es_l";
 }

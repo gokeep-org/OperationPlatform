@@ -23,7 +23,7 @@ import com.op.util.gson.SerializeUtil;
 @Component(value = ServiceName.MQ_SERVICE_IMPL)
 public class MqServiceImpl extends BaseService implements MqService {
     @Autowired
-    @Qualifier(ServiceName.ES_SENDER)
+    @Qualifier(ServiceName.LOG_SENDER)
     private Sender sender;
     private static final Logger LOGGER = LoggerFactory.getLogger(MqServiceImpl.class);
 

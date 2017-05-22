@@ -21,7 +21,6 @@ import com.op.message.library.rabbit.Queue.QueueName;
 import com.op.message.library.rabbit.Queue.RoutingKey;
 import com.op.message.library.rabbit.receiver.Receiver;
 import com.op.util.bean.UriPath;
-import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
 import com.op.util.gson.SerializeUtil;
@@ -80,13 +79,15 @@ public class LogReceiverImpl implements Receiver {
 
     @RabbitHandler
     public void process(@Payload String jsonStr) {
-        LOGGER.info("log receiver is " + jsonStr);
         try {
+            Map<String, Object> message = (Map<String, Object>) SerializeUtil.transfromStringToObject(jsonStr, Map.class);
             String esUri = discoveryVip.choose(ServerName.ES);
-            requests.post(esUri + UriPath.ES + "/log", SerializeUtil.transfromStringToObject(jsonStr, Map.class), RequestUtil.setUserIdToRequest(null));
+            String indexName = (String) message.get("index");
+            String indexType = (String) message.get("type");
+            Map<String, Object> body = (Map<String, Object>) message.get("body");
+            requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, body, null);
         } catch (Exception e) {
-            LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
+            LOGGER.error(ErrorCode.RABBIT_RECEIVER_FAILD);
         }
-
     }
 }
