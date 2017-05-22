@@ -8,9 +8,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.op.message.action.BaseAction;
 import com.op.message.bean.action.output.BaseOutput;
 import com.op.message.library.rabbit.Queue.ServiceName;
-import com.op.message.library.rabbit.sender.CommonSender;
 import com.op.message.library.rabbit.sender.Sender;
-import com.op.message.library.rabbit.sender.impl.CommonSenderImpl;
 import com.op.message.library.rabbit.sender.impl.LogSenderImpl;
 import com.op.message.library.rabbit.sender.impl.MailSenderImpl;
 import com.op.message.service.BaseService;
@@ -35,7 +33,7 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
 
     public static Sender logSender = BaseService.getService(ServiceName.LOG_SENDER, LogSenderImpl.class);
 
-    public CommonSender commonSender = BaseService.getService(ServiceName.COMMON_SENDER, CommonSenderImpl.class);
+//    public CommonSender commonSender = BaseService.getService(ServiceName.COMMON_SENDER, CommonSenderImpl.class);
 
     public static MqService mqService = BaseService.getService(ServiceName.MQ_SERVICE_IMPL, MqServiceImpl.class);
 

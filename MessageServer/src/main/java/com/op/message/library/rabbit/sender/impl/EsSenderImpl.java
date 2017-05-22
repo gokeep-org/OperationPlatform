@@ -19,16 +19,17 @@ import com.op.message.service.BaseService;
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/4/1.
+ * @Auther is xuning on 2017/5/22.
  ****************************************/
-@Component(value = ServiceName.LOG_SENDER)
-public class LogSenderImpl extends BaseService implements Sender, RabbitTemplate.ConfirmCallback {
+@Component(value = ServiceName.ES_SENDER)
+public class EsSenderImpl extends BaseService implements Sender, RabbitTemplate.ConfirmCallback {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogSenderImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EsSenderImpl.class);
+
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public LogSenderImpl(RabbitTemplate rabbitTemplate) {
+    public EsSenderImpl(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
         this.rabbitTemplate.setConfirmCallback(this);
     }
@@ -39,8 +40,8 @@ public class LogSenderImpl extends BaseService implements Sender, RabbitTemplate
             LOGGER.info("push to elasticsearch message is null");
         } else {
             CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-            LOGGER.info("Send log message correlation id is: " + correlationData.getId());
-            this.rabbitTemplate.convertAndSend(ExchangeName.OP_LOG, RoutingKey.ONLY, msg, correlationData);
+            LOGGER.info("Send es message correlation id is: " + correlationData.getId());
+            this.rabbitTemplate.convertAndSend(ExchangeName.OP_ES, RoutingKey.ONLY, msg, correlationData);
         }
     }
 
@@ -50,9 +51,9 @@ public class LogSenderImpl extends BaseService implements Sender, RabbitTemplate
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         if (ack) {
-            LOGGER.info("log queue message process is successful, confirm id: " + correlationData.getId());
+            LOGGER.info("es queue message process is successful, confirm id: " + correlationData.getId());
         } else {
-            LOGGER.info("log queue message process is fail, confirm id: " + correlationData.getId());
+            LOGGER.info("es queue message process is fail, confirm id: " + correlationData.getId());
         }
     }
 }

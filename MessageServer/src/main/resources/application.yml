@@ -1,11 +1,11 @@
 spring:
   application:
     name: message
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: xuning
-    password: xuning!
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: xuning
+#    password: xuning!
 eureka:
   server:
     url: http://localhost:10001/eureka/

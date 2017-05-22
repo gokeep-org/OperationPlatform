@@ -28,4 +28,6 @@ public class TestRabbitmq {
     public void testSendMessage() {
         sender.send("hello");
     }
+
+
 }
