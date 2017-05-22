@@ -90,4 +90,20 @@ public class LogReceiverImpl implements Receiver {
             LOGGER.error(ErrorCode.RABBIT_RECEIVER_FAILD);
         }
     }
+
+    public Requests getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Requests requests) {
+        this.requests = requests;
+    }
+
+    public DiscoveryVip getDiscoveryVip() {
+        return discoveryVip;
+    }
+
+    public void setDiscoveryVip(DiscoveryVip discoveryVip) {
+        this.discoveryVip = discoveryVip;
+    }
 }

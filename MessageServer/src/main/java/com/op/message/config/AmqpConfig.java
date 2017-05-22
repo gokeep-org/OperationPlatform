@@ -16,10 +16,6 @@ import org.springframework.context.annotation.Scope;
  ****************************************/
 @Configuration
 public class AmqpConfig {
-
-    public static final String FOO_EXCHANGE   = "callback.exchange.foo";
-    public static final String FOO_ROUTINGKEY = "callback.routingkey.foo";
-    public static final String FOO_QUEUE      = "callback.queue.foo";
     private static final String addresses = "localhost:5672";
     private static final String username = "xuning";
     private static final String password  = "xuning!";
