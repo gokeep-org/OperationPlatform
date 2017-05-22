@@ -14,7 +14,7 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.op.proxy.config.OperationPlatformException;
 import com.op.proxy.service.CommonService;
-import com.op.proxy.util.auth.AuthService;
+import com.op.proxy.service.AuthService;
 import com.op.util.bean.log.MessageLog;
 
 /****************************************
@@ -54,12 +54,17 @@ public class ZuulRequestFilter extends ZuulFilter {
      */
     @Override
     public Object run() {
-        LOGGER.info("proxt request is user");
+        LOGGER.info("Proxy server request filter start");
         RequestContext ctx = RequestContext.getCurrentContext();
         String accessToken = ctx.getRequest().getHeader("access_token");
         String userId = ctx.getRequest().getHeader("user_id");
         String path = ctx.getRequest().getRequestURI();
         String method = ctx.getRequest().getMethod();
+        if (!authService.checkAccessAuth(userId, path, method.toUpperCase())) {
+            buildAccessAuthErrorInfoToRequestComtext(ctx);
+        }
+
+        // 验证Token
         pushRequestMessage(userId, path, method, null);
         if (null == accessToken || null == userId)
             buildAuthErrorInfoToRequestContext(ctx);
@@ -92,10 +97,23 @@ public class ZuulRequestFilter extends ZuulFilter {
         LOGGER.error("uuid error is: " + uuidCode);
     }
 
+    public void buildAccessAuthErrorInfoToRequestComtext(RequestContext ctx) {
+        ctx.setResponseStatusCode(500);
+        ctx.addZuulResponseHeader("Content-Type", "application/json;charset=utf-8");
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("msg", "当前用户没有访问权限");
+        jsonObject.addProperty("code", 500);
+        jsonObject.addProperty("success", false);
+        String uuidCode = UUID.randomUUID().toString();
+        jsonObject.addProperty("uuid", uuidCode);
+        ctx.setResponseBody(jsonObject.toString());
+        LOGGER.error("uuid error is: " + uuidCode);
+    }
+
     @Async
     public void pushRequestMessage(String userId, String path, String method, Map<String, Object> params) {
         MessageLog log = new MessageLog();
         log.setRequestLog(userId, path, method, params);
-        commonService.pushLogMessage(log);
+//        commonService.pushLogMessage(log);
     }
 }

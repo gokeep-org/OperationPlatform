@@ -1,5 +1,7 @@
 package com.op.oauth.service;
 
+import java.util.List;
+
 import com.google.gson.JsonObject;
 import com.op.oauth.bean.entity.Event;
 import com.op.oauth.bean.entity.Rule;
@@ -42,4 +44,15 @@ public interface AuthService<T, C> {
      * @return
      */
     public JsonObject getRuleById(String id);
+
+    /**
+     * 获取事件根据ID
+     * @return
+     */
+    public JsonObject getEventById(String eventId);
+
+    /**
+     * 获取事件列表
+     */
+    public List getEventList();
 }

@@ -1,4 +1,4 @@
-package com.op.proxy.util.auth;
+package com.op.proxy.service;
 
 /****************************************
  * Copyright (c) xuning.
@@ -12,4 +12,6 @@ public interface AuthService {
 
     //验证Token
     public Boolean checkToken(String accessToken, String userId);
+
+    public Boolean checkAccessAuth(String userId, String path, String method);
 }

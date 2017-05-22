@@ -1,6 +1,7 @@
 package com.op.oauth.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,6 +95,37 @@ public class AuthServiceImpl extends BaseService implements AuthService<Client, 
             return null;
         }
         return result;
+    }
+
+    @Override
+    public JsonObject getEventById(String eventId) {
+        String res = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/event/" + eventId, getHeaders()).json();
+        JsonObject result;
+        try {
+            result = ((JsonObject) SerializeUtil.transfromStringToObject(res, JsonObject.class)).get("result").getAsJsonObject();
+        } catch (Throwable e) {
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public List getEventList() {
+        String totalResult = requests.get(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/event/total", getHeaders()).json();
+        long eventTotal = ((JsonObject) SerializeUtil.transfromStringToObject(totalResult, JsonObject.class)).get("total").getAsLong();
+        Map<String, Object> params = new HashMap<>();
+        params.put("page_size", eventTotal);
+        Map<String, Object> body = new HashMap();
+        String res;
+        try {
+            res = requests.post(discoveryVip.choose(ServerName.CORE) + UriPath.CORE + "/read/event", params, getHeaders()).json();
+        } catch (Throwable e) {
+            return null;
+        }
+        if (null != res) {
+            return (List) SerializeUtil.transfromStringToList(res);
+        }
+        return null;
     }
 
     public Requests getRequests() {

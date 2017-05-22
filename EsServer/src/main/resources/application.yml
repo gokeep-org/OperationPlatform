@@ -3,12 +3,12 @@ spring:
     name: es
   profiles:
     active: dev
-  data:
-    elasticsearch:
-      cluster-name: my-application
-      cluster-nodes: localhost:9300
-      repositories:
-        enabled: true
+#  data:
+#    elasticsearch:
+#      cluster-name: my-application
+#      cluster-nodes: localhost:9300
+#      repositories:
+#        enabled: true
 eureka:
   server:
     url: http://localhost:10001/eureka/

@@ -18,17 +18,6 @@ public class MessageLog {
     private String type = "info";
     private Map<String, Object> body;
 
-    public String getIndex() {
-        return index;
-    }
-
-    public void setIndex(String index) {
-        this.index = index;
-    }
-
-    public String getType() {
-        return type;
-    }
 
     public void setOperLog(String message, String userId) {
         setType("oper");
@@ -39,7 +28,6 @@ public class MessageLog {
         body.put("date", new Date().getTime());
         setBody(body);
     }
-
     public void setErrorLog(String message, String userId) {
         setType("error");
         Map<String, Object> body = new HashMap<>();
@@ -79,6 +67,19 @@ public class MessageLog {
         body.put("success", false);
         setBody(body);
     }
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+
 
 
     public MessageLog() {

@@ -13,10 +13,8 @@ import com.op.message.exception.ErrorCode;
 import com.op.message.library.rabbit.Queue.QueueName;
 import com.op.message.library.rabbit.receiver.Receiver;
 import com.op.util.bean.UriPath;
-import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.discovery.ServerName;
-import com.op.util.exception.OperationPlatformException;
 import com.op.util.gson.SerializeUtil;
 import com.op.util.requests.Requests;
 
@@ -49,10 +47,9 @@ public class EsReceiverImpl implements Receiver {
             String indexName = (String) message.get("index");
             String indexType = (String) message.get("type");
             Map<String, Object> body = (Map<String, Object>) message.get("body");
-            requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, body, RequestUtil.setUserIdToRequest(null));
+            requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, body, null);
         } catch (Exception e) {
-            LOGGER.info(ErrorCode.RABBIT_RECEIVER_FAILD);
-            throw new OperationPlatformException("request params is invalid, found error");
+            LOGGER.error(ErrorCode.RABBIT_RECEIVER_FAILD);
         }
     }
 }

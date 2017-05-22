@@ -7,4 +7,5 @@ package com.op.user.bean.entity.user;
  * @Auther is xuning on 2017/5/21.
  ****************************************/
 public class Product {
+    //产品信息
 }

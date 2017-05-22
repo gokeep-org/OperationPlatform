@@ -4,6 +4,7 @@ import com.op.oauth.action.BaseActionFactory;
 import com.op.oauth.action.auth.CreateEventAction;
 import com.op.oauth.action.auth.CreateRuleAction;
 import com.op.oauth.action.auth.GetRuleByIdAction;
+import com.op.oauth.action.auth.SearchEventListAction;
 import com.op.oauth.bean.entity.Event;
 import com.op.oauth.bean.entity.Rule;
 
@@ -24,5 +25,9 @@ public class AuthActionFactory extends BaseActionFactory {
 
     public static GetRuleByIdAction getGetEGetRuleByIdAction(String id) {
         return new GetRuleByIdAction(id);
+    }
+
+    public static SearchEventListAction getSearchEventListAction() {
+        return new SearchEventListAction();
     }
 }

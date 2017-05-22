@@ -1,6 +1,7 @@
 package com.op.es.bean.action.input;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /****************************************
@@ -18,9 +19,7 @@ public class SearchInput {
     public SearchInput() {
 
     }
-
-
-    public void setPaging(long form, long size, String field, String order) {
+    public SearchInput setPaging(long form, long size, String field, String order) {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> orderMap = new HashMap<>();
         orderMap.put("order", order);
@@ -28,7 +27,22 @@ public class SearchInput {
         this.from = form;
         this.size = size;
         this.sort = map;
+        return this;
     }
+
+    public SearchInput setFilter(List filterMatch){
+        return this;
+    }
+
+    public SearchInput setMustAndFilter(String clauses, List mustMatch, List filterMatch) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("must", mustMatch);
+        map.put("filter", filterMatch);
+        this.query.put(clauses, map);
+        return this;
+    }
+
+
 
     public long getFrom() {
         return from;

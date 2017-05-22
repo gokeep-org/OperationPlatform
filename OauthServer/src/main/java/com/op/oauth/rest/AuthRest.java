@@ -50,7 +50,7 @@ public class AuthRest {
     }
 
     @GET
-    @Path("rule/{id}")
+    @Path("/rule/{id}")
     public SearchOutput getRuleById(@PathParam("id") String id) throws Exception {
         return (SearchOutput) AuthActionFactory.getGetEGetRuleByIdAction(id).execute();
     }
@@ -60,4 +60,11 @@ public class AuthRest {
     public ResultOutput createEvent(Event event) throws Exception {
         return (ResultOutput) AuthActionFactory.getCreateEventAction(event).execute();
     }
+
+    @GET
+    @Path("/search/all")
+    public SearchOutput searchAllEvent() throws Exception {
+        return (SearchOutput) AuthActionFactory.getSearchEventListAction().execute();
+    }
+
 }
