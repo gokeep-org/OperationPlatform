@@ -63,30 +63,52 @@ public class ZuulRequestFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         String userId = null;
         String accessToken = null;
+        String path = ctx.getRequest().getRequestURI();
+        String method = ctx.getRequest().getMethod();
         Map<String, String> tokenMap = getCookies(ctx);
-        if (!Objects.equals(null, tokenMap) &&  tokenMap.size() > 0) {
+        /**
+         * 校验是否在cookie存在授权信息
+         */
+        if (!Objects.equals(null, tokenMap) && tokenMap.size() > 0) {
             if (null != tokenMap.get("user_id") && null != tokenMap.get("access_token")) {
                 accessToken = tokenMap.get("access_token");
                 userId = tokenMap.get("user_id");
             }
         }
-        if (null == userId || null == accessToken){
+        /**
+         * 如果收授权信息依然为空，那么而就荣请求Header中拿
+         */
+        if (null == userId || null == accessToken) {
             accessToken = ctx.getRequest().getHeader("access_token");
             userId = ctx.getRequest().getHeader("user_id");
         }
-        String path = ctx.getRequest().getRequestURI();
-        String method = ctx.getRequest().getMethod();
+
         /**
-         * 用户访问权限校验和请求日志推送
+         * 验证用户访问权限
          */
 //        校验请问权限
 //        if (!authService.checkAccessAuth(userId, path, method.toUpperCase())) {
 //            buildAccessAuthErrorInfoToRequestComtext(ctx);
 //            throw new OperationPlatformException("user don't access power");
 //        }
-//        pushRequestMessage(userId, path, method, null);
-//        if (null == accessToken || null == userId)
-//            buildAuthErrorInfoToRequestContext(ctx);
+
+
+        /**
+         *推送用户请求访问日志到ElasticSearch
+         */
+        pushRequestMessage(userId, path, method, null);
+
+        /**
+         * 如果授权信息都获取不到，就抛出异常
+         */
+        if (null == accessToken || null == userId) {
+            buildAuthErrorInfoToRequestContext(ctx);
+            throw new OperationPlatformException("user_id or access_token is null");
+        }
+
+        /**
+         * 验证用户认证授权信息向Oauth2服务
+         */
         if (authService.checkToken(accessToken, userId)) {
             Cookie userIdCookie = new Cookie("user_id", userId);
             Cookie accessTokenCookie = new Cookie("access_token", accessToken);
@@ -101,13 +123,6 @@ public class ZuulRequestFilter extends ZuulFilter {
         }
     }
 
-    public AuthService getAuthService() {
-        return authService;
-    }
-
-    public void setAuthService(AuthService authService) {
-        this.authService = authService;
-    }
 
     public void buildAuthErrorInfoToRequestContext(RequestContext ctx) {
         ctx.setResponseStatusCode(500);
@@ -139,12 +154,17 @@ public class ZuulRequestFilter extends ZuulFilter {
     public void pushRequestMessage(String userId, String path, String method, Map<String, Object> params) {
         MessageLog log = new MessageLog();
         log.setRequestLog(userId, path, method, params);
-//        commonService.pushLogMessage(log);
+        String pushMessage = String.format("zuul filter request info: [url: %s],[method: %s],[params: %s]", path, method, params);
+        LOGGER.info(pushMessage);
+        // 暂时不推送异步日志消息
+        commonService.pushLogMessage(log);
     }
 
     public Map<String, String> getCookies(RequestContext requestContext) {
         Map<String, String> cookieMap = new HashMap<>();
         Cookie[] cookies = requestContext.getRequest().getCookies();
+        if (Objects.equals(null, cookies) || cookies.length == 0)
+            return null;
         for (Cookie cookie : cookies) {
             if (null != cookie.getName() && null != cookie.getValue()) {
                 if (cookie.getName().equals("user_id")) {
@@ -156,5 +176,13 @@ public class ZuulRequestFilter extends ZuulFilter {
             }
         }
         return cookieMap;
+    }
+
+    public AuthService getAuthService() {
+        return authService;
+    }
+
+    public void setAuthService(AuthService authService) {
+        this.authService = authService;
     }
 }
