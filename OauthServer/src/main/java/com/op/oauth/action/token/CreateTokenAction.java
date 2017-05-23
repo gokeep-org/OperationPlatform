@@ -53,6 +53,7 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
             throw new OperationPlatformException("grant type is null");
         }
 
+
     }
 
     @Override
@@ -68,6 +69,8 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
             //如果用户的token没有过期，返回当前用户的token
             //如果已经过期，创建一个新的token
             this.token = (Token) tokenService.createTokenByUserId(this.user.getUserId());
+            tokenService.setCookie(token);
+            LOGGER.info("User login success set cookie is successful");
         } else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)) {
             LOGGER.error("password mode is not implement");
         } else {

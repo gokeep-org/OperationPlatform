@@ -5,9 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.loadbalancer.IRule;
-import com.netflix.loadbalancer.RandomRule;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -21,9 +18,9 @@ public class RibbonConfig {
     RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
-    @Bean
-    public IRule ribbonRule() {
-        return new RandomRule();
-    }
+//
+//    @Bean
+//    public IRule ribbonRule() {
+//        return new RandomRule();
+//    }
 }

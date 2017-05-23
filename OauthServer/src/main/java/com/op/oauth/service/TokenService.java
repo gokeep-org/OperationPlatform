@@ -2,6 +2,8 @@ package com.op.oauth.service;
 
 import java.util.List;
 
+import com.op.oauth.bean.entity.Token;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -64,5 +66,7 @@ public interface TokenService<T, S, U> {
      * @return
      */
     S freezeToken(T t);
+
+    void setCookie(Token token);
 
 }

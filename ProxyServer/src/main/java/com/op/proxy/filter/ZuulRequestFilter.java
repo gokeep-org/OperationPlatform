@@ -1,7 +1,11 @@
 package com.op.proxy.filter;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+
+import javax.servlet.http.Cookie;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +16,10 @@ import org.springframework.scheduling.annotation.Async;
 import com.google.gson.JsonObject;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.op.proxy.config.OperationPlatformException;
-import com.op.proxy.service.CommonService;
 import com.op.proxy.service.AuthService;
+import com.op.proxy.service.CommonService;
 import com.op.util.bean.log.MessageLog;
+import com.op.util.exception.OperationPlatformException;
 
 /****************************************
  * Copyright (c) xuning.
@@ -50,25 +54,46 @@ public class ZuulRequestFilter extends ZuulFilter {
 
     /**
      * 通过网关之前需要进行权限校验
-     * @return
+     * 校验的
+     * @return Object
      */
     @Override
     public Object run() {
         LOGGER.info("Proxy server request filter start");
         RequestContext ctx = RequestContext.getCurrentContext();
-        String accessToken = ctx.getRequest().getHeader("access_token");
-        String userId = ctx.getRequest().getHeader("user_id");
+        String userId = null;
+        String accessToken = null;
+        Map<String, String> tokenMap = getCookies(ctx);
+        if (!Objects.equals(null, tokenMap) &&  tokenMap.size() > 0) {
+            if (null != tokenMap.get("user_id") && null != tokenMap.get("access_token")) {
+                accessToken = tokenMap.get("access_token");
+                userId = tokenMap.get("user_id");
+            }
+        }
+        if (null == userId || null == accessToken){
+            accessToken = ctx.getRequest().getHeader("access_token");
+            userId = ctx.getRequest().getHeader("user_id");
+        }
         String path = ctx.getRequest().getRequestURI();
         String method = ctx.getRequest().getMethod();
-        if (!authService.checkAccessAuth(userId, path, method.toUpperCase())) {
-            buildAccessAuthErrorInfoToRequestComtext(ctx);
-            throw new OperationPlatformException("user don't access power");
-        }
-        // 验证Token
+        /**
+         * 用户访问权限校验和请求日志推送
+         */
+//        校验请问权限
+//        if (!authService.checkAccessAuth(userId, path, method.toUpperCase())) {
+//            buildAccessAuthErrorInfoToRequestComtext(ctx);
+//            throw new OperationPlatformException("user don't access power");
+//        }
 //        pushRequestMessage(userId, path, method, null);
-        if (null == accessToken || null == userId)
-            buildAuthErrorInfoToRequestContext(ctx);
+//        if (null == accessToken || null == userId)
+//            buildAuthErrorInfoToRequestContext(ctx);
         if (authService.checkToken(accessToken, userId)) {
+            Cookie userIdCookie = new Cookie("user_id", userId);
+            Cookie accessTokenCookie = new Cookie("access_token", accessToken);
+            userIdCookie.setMaxAge(7200);
+            accessTokenCookie.setMaxAge(7200);
+            ctx.getResponse().addCookie(userIdCookie);
+            ctx.getResponse().addCookie(accessTokenCookie);
             return null;
         } else {
             buildAuthErrorInfoToRequestContext(ctx);
@@ -115,5 +140,21 @@ public class ZuulRequestFilter extends ZuulFilter {
         MessageLog log = new MessageLog();
         log.setRequestLog(userId, path, method, params);
 //        commonService.pushLogMessage(log);
+    }
+
+    public Map<String, String> getCookies(RequestContext requestContext) {
+        Map<String, String> cookieMap = new HashMap<>();
+        Cookie[] cookies = requestContext.getRequest().getCookies();
+        for (Cookie cookie : cookies) {
+            if (null != cookie.getName() && null != cookie.getValue()) {
+                if (cookie.getName().equals("user_id")) {
+                    cookieMap.put("user_id", cookie.getValue());
+                }
+                if (cookie.getName().equals("access_token")) {
+                    cookieMap.put("access_token", cookie.getValue());
+                }
+            }
+        }
+        return cookieMap;
     }
 }

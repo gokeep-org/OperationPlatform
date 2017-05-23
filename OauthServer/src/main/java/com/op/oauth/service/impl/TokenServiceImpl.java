@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +33,8 @@ import com.op.util.exception.OperationPlatformException;
 public class TokenServiceImpl extends BaseService implements TokenService<Token, Boolean, User> {
     @Autowired
     private TokenMapper tokenMapper;
+    @Autowired
+    private HttpServletResponse httpServletResponse;
 
     @Override
     public Token createTokenByClientId(String clientId) {
@@ -130,6 +135,18 @@ public class TokenServiceImpl extends BaseService implements TokenService<Token,
     @Override
     public Boolean freezeToken(Token token) {
         return null;
+    }
+
+    @Override
+    public void setCookie(Token token) {
+        String userId = token.getUserId();
+        String accessToken = token.getAccessToken();
+        Cookie userIdCookie = new Cookie("user_id", userId);
+        Cookie accessTokenCookie = new Cookie("access_token", accessToken);
+        userIdCookie.setMaxAge(7200);
+        accessTokenCookie.setMaxAge(7200);
+        httpServletResponse.addCookie(userIdCookie);
+        httpServletResponse.addCookie(accessTokenCookie);
     }
 
     public TokenMapper getTokenMapper() {
