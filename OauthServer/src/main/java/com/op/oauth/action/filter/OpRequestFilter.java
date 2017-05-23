@@ -5,12 +5,15 @@ package com.op.oauth.action.filter;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>request和response过滤器。<p>
@@ -23,10 +26,21 @@ import org.slf4j.LoggerFactory;
 @Provider
 public class OpRequestFilter implements ContainerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(OpRequestFilter.class);
-
+    @Autowired
+    private HttpServletRequest httpServletRequest;
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String method = requestContext.getMethod();
         String path = requestContext.getUriInfo().getPath();
+//        Map<String, Cookie> s=requestContext.getCookies();
+        javax.servlet.http.Cookie[] cookies = httpServletRequest.getCookies();
+        String cookieValue = null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("user_id")) {
+                cookieValue = cookie.getValue();
+                break;
+            }
+        }
+        LOGGER.info("获取到aaa的Cookie值是" + cookieValue);
         String userId = requestContext.getHeaderString("user_id");
         String accessToken = requestContext.getHeaderString("access_token");
         String filterInfo = "request params: [path: %s], [method:  %s], [user_id: %s], [access_token: %s]";

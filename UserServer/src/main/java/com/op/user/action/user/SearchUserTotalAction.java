@@ -58,6 +58,6 @@ public class SearchUserTotalAction extends ItemAction<BaseOutput> {
         LOGGER.info(LogMessage.SEARCH_USER_TOTAL_SUCCESS);
         MessageLog messageLog = new MessageLog();
         messageLog.setOperLog(LogMessage.SEARCH_USER_TOTAL_SUCCESS, getUserId());
-//        commonService.pushLogMessage(messageLog);
+        commonService.pushLogMessage(messageLog);
     }
 }

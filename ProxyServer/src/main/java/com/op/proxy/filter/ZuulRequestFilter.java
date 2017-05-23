@@ -62,10 +62,10 @@ public class ZuulRequestFilter extends ZuulFilter {
         String method = ctx.getRequest().getMethod();
         if (!authService.checkAccessAuth(userId, path, method.toUpperCase())) {
             buildAccessAuthErrorInfoToRequestComtext(ctx);
+            throw new OperationPlatformException("user don't access power");
         }
-
         // 验证Token
-        pushRequestMessage(userId, path, method, null);
+//        pushRequestMessage(userId, path, method, null);
         if (null == accessToken || null == userId)
             buildAuthErrorInfoToRequestContext(ctx);
         if (authService.checkToken(accessToken, userId)) {

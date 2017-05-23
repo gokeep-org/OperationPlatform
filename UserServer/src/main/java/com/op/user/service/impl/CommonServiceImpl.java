@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 import com.op.user.bean.ServiceName;
 import com.op.user.service.BaseService;
 import com.op.user.service.CommonService;
-import com.op.util.bean.UriPath;
 import com.op.util.bean.log.MessageLog;
 import com.op.util.discovery.DiscoveryVip;
-import com.op.util.discovery.ServerName;
-import com.op.util.exception.OperationPlatformException;
 import com.op.util.requests.Requests;
 
 /****************************************
@@ -27,22 +24,18 @@ public class CommonServiceImpl extends BaseService implements CommonService {
     private Requests requests;
     @Autowired
     private DiscoveryVip discoveryVip;
-//    @Autowired
+    //    @Autowired
 //    private HttpServletRequest httpServletRequest;
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonServiceImpl.class);
 
     @Override
     public void pushLogMessage(MessageLog log) {
-        try {
-            String messageServer = discoveryVip.choose(ServerName.MESSAGE);
-            requests.post(messageServer + UriPath.MESSAGE + "/es/push", log, null);
-        } catch (OperationPlatformException e) {
-            LOGGER.error("push message to rabbitmq found error");
-        }
+        LOGGER.info("push message is log" + log);
+//        try {
+//            String messageServer = discoveryVip.choose(ServerName.MESSAGE);
+//            requests.post(messageServer + UriPath.MESSAGE + "/es/push", log, null);
+//        } catch (OperationPlatformException e) {
+//            LOGGER.error("push message to rabbitmq found error");
+//        }
     }
-
-//    public Map<String, String> getHeaders() {
-//        String userId = httpServletRequest.getHeader("user_id");
-//        return RequestUtil.setUserIdToRequest(userId);
-//    }
 }

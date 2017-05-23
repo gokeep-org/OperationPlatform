@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.junit.Test;
 
 import com.op.user.bean.entity.user.User;
+import com.op.util.redis.DefaultRedisClient;
+import com.op.util.redis.RedisClient;
 import com.op.util.requests.Requests;
 import com.op.util.requests.core.RequestImpl;
 
@@ -18,6 +20,7 @@ import com.op.util.requests.core.RequestImpl;
 public class UserTest {
     Requests requests = new RequestImpl();
 
+    RedisClient redisClient = new DefaultRedisClient();
     @Test
     public void batchInsertUser() {
         long count = 100000;
@@ -38,5 +41,10 @@ public class UserTest {
             headers.put("Content-Type", "application/json");
             requests.post("localhost:60001/user/user", user, headers);
         }
+    }
+
+    @Test
+    public void testRedis(){
+        System.out.println(redisClient.get("aaa"));
     }
 }

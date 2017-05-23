@@ -12,12 +12,9 @@ import org.springframework.stereotype.Service;
 import com.op.customer.bean.entity.ServiceName;
 import com.op.customer.service.BaseService;
 import com.op.customer.service.CommonService;
-import com.op.util.bean.UriPath;
 import com.op.util.bean.log.MessageLog;
 import com.op.util.common.RequestUtil;
 import com.op.util.discovery.DiscoveryVip;
-import com.op.util.discovery.ServerName;
-import com.op.util.exception.OperationPlatformException;
 import com.op.util.requests.Requests;
 
 /****************************************
@@ -38,12 +35,13 @@ public class CommonServiceImpl extends BaseService implements CommonService {
 
     @Override
     public void pushLogMessage(MessageLog log) {
-        try {
-            String messageServer = discoveryVip.choose(ServerName.MESSAGE);
-            requests.post(messageServer + UriPath.MESSAGE + "/es/push", log, getHeaders());
-        } catch (OperationPlatformException e) {
-            LOGGER.error("push message to rabbitmq found error");
-        }
+        LOGGER.info("push log message is: "+log);
+//        try {
+//            String messageServer = discoveryVip.choose(ServerName.MESSAGE);
+//            requests.post(messageServer + UriPath.MESSAGE + "/es/push", log, getHeaders());
+//        } catch (OperationPlatformException e) {
+//            LOGGER.error("push message to rabbitmq found error");
+//        }
     }
 
     public Map<String, String> getHeaders() {
