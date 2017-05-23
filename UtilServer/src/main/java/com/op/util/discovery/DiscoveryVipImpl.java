@@ -1,23 +1,9 @@
 package com.op.util.discovery;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.netflix.client.config.CommonClientConfigKey;
-import com.netflix.client.config.DefaultClientConfigImpl;
-import com.netflix.config.ConfigurationManager;
-import com.netflix.loadbalancer.BestAvailableRule;
-import com.netflix.loadbalancer.DynamicServerListLoadBalancer;
-import com.netflix.loadbalancer.ILoadBalancer;
-import com.netflix.loadbalancer.LoadBalancerBuilder;
-import com.netflix.loadbalancer.ServerList;
-import com.netflix.loadbalancer.ServerListFilter;
-import com.netflix.loadbalancer.ServerListSubsetFilter;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList;
-import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 /****************************************
  * Copyright (c) xuning.
@@ -27,12 +13,19 @@ import com.netflix.niws.loadbalancer.DiscoveryEnabledServer;
  ****************************************/
 public class DiscoveryVipImpl implements DiscoveryVip {
     private static Logger LOGGER = LoggerFactory.getLogger(DiscoveryVipImpl.class);
-    private static Map<String, ILoadBalancer> namedLBMap = new ConcurrentHashMap<String, ILoadBalancer>();
-
+//    private static Map<String, ILoadBalancer> namedLBMap = new ConcurrentHashMap<String, ILoadBalancer>();
+    @Autowired
+    public LoadBalancerClient loadBalancerClient;
     public DiscoveryVipImpl() {
     }
 
     public String choose(String serverId) {
+        String serverVip = loadBalancerClient.choose(serverId).getUri().toString();
+        return serverVip;
+        /***
+         * 下面是旧的负载均衡策略
+         */
+        /*
         String serverStr = null;
         try {
             DynamicServerListLoadBalancer lb = (DynamicServerListLoadBalancer) namedLBMap.get(serverId);
@@ -54,5 +47,6 @@ public class DiscoveryVipImpl implements DiscoveryVip {
             LOGGER.error("查询服务时异常", t);
         }
         return serverStr;
+        */
     }
 }
