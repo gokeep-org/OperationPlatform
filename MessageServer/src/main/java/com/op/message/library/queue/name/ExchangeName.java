@@ -1,4 +1,4 @@
-package com.op.message.library.rabbit.Queue;
+package com.op.message.library.queue.name;
 
 /****************************************
  * Copyright (c) xuning.
@@ -6,6 +6,8 @@ package com.op.message.library.rabbit.Queue;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/22.
  ****************************************/
-public class RoutingKey {
-    public static final String ONLY = "com.op.only";
+public class ExchangeName {
+    public static final String OP_MAIL = "op_mail";
+    public static final String OP_LOG = "op_log";
+    public static final String OP_ES = "op_es_l";
 }

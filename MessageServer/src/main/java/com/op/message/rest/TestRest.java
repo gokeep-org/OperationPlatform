@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.google.gson.JsonObject;
 import com.op.message.bean.entity.email.Email;
-import com.op.message.library.rabbit.sender.Sender;
+import com.op.message.library.queue.Sender;
 import com.op.message.service.MailSendService;
 
 /**

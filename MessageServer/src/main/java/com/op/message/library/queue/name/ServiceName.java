@@ -1,4 +1,4 @@
-package com.op.message.library.rabbit.Queue;
+package com.op.message.library.queue.name;
 
 /****************************************
  * Copyright (c) xuning.

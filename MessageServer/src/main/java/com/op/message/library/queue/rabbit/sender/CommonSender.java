@@ -1,15 +1,11 @@
-package com.op.message.library.rabbit.sender;
+package com.op.message.library.queue.rabbit.sender;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/2/15.
+ * @Auther is xuning on 2017/4/1.
  ****************************************/
-
-/**
- * 发送消息队列接口
- */
-public interface Sender {
-    void send(String message);
+public interface CommonSender {
+    public void send(String queueName, String message);
 }

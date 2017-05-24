@@ -1,4 +1,4 @@
-//package com.op.message.library.rabbit.receiver.impl;
+//package com.op.message.library.queue.rabbit.receiver.impl;
 //
 //
 //import org.slf4j.Logger;
@@ -8,8 +8,8 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //
-//import com.op.message.library.rabbit.Queue.QueueName;
-//import com.op.message.library.rabbit.receiver.Receiver;
+//import com.op.message.library.queue.rabbit.Queue.QueueName;
+//import com.op.message.library.queue.rabbit.receiver.Receiver;
 //import com.op.message.service.MailSendService;
 //
 ///****************************************

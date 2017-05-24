@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.op.message.library.rabbit.Queue.ServiceName;
-import com.op.message.library.rabbit.sender.Sender;
+import com.op.message.library.queue.name.ServiceName;
+import com.op.message.library.queue.Sender;
 import com.op.message.service.BaseService;
 import com.op.message.service.MqService;
 import com.op.util.gson.SerializeUtil;

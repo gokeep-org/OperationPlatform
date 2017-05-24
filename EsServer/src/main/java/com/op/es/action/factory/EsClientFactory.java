@@ -1,12 +1,14 @@
 package com.op.es.action.factory;
 
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestClientFactory;
-import io.searchbox.client.config.HttpClientConfig;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+
+import com.op.es.config.EsConfig;
+
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.config.HttpClientConfig;
 
 /****************************************
  * Copyright (c) xuning.
@@ -25,8 +27,9 @@ public class EsClientFactory {
             jestfactory = new JestClientFactory();
         }
         List<String> serverLists = new LinkedList<>();
-        serverLists.add("http://localhost:9200");
-        serverLists.add("http://localhost:9201");
+        EsConfig.elasticSearchServerList.forEach(server -> {
+            serverLists.add(server);
+        });
         jestfactory.setHttpClientConfig(new HttpClientConfig
                 .Builder(serverLists)
                 .multiThreaded(true)

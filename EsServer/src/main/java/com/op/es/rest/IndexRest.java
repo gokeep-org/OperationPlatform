@@ -1,5 +1,6 @@
 package com.op.es.rest;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public class IndexRest {
     @Path("/{index}/type/{type}")
     public WriteOutput createDocument(@PathParam("index") String index,
                                       @PathParam("type") String type,
-                                      Map<String, Object> map) {
+                                      Map<String, Object> map) throws IOException {
         WriteOutput output = new WriteOutput(200, "操作成功");
         if (indexService.insertIndex(index, type, UUID.randomUUID().toString(), map)) {
             output.setSuccess("true");
@@ -100,5 +101,13 @@ public class IndexRest {
         output.setMessage("操作失败");
         output.setUuid(UUID.randomUUID().toString());
         return output;
+    }
+
+    public IndexService getIndexService() {
+        return indexService;
+    }
+
+    public void setIndexService(IndexService indexService) {
+        this.indexService = indexService;
     }
 }

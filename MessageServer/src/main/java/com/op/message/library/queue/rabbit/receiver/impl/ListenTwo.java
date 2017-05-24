@@ -1,4 +1,4 @@
-//package com.op.message.library.rabbit.receiver.impl;
+//package com.op.message.library.queue.rabbit.receiver.impl;
 //
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -12,8 +12,6 @@
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.messaging.handler.annotation.Payload;
 //
-//import com.op.message.config.AmqpConfig;
-//
 ///****************************************
 // * Copyright (c) xuning.
 // * 尊重版权，禁止抄袭!
@@ -21,8 +19,9 @@
 // * @Auther is xuning on 2017/5/22.
 // ****************************************/
 //@Configuration
-//@RabbitListener(queues = AmqpConfig.FOO_QUEUE)
-//public class Listener {
+//@RabbitListener(queues = ListenTwo.QueueTwo)
+//public class ListenTwo {
+//    public static final String QueueTwo = "xuning.queue.two";
 //    private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
 //
 //    /** 设置交换机类型  */
@@ -34,7 +33,7 @@
 //         * FanoutExchange: 将消息分发到所有的绑定队列，无routingkey的概念
 //         * HeadersExchange ：通过添加属性key-value匹配
 //         */
-//        return new DirectExchange(AmqpConfig.FOO_EXCHANGE);
+//        return new DirectExchange("aaa");
 //    }
 //
 //    /**
@@ -43,7 +42,7 @@
 //     */
 //    @Bean
 //    public Queue fooQueue() {
-//        return new Queue(AmqpConfig.FOO_QUEUE);
+//        return new Queue(QueueTwo);
 //    }
 //
 //    /**
@@ -52,11 +51,11 @@
 //     */
 //    @Bean
 //    public Binding binding() {
-//        return BindingBuilder.bind(fooQueue()).to(defaultExchange()).with(AmqpConfig.FOO_ROUTINGKEY);
+//        return BindingBuilder.bind(fooQueue()).to(defaultExchange()).with("xuning.two.route_key");
 //    }
 //
 //    @RabbitHandler
 //    public void process(@Payload String foo) {
-//        LOGGER.info("Listener: " + foo);
+//        LOGGER.info("two Listener: " + foo);
 //    }
 //}

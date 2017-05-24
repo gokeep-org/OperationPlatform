@@ -65,16 +65,16 @@ public class ZuulRequestFilter extends ZuulFilter {
         String accessToken = null;
         String path = ctx.getRequest().getRequestURI();
         String method = ctx.getRequest().getMethod();
-        Map<String, String> tokenMap = getCookies(ctx);
-        /**
-         * 校验是否在cookie存在授权信息
-         */
-        if (!Objects.equals(null, tokenMap) && tokenMap.size() > 0) {
-            if (null != tokenMap.get("user_id") && null != tokenMap.get("access_token")) {
-                accessToken = tokenMap.get("access_token");
-                userId = tokenMap.get("user_id");
-            }
-        }
+//        Map<String, String> tokenMap = getCookies(ctx);
+//        /**
+//         * 校验是否在cookie存在授权信息
+//         */
+//        if (!Objects.equals(null, tokenMap) && tokenMap.size() > 0) {
+//            if (null != tokenMap.get("user_id") && null != tokenMap.get("access_token")) {
+//                accessToken = tokenMap.get("access_token");
+//                userId = tokenMap.get("user_id");
+//            }
+//        }
         /**
          * 如果收授权信息依然为空，那么而就荣请求Header中拿
          */
@@ -82,6 +82,7 @@ public class ZuulRequestFilter extends ZuulFilter {
             accessToken = ctx.getRequest().getHeader("access_token");
             userId = ctx.getRequest().getHeader("user_id");
         }
+
 
         /**
          * 验证用户访问权限

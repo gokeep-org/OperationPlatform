@@ -7,10 +7,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.op.message.action.BaseAction;
 import com.op.message.bean.action.output.BaseOutput;
-import com.op.message.library.rabbit.Queue.ServiceName;
-import com.op.message.library.rabbit.sender.Sender;
-import com.op.message.library.rabbit.sender.impl.LogSenderImpl;
-import com.op.message.library.rabbit.sender.impl.MailSenderImpl;
+import com.op.message.library.queue.Sender;
+import com.op.message.library.queue.kafka.send.LogSenderImpl;
+import com.op.message.library.queue.kafka.send.MailSenderImpl;
+import com.op.message.library.queue.name.ServiceName;
 import com.op.message.service.BaseService;
 import com.op.message.service.MailSendService;
 import com.op.message.service.MqService;

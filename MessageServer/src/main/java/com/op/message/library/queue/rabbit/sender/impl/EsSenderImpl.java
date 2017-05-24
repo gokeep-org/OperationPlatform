@@ -1,4 +1,4 @@
-//package com.op.message.library.rabbit.sender.impl;
+//package com.op.message.library.queue.rabbit.sender.impl;
 //
 //import java.util.UUID;
 //
@@ -9,10 +9,10 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //
-//import com.op.message.library.rabbit.Queue.ExchangeName;
-//import com.op.message.library.rabbit.Queue.RoutingKey;
-//import com.op.message.library.rabbit.Queue.ServiceName;
-//import com.op.message.library.rabbit.sender.Sender;
+//import com.op.message.library.queue.rabbit.Queue.ExchangeName;
+//import com.op.message.library.queue.rabbit.Queue.RoutingKey;
+//import com.op.message.library.queue.rabbit.Queue.ServiceName;
+//import com.op.message.library.queue.Sender;
 //import com.op.message.service.BaseService;
 //
 ///****************************************

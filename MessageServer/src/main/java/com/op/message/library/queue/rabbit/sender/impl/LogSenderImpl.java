@@ -1,4 +1,4 @@
-//package com.op.message.library.rabbit.sender.impl;
+//package com.op.message.library.queue.rabbit.sender.impl;
 //
 //import java.util.UUID;
 //
@@ -9,10 +9,10 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //
-//import com.op.message.library.rabbit.Queue.ExchangeName;
-//import com.op.message.library.rabbit.Queue.QueueName;
-//import com.op.message.library.rabbit.Queue.RoutingKey;
-//import com.op.message.library.rabbit.sender.Sender;
+//import com.op.message.library.queue.name.ExchangeName;
+//import com.op.message.library.queue.name.RoutingKey;
+//import com.op.message.library.queue.kafka.send.ServiceName;
+//import com.op.message.library.queue.Sender;
 //import com.op.message.service.BaseService;
 //
 ///****************************************
@@ -21,14 +21,14 @@
 // * 如有违反，必将追究其法律责任.
 // * @Auther is xuning on 2017/4/1.
 // ****************************************/
-//@Component(value = QueueName.MESSAGE)
-//public class MessageSenderImpl extends BaseService implements Sender, RabbitTemplate.ConfirmCallback {
+//@Component(value = ServiceName.LOG_SENDER)
+//public class LogSenderImpl extends BaseService implements Sender, RabbitTemplate.ConfirmCallback {
 //
-//    private static final Logger LOGGER = LoggerFactory.getLogger(MessageSenderImpl.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(LogSenderImpl.class);
 //    private RabbitTemplate rabbitTemplate;
 //
 //    @Autowired
-//    public MailSenderImpl(RabbitTemplate rabbitTemplate) {
+//    public LogSenderImpl(RabbitTemplate rabbitTemplate) {
 //        this.rabbitTemplate = rabbitTemplate;
 //        this.rabbitTemplate.setConfirmCallback(this);
 //    }
@@ -40,7 +40,7 @@
 //        } else {
 //            CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
 //            LOGGER.info("Send log message correlation id is: " + correlationData.getId());
-//            this.rabbitTemplate.convertAndSend(ExchangeName.OP_MAIL, RoutingKey.ONLY, msg, correlationData);
+//            this.rabbitTemplate.convertAndSend(ExchangeName.OP_LOG, RoutingKey.ONLY, msg, correlationData);
 //        }
 //    }
 //
@@ -50,9 +50,9 @@
 //    @Override
 //    public void confirm(CorrelationData correlationData, boolean ack, String cause) {
 //        if (ack) {
-//            LOGGER.info("mail queue message process is successful, confirm id: " + correlationData.getId());
+//            LOGGER.info("log queue message process is successful, confirm id: " + correlationData.getId());
 //        } else {
-//            LOGGER.info("mail queue message process is fail, confirm id: " + correlationData.getId());
+//            LOGGER.info("log queue message process is fail, confirm id: " + correlationData.getId());
 //        }
 //    }
 //}

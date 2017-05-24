@@ -1,4 +1,4 @@
-//package com.op.message.library.rabbit.receiver.impl;
+//package com.op.message.library.queue.rabbit.receiver.impl;
 //
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -13,10 +13,10 @@
 //import org.springframework.messaging.handler.annotation.Payload;
 //import org.springframework.stereotype.Component;
 //
-//import com.op.message.library.rabbit.Queue.ExchangeName;
-//import com.op.message.library.rabbit.Queue.QueueName;
-//import com.op.message.library.rabbit.Queue.RoutingKey;
-//import com.op.message.library.rabbit.receiver.Receiver;
+//import com.op.message.library.queue.rabbit.Queue.ExchangeName;
+//import com.op.message.library.queue.rabbit.Queue.QueueName;
+//import com.op.message.library.queue.rabbit.Queue.RoutingKey;
+//import com.op.message.library.queue.rabbit.receiver.Receiver;
 //import com.op.util.discovery.DiscoveryVip;
 //import com.op.util.requests.Requests;
 //

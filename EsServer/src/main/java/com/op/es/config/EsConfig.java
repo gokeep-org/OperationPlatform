@@ -1,6 +1,7 @@
 package com.op.es.config;
 
-import com.op.es.util.PropertiesUtil;
+import java.util.Arrays;
+import java.util.List;
 
 /****************************************
  * Copyright (c) xuning.
@@ -9,7 +10,11 @@ import com.op.es.util.PropertiesUtil;
  * @Auther is xuning on 2017/3/15.
  ****************************************/
 public class EsConfig {
-    public static final String esHost = PropertiesUtil.getValue("es.host");
-    public static final String esPort = PropertiesUtil.getValue("es.port");
-    public static final String esUri = esHost + ":" + esPort;
+    //    public static final String esHost = PropertiesUtil.getValue("es.host");
+//    public static final String esPort = PropertiesUtil.getValue("es.port");
+//    public static final String mastUri = esHost + ":" + esPort;
+    public static final String mastUri = "http://localhost:9200";
+    public static final List<String> elasticSearchServerList = Arrays.asList(
+            mastUri
+    );
 }

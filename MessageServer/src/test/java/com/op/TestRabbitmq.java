@@ -8,8 +8,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.op.message.MessageBootstrap;
-import com.op.message.library.rabbit.Queue.ServiceName;
-import com.op.message.library.rabbit.sender.Sender;
+import com.op.message.library.queue.name.ServiceName;
+import com.op.message.library.queue.Sender;
 
 /****************************************
  * Copyright (c) xuning.
