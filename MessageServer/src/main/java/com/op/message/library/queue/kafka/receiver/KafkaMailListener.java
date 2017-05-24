@@ -25,7 +25,7 @@ public class KafkaMailListener {
     private MailSendService mailSendService;
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaMailListener.class);
 
-    @KafkaListener(topics = {QueueName.KAKFKA_QUEUE_MAIL})
+    @KafkaListener(topics = {QueueName.KAFKA_QUEUE_MAIL})
     public void listen(ConsumerRecord<?, ?> record) {
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
         if (kafkaMessage.isPresent()) {

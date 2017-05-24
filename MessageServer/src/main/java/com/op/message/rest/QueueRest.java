@@ -7,15 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-import com.alibaba.fastjson.JSON;
-import com.google.gson.JsonObject;
 import com.op.message.action.factory.mq.MqActionFactory;
 import com.op.message.bean.action.output.ResultMessage;
-import com.op.message.library.queue.name.ServiceName;
-import com.op.message.library.queue.Sender;
 
 /****************************************
  * Copyright (c) xuning.
@@ -26,30 +19,30 @@ import com.op.message.library.queue.Sender;
 @Path("/")
 @Produces({MediaType.APPLICATION_JSON})
 public class QueueRest {
-    @Autowired
-    @Qualifier(ServiceName.RABBITMQ_LOG_SENDER)
-    public Sender logSender;
+//    @Autowired
+//    @Qualifier(ServiceName.RABBITMQ_LOG_SENDER)
+//    public Sender logSender;
 
-    /**
-     * 异步插入RabbitMQ消费Log队列存入ElasticSearch
-     * 备注：所有的日志都通过异步插入
-     * 备注：已经过期，不建议使用费
-     * @param body
-     * @return
-     */
-    @POST
-    @Path("/log/async")
-    public String asyncLog(Map<String, Object> body) {
-        JsonObject object = new JsonObject();
-        try {
-            logSender.send(JSON.toJSONString(body));
-        } catch (Throwable e) {
-            object.addProperty("success", false);
-            return object.toString();
-        }
-        object.addProperty("success", true);
-        return object.toString();
-    }
+//    /**
+//     * 异步插入RabbitMQ消费Log队列存入ElasticSearch
+//     * 备注：所有的日志都通过异步插入
+//     * 备注：已经过期，不建议使用费
+//     * @param body
+//     * @return
+//     */
+//    @POST
+//    @Path("/log/sync")
+//    public String asyncLog(Map<String, Object> body) {
+//        JsonObject object = new JsonObject();
+//        try {
+//            logSender.send(JSON.toJSONString(body));
+//        } catch (Throwable e) {
+//            object.addProperty("success", false);
+//            return object.toString();
+//        }
+//        object.addProperty("success", true);
+//        return object.toString();
+//    }
 
     /**
      * 推送消息到ElasticSearch，统一推送接口

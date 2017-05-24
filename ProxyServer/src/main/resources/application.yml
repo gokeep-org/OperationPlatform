@@ -1,6 +1,6 @@
 server:
   port: 8080
-  connection-timeout: 600000
+  connection-timeout: 6000
 spring:
   application:
     name: proxy
@@ -41,12 +41,12 @@ zuul:
       path: /analysis/api/**
       serviceId: analysis
   host:
-    connect-timeout-millis: 10000
-    socket-timeout-millis: 60000
+    connect-timeout-millis: 1000
+    socket-timeout-millis: 6000
 hystrix:
     command:
         default:
             execution:
                 isolation:
                     thread:
-                        timeoutInMilliseconds: 60000
+                        timeoutInMilliseconds: 6000

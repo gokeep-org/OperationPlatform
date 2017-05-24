@@ -62,7 +62,7 @@ public abstract class RequestClient<T> {
         setUpHttpMethod();
         requestParamterFilter(url);
         HttpResponse httpResponse = sendRequest(url, params, postForms, body, headers);
-//        closeHttpClient();
+        closeHttpClient();
         return new com.op.util.requests.bean.HttpResponse().setHttpResponse(httpResponse);
     }
 

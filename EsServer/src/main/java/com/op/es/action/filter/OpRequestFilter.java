@@ -27,7 +27,6 @@ public class OpRequestFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String method = requestContext.getMethod();
         String path = requestContext.getUriInfo().getPath();
-        String requestPath = method + ":" + path;
         LOGGER.info(
                 "request params: [path: "
                         + path + "],[method: "

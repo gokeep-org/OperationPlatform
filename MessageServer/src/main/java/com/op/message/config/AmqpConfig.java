@@ -5,7 +5,6 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 /****************************************
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Scope;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/22.
  ****************************************/
-@Configuration
+//@Configuration
 public class AmqpConfig {
     private static final String addresses = "localhost:5672";
     private static final String username = "xuning";

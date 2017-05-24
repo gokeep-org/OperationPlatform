@@ -70,7 +70,6 @@ public class IndexServiceImpl implements IndexService {
      */
     @Override
     public Boolean updateIndex(String index, String type, String id, Object body) {
-
         try {
             requests.post(EsConfig.mastUri + "/" + index + "/" + type + "/" + id, body, null);
             return true;

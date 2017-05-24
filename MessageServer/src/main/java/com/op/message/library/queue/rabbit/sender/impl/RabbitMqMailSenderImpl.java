@@ -6,12 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.op.message.library.queue.Sender;
-import com.op.message.library.queue.kafka.send.KafkaMailSenderImpl;
-import com.op.message.library.queue.name.ExchangeName;
-import com.op.message.library.queue.name.RoutingKey;
+import com.op.message.library.queue.name.QueueName;
 import com.op.message.library.queue.name.ServiceName;
 import com.op.message.service.BaseService;
 
@@ -24,9 +23,16 @@ import com.op.message.service.BaseService;
 @Component(value = ServiceName.RABBITMQ_MAIL_SENDER)
 public class RabbitMqMailSenderImpl extends BaseService implements Sender, RabbitTemplate.ConfirmCallback {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaMailSenderImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMqMailSenderImpl.class);
 
+    @Autowired
     private RabbitTemplate rabbitTemplate;
+
+//    @Autowired
+//    public RabbitMqMailSenderImpl(RabbitTemplate rabbitTemplate) {
+//        this.rabbitTemplate = rabbitTemplate;
+//        this.rabbitTemplate.setConfirmCallback(this);
+//    }
 
 
     @Override
@@ -36,7 +42,7 @@ public class RabbitMqMailSenderImpl extends BaseService implements Sender, Rabbi
         } else {
             CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
             LOGGER.info("RabbitMQ: Send mail message correlation id is: " + correlationData.getId());
-            this.rabbitTemplate.convertAndSend(ExchangeName.OP_MAIL, RoutingKey.ONLY, msg, correlationData);
+            this.rabbitTemplate.convertAndSend(QueueName.RABBITMQ_QUEUE_MAIL, msg);
         }
     }
 

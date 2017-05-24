@@ -9,7 +9,7 @@ import com.op.message.action.BaseAction;
 import com.op.message.bean.action.output.BaseOutput;
 import com.op.message.library.queue.Sender;
 import com.op.message.library.queue.name.ServiceName;
-import com.op.message.library.queue.rabbit.sender.impl.RabbitMqLogSenderImper;
+import com.op.message.library.queue.rabbit.sender.impl.RabbitMqMailSenderImpl;
 import com.op.message.service.BaseService;
 import com.op.message.service.MailSendService;
 import com.op.message.service.MqService;
@@ -28,7 +28,7 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
 
     public static MailSendService mailSendService = BaseService.getService(ServiceBeanNames.MAIL_SEND_SERVICE, MailSendServiceImpl.class);
 
-    public static Sender mailSender = BaseService.getService(ServiceName.RABBITMQ_MAIL_SENDER, RabbitMqLogSenderImper.class);
+    public static Sender mailSender = BaseService.getService(ServiceName.RABBITMQ_MAIL_SENDER, RabbitMqMailSenderImpl.class);
 
 //    public CommonSender commonSender = BaseService.getService(ServiceName.COMMON_SENDER, CommonSenderImpl.class);
 

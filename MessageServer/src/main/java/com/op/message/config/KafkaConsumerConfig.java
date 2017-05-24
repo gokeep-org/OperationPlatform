@@ -50,7 +50,7 @@ public class KafkaConsumerConfig {
         propsMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.KAFKA_QUEUE_LOG);
-        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.KAKFKA_QUEUE_MAIL);
+        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.KAFKA_QUEUE_MAIL);
         propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         return propsMap;
     }

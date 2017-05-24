@@ -25,8 +25,8 @@ import com.op.util.exception.OperationPlatformException;
 public class HttpConnectionManager {
     private static PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = null;
     private static LayeredConnectionSocketFactory layeredConnectionSocketFactory = null;
-    private static int maxTotalConnection = 200;
-    private static int defaultMaxPerRoute = 20;
+    private static int maxTotalConnection = 20000;
+    private static int defaultMaxPerRoute = 200;
 
     /**
      * Http 连接池处理类

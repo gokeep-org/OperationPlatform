@@ -35,7 +35,7 @@ public class KafkaMailSenderImpl extends BaseService implements Sender {
         } else {
             CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
             LOGGER.info("Kafka: Send log message correlation id is: " + correlationData.getId());
-            kafkaTemplate.send(QueueName.KAKFKA_QUEUE_MAIL, msg);
+            kafkaTemplate.send(QueueName.KAFKA_QUEUE_MAIL, msg);
         }
     }
 }
