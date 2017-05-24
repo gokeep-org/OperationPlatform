@@ -96,8 +96,14 @@ public class ZuulRequestFilter extends ZuulFilter {
 
         /**
          *推送用户请求访问日志到ElasticSearch
+         * 由于未解决的问题，这里先不进行log推送
+         * 问题： 消息队列发生阻塞
          */
-        pushRequestMessage(userId, path, method, null);
+        try {
+            pushRequestMessage(userId, path, method, null);
+        }catch (Throwable e){
+            LOGGER.error("push request log queue is fail");
+        }
 
         /**
          * 如果授权信息都获取不到，就抛出异常

@@ -23,13 +23,22 @@ import com.op.util.exception.OperationPlatformException;
  * @Auther is xuning on 2017/5/6.
  ****************************************/
 public class HttpConnectionManager {
+    /**
+     * 数据库连接池配置信息
+     * 参数信息说明：
+     * maxTotalConnection：请求连接词的最大连接数，默认是6000，需要根据实际场景分析
+     * defaultMaxPerRoute：默认路分发单节点数目，默认为一个节点，等于最大连接数
+     * 这是一个单例，用来给HttpClient通过HttpClient连接池获取连接
+     * 每一个连接信息都会打开和关闭，避免在高并发状态下发生线程阻塞。
+     */
     private static PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = null;
     private static LayeredConnectionSocketFactory layeredConnectionSocketFactory = null;
-    private static int maxTotalConnection = 20000;
-    private static int defaultMaxPerRoute = 200;
+    private static int maxTotalConnection = 6000;
+    private static int defaultMaxPerRoute = 6000;
 
     /**
      * Http 连接池处理类
+     * 该部分使用届台代码块中，节省时间效率
      */
     static {
         try {
@@ -48,6 +57,8 @@ public class HttpConnectionManager {
 
     /**
      * 获取连接池中的连接对象
+     * 提供给Apache HttpClient创建该对象信息，直接
+     * HttpClient连接池中去拿
      * @return
      */
     public static CloseableHttpClient getHttpClient() {
