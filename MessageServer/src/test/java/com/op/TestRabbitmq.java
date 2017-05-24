@@ -21,7 +21,7 @@ import com.op.message.library.queue.Sender;
 @SpringApplicationConfiguration(classes = MessageBootstrap.class)
 public class TestRabbitmq {
     @Autowired
-    @Qualifier(value = ServiceName.LOG_SENDER)
+    @Qualifier(value = ServiceName.RABBITMQ_LOG_SENDER)
     public Sender sender;
 
     @Test

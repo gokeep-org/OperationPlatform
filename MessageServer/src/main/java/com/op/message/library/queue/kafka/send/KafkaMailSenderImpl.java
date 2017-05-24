@@ -20,10 +20,10 @@ import com.op.message.service.BaseService;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/24.
  ****************************************/
-@Component(value = ServiceName.MAIL_SENDER)
-public class MailSenderImpl extends BaseService implements Sender {
+@Component(value = ServiceName.KAFKA_MAIL_SENDER)
+public class KafkaMailSenderImpl extends BaseService implements Sender {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MailSenderImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaMailSenderImpl.class);
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -31,11 +31,11 @@ public class MailSenderImpl extends BaseService implements Sender {
     @Override
     public void send(String msg) {
         if (null == msg) {
-            LOGGER.info("push to elasticsearch message is null");
+            LOGGER.info("Kafka: push to elasticsearch message is null");
         } else {
             CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-            LOGGER.info("Send log message correlation id is: " + correlationData.getId());
-            kafkaTemplate.send(QueueName.QUEUE_MAIL, msg);
+            LOGGER.info("Kafka: Send log message correlation id is: " + correlationData.getId());
+            kafkaTemplate.send(QueueName.KAKFKA_QUEUE_MAIL, msg);
         }
     }
 }

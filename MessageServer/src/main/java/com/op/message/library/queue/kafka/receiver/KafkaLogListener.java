@@ -23,14 +23,14 @@ import com.op.util.requests.Requests;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/24.
  ****************************************/
-public class LoginListener {
+public class KafkaLogListener {
     @Autowired
     private DiscoveryVip discoveryVip;
     @Autowired
     private Requests requests;
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoginListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaLogListener.class);
 
-    @KafkaListener(topics = {QueueName.QUEUE_LOG})
+    @KafkaListener(topics = {QueueName.KAFKA_QUEUE_LOG})
     public void listen(ConsumerRecord<?, ?> record) {
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
         if (kafkaMessage.isPresent()) {
@@ -42,7 +42,7 @@ public class LoginListener {
                 Map<String, Object> body = (Map<String, Object>) message.get("body");
                 requests.post(esUri + UriPath.ES + "/index/" + indexName + "/type/" + indexType, body, null);
             } catch (Exception e) {
-                LOGGER.error(ErrorCode.RABBIT_RECEIVER_FAILD);
+                LOGGER.error(ErrorCode.KAFKA_RECEIVER_FAILD);
             }
         }
     }

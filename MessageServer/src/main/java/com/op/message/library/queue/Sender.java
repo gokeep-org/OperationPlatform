@@ -11,5 +11,9 @@ package com.op.message.library.queue;
  * 发送消息队列接口
  */
 public interface Sender {
+    /**
+     * Kafka与RabbitMQ通用消息发送接口
+     * @param message
+     */
     void send(String message);
 }

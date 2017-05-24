@@ -20,7 +20,6 @@ public class EmailActionFactory extends BaseActionFactory {
     }
 
     public static MailSyncAction getMailSyncSendAction(MailSendInput input) throws Exception {
-        User user = getUser();
         return new MailSyncAction(input);
     }
 }

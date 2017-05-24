@@ -20,11 +20,12 @@ import com.op.message.service.MailSendService;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/24.
  ****************************************/
-public class MailListener {
+public class KafkaMailListener {
     @Autowired
     private MailSendService mailSendService;
-    private static final Logger LOGGER = LoggerFactory.getLogger(MailListener.class);
-    @KafkaListener(topics = {QueueName.QUEUE_MAIL})
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaMailListener.class);
+
+    @KafkaListener(topics = {QueueName.KAKFKA_QUEUE_MAIL})
     public void listen(ConsumerRecord<?, ?> record) {
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
         if (kafkaMessage.isPresent()) {

@@ -14,8 +14,8 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
-import com.op.message.library.queue.kafka.receiver.LoginListener;
-import com.op.message.library.queue.kafka.receiver.MailListener;
+import com.op.message.library.queue.kafka.receiver.KafkaLogListener;
+import com.op.message.library.queue.kafka.receiver.KafkaMailListener;
 import com.op.message.library.queue.name.QueueName;
 
 /****************************************
@@ -49,20 +49,20 @@ public class KafkaConsumerConfig {
         propsMap.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
         propsMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.QUEUE_LOG);
-        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.QUEUE_MAIL);
+        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.KAFKA_QUEUE_LOG);
+        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, QueueName.KAKFKA_QUEUE_MAIL);
         propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         return propsMap;
     }
 
     @Bean
-    public LoginListener loginListener() {
-        return new LoginListener();
+    public KafkaLogListener loginListener() {
+        return new KafkaLogListener();
     }
 
     @Bean
-    public MailListener mailListener() {
-        return new MailListener();
+    public KafkaMailListener mailListener() {
+        return new KafkaMailListener();
     }
 
 

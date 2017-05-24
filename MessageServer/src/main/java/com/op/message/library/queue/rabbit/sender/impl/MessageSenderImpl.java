@@ -28,7 +28,7 @@
 //    private RabbitTemplate rabbitTemplate;
 //
 //    @Autowired
-//    public MailSenderImpl(RabbitTemplate rabbitTemplate) {
+//    public KafkaMailSenderImpl(RabbitTemplate rabbitTemplate) {
 //        this.rabbitTemplate = rabbitTemplate;
 //        this.rabbitTemplate.setConfirmCallback(this);
 //    }

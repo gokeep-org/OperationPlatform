@@ -11,6 +11,7 @@ public class ErrorCode {
     public static final String SMTP_ACCEPTER_IS_NULL = "smtp accepter is null";
     public static final String SMTP_SEND_ERROR = "smtp mail send error";
     public static final String RABBIT_RECEIVER_FAILD = "rabbitmq receiver and send is faild";
+    public static final String KAFKA_RECEIVER_FAILD = "kafka receiver and send is faild";
     public static final String PUSH_MESSAGE_TO_ELASTICSEARCH_IS_FAIL = "push message to elasticsearch is fail";
 
 }

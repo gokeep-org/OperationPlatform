@@ -7,5 +7,8 @@ package com.op.message.library.queue.name;
  * @Auther is xuning on 2017/5/22.
  ****************************************/
 public class RoutingKey {
+    /**
+     * RabbitMQ专有路由Key
+     */
     public static final String ONLY = "com.op.only";
 }

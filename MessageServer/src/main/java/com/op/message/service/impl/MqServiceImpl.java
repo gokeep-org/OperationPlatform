@@ -23,7 +23,7 @@ import com.op.util.gson.SerializeUtil;
 @Component(value = ServiceName.MQ_SERVICE_IMPL)
 public class MqServiceImpl extends BaseService implements MqService {
     @Autowired
-    @Qualifier(ServiceName.LOG_SENDER)
+    @Qualifier(ServiceName.RABBITMQ_LOG_SENDER)
     private Sender sender;
     private static final Logger LOGGER = LoggerFactory.getLogger(MqServiceImpl.class);
 

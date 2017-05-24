@@ -27,7 +27,7 @@ import com.op.message.library.queue.Sender;
 @Produces({MediaType.APPLICATION_JSON})
 public class QueueRest {
     @Autowired
-    @Qualifier(ServiceName.LOG_SENDER)
+    @Qualifier(ServiceName.RABBITMQ_LOG_SENDER)
     public Sender logSender;
 
     /**

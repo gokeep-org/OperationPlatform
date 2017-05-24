@@ -7,6 +7,11 @@ package com.op.message.library.queue.name;
  * @Auther is xuning on 2017/5/24.
  ****************************************/
 public class QueueName {
-    public static final String QUEUE_LOG = "op_log";
-    public static final String QUEUE_MAIL = "op_mail";
+    /**
+     * RabbitMQ与Kafka队列名称
+     */
+    public static final String RABBITMQ_QUEUE_LOG = "rabbitmq_op_log";
+    public static final String RABBITMQ_QUEUE_MAIL = "rabbit_op_mail";
+    public static final String KAFKA_QUEUE_LOG = "kafka_op_log";
+    public static final String KAKFKA_QUEUE_MAIL = "kafka_op_mail";
 }
