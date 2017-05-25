@@ -9,7 +9,7 @@ import java.util.Objects;
  * @Auther is xuning on 2017/5/10.
  ****************************************/
 public class RedisConfig {
-    private static final String redisHost = "192.168.0.136";
+    private static final String redisHost = "localhost";
     private static final int redisPort = 6379;
 
     private static final int timeout = 60000;
