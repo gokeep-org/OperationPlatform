@@ -15,7 +15,7 @@ public class MessageLog {
      * 日志消息推送对象
      */
     private String index = "log";
-    private String type = "info";
+    private String type = "reuqest";
     private Map<String, Object> body;
 
 
@@ -28,13 +28,14 @@ public class MessageLog {
         body.put("date", new Date().getTime());
         setBody(body);
     }
-    public void setErrorLog(String message, String userId) {
+    public void setErrorLog(String message, String userId, String uuid) {
         setType("error");
         Map<String, Object> body = new HashMap<>();
         body.put("content", message);
         body.put("user_id", userId);
         body.put("success", false);
         body.put("date", new Date().getTime());
+        body.put("uuid", uuid);
         setBody(body);
     }
 

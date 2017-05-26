@@ -99,18 +99,19 @@ public class ZuulRequestFilter extends ZuulFilter {
          * 由于未解决的问题，这里先不进行log推送
          * 问题： 消息队列发生阻塞
          */
-        try {
-            pushRequestMessage(userId, path, method, null);
-        }catch (Throwable e){
-            LOGGER.error("push request log queue is fail");
-        }
+        pushRequestMessage(userId, path, method, null);
+
 
         /**
          * 如果授权信息都获取不到，就抛出异常
          */
         if (null == accessToken || null == userId) {
             buildAuthErrorInfoToRequestContext(ctx);
-            throw new OperationPlatformException("user_id or access_token is null");
+            String error = "user_id or access_token is null";
+            OperationPlatformException exception = new OperationPlatformException(error);
+            String uuid = exception.getUuid();
+            pushErrorLogMessage(error, userId, uuid);
+            throw exception;
         }
 
         /**
@@ -126,7 +127,11 @@ public class ZuulRequestFilter extends ZuulFilter {
             return null;
         } else {
             buildAuthErrorInfoToRequestContext(ctx);
-            throw new OperationPlatformException("token is exprise in");
+            String error = "token is exprise in";
+            OperationPlatformException exception = new OperationPlatformException(error);
+            String uuid = exception.getUuid();
+            pushErrorLogMessage(error, userId, uuid);
+            throw exception;
         }
     }
 
@@ -177,7 +182,31 @@ public class ZuulRequestFilter extends ZuulFilter {
         log.setRequestLog(userId, path, method, params);
         String pushMessage = String.format("zuul filter request info: [url: %s],[method: %s],[params: %s]", path, method, params);
         LOGGER.info(pushMessage);
-        commonService.pushLogMessage(log);
+        try {
+            commonService.pushLogMessage(log);
+        } catch (Throwable e) {
+            LOGGER.error("Push request log queue is fail");
+        }
+    }
+
+    /**
+     * 异步推送错误日志信息
+     * @param content
+     * @param userId
+     * @param uuid
+     */
+    @Async
+    public void pushErrorLogMessage(String content, String userId, String uuid) {
+        MessageLog messageLog = new MessageLog();
+        String pushMessage = String.format("zuul filter request found error: [user_id: %s],[content: %s],[uuid: %s]", userId, content, uuid);
+        messageLog.setErrorLog(content, userId, uuid);
+        LOGGER.info(pushMessage);
+        try {
+            commonService.pushLogMessage(messageLog);
+        } catch (Throwable e) {
+            LOGGER.error("Push error log queue is fail");
+        }
+
     }
 
     /**
