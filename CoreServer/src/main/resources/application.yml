@@ -26,3 +26,10 @@ eureka:
 server:
   port: 20001
   connection-timeout: 60000
+info:
+  app:
+    name: "Core Server Node"
+    description: "This is a Core Server Node"
+    version: "v1.0"
+    spring-boot-version: "1.4.2"
+    status: "success"

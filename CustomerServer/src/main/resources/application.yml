@@ -12,3 +12,10 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 server:
   port: 50001
+info:
+  app:
+    name: "Customer Server Node"
+    description: "This is a Customer Server Node"
+    version: "v1.0"
+    spring-boot-version: "1.4.2"
+    status: "success"

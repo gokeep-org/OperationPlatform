@@ -19,3 +19,10 @@ eureka:
 server:
   port: 34334
   connection-timeout: 60000
+info:
+  app:
+    name: "Analysis Server Node"
+    description: "This is a Analysis Server Node"
+    version: "v1.0"
+    spring-boot-version: "1.4.2"
+    status: "success"

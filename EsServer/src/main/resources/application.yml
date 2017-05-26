@@ -20,3 +20,10 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 server:
   port: 10102
+info:
+  app:
+    name: "ElasticSearch Server Node"
+    description: "This is a ElasticSearch Server Node"
+    version: "v1.0"
+    spring-boot-version: "1.4.2"
+    status: "success"

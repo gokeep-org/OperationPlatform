@@ -4,28 +4,33 @@ import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.metrics.CounterService;
+
+import com.op.analysis.service.MeasureAnalysisService;
 
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
  * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 2017/5/19.
+ * @Auther is xuning on 2017/5/25.
  ****************************************/
-@Path("/message")
+@Path("/measure")
 @Produces({MediaType.APPLICATION_JSON})
-public class MessageAnalysis {
-
+public class MeasureAnalysisRest {
     @Autowired
-    public CounterService counterService;
+    private MeasureAnalysisService measureAnalysisService;
+    @GET
+    public String test(){
+        return "success";
+    }
 
     @GET
-    @Path("/inter/count")
-    public Map analysisInterfaceAccessCount(){
-        return null;
+    @Path("/node/{name}")
+    public Map searchNodeHealth(@PathParam("name") String name){
+        return measureAnalysisService.searchNodeHealthy(name);
     }
 }

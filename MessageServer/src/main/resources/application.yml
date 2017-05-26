@@ -19,3 +19,10 @@ eureka:
       lease-renewal-interval-in-seconds: 10
 server:
   port: 40001
+info:
+  app:
+    name: "Message Server Node"
+    description: "This is a Message Server Node"
+    version: "v1.0"
+    spring-boot-version: "1.4.2"
+    status: "success"

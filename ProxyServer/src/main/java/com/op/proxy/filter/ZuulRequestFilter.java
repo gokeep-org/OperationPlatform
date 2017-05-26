@@ -130,7 +130,10 @@ public class ZuulRequestFilter extends ZuulFilter {
         }
     }
 
-
+    /**
+     * 构建收取那认证错误响应信息
+     * @param ctx
+     */
     public void buildAuthErrorInfoToRequestContext(RequestContext ctx) {
         ctx.setResponseStatusCode(500);
         ctx.addZuulResponseHeader("Content-Type", "application/json;charset=utf-8");
@@ -144,6 +147,10 @@ public class ZuulRequestFilter extends ZuulFilter {
         LOGGER.error("uuid error is: " + uuidCode);
     }
 
+    /**
+     * 构建访问权限错误信息
+     * @param ctx
+     */
     public void buildAccessAuthErrorInfoToRequestComtext(RequestContext ctx) {
         ctx.setResponseStatusCode(500);
         ctx.addZuulResponseHeader("Content-Type", "application/json;charset=utf-8");
@@ -157,16 +164,28 @@ public class ZuulRequestFilter extends ZuulFilter {
         LOGGER.error("uuid error is: " + uuidCode);
     }
 
+    /**
+     * 异步推送日志到ElasticSearch
+     * @param userId
+     * @param path
+     * @param method
+     * @param params
+     */
     @Async
     public void pushRequestMessage(String userId, String path, String method, Map<String, Object> params) {
         MessageLog log = new MessageLog();
         log.setRequestLog(userId, path, method, params);
         String pushMessage = String.format("zuul filter request info: [url: %s],[method: %s],[params: %s]", path, method, params);
         LOGGER.info(pushMessage);
-        // 暂时不推送异步日志消息
         commonService.pushLogMessage(log);
     }
 
+    /**
+     * 从请求中获取Cookie信息
+     * 包含： user_id, access_token
+     * @param requestContext
+     * @return
+     */
     public Map<String, String> getCookies(RequestContext requestContext) {
         Map<String, String> cookieMap = new HashMap<>();
         Cookie[] cookies = requestContext.getRequest().getCookies();

@@ -12,7 +12,7 @@ public interface MeasureAnalysisService {
     /**
      * 获取当前集群系统的使用健康值
      */
-    public Map<String, Object> searchNodeHealthy();
+    public Map<String, Object> searchNodeHealthy(String serverName);
 
     /**
      * 获取结群节点CPU使用情况

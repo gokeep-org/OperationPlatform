@@ -10,7 +10,7 @@ public class QueueName {
     /**
      * RabbitMQ与Kafka队列名称
      */
-    public static final String RABBITMQ_QUEUE_LOG = "rabbitmq_op_log";
+    public static final String RABBITMQ_QUEUE_LOG = "rabbit_op_log";
     public static final String RABBITMQ_QUEUE_MAIL = "rabbit_op_mail";
     public static final String KAFKA_QUEUE_LOG = "kafka_op_log";
     public static final String KAFKA_QUEUE_MAIL = "kafka_op_mail";

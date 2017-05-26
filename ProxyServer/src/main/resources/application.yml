@@ -50,3 +50,10 @@ hystrix:
                 isolation:
                     thread:
                         timeoutInMilliseconds: 6000
+info:
+  app:
+    name: "Proxy Server Node"
+    description: "This is a Proxy Server Node"
+    version: "v1.0"
+    spring-boot-version: "1.4.2"
+    status: "success"
