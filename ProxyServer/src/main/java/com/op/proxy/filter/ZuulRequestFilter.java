@@ -200,7 +200,7 @@ public class ZuulRequestFilter extends ZuulFilter {
         MessageLog messageLog = new MessageLog();
         String pushMessage = String.format("zuul filter request found error: [user_id: %s],[content: %s],[uuid: %s]", userId, content, uuid);
         messageLog.setErrorLog(content, userId, uuid);
-        LOGGER.info(pushMessage);
+        LOGGER.error(pushMessage);
         try {
             commonService.pushLogMessage(messageLog);
         } catch (Throwable e) {

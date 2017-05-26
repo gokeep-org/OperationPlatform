@@ -11,7 +11,7 @@ eureka:
       lease-expiration-duration-in-seconds: 30
       lease-renewal-interval-in-seconds: 10
 server:
-  port: 50001
+  port: 50002
 info:
   app:
     name: "Customer Server Node"
