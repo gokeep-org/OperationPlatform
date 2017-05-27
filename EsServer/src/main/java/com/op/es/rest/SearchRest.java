@@ -91,4 +91,35 @@ public class SearchRest {
                                               Map body) {
         return indexService.searchIndexByDSL(index, type, body);
     }
+
+    /**
+     * 全文搜索
+     * @param word
+     * @return
+     */
+    @POST
+    @Path("/index/{index}/type/{type}/fulltext")
+    public String fullTextSearchByWord(@QueryParam("word") String word) {
+        return null;
+    }
+
+    /**
+     * 聚合查询
+     * @return
+     */
+    @POST
+    @Path("/index/{index}/type/{type}/aggs")
+    public String searchAggsByQuery() {
+        return null;
+    }
+
+    /**
+     * 直方图查询接口
+     * @return
+     */
+    @POST
+    @Path("/index/{index}/type/{type}/histogram")
+    public String searchHistogramByQuery(){
+        return null;
+    }
 }

@@ -49,7 +49,8 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
         if (null == user.getStatus()) {
             user.setStatus(true);
         }
-        String commonId = UUID.randomUUID().toString();
+        //优化字符串
+        String commonId = UUID.randomUUID().toString().replace("-", "");
         user.setId(commonId);
         user.setUserId(commonId);
         user.setCreateDate(new Date().getTime());
