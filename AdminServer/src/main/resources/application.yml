@@ -15,8 +15,10 @@ eureka:
     serviceUrl:
       defaultZone: ${eureka.server.url}
   instance:
-      lease-expiration-duration-in-seconds: 30
-      lease-renewal-interval-in-seconds: 10
+      lease-renewal-interval-in-seconds: 5
+      #最后一次一条
+      lease-expiration-duration-in-seconds: 6
+
 info:
   app:
     name: "Admin Server Node"

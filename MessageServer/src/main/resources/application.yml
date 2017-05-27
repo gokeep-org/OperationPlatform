@@ -15,8 +15,8 @@ eureka:
     serviceUrl:
       defaultZone: ${eureka.server.url}
   instance:
-      lease-expiration-duration-in-seconds: 30
-      lease-renewal-interval-in-seconds: 10
+      lease-expiration-duration-in-seconds: 6
+      lease-renewal-interval-in-seconds: 5
 server:
   port: 40001
 info:
