@@ -1,7 +1,10 @@
 package com.op.es.rest;
 
+import java.util.Map;
+
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -72,5 +75,20 @@ public class SearchRest {
                                       @QueryParam("field") @DefaultValue("date") String field,
                                       @QueryParam("order") @DefaultValue("desc") String order) {
         return indexService.pagingSearch(index, type, pageNow, pageSize, field, order);
+    }
+
+    /**
+     * 通用查询ElasticSearch
+     * @param index
+     * @param type
+     * @param body
+     * @return
+     */
+    @POST
+    @Path("/index/{index}/type/{type}")
+    public String searchDocumentByCommonQuery(@PathParam("index") String index,
+                                              @PathParam("type") String type,
+                                              Map body) {
+        return indexService.searchIndexByDSL(index, type, body);
     }
 }
