@@ -2,6 +2,9 @@ package com.op.analysis.action.log;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.op.analysis.action.item.ItemAction;
 import com.op.analysis.bean.action.output.SearchOutput;
 
@@ -16,7 +19,7 @@ public class CommonLogAnalysisAction extends ItemAction<SearchOutput> {
     private String type;
     private Map query;
     private Map result;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommonLogAnalysisAction.class);
     public CommonLogAnalysisAction(String index, String type, Map query) {
         this.index = index;
         this.type = type;
@@ -47,6 +50,6 @@ public class CommonLogAnalysisAction extends ItemAction<SearchOutput> {
 
     @Override
     protected void logSyncAction() throws Exception {
-
+        LOGGER.info("common log analysis is successful");
     }
 }

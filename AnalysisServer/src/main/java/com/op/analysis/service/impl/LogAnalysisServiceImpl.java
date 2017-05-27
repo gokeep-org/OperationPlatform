@@ -66,7 +66,7 @@ public class LogAnalysisServiceImpl extends BaseService implements LogAnalysisSe
     @Override
     public Map<String, Object> commonLogAnalysis(String index, String type, Map query) {
         String esUrl = discoveryVip.choose(ServerName.ES);
-        String result = requests.post(esUrl + UriPath.ES + "/search/index/" + index + "/type/" + type, query, null).json();
+        String result = requests.post(esUrl + UriPath.ES + "/search/index/" + index + "/type/" + type,null, query, null).json();
         return (Map<String, Object>) SerializeUtil.transfromStringToObject(result, Map.class);
-    }
+}
 }
