@@ -3,8 +3,10 @@ package com.op.analysis.service.impl;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import com.op.analysis.bean.ServiceName;
+import com.op.analysis.service.BaseService;
 import com.op.analysis.service.MeasureAnalysisService;
 import com.op.util.discovery.DiscoveryVip;
 import com.op.util.gson.SerializeUtil;
@@ -16,8 +18,8 @@ import com.op.util.requests.Requests;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/25.
  ****************************************/
-@Component
-public class MeasureAnalysisServiceImpl implements MeasureAnalysisService {
+@Service(value = ServiceName.MEASURE_ANALYSIS_SERVICE)
+public class MeasureAnalysisServiceImpl extends BaseService implements MeasureAnalysisService {
 
     @Autowired
     private Requests requests;

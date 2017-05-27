@@ -49,5 +49,5 @@ public interface LogAnalysisService {
      * 通用分析接口
      * @return
      */
-    public Map<String, Object> commonLogAnalysis();
+    public Map<String, Object> commonLogAnalysis(String index, String type, Map query);
 }

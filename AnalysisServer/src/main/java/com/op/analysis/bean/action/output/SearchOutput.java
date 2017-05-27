@@ -1,6 +1,7 @@
 package com.op.analysis.bean.action.output;
 
 import java.util.List;
+import java.util.Map;
 
 /****************************************
  * Copyright (c) xuning.
@@ -11,7 +12,29 @@ import java.util.List;
 public class SearchOutput extends BaseOutput {
     private long total;
     private List list;
-//    private Customer result;
+    private Map result;
+
+    public Map getResult() {
+        return result;
+    }
+
+    public void setResult(Map result) {
+        this.result = result;
+    }
+
+    public SearchOutput(Map result) {
+        this.result = result;
+    }
+
+    public SearchOutput() {
+    }
+
+    public SearchOutput(long total, List list, Map result) {
+        this.total = total;
+        this.list = list;
+        this.result = result;
+    }
+
     public long getTotal() {
         return total;
     }
@@ -27,12 +50,4 @@ public class SearchOutput extends BaseOutput {
     public void setList(List list) {
         this.list = list;
     }
-
-//    public Customer getResult() {
-//        return result;
-//    }
-//
-//    public void setResult(Customer result) {
-//        this.result = result;
-//    }
 }
