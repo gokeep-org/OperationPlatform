@@ -6,11 +6,13 @@ import com.op.oauth.bean.action.output.BaseOutput;
 import com.op.oauth.service.AuthService;
 import com.op.oauth.service.BaseService;
 import com.op.oauth.service.ClientService;
+import com.op.oauth.service.CommonService;
 import com.op.oauth.service.ServiceBeanNames;
 import com.op.oauth.service.TokenService;
 import com.op.oauth.service.UserService;
 import com.op.oauth.service.impl.AuthServiceImpl;
 import com.op.oauth.service.impl.ClientServiceImpl;
+import com.op.oauth.service.impl.CommonServiceImpl;
 import com.op.oauth.service.impl.TokenServiceImpl;
 import com.op.oauth.service.impl.UserServiceImpl;
 
@@ -32,5 +34,8 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
     );
     public static AuthService authService = BaseService.getService(
             ServiceBeanNames.AUTHORIZATION_SERVICE, AuthServiceImpl.class
+    );
+    public static CommonService commonService = BaseService.getService(
+            ServiceBeanNames.COMMON_SERVICE, CommonServiceImpl.class
     );
 }

@@ -21,10 +21,6 @@ import com.op.analysis.bean.action.output.SearchOutput;
 @Path("/log")
 @Produces({MediaType.APPLICATION_JSON})
 public class LogAnalysisRest {
-    @Path("/log")
-    public String test() {
-        return null;
-    }
 
     /**
      * 通用日志分析接口
@@ -34,10 +30,9 @@ public class LogAnalysisRest {
      * @return
      */
     @POST
-    @Path("/analysis/{index}/{type}")
+    @Path("{type}")
     public SearchOutput commonLogAnalysis(Map query,
-                                          @PathParam("index") String index,
                                           @PathParam("type") String type) throws Exception {
-        return LogAnalysisActionFactory.getCommonLogAnalysisAction(index, type, query).execute();
+        return LogAnalysisActionFactory.getCommonLogAnalysisAction("log", type, query).execute();
     }
 }

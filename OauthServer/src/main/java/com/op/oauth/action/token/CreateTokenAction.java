@@ -1,6 +1,7 @@
 package com.op.oauth.action.token;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import com.op.oauth.bean.action.output.token.CreateTokenOutput;
 import com.op.oauth.bean.entity.Token;
 import com.op.oauth.bean.entity.User;
 import com.op.oauth.util.OpUtils;
+import com.op.util.bean.log.MessageLog;
 import com.op.util.exception.OperationPlatformException;
 
 /****************************************
@@ -52,8 +54,6 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
         } else {
             throw new OperationPlatformException("grant type is null");
         }
-
-
     }
 
     @Override
@@ -95,5 +95,16 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
     @Override
     protected void logSyncAction() throws Exception {
         LOGGER.info("create token info by" + this.createTokenInput.getGrantType());
+        MessageLog messageLog = new MessageLog();
+        try {
+            if (!Objects.equals(null, this.user) && null != this.user.getUserId())
+                //TODO: 临时测试
+                messageLog.setLoginLog(this.user.getUserId(), true);
+            else
+                messageLog.setLoginLog(this.user.getUserId(), false);
+            commonService.pushLogMessage(messageLog);
+        } catch (Exception e) {
+            LOGGER.error("push user login message found fail");
+        }
     }
 }

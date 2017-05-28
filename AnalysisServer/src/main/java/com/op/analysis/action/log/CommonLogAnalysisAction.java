@@ -20,8 +20,8 @@ public class CommonLogAnalysisAction extends ItemAction<SearchOutput> {
     private Map query;
     private Map result;
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonLogAnalysisAction.class);
-    public CommonLogAnalysisAction(String index, String type, Map query) {
-        this.index = index;
+    public CommonLogAnalysisAction( String type, Map query) {
+        this.index = "log";
         this.type = type;
         this.query = query;
     }

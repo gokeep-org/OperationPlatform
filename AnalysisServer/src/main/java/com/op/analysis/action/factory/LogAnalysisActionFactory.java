@@ -12,6 +12,6 @@ import com.op.analysis.action.log.CommonLogAnalysisAction;
  ****************************************/
 public class LogAnalysisActionFactory extends BaseActionFactory {
     public static CommonLogAnalysisAction getCommonLogAnalysisAction(String index, String type, Map query) {
-        return new CommonLogAnalysisAction(index, type, query);
+        return new CommonLogAnalysisAction(type, query);
     }
 }

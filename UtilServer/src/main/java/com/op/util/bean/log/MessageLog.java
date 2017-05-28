@@ -18,7 +18,11 @@ public class MessageLog {
     private String type = "reuqest";
     private Map<String, Object> body;
 
-
+    /**
+     * 设置操作日志信息
+     * @param message
+     * @param userId
+     */
     public void setOperLog(String message, String userId) {
         setType("oper");
         Map<String, Object> body = new HashMap<>();
@@ -28,6 +32,13 @@ public class MessageLog {
         body.put("date", new Date().getTime());
         setBody(body);
     }
+
+    /**
+     * 设置错误日志操作信息
+     * @param message
+     * @param userId
+     * @param uuid
+     */
     public void setErrorLog(String message, String userId, String uuid) {
         setType("error");
         Map<String, Object> body = new HashMap<>();
@@ -39,17 +50,47 @@ public class MessageLog {
         setBody(body);
     }
 
-    public void setLoginLog(String message, String userId) {
+    /**
+     * 设置登录日志操作信息
+     * @param userId
+     */
+    public void setLoginLog(String userId, boolean status) {
         setType("login");
         Map<String, Object> body = new HashMap<>();
-        body.put("content", message);
+        body.put("content", "user login successful");
+        body.put("user_id", userId);
+        body.put("success", true);
+        body.put("date", new Date().getTime());
+        if (status == false) {
+            body.put("content", "user login is fail");
+            body.put("success", false);
+        }
+        setBody(body);
+    }
+
+    /**
+     * 设置分析日志信息
+     * @param content
+     * @param userId
+     */
+    public void setAnalysisLog(String content, String userId) {
+        setType("analy");
+        Map<String, Object> body = new HashMap<>();
+        body.put("content", content);
         body.put("user_id", userId);
         body.put("success", true);
         body.put("date", new Date().getTime());
         setBody(body);
     }
 
-    public void setRequestLog(String userId, String path, String method, Map<String, Object> params){
+    /**
+     * 设置请求日志信息
+     * @param userId
+     * @param path
+     * @param method
+     * @param params
+     */
+    public void setRequestLog(String userId, String path, String method, Map<String, Object> params) {
         setType("request");
         Map<String, Object> body = new HashMap<>();
         body.put("path", path);
@@ -60,14 +101,27 @@ public class MessageLog {
         body.put("date", new Date().getTime());
         setBody(body);
     }
-    public MessageLog(String type, String message, String userId) {
-        setType(type);
+
+    /**
+     * 设置消息日志信息
+     * @param status
+     * @param userId
+     */
+    public MessageLog(String userId, boolean status) {
+        setType("message");
         Map<String, Object> body = new HashMap<>();
-        body.put("content", message);
+
         body.put("user_id", userId);
-        body.put("success", false);
+        if (status == false) {
+            body.put("content", "user login is fail");
+            status = false;
+        } else {
+            body.put("content", "user login is success");
+            status = true;
+        }
         setBody(body);
     }
+
     public String getIndex() {
         return index;
     }
@@ -79,8 +133,6 @@ public class MessageLog {
     public String getType() {
         return type;
     }
-
-
 
 
     public MessageLog() {

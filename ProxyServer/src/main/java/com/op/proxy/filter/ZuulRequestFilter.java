@@ -136,7 +136,7 @@ public class ZuulRequestFilter extends ZuulFilter {
     }
 
     /**
-     * 构建收取那认证错误响应信息
+     * 构建授权认证错误响应信息
      * @param ctx
      */
     public void buildAuthErrorInfoToRequestContext(RequestContext ctx) {
