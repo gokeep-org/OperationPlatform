@@ -49,6 +49,10 @@ public class CreateUserAction extends ItemAction<BaseOutput> {
         if (null == user.getStatus()) {
             user.setStatus(true);
         }
+        if (null == user.getPassword()){
+            user.setPassword(UUID.randomUUID().toString().substring(6));
+            LOGGER.info(user.getPassword());
+        }
         //优化字符串
         String commonId = UUID.randomUUID().toString().replace("-", "");
         user.setId(commonId);

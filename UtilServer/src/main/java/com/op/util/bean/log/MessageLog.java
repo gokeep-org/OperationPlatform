@@ -33,6 +33,10 @@ public class MessageLog {
         setBody(body);
     }
 
+    public void setIpAddress(String ip){
+        this.body.put("ip", ip);
+    }
+
     /**
      * 设置错误日志操作信息
      * @param message

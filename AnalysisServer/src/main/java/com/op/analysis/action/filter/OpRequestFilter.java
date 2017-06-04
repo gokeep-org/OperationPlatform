@@ -4,6 +4,7 @@
 package com.op.analysis.action.filter;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -28,6 +29,7 @@ public class OpRequestFilter implements ContainerRequestFilter {
         String method = requestContext.getMethod();
         String path = requestContext.getUriInfo().getPath();
         String userId = requestContext.getHeaderString("user_id");
+        InputStream inputStream = requestContext.getEntityStream();
         LOGGER.info(
                 "request params: [path: " + path + "]," +
                         "[method: " + method + "]," +

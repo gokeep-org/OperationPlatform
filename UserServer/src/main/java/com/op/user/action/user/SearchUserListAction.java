@@ -54,6 +54,9 @@ public class SearchUserListAction extends ItemAction<BaseOutput> {
         SearchOutput output = new SearchOutput();
         output.setList(this.list);
         output.setTotal(this.total);
+        output.setPageNow(this.paging.getPageNow());
+        output.setPageSize(this.paging.getPageSize());
+        output.setCurrentTotal(this.list.size());
         return output;
     }
 

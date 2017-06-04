@@ -120,10 +120,17 @@ public class IndexServiceImpl implements IndexService {
     public String searchIndexByDSL(String index, String type, Map<String, Object> dsl) {
         String query = SerializeUtil.transfromObjectToString(dsl);
         try {
-            Search search = new Search.Builder(query)
-                    .addIndex(index)
-                    .addType(type)
-                    .build();
+            Search search = null;
+            if (null == type){
+                search = new Search.Builder(query)
+                        .addIndex(index)
+                        .build();
+            }else {
+                search = new Search.Builder(query)
+                        .addIndex(index)
+                        .addType(type)
+                        .build();
+            }
             SearchResult result = client.execute(search);
             return result.getJsonString();
         } catch (Throwable e) {

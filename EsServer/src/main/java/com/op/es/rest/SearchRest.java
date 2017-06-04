@@ -92,6 +92,12 @@ public class SearchRest {
         return indexService.searchIndexByDSL(index, type, body);
     }
 
+    @POST
+    @Path("/log/search")
+    public String searchAllLogDocumentByCommonQuery(Map body) {
+        return indexService.searchIndexByDSL("log", null, body);
+    }
+
     /**
      * 全文搜索
      * @param word
@@ -119,7 +125,7 @@ public class SearchRest {
      */
     @POST
     @Path("/index/{index}/type/{type}/histogram")
-    public String searchHistogramByQuery(){
+    public String searchHistogramByQuery() {
         return null;
     }
 }

@@ -35,4 +35,9 @@ public class LogAnalysisRest {
                                           @PathParam("type") String type) throws Exception {
         return LogAnalysisActionFactory.getCommonLogAnalysisAction("log", type, query).execute();
     }
+//
+//    @POST
+//    public SearchOutput commonAllLogAnalysis(Map query) throws Exception {
+//        return LogAnalysisActionFactory.getCommonLogAnalysisAction("log", null, query).execute();
+//    }
 }
