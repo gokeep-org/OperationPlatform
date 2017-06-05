@@ -1,7 +1,6 @@
 package com.op.user.action.user;
 
 import java.util.Map;
-import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,15 +43,15 @@ public class SearchUserAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        if (Objects.equals(null, user) && !Objects.equals(null, userId))
-            this.result = userService.searchUserByUserId(userId);
+
+        this.result = userService.searchUserByUserId(this.userId);
     }
 
     @Override
     protected BaseOutput formatOutput() throws Exception {
         Map<String, Object> map = (Map<String, Object>) SerializeUtil.transfromStringToObject(this.result, Map.class);
         SearchOutput output = new SearchOutput();
-        output.setResult((Map<String, Object>) map.get("result"));
+        output.setResult(map.get("result"));
         return output;
     }
 

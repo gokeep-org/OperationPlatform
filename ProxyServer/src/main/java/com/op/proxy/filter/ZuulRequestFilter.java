@@ -65,6 +65,7 @@ public class ZuulRequestFilter extends ZuulFilter {
         String accessToken = null;
         String path = ctx.getRequest().getRequestURI();
         String method = ctx.getRequest().getMethod();
+
 //        Map<String, String> tokenMap = getCookies(ctx);
 //        /**
 //         * 校验是否在cookie存在授权信息
@@ -99,7 +100,7 @@ public class ZuulRequestFilter extends ZuulFilter {
          * 由于未解决的问题，这里先不进行log推送
          * 问题： 消息队列发生阻塞
          */
-        pushRequestMessage(userId, path, method, null);
+        pushRequestMessage(userId, path, method, null, getRequestIpAddress(ctx));
 
 
         /**
@@ -110,7 +111,7 @@ public class ZuulRequestFilter extends ZuulFilter {
             String error = "user_id or access_token is null";
             OperationPlatformException exception = new OperationPlatformException(error);
             String uuid = exception.getUuid();
-            pushErrorLogMessage(error, userId, uuid);
+            pushErrorLogMessage(error, userId, uuid, getRequestIpAddress(ctx));
             throw exception;
         }
 
@@ -130,7 +131,7 @@ public class ZuulRequestFilter extends ZuulFilter {
             String error = "token is exprise in";
             OperationPlatformException exception = new OperationPlatformException(error);
             String uuid = exception.getUuid();
-            pushErrorLogMessage(error, userId, uuid);
+            pushErrorLogMessage(error, userId, uuid, getRequestIpAddress(ctx));
             throw exception;
         }
     }
@@ -177,9 +178,10 @@ public class ZuulRequestFilter extends ZuulFilter {
      * @param params
      */
     @Async
-    public void pushRequestMessage(String userId, String path, String method, Map<String, Object> params) {
+    public void pushRequestMessage(String userId, String path, String method, Map<String, Object> params, String ip) {
         MessageLog log = new MessageLog();
         log.setRequestLog(userId, path, method, params);
+        log.setIpAddress(ip);
         String pushMessage = String.format("zuul filter request info: [url: %s],[method: %s],[params: %s]", path, method, params);
         LOGGER.info(pushMessage);
         try {
@@ -196,10 +198,11 @@ public class ZuulRequestFilter extends ZuulFilter {
      * @param uuid
      */
     @Async
-    public void pushErrorLogMessage(String content, String userId, String uuid) {
+    public void pushErrorLogMessage(String content, String userId, String uuid, String ip) {
         MessageLog messageLog = new MessageLog();
         String pushMessage = String.format("zuul filter request found error: [user_id: %s],[content: %s],[uuid: %s]", userId, content, uuid);
         messageLog.setErrorLog(content, userId, uuid);
+        messageLog.setIpAddress(ip);
         LOGGER.error(pushMessage);
         try {
             commonService.pushLogMessage(messageLog);
@@ -231,6 +234,17 @@ public class ZuulRequestFilter extends ZuulFilter {
             }
         }
         return cookieMap;
+    }
+
+    public static String getRequestIpAddress(RequestContext ctx) {
+        String ipAddress = "0.0.0.0";
+        try {
+            ipAddress = ctx.getRequest().getLocalAddr();
+        } catch (Throwable e) {
+            LOGGER.error("get request ip address is fail");
+        }
+        LOGGER.info("request ip address is: " + ipAddress);
+        return ipAddress;
     }
 
     public AuthService getAuthService() {

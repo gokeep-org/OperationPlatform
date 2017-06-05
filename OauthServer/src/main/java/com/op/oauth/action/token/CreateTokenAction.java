@@ -40,20 +40,37 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void permissionValidate() throws Exception {
-        if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)) {
-            List<User> users = userService.checkUserIsLogin(this.user);
-            if (users.size() >= 1) {
-                this.user = users.get(0);
+        try{
+            if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)) {
+                List<User> users = userService.checkUserIsLogin(this.user);
+                if (users.size() >= 1) {
+                    this.user = users.get(0);
+                } else {
+                    throw new OperationPlatformException("username or password is invalid");
+                }
+            } else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)) {
+                //授权码模式，暂时不实现,无需求
+                LOGGER.error("auth code mode is not implement");
+                throw new OperationPlatformException("no support auth code mode");
             } else {
-                throw new OperationPlatformException("username or password is invalid");
+                throw new OperationPlatformException("grant type is null");
             }
-        } else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)) {
-            //授权码模式，暂时不实现,无需求
-            LOGGER.error("auth code mode is not implement");
-            throw new OperationPlatformException("no support auth code mode");
-        } else {
-            throw new OperationPlatformException("grant type is null");
+        }catch (Throwable ex){
+            LOGGER.info("get user info by username and password is null or error");
+            MessageLog messageLog = new MessageLog();
+            try {
+                if (!Objects.equals(null, this.user) && null != this.user.getUserId())
+                    //TODO: 临时测试
+                    messageLog.setLoginLog(this.user.getUserId(), false);
+                else
+                    messageLog.setLoginLog(this.user.getUserId(), false);
+                commonService.pushLogMessage(messageLog);
+            } catch (Exception exception) {
+                LOGGER.error("push user login message found fail");
+            }
+            throw new OperationPlatformException("username or password is invalid");
         }
+
     }
 
     @Override
@@ -65,17 +82,35 @@ public class CreateTokenAction extends ItemAction<BaseOutput> {
 
     @Override
     protected void start() throws Exception {
-        if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)) {
-            //如果用户的token没有过期，返回当前用户的token
-            //如果已经过期，创建一个新的token
-            this.token = (Token) tokenService.createTokenByUserId(this.user.getUserId());
-            tokenService.setCookie(token);
-            LOGGER.info("User login success set cookie is successful");
-        } else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)) {
-            LOGGER.error("password mode is not implement");
-        } else {
-            throw new OperationPlatformException("grant type is null");
+        try{
+            if (this.createTokenInput.getGrantType().equals(GrantType.PASSWORD)) {
+                //如果用户的token没有过期，返回当前用户的token
+                //如果已经过期，创建一个新的token
+                this.token = (Token) tokenService.createTokenByUserId(this.user.getUserId());
+                tokenService.setCookie(token);
+                LOGGER.info("User login success set cookie is successful");
+            } else if (this.createTokenInput.getGrantType().equals(GrantType.AUTH_CODE)) {
+                LOGGER.error("password mode is not implement");
+            } else {
+                throw new OperationPlatformException("grant type is null");
+            }
+        }catch (Throwable e){
+            LOGGER.error("user login is fail");
+            //推送
+            MessageLog messageLog = new MessageLog();
+            try {
+                if (!Objects.equals(null, this.user) && null != this.user.getUserId())
+                    //TODO: 临时测试
+                    messageLog.setLoginLog(this.user.getUserId(), false);
+                else
+                    messageLog.setLoginLog(this.user.getUserId(), false);
+                commonService.pushLogMessage(messageLog);
+            } catch (Exception exception) {
+                LOGGER.error("push user login message found fail");
+            }
+            throw new OperationPlatformException("user login is fail get token");
         }
+
     }
 
     @Override
