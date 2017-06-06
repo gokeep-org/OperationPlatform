@@ -1,8 +1,6 @@
 package com.op.customer.bean.entity;
 
 
-import org.springframework.data.mongodb.core.mapping.Field;
-
 import com.google.gson.annotations.SerializedName;
 
 /****************************************
@@ -22,12 +20,14 @@ public class Customer {
     private String address;
     private String email;
     private String qq;
-    @Field("team_id")
+    @SerializedName("team_id")
     private String teamId;
     private String industry;
     private String remark;
-    @Field("sale_name")
+    @SerializedName("sale_name")
     private String saleName;
+    @SerializedName("create_time")
+    private long createTime;
     private Boolean status;
 
     public Boolean getStatus() {
@@ -132,5 +132,13 @@ public class Customer {
 
     public void setSaleName(String saleName) {
         this.saleName = saleName;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 }

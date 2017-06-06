@@ -13,7 +13,26 @@ import com.op.customer.bean.entity.Customer;
 public class SearchOutput extends BaseOutput {
     private long total;
     private List list;
+    private long pageNow;
+    private long pageSize;
     private Customer result;
+
+    public long getPageNow() {
+        return pageNow;
+    }
+
+    public void setPageNow(long pageNow) {
+        this.pageNow = pageNow;
+    }
+
+    public long getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(long pageSize) {
+        this.pageSize = pageSize;
+    }
+
     public long getTotal() {
         return total;
     }

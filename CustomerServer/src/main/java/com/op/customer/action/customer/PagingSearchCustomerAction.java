@@ -52,6 +52,8 @@ public class PagingSearchCustomerAction extends ItemAction<SearchOutput> {
         SearchOutput output = new SearchOutput();
         output.setTotal(this.total);
         output.setList(this.list);
+        output.setPageNow(this.paging.getPageNow());
+        output.setPageSize(this.paging.getPageSize());
         return output;
     }
 

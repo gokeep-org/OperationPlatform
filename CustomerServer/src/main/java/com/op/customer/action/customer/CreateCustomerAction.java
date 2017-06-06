@@ -1,5 +1,6 @@
 package com.op.customer.action.customer;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -38,7 +39,8 @@ public class CreateCustomerAction extends ItemAction<ResultMessage> {
         if (Objects.equals(null, this.customer))
             throw new OperationPlatformException("create customer must customer is not null");
         this.customer.setId(UUID.randomUUID().toString());
-        this.customer.setStatus((null == this.customer.getStatus()) ? this.customer.getStatus() : null);
+        this.customer.setStatus(true);
+        this.customer.setCreateTime(new Date().getTime());
         //TODO: 还需要校验当前客户是否已经存在
     }
 
