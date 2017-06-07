@@ -2,8 +2,6 @@ package com.op.customer.bean.action.output;
 
 import java.util.List;
 
-import com.op.customer.bean.entity.Customer;
-
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -15,7 +13,7 @@ public class SearchOutput extends BaseOutput {
     private List list;
     private long pageNow;
     private long pageSize;
-    private Customer result;
+    private Object result;
 
     public long getPageNow() {
         return pageNow;
@@ -49,11 +47,11 @@ public class SearchOutput extends BaseOutput {
         this.list = list;
     }
 
-    public Customer getResult() {
+    public Object getResult() {
         return result;
     }
 
-    public void setResult(Customer result) {
+    public void setResult(Object result) {
         this.result = result;
     }
 }

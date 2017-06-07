@@ -9,4 +9,5 @@ package com.op.customer.bean.entity;
 public class ServiceName {
     public static final String CUSTOMER_SERVICE = "customer_service_impl";
     public static final String COMMMON_SERVICE = "common_service_impl";
+    public static final String PRODUCT_SERVICE = "product_service_impl";
 }
