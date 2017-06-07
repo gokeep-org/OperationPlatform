@@ -15,6 +15,10 @@ public class LogMessage {
     public static final String DELETE_PRODUCT_SUCCESS = "delete product success";
     public static final String SEARCH_PRODUCT_SUCCESS = "search product success";
     public static final String UPDATE_PRODUCT_SUCCESS = "update product success";
+    public static final String CREATE_CONTRACT_SUCCESS = "create contract success";
+    public static final String DELETE_CONTRACT_SUCCESS = "delete contract success";
+    public static final String SEARCH_CONTRACT_SUCCESS = "search contract success";
+    public static final String UPDATE_CONTRACT_SUCCESS = "update contract success";
 }
 
 

@@ -11,9 +11,11 @@ import com.op.customer.bean.action.output.BaseOutput;
 import com.op.customer.bean.entity.ServiceName;
 import com.op.customer.service.BaseService;
 import com.op.customer.service.CommonService;
+import com.op.customer.service.ContractService;
 import com.op.customer.service.CustomerService;
 import com.op.customer.service.ProductService;
 import com.op.customer.service.impl.CommonServiceImpl;
+import com.op.customer.service.impl.ContractServiceImpl;
 import com.op.customer.service.impl.CustomerServiceImpl;
 import com.op.customer.service.impl.ProductServiceImpl;
 
@@ -29,6 +31,7 @@ public abstract class ItemAction<T extends BaseOutput> extends BaseAction<T> {
     public CustomerService customerService = BaseService.getService(ServiceName.CUSTOMER_SERVICE, CustomerServiceImpl.class);
     public CommonService commonService = BaseService.getService(ServiceName.COMMMON_SERVICE, CommonServiceImpl.class);
     public ProductService productService = BaseService.getService(ServiceName.PRODUCT_SERVICE, ProductServiceImpl.class);
+    public ContractService contractService = BaseService.getService(ServiceName.CONTRACT_SERVICE, ContractServiceImpl.class);
 
     public String getUserId() {
         return request.getHeader("user_id");

@@ -13,8 +13,9 @@ import com.google.gson.annotations.SerializedName;
 public class Contract {
     @SerializedName("_id")
     private String id;
+    private String type;
     @SerializedName("create_date")
-    private long createDate;
+    private long createTime;
     private boolean status;
     @SerializedName("user_id")
     private String userId;
@@ -28,6 +29,76 @@ public class Contract {
     private List<String> rePaymentIds;
     @SerializedName("product_ids")
     private List<String> productIds;
+    private String department;
+    private double amount;
+    @SerializedName("payment_amount")
+    private double paymentAmount;
+    @SerializedName("repayment_amount")
+    private double rePaymentAmount;
+    @SerializedName("team_name")
+    private String teamName;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    private long total;
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public double getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(double paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public double getRePaymentAmount() {
+        return rePaymentAmount;
+    }
+
+    public void setRePaymentAmount(double rePaymentAmount) {
+        this.rePaymentAmount = rePaymentAmount;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getId() {
         return id;
@@ -37,15 +108,15 @@ public class Contract {
         this.id = id;
     }
 
-    public long getCreateDate() {
-        return createDate;
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateDate(long createDate) {
-        this.createDate = createDate;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
