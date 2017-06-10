@@ -6,9 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ImportResource;
 
-/**
- * Hello world!
- */
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @ImportResource(value = {"classpath:spring.xml"})
