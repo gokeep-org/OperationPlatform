@@ -22,6 +22,7 @@
         <module>EsServer</module>
         <module>AnalysisServer</module>
         <module>AdminServer</module>
+        <module>MetricServer</module>
         <!--<module>UtilServer</module>-->
     </modules>
 
