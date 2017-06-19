@@ -10,7 +10,7 @@
     <artifactId>MetricServer</artifactId>
     <packaging>jar</packaging>
 
-    <name>MetricServer</name>
+    <name>OperationPlatform::MetricServer</name>
     <url>http://maven.apache.org</url>
 
     <properties>

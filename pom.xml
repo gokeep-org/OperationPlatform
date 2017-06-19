@@ -23,6 +23,7 @@
         <module>AnalysisServer</module>
         <module>AdminServer</module>
         <module>MetricServer</module>
+        <module>TaskServer</module>
         <!--<module>UtilServer</module>-->
     </modules>
 
