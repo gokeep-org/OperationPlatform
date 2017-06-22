@@ -8,6 +8,9 @@ spring:
     password: xuning!
     listener:
       prefetch: 1
+  output:
+    ansi:
+      enabled: always
 eureka:
   server:
     url: http://localhost:10001/eureka/

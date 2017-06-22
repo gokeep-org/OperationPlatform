@@ -1,6 +1,9 @@
 spring:
   application:
     name: customer
+  output:
+    ansi:
+      enabled: always
 eureka:
   server:
     url: http://localhost:10001/eureka/

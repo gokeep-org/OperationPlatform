@@ -1,6 +1,9 @@
 spring:
   application:
     name: oauth
+  output:
+    ansi:
+      enabled: always
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource

@@ -1,12 +1,17 @@
 spring:
   application:
     name: metris
+  profiles:
+    active: application
+  output:
+    ansi:
+      enabled: always
 server:
   port: 11234
 info:
   app:
     name: "Metric Server Node"
-    description: "This is a Message Server Node"
+    description: "This is a metrics Server Node"
     version: "v1.0"
     spring-boot-version: "1.4.2"
     status: "success"

@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: proxy
+  output:
+    ansi:
+      enabled: always
   http:
     encoding:
       charset: utf-8

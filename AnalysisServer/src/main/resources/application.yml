@@ -3,6 +3,9 @@ spring:
     name: analysis
   profiles:
       active: dev
+  output:
+    ansi:
+      enabled: always
   http:
       encoding:
         charset: utf-8

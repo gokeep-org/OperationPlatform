@@ -25,7 +25,7 @@ public class MetricTestRest {
     @POST
     @Path("/test")
     public Map test(Map map) {
-        Map m = new HashMap();
+        Map<String, String> m = new HashMap();
         m.put("aa", "111");
         LOGGER.info(m.toString());
         return m;

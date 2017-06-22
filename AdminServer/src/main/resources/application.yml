@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: admin
+  output:
+    ansi:
+      enabled: always
   boot:
     admin:
       url: http://localhost:${server.port}

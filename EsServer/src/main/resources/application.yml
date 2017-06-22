@@ -3,6 +3,9 @@ spring:
     name: es
   profiles:
     active: dev
+  output:
+    ansi:
+      enabled: always
 #  data:
 #    elasticsearch:
 #      cluster-name: my-application
