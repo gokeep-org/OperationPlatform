@@ -11,10 +11,9 @@ import com.codahale.metrics.Reporter;
  ****************************************/
 public class FlumeReport implements Reporter{
     /**
-     * 报送实现
+     * 度量数据信息发送到Flume
      */
     public FlumeReport(MetricRegistry metricRegistry) {
         // 注入实例
-
     }
 }

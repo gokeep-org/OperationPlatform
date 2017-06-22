@@ -10,17 +10,17 @@ public class MetricsConfig {
     /**
      * 报送时间间隔，单位/秒
      */
-    public static final long PERIOD = 1;
+    public static final long PERIOD = Integer.parseInt(PropertiesUtil.getValue("metrics.period"));
 
     /**
      * Flume 接受url
      */
-    public static final String FLUME_RECEIVE_URL = "http://localhost:41414";
+    public static final String FLUME_RECEIVE_URL = PropertiesUtil.getValue("metrics.flume.receive.url");
 
     /**
      * SLF4J 日志输出配置
      */
-    public static final String SLF4J_LOG_PATH = "/var/log/metric/";
+    public static final String SLF4J_LOG_PATH = PropertiesUtil.getValue("metrics.slf4j.log.path");
 
     /**
      * 默认报送类型
@@ -30,6 +30,5 @@ public class MetricsConfig {
     /**
      * 度量报送类型
      */
-    public static final String REPORT_TYPE = DEFAULT_REPORT_TYPE;
-
+    public static final String REPORT_TYPE = PropertiesUtil.getValue("metrics.report.type");
 }
