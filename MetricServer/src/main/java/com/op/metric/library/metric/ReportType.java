@@ -13,5 +13,6 @@ public final class ReportType {
     public static final String HTTP = "http";
     public static final String FLUME = "flume";
     public static final String CSV = "csv";
+    public static final String INFLUX_DB = "influxdb";
 
 }

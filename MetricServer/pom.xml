@@ -114,6 +114,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/net.alchim31/metrics-influxdb &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>net.alchim31</groupId>-->
+            <!--<artifactId>metrics-influxdb</artifactId>-->
+            <!--<version>0.7.0</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.izettle/dropwizard-metrics-influxdb -->
+        <dependency>
+            <groupId>com.github.davidb</groupId>
+            <artifactId>metrics-influxdb</artifactId>
+            <version>0.8.2</version>
+        </dependency>
 
     </dependencies>
     <dependencyManagement>

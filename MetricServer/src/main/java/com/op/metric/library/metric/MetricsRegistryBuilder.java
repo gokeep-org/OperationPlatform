@@ -1,10 +1,16 @@
 package com.op.metric.library.metric;
 
+import com.codahale.metrics.ConsoleReporter;
+import com.codahale.metrics.MetricFilter;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.ScheduledReporter;
+import metrics_influxdb.InfluxdbReporter;
+import metrics_influxdb.api.protocols.InfluxdbProtocols;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import com.codahale.metrics.ConsoleReporter;
-import com.codahale.metrics.MetricRegistry;
 
 /****************************************
  * Copyright (c) xuning.
@@ -22,7 +28,7 @@ public class MetricsRegistryBuilder {
      */
     private static MetricsRegistryBuilder metricsRegistryFactory;
     private static MetricRegistry metricRegistry;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(MetricsRegistryBuilder.class);
     static {
         if (Objects.equals(null, metricsRegistryFactory))
             metricsRegistryFactory = new MetricsRegistryBuilder();
@@ -52,6 +58,16 @@ public class MetricsRegistryBuilder {
                 break;
             case ReportType.HTTP:
                 startHttpReport(MetricsConfig.PERIOD);
+                break;
+            case ReportType.INFLUX_DB:
+                startInfluxdbReport(
+                        MetricsConfig.PERIOD,
+                        MetricsConfig.INFLUXDB_HOST,
+                        MetricsConfig.INFLUXDB_PORT,
+                        MetricsConfig.INFLUXDB_DB_NAME,
+                        MetricsConfig.INFLUXDB_USERNAME,
+                        MetricsConfig.INFLUXDB_PASSWORD
+                );
                 break;
             default:
                 startConsoleReporter(MetricsConfig.PERIOD);
@@ -107,5 +123,18 @@ public class MetricsRegistryBuilder {
      */
     public static void startCSVReport(long period) {
 
+    }
+    
+    public static void startInfluxdbReport(long period, String host, int port, String dbName, String username, String password){
+        String params = String.format("[influx db connect url: %s], [db: %s], [username: %s]",
+                host+":"+port, dbName, username);
+        ScheduledReporter reporter = InfluxdbReporter.forRegistry(metricRegistry)
+                .protocol(InfluxdbProtocols.http("localhost", 8086, "test"))
+                .convertRatesTo(TimeUnit.SECONDS)
+                .convertDurationsTo(TimeUnit.MILLISECONDS)
+                .filter(MetricFilter.ALL)
+                .skipIdleMetrics(false)
+                .build();
+        reporter.start(period, TimeUnit.SECONDS);
     }
 }
